@@ -1,0 +1,1088 @@
+{
+  "id": "1dbf0f6b-59ca-4f97-8d03-2ca9928b4eef",
+  "siteName": "NIK FINANCE",
+  "domainUrl": "nikfinances.com",
+  "brandingPresets": [
+    {
+      "presetId": "00000000-7f73-4b22-953a-dde60195592d",
+      "brandIdentity": {
+        "designSummary": "**The Serene Marketplace: A Fusion of Trust and Approachability**\n\nThe Vision: To create a digital space that exudes both trustworthiness and approachability, reflecting NIK FINANCE's position as Australia's smartest loan marketplace. The design will leverage clean lines, generous whitespace, and a carefully curated color palette to inspire confidence and ease of use. The overall aesthetic will be modern and elegant, avoiding any visual clutter or aggressive sales tactics.\n\n**Execution Blueprint:**\n1. Whitespace as a Design Element: Employ generous whitespace throughout the layout to create a sense of calm and sophistication. Whitespace will be used to separate elements, guide the eye, and enhance readability.\n2. Rounded Corners and Smooth Transitions: Implement rounded corners on all containers and buttons to soften the overall look and feel. Use subtle hover effects and smooth transitions to create a sense of polish and interactivity.\n3. Color Palette Harmony: The primary colors (dark green and navy blue) will be used strategically to establish a sense of trust and professionalism. Bright green accents will be used sparingly to draw attention to key interactive elements and create a sense of energy.\n4. Typographic Hierarchy: Establish a clear typographic hierarchy using a modern sans-serif font. Headings will be bold and prominent, while body text will be clean and readable. Font sizes and line heights will be carefully adjusted to ensure optimal readability and visual balance.",
+        "toneOfVoice": "Professional, trustworthy, and approachable",
+        "tones": [
+          "Confident",
+          "Helpful",
+          "Transparent"
+        ],
+        "designStyle": {
+          "primaryStyle": [
+            "Modern",
+            "Clean",
+            "Elegant"
+          ],
+          "supportingStyles": [
+            "Minimalist",
+            "User-friendly"
+          ]
+        },
+        "palette": {
+          "colors": {
+            "primary": "#0d4d3e",
+            "primaryForeground": "#ffffff",
+            "secondary": "#1e3a5f",
+            "secondaryForeground": "#ffffff",
+            "background": "#ffffff",
+            "foreground": "#333333",
+            "customColors": [
+              {
+                "name": "accent",
+                "value": "#10b981"
+              },
+              {
+                "name": "lightGray",
+                "value": "#f2f2f2"
+              },
+              {
+                "name": "destructive",
+                "value": "#dc2626"
+              },
+              {
+                "name": "destructive-foreground",
+                "value": "#ffffff"
+              }
+            ]
+          },
+          "paletteUsageGuide": "Primary color (#0d4d3e) is used for main headings, key buttons, and the footer. Secondary color (#1e3a5f) is used for subheadings, secondary buttons, and accents. Accent color (#10b981) is used for highlights, rates, and calls to action. Light gray (#f2f2f2) is used for background sections to create visual separation.",
+          "paletteAccessibilityNotes": "Ensure sufficient contrast between text and background colors for readability. Use a contrast checker to verify WCAG AA compliance."
+        },
+        "typography": {
+          "headings": {
+            "font": {
+              "role": "headings",
+              "fontFamily": "montserrat",
+              "fontJustification": ""
+            },
+            "headingsSimilarFonts": [],
+            "headingsUsageGuide": "Use Montserrat for all headings to maintain a modern and professional look. Adjust font weight and size to create a clear visual hierarchy.",
+            "headingsAccessibilityNotes": "Ensure headings are properly nested (H1, H2, H3, etc.) for semantic structure and screen reader compatibility."
+          },
+          "paragraphs": {
+            "font": {
+              "role": "paragraphs",
+              "fontFamily": "lato-light",
+              "fontJustification": ""
+            },
+            "paragraphsSimilarFonts": [],
+            "paragraphsUsageGuide": "Use Lato Light for all body text to ensure readability and a clean aesthetic. Adjust line height and letter spacing for optimal legibility.",
+            "paragraphsAccessibilityNotes": "Ensure sufficient contrast between text and background colors. Use a font size that is easily readable on all devices."
+          },
+          "welcomeSectionTypography": {
+            "placement": "",
+            "implementation": ""
+          },
+          "fontSizes": [
+            {
+              "name": "xs",
+              "size": "0.75rem",
+              "lineHeight": "1",
+              "letterSpacing": "0.05em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "sm",
+              "size": "0.875rem",
+              "lineHeight": "1.25",
+              "letterSpacing": "0.025em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "base",
+              "size": "1rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "lg",
+              "size": "1.125rem",
+              "lineHeight": "1.75",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "xl",
+              "size": "1.25rem",
+              "lineHeight": "1.75",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "500"
+            },
+            {
+              "name": "2xl",
+              "size": "1.5rem",
+              "lineHeight": "2",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "600"
+            },
+            {
+              "name": "3xl",
+              "size": "1.875rem",
+              "lineHeight": "2.25",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "700"
+            },
+            {
+              "name": "4xl",
+              "size": "2.25rem",
+              "lineHeight": "2.5",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "700"
+            },
+            {
+              "name": "5xl",
+              "size": "3rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "800"
+            },
+            {
+              "name": "6xl",
+              "size": "3.75rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "800"
+            },
+            {
+              "name": "7xl",
+              "size": "4.5rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "900"
+            },
+            {
+              "name": "8xl",
+              "size": "6rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "900"
+            },
+            {
+              "name": "9xl",
+              "size": "8rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "900"
+            }
+          ]
+        },
+        "layout": {
+          "layoutDna": {
+            "densitySpectrum": "Sparse",
+            "contrastSpectrum": "Moderate",
+            "gridAlignmentSpectrum": "Balanced",
+            "negativeSpaceUsage": "Generous",
+            "textVsImageEmphasis": "Balanced",
+            "complexitySpectrum": "Simple"
+          },
+          "grid": {
+            "compositionApproach": "12-Column Grid with Rounded Corners and Smooth Transitions",
+            "spacing": {
+              "columns": "12",
+              "rows": "Auto",
+              "gaps": "24px"
+            },
+            "margins": "32px",
+            "padding": "16px"
+          },
+          "heroSectionLayout": "**The Animated Trust Badges**\nComposition (Tailwind Spec): Full-screen container (h-screen grid place-items-center p-8). Headline 'Australia's Smartest Loan Marketplace' (text-6xl font-bold text-center). Subheading 'AI-powered loan matching...' (text-lg text-center mt-4). Button 'Get Instant Quote' (bg-green-500 text-white py-3 px-6 rounded-full mt-8 hover:bg-green-700 transition-colors duration-300). Trust badges (flex justify-center mt-8 gap-4).\nSignature Hook (Framer Motion Spec): Each trust badge (div) uses `whileHover={{ scale: 1.1 }}` and `transition={{ type: 'spring', stiffness: 300, damping: 10 }}`. The button also uses `whileHover` to slightly increase its scale and brightness."
+        },
+        "components": {
+          "containers": "Method: Whitespace, Style: 40px vertical margin, rounded corners",
+          "images": "Layout Role: None. | Gallery Type: Interactive Carousel: A full-width carousel with smooth transitions and dot navigation. The active slide is slightly larger and brighter than the others.",
+          "buttons": "Primary: background-color: #0d4d3e, color: #ffffff, border-radius: 24px, padding: 12px 24px, hover: background-color: #10b981, transition: background-color 0.3s ease. Secondary: background-color: transparent, color: #0d4d3e, border: 1px solid #0d4d3e, border-radius: 24px, padding: 12px 24px, hover: background-color: #f2f2f2, transition: background-color 0.3s ease."
+        },
+        "graphicElements": {
+          "icons": "",
+          "illustrations": "",
+          "stickers": ""
+        }
+      },
+      "originImagesUrls": []
+    },
+    {
+      "presetId": "9e792e4c-0adf-4df9-b286-bee3c5716a9a",
+      "brandIdentity": {
+        "designSummary": "This brand design embraces a modern minimalistic aesthetic with a focus on organic and natural tones. The layout is modular and grid-based, balancing generous white space with blocks of earthy and soft accent colors. Typography is clean and sans-serif, with large, bold headings paired with smaller, readable body text. A subtle serif italic font is used sparingly for emphasis, adding a touch of elegance. The color palette centers on a deep forest green as the primary color, complemented by a warm brown and a soft lavender accent, all set against a very light neutral background. Black is used for primary text to ensure clarity and contrast. UI elements like buttons and forms are understated with thin borders and minimal styling, reinforcing the clean and sophisticated feel. Photography is natural and organic but excluded from the core palette, serving to enhance the brand's authentic and quality-driven personality. Overall, the design communicates a refined, approachable, and organic brand identity suitable for premium, artisanal, or natural product brands.",
+        "toneOfVoice": "Sophisticated, natural, approachable, and modern with a subtle elegance.",
+        "tones": [
+          "organic",
+          "clean",
+          "sophisticated",
+          "minimalistic",
+          "natural",
+          "approachable",
+          "elegant",
+          "fresh",
+          "authentic",
+          "calm"
+        ],
+        "designStyle": {
+          "primaryStyle": [
+            "Minimalism",
+            "Organic"
+          ],
+          "supportingStyles": [
+            "Modern",
+            "Editorial",
+            "Natural"
+          ]
+        },
+        "palette": {
+          "colors": {
+            "primary": "#0B3D0B",
+            "primaryForeground": "#FFFFFF",
+            "secondary": "#7A4B2B",
+            "secondaryForeground": "#FFFFFF",
+            "background": "#F7F7F5",
+            "customColors": [
+              {
+                "name": "lavenderaccent",
+                "value": "#C6B9FF"
+              },
+              {
+                "name": "foreground",
+                "value": "#0B3D0B"
+              },
+              {
+                "name": "destructive",
+                "value": "#DF3131"
+              },
+              {
+                "name": "destructiveforeground",
+                "value": "#FFFFFF"
+              }
+            ]
+          },
+          "paletteUsageGuide": "Use the 'primary' color predominantly for footer backgrounds, key navigation elements, and important text highlights to ground the design with a natural, earthy tone. The 'primaryForeground' color should be used for text and icons on 'primary' backgrounds to ensure strong contrast and readability. The 'secondary' color serves as a warm accent for smaller UI elements, borders, and call-to-action highlights, paired with 'secondaryForeground' for text to maintain clarity. The 'lavenderAccent' color is ideal for background blocks or subtle highlights that add freshness and modernity without overwhelming the natural palette. The 'background' color provides a clean, neutral canvas for all content areas, ensuring that text and color blocks stand out crisply. Black text is used on light backgrounds for maximum legibility. Colors should be combined thoughtfully to maintain accessibility and a calm, organic atmosphere, avoiding overly saturated or bright combinations.",
+          "paletteAccessibilityNotes": "The 'primary' color (#0B3D0B) paired with 'primaryForeground' (#FFFFFF) meets WCAG AA and AAA contrast standards for text and UI elements. The 'secondary' color (#7A4B2B) with 'secondaryForeground' (#FFFFFF) also meets WCAG AA contrast requirements. The 'lavenderAccent' (#C6B9FF) on 'background' (#F7F7F5) provides sufficient contrast for large text and UI backgrounds but should be used cautiously for small text to maintain accessibility. Black text on 'background' ensures excellent readability and meets all WCAG contrast guidelines."
+        },
+        "typography": {
+          "headings": {
+            "font": {
+              "role": "Primary Heading Font",
+              "fontFamily": "helvetica-w01-roman",
+              "fontJustification": ""
+            },
+            "headingsSimilarFonts": [
+              "open sans",
+              "poppins-v2",
+              "work-sans-v2"
+            ],
+            "headingsUsageGuide": "Use the heading font for all major titles and section headers to create a clear visual hierarchy. Pair with the paragraph font to maintain readability and balance. Headings should have ample spacing above and below to separate content blocks and enhance scanability. Use 'primary' or black text colors on light backgrounds for maximum contrast. Italic serif can be used sparingly for emphasis or subheadings to add elegance without disrupting the modern feel.",
+            "headingsAccessibilityNotes": "Headings in 'primary' or black on 'background' meet WCAG AA and AAA contrast standards. Ensure font sizes are large enough to maintain readability, especially for users with visual impairments."
+          },
+          "paragraphs": {
+            "font": {
+              "role": "Main Body Text Font",
+              "fontFamily": "open sans",
+              "fontJustification": ""
+            },
+            "paragraphsSimilarFonts": [
+              "rubik-v2",
+              "work-sans-v2",
+              "poppins-v2"
+            ],
+            "paragraphsUsageGuide": "Use the paragraph font for all body text, descriptions, and smaller informational content. Maintain consistent line height and letter spacing for readability. Combine with the heading font to create a balanced typographic system. Text should primarily be black or 'primary' color on 'background' for clarity. Avoid using accent colors for body text to maintain legibility.",
+            "paragraphsAccessibilityNotes": "Body text in black or 'primary' on 'background' meets WCAG AA contrast requirements for normal and large text. Maintain sufficient font size and spacing for accessibility."
+          },
+          "welcomeSectionTypography": {
+            "placement": "Weighted Quadrant",
+            "implementation": "The welcome section uses a weighted quadrant layout where large, bold headings occupy the top-left quadrant, drawing immediate attention. Supporting text and call-to-action elements are placed in the bottom-right quadrant, balancing the composition. This asymmetrical but balanced placement creates visual interest and guides the user's eye naturally through the content. The typography is large and clear, with ample white space around to emphasize the message and maintain a clean, modern look."
+          },
+          "fontSizes": [
+            {
+              "name": "xs",
+              "size": "0.75rem",
+              "lineHeight": "1.2",
+              "letterSpacing": "0.02em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "sm",
+              "size": "0.875rem",
+              "lineHeight": "1.3",
+              "letterSpacing": "0.02em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "base",
+              "size": "1rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0.025em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "lg",
+              "size": "1.125rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0.025em",
+              "fontWeight": "500"
+            },
+            {
+              "name": "xl",
+              "size": "1.25rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0.03em",
+              "fontWeight": "600"
+            },
+            {
+              "name": "2xl",
+              "size": "1.5rem",
+              "lineHeight": "1.4",
+              "letterSpacing": "0.03em",
+              "fontWeight": "600"
+            },
+            {
+              "name": "3xl",
+              "size": "1.875rem",
+              "lineHeight": "1.3",
+              "letterSpacing": "0.035em",
+              "fontWeight": "700"
+            },
+            {
+              "name": "4xl",
+              "size": "2.25rem",
+              "lineHeight": "1.2",
+              "letterSpacing": "0.04em",
+              "fontWeight": "700"
+            },
+            {
+              "name": "5xl",
+              "size": "3rem",
+              "lineHeight": "1.1",
+              "letterSpacing": "0.04em",
+              "fontWeight": "800"
+            },
+            {
+              "name": "6xl",
+              "size": "3.75rem",
+              "lineHeight": "1.1",
+              "letterSpacing": "0.05em",
+              "fontWeight": "800"
+            },
+            {
+              "name": "7xl",
+              "size": "4.5rem",
+              "lineHeight": "1",
+              "letterSpacing": "0.05em",
+              "fontWeight": "900"
+            },
+            {
+              "name": "8xl",
+              "size": "6rem",
+              "lineHeight": "1",
+              "letterSpacing": "0.06em",
+              "fontWeight": "900"
+            },
+            {
+              "name": "9xl",
+              "size": "8rem",
+              "lineHeight": "1",
+              "letterSpacing": "0.07em",
+              "fontWeight": "900"
+            }
+          ]
+        },
+        "layout": {
+          "layoutDna": {
+            "densitySpectrum": "Balanced",
+            "contrastSpectrum": "Moderate Contrast",
+            "gridAlignmentSpectrum": "Modular",
+            "negativeSpaceUsage": "Generous",
+            "textVsImageEmphasis": "Balanced",
+            "complexitySpectrum": "Simple & Clean"
+          },
+          "grid": {
+            "compositionApproach": "Modular",
+            "spacing": {
+              "columns": "12-column grid",
+              "rows": "Defined content rows",
+              "gaps": "Consistent medium gaps"
+            },
+            "margins": "Generous page margins",
+            "padding": "Consistent padding within containers"
+          }
+        },
+        "components": {
+          "containers": "Containers use solid background colors from the palette, primarily the 'background' color for main content areas and 'primary' or 'secondary' colors for footer and accent sections. Padding is consistent to maintain spaciousness. Borders are minimal or absent, relying on color blocks to define sections.",
+          "images": "Images are integrated into the grid with clean edges and no decorative borders. They are often paired with color blocks to create layered compositions. Image content is natural and organic but does not influence the core color palette.",
+          "buttons": "Buttons are minimal with thin borders in 'secondary' color and transparent backgrounds by default. On hover or active states, they fill with 'secondary' color and use 'secondaryForeground' for text. The font is consistent with body text, and buttons have rounded corners for a soft, approachable feel."
+        },
+        "graphicElements": {
+          "icons": "Icons are minimal, line-based, and use the 'primary' or black color to maintain clarity and simplicity. They complement the text without overwhelming the design.",
+          "illustrations": "No prominent illustrations are used; the design relies on photography and color blocks for visual interest.",
+          "stickers": "No stickers or badges are present, maintaining the clean and minimal aesthetic."
+        }
+      },
+      "originImagesUrls": [
+        "https://wixmp-fe53c9ff592a4da924211f23.wixmp.com/uploads/1752405549273-Screenshot%202025-06-04%20at%2011.58.20.jpg"
+      ]
+    },
+    {
+      "presetId": "e3803693-24c3-4139-8260-016899e16953",
+      "brandIdentity": {
+        "designSummary": "This brand design embraces a minimalistic and modern editorial style, characterized by a restrained and professional color palette dominated by soft neutrals and muted pastels. The primary background is a very light grayish-white, complemented by subtle light blue content blocks that create visual separation without overwhelming the user. Typography is elegant and classic, featuring serif fonts for headings that convey sophistication and trustworthiness, paired with clean, readable serif or serif-inspired body text. The layout employs a balanced two-column grid with generous white space, ensuring clarity and ease of navigation. Abstract geometric dot-matrix style graphics subtly reinforce the AI and technology theme, integrated as understated visual motifs. UI elements such as navigation and buttons are minimal and refined, using thin lines and subtle contrasts to maintain the airy and professional aesthetic. Overall, the design communicates a calm, authoritative, and approachable tone suitable for professional consulting and technology sectors.",
+        "toneOfVoice": "Professional, calm, authoritative, and approachable with a sophisticated and trustworthy personality.",
+        "tones": [
+          "calm",
+          "professional",
+          "trustworthy",
+          "minimal",
+          "sophisticated",
+          "approachable",
+          "clean",
+          "modern",
+          "refined",
+          "balanced"
+        ],
+        "designStyle": {
+          "primaryStyle": [
+            "Minimalism",
+            "Editorial"
+          ],
+          "supportingStyles": [
+            "Modern",
+            "Tech-Inspired"
+          ]
+        },
+        "palette": {
+          "colors": {
+            "primary": "#B9D6E8",
+            "primaryForeground": "#333333",
+            "secondary": "#F9FAFB",
+            "secondaryForeground": "#333333",
+            "background": "#FFFFFF",
+            "customColors": [
+              {
+                "name": "darktext",
+                "value": "#333333"
+              },
+              {
+                "name": "buttonborder",
+                "value": "#333333"
+              },
+              {
+                "name": "contentblockbackground",
+                "value": "#E6F0F6"
+              },
+              {
+                "name": "foreground",
+                "value": "#333333"
+              },
+              {
+                "name": "destructive",
+                "value": "#DF3131"
+              },
+              {
+                "name": "destructiveforeground",
+                "value": "#FFFFFF"
+              }
+            ]
+          },
+          "paletteUsageGuide": "Use the 'background' color as the main page canvas to maintain a clean and open feel. The 'secondary' color is ideal for large content blocks or sections to create subtle visual separation without heavy contrast. The 'primary' color should be used for accent backgrounds or highlight areas, such as side panels or feature blocks, to add calm emphasis. Text should primarily use 'darkText' for maximum readability on all backgrounds. Buttons and interactive elements should use 'buttonBorder' for outlines and text to maintain a minimal and refined look. The 'contentBlockBackground' can be used for subtle backgrounds behind text or graphics to enhance hierarchy and focus. Combining 'primary' with 'primaryForeground' ensures accessible contrast for headings or callouts, while 'secondary' with 'secondaryForeground' supports body text and secondary content. Overall, colors are balanced to maintain a professional and approachable atmosphere with sufficient contrast for accessibility.",
+          "paletteAccessibilityNotes": "The 'primary' color paired with 'primaryForeground' meets WCAG AA standards for large text and UI elements, ensuring readability and accessibility. The 'secondary' color with 'secondaryForeground' also meets WCAG AA contrast ratios for body text and secondary content. The 'darkText' color on 'background' and 'secondary' backgrounds provides strong contrast for all text elements. Button borders and text using 'buttonBorder' on 'secondary' or 'background' maintain clear visibility and interactive affordance. Overall, the palette supports accessible typography and UI components across the site."
+        },
+        "typography": {
+          "headings": {
+            "font": {
+              "role": "Primary Heading Font",
+              "fontFamily": "bitter",
+              "fontJustification": ""
+            },
+            "headingsSimilarFonts": [
+              "playfair display",
+              "cormorantgaramond",
+              "raleway"
+            ],
+            "headingsUsageGuide": "Use the 'bitter' font for all primary headings to establish a clear hierarchy and refined tone. Headings should be sized prominently with ample line height and letter spacing to enhance readability and elegance. Pair headings with body text fonts that complement serif styles to maintain visual harmony. Use the 'primary' or 'darkText' colors for headings to ensure strong contrast against backgrounds. Avoid overly tight letter spacing to preserve the font's classic character. Headings can be spaced generously from body text to create a balanced and airy layout.",
+            "headingsAccessibilityNotes": "Headings in 'bitter' font with 'primaryForeground' or 'darkText' colors on 'primary' or 'background' colors meet WCAG AA contrast standards for all sizes, ensuring clear readability and accessibility."
+          },
+          "paragraphs": {
+            "font": {
+              "role": "Main Body Text Font",
+              "fontFamily": "madefor-display",
+              "fontJustification": ""
+            },
+            "paragraphsSimilarFonts": [
+              "raleway",
+              "playfair display",
+              "cormorantgaramond"
+            ],
+            "paragraphsUsageGuide": "Use the 'bitter' font for body text to maintain consistency and a professional appearance. Body text should be sized for comfortable reading with appropriate line height and letter spacing. Use 'darkText' or 'primaryForeground' colors for body text on 'secondary' or 'background' colors to ensure legibility. Maintain sufficient spacing between paragraphs and other elements to avoid clutter. Pair body text with serif headings for a cohesive editorial style. Avoid using body text in all caps or overly decorative styles to preserve clarity.",
+            "paragraphsAccessibilityNotes": "Body text in 'bitter' font with 'darkText' or 'primaryForeground' colors on 'secondary' or 'background' colors meets WCAG AA contrast requirements for normal and large text, supporting accessibility."
+          },
+          "welcomeSectionTypography": {
+            "placement": "Weighted Quadrant",
+            "implementation": "The welcome section uses a weighted quadrant layout where the left quadrant is dedicated to large, bold heading text aligned top-left, creating a strong visual anchor. The right quadrant features an abstract geometric graphic that balances the composition. This asymmetrical but balanced placement draws the eye naturally from text to image, emphasizing the message while maintaining visual interest. Generous white space surrounds the elements, enhancing clarity and focus. Typography here is large and prominent, using the 'bitter' font for headings with ample line height and letter spacing to convey authority and sophistication."
+          },
+          "fontSizes": [
+            {
+              "name": "xs",
+              "size": "0.75rem",
+              "lineHeight": "1.25",
+              "letterSpacing": "0.02em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "sm",
+              "size": "0.875rem",
+              "lineHeight": "1.35",
+              "letterSpacing": "0.02em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "base",
+              "size": "1rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0.025em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "lg",
+              "size": "1.125rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0.025em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "xl",
+              "size": "1.25rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0.02em",
+              "fontWeight": "600"
+            },
+            {
+              "name": "2xl",
+              "size": "1.5rem",
+              "lineHeight": "1.4",
+              "letterSpacing": "0.015em",
+              "fontWeight": "600"
+            },
+            {
+              "name": "3xl",
+              "size": "1.875rem",
+              "lineHeight": "1.3",
+              "letterSpacing": "0em",
+              "fontWeight": "700"
+            },
+            {
+              "name": "4xl",
+              "size": "2.25rem",
+              "lineHeight": "1.2",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            },
+            {
+              "name": "5xl",
+              "size": "3rem",
+              "lineHeight": "1.1",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "700"
+            },
+            {
+              "name": "6xl",
+              "size": "3.75rem",
+              "lineHeight": "1.1",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            },
+            {
+              "name": "7xl",
+              "size": "4.5rem",
+              "lineHeight": "1.05",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "800"
+            },
+            {
+              "name": "8xl",
+              "size": "6rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.03em",
+              "fontWeight": "900"
+            },
+            {
+              "name": "9xl",
+              "size": "8rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.035em",
+              "fontWeight": "900"
+            }
+          ]
+        },
+        "layout": {
+          "layoutDna": {
+            "densitySpectrum": "Balanced",
+            "contrastSpectrum": "Subtle",
+            "gridAlignmentSpectrum": "Strict Grid",
+            "negativeSpaceUsage": "Generous",
+            "textVsImageEmphasis": "Balanced",
+            "complexitySpectrum": "Simple & Clean"
+          },
+          "grid": {
+            "compositionApproach": "Two-column grid with alternating content blocks",
+            "spacing": {
+              "columns": "12-column grid",
+              "rows": "Defined content rows",
+              "gaps": "Consistent medium gaps"
+            },
+            "margins": "Generous page margins",
+            "padding": "Consistent padding within containers"
+          }
+        },
+        "components": {
+          "containers": "Containers use subtle background color blocks such as 'primary' and 'secondary' to visually separate content areas. They maintain generous padding and margin to ensure content clarity and breathing room. Borders are minimal or absent, relying on color contrast for separation.",
+          "images": "Images or graphics are treated as abstract geometric dot-matrix style shapes with monochromatic or muted pastel colors. They integrate seamlessly into the layout as side or background elements, maintaining the minimal and professional aesthetic.",
+          "buttons": "Buttons are minimal with thin borders using 'buttonBorder' color and transparent backgrounds. Text inside buttons uses 'darkText' for readability. Hover states may invert colors subtly or increase border weight to indicate interactivity without disrupting the clean design."
+        },
+        "graphicElements": {
+          "icons": "Icons are minimal line-based designs in 'darkText' or 'buttonBorder' colors, consistent with the overall minimal and professional style.",
+          "illustrations": "Illustrations are abstract, geometric, and pixelated or dot-matrix style, using monochromatic or muted pastel colors to reinforce the AI and technology theme subtly.",
+          "stickers": "No stickers or badges are present; the design avoids decorative elements to maintain a clean and professional look."
+        }
+      },
+      "originImagesUrls": [
+        "https://wixmp-fe53c9ff592a4da924211f23.wixmp.com/uploads/1752391231198-Screenshot%202025-07-13%20at%209.59.22.png"
+      ]
+    },
+    {
+      "presetId": "c91e4e9f-ca39-4488-b417-e35faff6b80f",
+      "brandIdentity": {
+        "designSummary": "This brand design features a warm, earthy color palette dominated by beige and rich brown tones, creating a natural and grounded atmosphere. The layout is spacious and balanced, with generous negative space and a column-based grid that allows for asymmetrical text and image placement. Typography plays a central role, combining tall, elegant serif fonts for headings with clean, modern sans-serif fonts for body text, establishing a refined and sophisticated tone. UI elements such as buttons and navigation are minimal and understated, using thin borders and the primary brown color to maintain the elegant aesthetic. Photography is prominently featured, showcasing natural scenes with warm lighting and earthy hues, reinforcing the brand's connection to nature and tranquility. Overall, the design conveys a premium, calm, and sophisticated brand personality suitable for luxury outdoor or boutique hospitality experiences.",
+        "toneOfVoice": "Refined, calm, sophisticated, natural, and inviting with a premium feel.",
+        "tones": [
+          "calm",
+          "sophisticated",
+          "natural",
+          "warm",
+          "elegant",
+          "minimal",
+          "premium",
+          "inviting",
+          "grounded",
+          "balanced"
+        ],
+        "designStyle": {
+          "primaryStyle": [
+            "Minimalism",
+            "Editorial"
+          ],
+          "supportingStyles": [
+            "Natural",
+            "Luxury",
+            "Modern Classic"
+          ]
+        },
+        "palette": {
+          "colors": {
+            "primary": "#4A3B1B",
+            "primaryForeground": "#E6D6B8",
+            "secondary": "#D6C3A1",
+            "secondaryForeground": "#4A3B1B",
+            "background": "#E6D6B8",
+            "customColors": [
+              {
+                "name": "foreground",
+                "value": "#4A3B1B"
+              },
+              {
+                "name": "destructive",
+                "value": "#DF3131"
+              },
+              {
+                "name": "destructiveforeground",
+                "value": "#FFFFFF"
+              }
+            ]
+          },
+          "paletteUsageGuide": "Use the 'primary' color predominantly for large headings, key text elements, and interactive text such as buttons and navigation links to convey sophistication and ensure strong contrast against the 'background'. The 'primaryForeground' color is ideal for text or icons placed on 'primary' backgrounds to maintain readability. The 'secondary' color serves as a subtle background or accent, such as in header bars or secondary UI elements, paired with 'secondaryForeground' for text to maintain legibility. The 'background' color provides a warm, neutral canvas that supports the natural and calm brand atmosphere. This palette should be used to create a harmonious, grounded visual experience, balancing contrast and warmth while ensuring accessibility and clarity across all components.",
+          "paletteAccessibilityNotes": "The combination of 'primary' on 'background' provides strong contrast exceeding WCAG AA standards for text and UI elements. 'Secondary' on 'secondaryForeground' also meets WCAG AA contrast requirements, ensuring readability. Use 'primaryForeground' on 'primary' backgrounds for accessible text contrast. Overall, the palette supports accessible typography and UI design with sufficient contrast ratios for normal and large text."
+        },
+        "typography": {
+          "headings": {
+            "font": {
+              "role": "Primary Heading Font",
+              "fontFamily": "fraunces",
+              "fontJustification": ""
+            },
+            "headingsSimilarFonts": [
+              "playfair display",
+              "didot-w01-italic",
+              "baskervillemtw01-smbdit"
+            ],
+            "headingsUsageGuide": "Use the heading font for all major titles and section headers to establish a sophisticated and editorial tone. Pair with the paragraph font to create clear hierarchy and contrast. Maintain generous spacing around headings to emphasize their importance and preserve readability. Use 'primary' color for headings to ensure strong visual impact and accessibility.",
+            "headingsAccessibilityNotes": "Headings in 'primary' color on 'background' meet WCAG AA contrast standards, ensuring legibility for users with visual impairments."
+          },
+          "paragraphs": {
+            "font": {
+              "role": "Main Body Text Font",
+              "fontFamily": "open sans",
+              "fontJustification": ""
+            },
+            "paragraphsSimilarFonts": [
+              "nunito sans",
+              "raleway",
+              "work-sans-v2"
+            ],
+            "paragraphsUsageGuide": "Use the paragraph font for all body text, captions, and smaller informational text. It complements the heading font by providing clarity and ease of reading. Maintain consistent line height and spacing to enhance legibility. Use 'primary' or 'secondary' colors for text depending on background context, ensuring sufficient contrast.",
+            "paragraphsAccessibilityNotes": "Paragraph text in 'primary' or 'secondary' colors on 'background' meets WCAG AA contrast requirements for normal and large text."
+          },
+          "welcomeSectionTypography": {
+            "placement": "Top-Third Anchor",
+            "implementation": "The welcome section uses a top-third anchor placement where large, elegant headings dominate the upper portion of the viewport, creating an immediate visual impact. The heading is aligned left with ample negative space around it, paired with smaller body text on the right or below to balance the composition. This placement draws the visitor's eye naturally from the heading to the supporting content, establishing a calm and sophisticated introduction to the brand."
+          },
+          "fontSizes": [
+            {
+              "name": "xs",
+              "size": "0.75rem",
+              "lineHeight": "1.2",
+              "letterSpacing": "0.02em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "sm",
+              "size": "0.875rem",
+              "lineHeight": "1.3",
+              "letterSpacing": "0.02em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "base",
+              "size": "1rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0.025em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "lg",
+              "size": "1.125rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0.025em",
+              "fontWeight": "400"
+            },
+            {
+              "name": "xl",
+              "size": "1.25rem",
+              "lineHeight": "1.5",
+              "letterSpacing": "0.02em",
+              "fontWeight": "600"
+            },
+            {
+              "name": "2xl",
+              "size": "1.5rem",
+              "lineHeight": "1.4",
+              "letterSpacing": "0.015em",
+              "fontWeight": "600"
+            },
+            {
+              "name": "3xl",
+              "size": "1.875rem",
+              "lineHeight": "1.3",
+              "letterSpacing": "0em",
+              "fontWeight": "700"
+            },
+            {
+              "name": "4xl",
+              "size": "2.25rem",
+              "lineHeight": "1.2",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            },
+            {
+              "name": "5xl",
+              "size": "3rem",
+              "lineHeight": "1.1",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "800"
+            },
+            {
+              "name": "6xl",
+              "size": "3.75rem",
+              "lineHeight": "1.1",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            },
+            {
+              "name": "7xl",
+              "size": "4.5rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "900"
+            },
+            {
+              "name": "8xl",
+              "size": "6rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.03em",
+              "fontWeight": "900"
+            },
+            {
+              "name": "9xl",
+              "size": "8rem",
+              "lineHeight": "1",
+              "letterSpacing": "-0.035em",
+              "fontWeight": "900"
+            }
+          ]
+        },
+        "layout": {
+          "layoutDna": {
+            "densitySpectrum": "Balanced",
+            "contrastSpectrum": "High-Contrast",
+            "gridAlignmentSpectrum": "Column-based",
+            "negativeSpaceUsage": "Generous",
+            "textVsImageEmphasis": "Balanced",
+            "complexitySpectrum": "Simple & Clean"
+          },
+          "grid": {
+            "compositionApproach": "Column-based",
+            "spacing": {
+              "columns": "12-column grid",
+              "rows": "Defined content rows",
+              "gaps": "Consistent medium gaps"
+            },
+            "margins": "Generous page margins",
+            "padding": "Consistent padding within containers"
+          }
+        },
+        "components": {
+          "containers": "Containers are minimal with no heavy backgrounds, relying on spacing and subtle borders in 'secondary' color to define sections. They maintain the warm, natural tone by using the 'background' color and 'secondary' accents.",
+          "images": "Images are large, central, and framed by text. They feature natural, warm tones with soft lighting, reinforcing the brand's connection to nature and tranquility.",
+          "buttons": "Buttons use thin borders and text in the 'primary' color with transparent or 'background' fill, maintaining an understated and elegant style. Hover states may invert colors for subtle emphasis."
+        },
+        "graphicElements": {
+          "icons": "Icons are minimal, line-based, and use the 'primary' color to maintain consistency with the overall refined and understated style.",
+          "illustrations": "No prominent illustrations are used, keeping the focus on photography and typography to convey the brand message.",
+          "stickers": "No stickers or badges are present, supporting the clean and sophisticated aesthetic."
+        }
+      },
+      "originImagesUrls": [
+        "https://wixmp-fe53c9ff592a4da924211f23.wixmp.com/uploads/1752407474032-Screenshot%202025-07-13%20at%2014.48.47%201.jpg"
+      ]
+    }
+  ],
+  "brandBook": {
+    "tones": [
+      "Confident",
+      "Helpful",
+      "Transparent"
+    ],
+    "designStyle": {
+      "primaryStyle": [
+        "Modern",
+        "Clean",
+        "Elegant"
+      ],
+      "supportingStyles": [
+        "Minimalist",
+        "User-friendly"
+      ]
+    },
+    "toneOfVoice": "Professional, trustworthy, and approachable",
+    "components": {
+      "images": "Layout Role: None. | Gallery Type: Interactive Carousel: A full-width carousel with smooth transitions and dot navigation. The active slide is slightly larger and brighter than the others.",
+      "buttons": "Primary: background-color: #0d4d3e, color: #ffffff, border-radius: 24px, padding: 12px 24px, hover: background-color: #10b981, transition: background-color 0.3s ease. Secondary: background-color: transparent, color: #0d4d3e, border: 1px solid #0d4d3e, border-radius: 24px, padding: 12px 24px, hover: background-color: #f2f2f2, transition: background-color 0.3s ease.",
+      "containers": "Method: Whitespace, Style: 40px vertical margin, rounded corners"
+    },
+    "typography": {
+      "headings": {
+        "font": {
+          "role": "headings",
+          "fontFamily": "montserrat",
+          "fontJustification": ""
+        },
+        "headingsUsageGuide": "Use Montserrat for all headings to maintain a modern and professional look. Adjust font weight and size to create a clear visual hierarchy.",
+        "headingsSimilarFonts": [],
+        "headingsAccessibilityNotes": "Ensure headings are properly nested (H1, H2, H3, etc.) for semantic structure and screen reader compatibility."
+      },
+      "fontSizes": [
+        {
+          "name": "xs",
+          "size": "0.75rem",
+          "letterSpacing": "0.05em",
+          "lineHeight": "1",
+          "fontWeight": "400"
+        },
+        {
+          "name": "sm",
+          "size": "0.875rem",
+          "letterSpacing": "0.025em",
+          "lineHeight": "1.25",
+          "fontWeight": "400"
+        },
+        {
+          "name": "base",
+          "size": "1rem",
+          "letterSpacing": "0em",
+          "lineHeight": "1.5",
+          "fontWeight": "400"
+        },
+        {
+          "name": "lg",
+          "size": "1.125rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "1.75",
+          "fontWeight": "400"
+        },
+        {
+          "name": "xl",
+          "size": "1.25rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "1.75",
+          "fontWeight": "500"
+        },
+        {
+          "name": "2xl",
+          "size": "1.5rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "2",
+          "fontWeight": "600"
+        },
+        {
+          "name": "3xl",
+          "size": "1.875rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "2.25",
+          "fontWeight": "700"
+        },
+        {
+          "name": "4xl",
+          "size": "2.25rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "2.5",
+          "fontWeight": "700"
+        },
+        {
+          "name": "5xl",
+          "size": "3rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "1",
+          "fontWeight": "800"
+        },
+        {
+          "name": "6xl",
+          "size": "3.75rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "1",
+          "fontWeight": "800"
+        },
+        {
+          "name": "7xl",
+          "size": "4.5rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "1",
+          "fontWeight": "900"
+        },
+        {
+          "name": "8xl",
+          "size": "6rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "1",
+          "fontWeight": "900"
+        },
+        {
+          "name": "9xl",
+          "size": "8rem",
+          "letterSpacing": "-0.025em",
+          "lineHeight": "1",
+          "fontWeight": "900"
+        }
+      ],
+      "paragraphs": {
+        "font": {
+          "role": "paragraphs",
+          "fontFamily": "lato-light",
+          "fontJustification": ""
+        },
+        "paragraphsUsageGuide": "Use Lato Light for all body text to ensure readability and a clean aesthetic. Adjust line height and letter spacing for optimal legibility.",
+        "paragraphsSimilarFonts": [],
+        "paragraphsAccessibilityNotes": "Ensure sufficient contrast between text and background colors. Use a font size that is easily readable on all devices."
+      },
+      "welcomeSectionTypography": {
+        "placement": "",
+        "implementation": ""
+      }
+    },
+    "originImagesUrls": [],
+    "layout": {
+      "grid": {
+        "margins": "32px",
+        "padding": "16px",
+        "spacing": {
+          "gaps": "24px",
+          "rows": "Auto",
+          "columns": "12"
+        },
+        "compositionApproach": "12-Column Grid with Rounded Corners and Smooth Transitions"
+      },
+      "layoutDna": {
+        "contrastSpectrum": "Moderate",
+        "densitySpectrum": "Sparse",
+        "textVsImageEmphasis": "Balanced",
+        "complexitySpectrum": "Simple",
+        "gridAlignmentSpectrum": "Balanced",
+        "negativeSpaceUsage": "Generous"
+      },
+      "heroSectionLayout": "**The Animated Trust Badges**\nComposition (Tailwind Spec): Full-screen container (h-screen grid place-items-center p-8). Headline 'Australia's Smartest Loan Marketplace' (text-6xl font-bold text-center). Subheading 'AI-powered loan matching...' (text-lg text-center mt-4). Button 'Get Instant Quote' (bg-green-500 text-white py-3 px-6 rounded-full mt-8 hover:bg-green-700 transition-colors duration-300). Trust badges (flex justify-center mt-8 gap-4).\nSignature Hook (Framer Motion Spec): Each trust badge (div) uses `whileHover={{ scale: 1.1 }}` and `transition={{ type: 'spring', stiffness: 300, damping: 10 }}`. The button also uses `whileHover` to slightly increase its scale and brightness."
+    },
+    "graphicElements": {
+      "icons": "",
+      "stickers": "",
+      "illustrations": ""
+    },
+    "designSummary": "**The Serene Marketplace: A Fusion of Trust and Approachability**\n\nThe Vision: To create a digital space that exudes both trustworthiness and approachability, reflecting NIK FINANCE's position as Australia's smartest loan marketplace. The design will leverage clean lines, generous whitespace, and a carefully curated color palette to inspire confidence and ease of use. The overall aesthetic will be modern and elegant, avoiding any visual clutter or aggressive sales tactics.\n\n**Execution Blueprint:**\n1. Whitespace as a Design Element: Employ generous whitespace throughout the layout to create a sense of calm and sophistication. Whitespace will be used to separate elements, guide the eye, and enhance readability.\n2. Rounded Corners and Smooth Transitions: Implement rounded corners on all containers and buttons to soften the overall look and feel. Use subtle hover effects and smooth transitions to create a sense of polish and interactivity.\n3. Color Palette Harmony: The primary colors (dark green and navy blue) will be used strategically to establish a sense of trust and professionalism. Bright green accents will be used sparingly to draw attention to key interactive elements and create a sense of energy.\n4. Typographic Hierarchy: Establish a clear typographic hierarchy using a modern sans-serif font. Headings will be bold and prominent, while body text will be clean and readable. Font sizes and line heights will be carefully adjusted to ensure optimal readability and visual balance.",
+    "palette": {
+      "colors": {
+        "background": "#ffffff",
+        "secondary": "#1e3a5f",
+        "customColors": [
+          {
+            "name": "accent",
+            "value": "#10b981"
+          },
+          {
+            "name": "lightGray",
+            "value": "#f2f2f2"
+          },
+          {
+            "name": "destructive",
+            "value": "#dc2626"
+          },
+          {
+            "name": "destructive-foreground",
+            "value": "#ffffff"
+          }
+        ],
+        "foreground": "#333333",
+        "secondaryForeground": "#ffffff",
+        "primaryForeground": "#ffffff",
+        "primary": "#0d4d3e"
+      },
+      "paletteUsageGuide": "Primary color (#0d4d3e) is used for main headings, key buttons, and the footer. Secondary color (#1e3a5f) is used for subheadings, secondary buttons, and accents. Accent color (#10b981) is used for highlights, rates, and calls to action. Light gray (#f2f2f2) is used for background sections to create visual separation.",
+      "paletteAccessibilityNotes": "Ensure sufficient contrast between text and background colors for readability. Use a contrast checker to verify WCAG AA compliance."
+    }
+  },
+  "initialPrompt": "Create a professional loan marketplace website for NIK FINANCE, Australia's smartest digital loan marketplace.\n\nDESIGN STYLE: Clean modern design, white background, dark green (#0d4d3e) and navy blue (#1e3a5f) brand colors, bright green (#10b981) accents, professional and trustworthy feel, lots of white space, rounded corners, smooth hover effects.\n\nSECTION 1 - HERO:\nHeadline: \"Australia's Smartest Loan Marketplace\"\nSubheading: \"AI-powered loan matching with 130+ lenders. Get approved in minutes, not days.\"\nLarge green button: \"Get Instant Quote\"\n3 trust badges below: \"100% Free Service\" | \"5 Minute Application\" | \"130+ Lenders\" with checkmark, lightning, and bank icons\n\nSECTION 2 - LOAN CARDS:\nHeading: \"Compare Loan Options\"\nSubheading: \"Get personalized recommendations from our AI-powered platform. Rates from as low as 4.99%.\"\n4 cards in grid (2x2):\n\nCard 1: Home Loans | 4.99% rate | House icon | \"Purchase, refinance, or investment properties. Access exclusive rates from 130+ lenders.\" | \"Get Home Loan Quote\" button\n\nCard 2: Car Loans | 5.54% rate | Car icon | \"New or used vehicles. Fast approval with competitive rates and flexible terms.\" | \"Get Car Loan Quote\" button\n\nCard 3: Personal Loans | 6.49% rate | Money icon | \"Debt consolidation, home improvements, or major purchases. Unsecured options available.\" | \"Get Personal Loan Quote\" button\n\nCard 4: Business Loans | 7.99% rate | Briefcase icon | \"Working capital, equipment finance, or expansion. Tailored solutions for your business.\" | \"Get Business Loan Quote\" button\n\nCards: white background, light border, dark green button, rate in large bright green text, hover lifts card with shadow\n\nSECTION 3 - HOW IT WORKS (light gray background):\nHeading: \"How It Works\"\nSubheading: \"Get approved in 3 simple steps\"\n3 numbered steps:\n1. \"Chat with AI\" - \"Answer a few quick questions about your loan needs. Our AI pre-qualifies you instantly.\"\n2. \"Get Matched\" - \"Our system compares 130+ lenders to find the best rates and terms for your situation.\"\n3. \"Get Approved\" - \"Complete your application with your dedicated loan specialist. Most approvals within 24 hours.\"\nEach with large circular number badge in gradient dark green to navy\n\nSECTION 4 - REVIEWS (light gray background):\nHeading: \"What Our Customers Say\"\nSubheading: \"Join thousands of happy borrowers\"\n3 review cards:\nReview 1: 5 stars | \"I applied during my lunch break and got pre-approved the same day. The process was so smooth and the team really knew their stuff. I ended up with a better rate than the dealership offered.\" | Jason T, Melbourne\nReview 2: 5 stars | \"I refinanced through Nik Finance and saved over $500 a month on my mortgage. Wish I'd done it sooner. The whole process was quick, easy, and digital.\" | Amanda R, Sydney\nReview 3: 5 stars | \"Nik Finance got me approved for a car loan when the banks said no. They found a lender that understood my situation, and I'm now driving the car I wanted.\" | Priya M, Dandenong\n\nSECTION 5 - WHY CHOOSE US:\nHeading: \"Why Choose NIK FINANCE\"\n3 features:\nFeature 1: \"Instant Loan Match\" | Target icon | \"Our advanced AI instantly analyses your profile against hundreds of lender policies, ensuring you're matched with the absolute best loan for maximum approval likelihood.\"\nFeature 2: \"Your Personal Loan Expert\" | Person icon | \"Beyond the tech, you'll have a dedicated human specialist guiding you. We provide tailored advice, answer your questions, and navigate complexities for a stress-free journey.\"\nFeature 3: \"Fast-Track Applications\" | Clock icon | \"No more paperwork headaches. We use an intuitive online portal to swiftly gather your documents, accelerating your application directly to the lender for quicker approvals.\"\n\nSECTION 6 - FINAL CTA:\nCentered content\nHeading: \"Ready to Get Started?\"\nSubheading: \"It only takes 5 minutes to see what you qualify for\"\nLarge green button: \"Get Your Free Quote Now\"\n\nFOOTER:\nDark green or navy background, white text, company name \"NIK FINANCE\", tagline \"Your Trusted Partner for Financial Success\", copyright \"© 2025 NIK FINANCE\"\n\nMOBILE: Stack all cards vertically, large touch-friendly buttons, single column layout, maintain spacing\n\nFONTS: Modern sans-serif (Inter or similar), bold headings, clear hierarchy\n\nOVERALL: Professional, trustworthy, clean, smooth animations, hover effects on cards and buttons, good contrast, mobile responsive",
+  "status": "READY",
+  "revision": "10",
+  "createdDate": "2025-12-06T04:27:23.363Z",
+  "updatedDate": "2025-12-06T04:27:46.611Z",
+  "attachments": {
+    "contentImagesUrls": [],
+    "inspirationImagesUrls": []
+  },
+  "selectedBrandingPresetId": "00000000-7f73-4b22-953a-dde60195592d",
+  "plan": "{\n  \"sections\": [\n    {\n      \"id\": \"overview\",\n      \"title\": \"## Overview\",\n      \"content\": \"This plan outlines the creation of a professional loan marketplace website for NIK FINANCE. It will feature a clean, modern design to showcase various loan options, an AI-powered matching system, a clear 'how it works' process, customer testimonials, and trust-building elements to facilitate loan applications.\"\n    },\n    {\n      \"id\": \"key-features\",\n      \"title\": \"## Key features\",\n      \"content\": \"- **View Loan Listing**: Displays all available loan types (Home, Car, Personal, Business).\\n- **View Loan Details**: Shows detailed information for each specific loan type, including rates and features.\\n- **Filter Loan Options**: Allows users to filter loan types based on their needs.\\n- **Submit Loan Application**: Enables users to initiate the loan application process through a form.\\n- **View How It Works**: Presents a step-by-step guide on the loan application process.\\n- **View Customer Reviews**: Displays testimonials from satisfied customers.\\n- **View Why Choose Us**: Highlights the unique benefits of using NIK FINANCE.\\n- **Submit Contact Form**: Allows visitors to send general inquiries.\",\n      \"metadata\": [\n        { \"id\": \"view-loan-listing\", \"name\": \"View Loan Listing\" },\n        { \"id\": \"view-loan-details\", \"name\": \"View Loan Details\" },\n        { \"id\": \"filter-loan-options\", \"name\": \"Filter Loan Options\" },\n        { \"id\": \"submit-loan-application\", \"name\": \"Submit Loan Application\" },\n        { \"id\": \"view-how-it-works\", \"name\": \"View How It Works\" },\n        { \"id\": \"view-customer-reviews\", \"name\": \"View Customer Reviews\" },\n        { \"id\": \"view-why-choose-us\", \"name\": \"View Why Choose Us\" },\n        { \"id\": \"submit-contact-form\", \"name\": \"Submit Contact Form\" }\n      ]\n    },\n    {\n      \"id\": \"structure\",\n      \"title\": \"## Structure\",\n      \"content\": \"- **Header (Reusable)**: Contains the NIK FINANCE logo, navigation links (Home, Loans, How It Works, Reviews, Why Choose Us), and a prominent 'Get Instant Quote' button.\\n- **Footer (Reusable)**: Contains company name, tagline, copyright, and contact information.\\n- **Homepage**: Features the hero section, loan cards, how it works, reviews, why choose us, and final CTA.\\n- **Contact Page**: Dedicated page for the contact form.\"\n    }\n  ],\n  \"apps\": [\n    {\n      \"id\": \"ecom-platform\",\n      \"keyFeatures\": [\n        { \"id\": \"view-loan-listing\", \"name\": \"View Loan Listing\" },\n        { \"id\": \"filter-loan-options\", \"name\": \"Filter Loan Options\" },\n        { \"id\": \"view-loan-details\", \"name\": \"View Loan Details\" },\n        { \"id\": \"submit-loan-application\", \"name\": \"Submit Loan Application\" }\n      ]\n    },\n    {\n      \"id\": \"wix-forms\",\n      \"keyFeatures\": [\n        { \"id\": \"submit-contact-form\", \"name\": \"Submit Contact Form\" }\n      ]\n    },\n    {\n      \"id\": \"wix-cms\",\n      \"keyFeatures\": [\n        { \"id\": \"view-how-it-works\", \"name\": \"View How It Works\" },\n        { \"id\": \"view-customer-reviews\", \"name\": \"View Customer Reviews\" },\n        { \"id\": \"view-why-choose-us\", \"name\": \"View Why Choose Us\" }\n      ]\n    }\n  ],\n  \"version\": \"3.0\"\n}",
+  "designerData": {
+    "designerId": "45d286a9-c2d3-4558-807d-a3f26205dc86",
+    "designerName": "Elise",
+    "selectionMethod": "UNSELECTED"
+  }
+}

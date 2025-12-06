@@ -1,0 +1,59 @@
+{
+  "name": "@wix/vibe-forms-plugin",
+  "version": "0.32.3",
+  "main": "dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.cjs"
+    }
+  },
+  "keywords": [
+    "vibe-plugin"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "jsdelivr": "dist/index.js",
+  "unpkg": "dist/index.js",
+  "scripts": {
+    "build": "tsc --noEmit && tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint:fix": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,md}\"",
+    "lint:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,md}\""
+  },
+  "dependencies": {
+    "@types/adm-zip": "^0.5.7",
+    "@wix/vibe-forms-plugin-files": "0.32.3",
+    "@wix/vibe-plugin-utils": "0.1.0",
+    "@wix/wix-vibe-plugins": "^0.0.2",
+    "adm-zip": "^0.5.16"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.26.0",
+    "prettier": "^3.6.2",
+    "tsup": "^8.1.0",
+    "typescript": "^5.8.3",
+    "vitest": "^2.0.0"
+  },
+  "wix": {
+    "artifact": {
+      "groupId": "com.wixpress.ai-systems",
+      "artifactId": "vibe-forms-plugin"
+    },
+    "validations": {
+      "postDependenciesBuild": [
+        "lint:check"
+      ]
+    }
+  },
+  "falconPackageHash": "9d4ce88bd0444628049415d0898770432cd9d809f8c26b0dfc2324b1"
+}

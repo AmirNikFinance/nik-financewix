@@ -36,7 +36,7 @@ export default function Footer() {
           <div>
             <h4 className="font-heading text-lg font-semibold mb-4">Contact Us</h4>
             <div className="flex flex-col gap-2 font-paragraph text-sm opacity-90">
-              <p>Email: info@nikfinance.com.au</p>
+
               <p>Phone: 1300 NIK FIN</p>
               <p>Australia Wide Service</p>
             </div>

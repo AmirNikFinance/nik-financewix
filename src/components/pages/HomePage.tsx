@@ -155,9 +155,7 @@ export default function HomePage() {
         className="fixed top-0 left-0 right-0 h-1 bg-accent z-50 origin-left"
         style={{ scaleX }}
       />
-
       <Header />
-
       {/* --- HERO SECTION --- */}
       <section className="relative w-full min-h-[95vh] flex items-center justify-center overflow-hidden bg-secondary">
         {/* Background Parallax Layer */}
@@ -258,7 +256,7 @@ export default function HomePage() {
                     <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
                       <Home className="text-accent w-5 h-5" />
                     </div>
-                    <span className="text-accent font-bold">+4.2%</span>
+                    <span className="text-accent font-bold">{"A"}</span>
                   </div>
                   <div className="h-2 w-24 bg-white/20 rounded-full mb-2" />
                   <div className="h-2 w-16 bg-white/10 rounded-full" />
@@ -280,7 +278,7 @@ export default function HomePage() {
                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-accent/30">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xs">NIK</div>
-                          <span className="text-sm font-medium text-gray-700">Smart Choice</span>
+                          <span className="text-sm font-medium text-gray-700">{"AS"}</span>
                         </div>
                         <span className="font-bold text-accent">4.75%</span>
                      </div>
@@ -301,7 +299,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* --- LOAN OPTIONS SECTION (Overlapping) --- */}
       <section className="relative z-30 -mt-20 pb-32 px-6 md:px-12">
         <div className="max-w-[100rem] mx-auto">
@@ -344,7 +341,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* --- HOW IT WORKS (Sticky Scroll) --- */}
       <section className="relative w-full py-32 bg-light-gray overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
@@ -421,7 +417,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* --- WHY CHOOSE US (Bento Grid) --- */}
       <section className="py-32 bg-white">
         <div className="max-w-[100rem] mx-auto px-6 md:px-12">
@@ -519,7 +514,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* --- REVIEWS (Horizontal Scroll) --- */}
       <section className="py-32 bg-secondary overflow-hidden">
         <div className="max-w-[100rem] mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
@@ -570,7 +564,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       {/* --- FINAL CTA --- */}
       <section className="relative py-32 bg-white overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent" />
@@ -600,7 +593,6 @@ export default function HomePage() {
           </AnimatedElement>
         </div>
       </section>
-
       <Footer />
     </div>
   );

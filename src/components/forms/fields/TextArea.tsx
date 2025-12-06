@@ -28,7 +28,6 @@ const TextArea = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: TextAreaProps) => {
   const descriptionId = description ? `${id}-description` : undefined;

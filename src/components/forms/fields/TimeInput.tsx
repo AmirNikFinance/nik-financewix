@@ -27,7 +27,6 @@ const TimeInput = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: TimeInputProps) => {
   const descriptionId = description ? `${id}-description` : undefined;

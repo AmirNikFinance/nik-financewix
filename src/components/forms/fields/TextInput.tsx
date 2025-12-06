@@ -28,7 +28,6 @@ const TextInput = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: TextInputProps) => {
   const descriptionId = description ? `${id}-description` : undefined;

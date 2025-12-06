@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import LendersCarousel from '@/components/LendersCarousel';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { BaseCrudService } from '@/integrations';
@@ -512,6 +513,12 @@ export default function HomePage() {
               </AnimatedElement>
             )}
           </div>
+        </div>
+      </section>
+      {/* --- LENDERS CAROUSEL --- */}
+      <section className="py-32 bg-white">
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12">
+          <LendersCarousel />
         </div>
       </section>
       {/* --- REVIEWS (Horizontal Scroll) --- */}

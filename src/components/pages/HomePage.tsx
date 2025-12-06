@@ -257,7 +257,7 @@ export default function HomePage() {
                     <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
                       <Home className="text-accent w-5 h-5" />
                     </div>
-                    <span className="text-accent font-bold">{"A"}</span>
+                    <span className="text-accent font-bold">{"APPROVED!"}</span>
                   </div>
                   <div className="h-2 w-24 bg-white/20 rounded-full mb-2" />
                   <div className="h-2 w-16 bg-white/10 rounded-full" />
@@ -274,14 +274,14 @@ export default function HomePage() {
                           <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">ANZ</div>
                           <span className="text-sm font-medium text-gray-700">Home Loan</span>
                         </div>
-                        <span className="font-bold text-secondary">4.99%</span>
+                        <span className="font-bold text-secondary">{"4.89%"}</span>
                      </div>
                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-accent/30">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xs">NIK</div>
-                          <span className="text-sm font-medium text-gray-700">{"AS"}</span>
+                          <span className="text-sm font-medium text-gray-700">{"Asset Finance"}</span>
                         </div>
-                        <span className="font-bold text-accent">4.75%</span>
+                        <span className="font-bold text-accent">{"5.75%"}</span>
                      </div>
                    </div>
                    <Button className="w-full mt-6 bg-secondary text-white rounded-xl py-6">View Details</Button>

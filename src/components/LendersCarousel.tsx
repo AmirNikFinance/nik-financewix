@@ -191,10 +191,7 @@ export default function LendersCarousel() {
 
   return (
     <div className="w-full bg-light-gray rounded-3xl p-8 md:p-12">
-      <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground text-center mb-8">
-        Our Trusted Lenders
-      </h2>
-
+      <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground text-center mb-8">{"Some Of Our Trusted Lenders"}</h2>
       <div className="relative">
         {/* Carousel Container */}
         <div className="flex items-center justify-center gap-4 md:gap-6">

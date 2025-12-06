@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Form from '@/components/forms/Form';
+import LendersCarousel from '@/components/LendersCarousel';
 import { CheckCircle, Zap, Building2 } from 'lucide-react';
 
 export default function ApplyPage() {
@@ -43,6 +44,11 @@ export default function ApplyPage() {
               Loan Application Form
             </h2>
             <Form formServiceConfig={{ formId: "a3ca1543-a162-47a8-b6a8-e642a7d6be79" }} />
+          </div>
+
+          {/* Lenders Carousel */}
+          <div className="mt-12">
+            <LendersCarousel />
           </div>
 
           {/* Additional Info */}

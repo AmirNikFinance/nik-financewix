@@ -22,7 +22,6 @@ const RadioGroup = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: RadioGroupProps) => {
   return (

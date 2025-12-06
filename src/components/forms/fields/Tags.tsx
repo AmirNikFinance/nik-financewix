@@ -17,7 +17,6 @@ const Tags = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: TagsProps) => {
   const currentValues = value || [];

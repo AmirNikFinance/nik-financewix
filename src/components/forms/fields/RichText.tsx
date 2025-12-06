@@ -9,7 +9,6 @@ import "@wix/ricos/css/all-plugins-viewer.css";
 import { Field, FieldInput, FieldInputWrapper } from "../../ui/forms/Form";
 
 const RichText = ({
-  // @ts-expect-error
   id,
   content,
   maxShownParagraphs,

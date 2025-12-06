@@ -23,7 +23,6 @@ export default function PaymentInput({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: PaymentInputProps) {
   return (

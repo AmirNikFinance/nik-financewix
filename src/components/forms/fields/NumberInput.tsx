@@ -26,7 +26,6 @@ const NumberInput = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: NumberInputProps) => {
   const descriptionId = description ? `${id}-description` : undefined;

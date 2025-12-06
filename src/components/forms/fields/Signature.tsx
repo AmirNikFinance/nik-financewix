@@ -21,7 +21,6 @@ const Signature = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: SignatureProps) => {
   return (

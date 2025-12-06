@@ -23,7 +23,6 @@ const ImageChoice = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: ImageChoiceProps) => {
   return (

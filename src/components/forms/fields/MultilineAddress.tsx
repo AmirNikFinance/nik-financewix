@@ -18,7 +18,6 @@ const MultilineAddress = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: MultilineAddressProps) => {
   const handleFieldChange = (field: keyof typeof value, fieldValue: string) => {

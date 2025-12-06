@@ -20,7 +20,6 @@ const RatingInput = ({
   onChange,
   onBlur,
   onFocus,
-  // @ts-expect-error
   errorMessage,
 }: RatingInputProps) => {
   return (

@@ -17,7 +17,6 @@ export default function ProductList({
   showLabel,
   options,
   onChange,
-  // @ts-expect-error
   errorMessage,
 }: ProductListProps) {
   const handleToggle = (productId: string) => {

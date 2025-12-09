@@ -209,19 +209,7 @@ export default function HomePage() {
                     Get Instant Quote
                   </Button>
                 </Link>
-                <div className="flex items-center gap-4 px-6 py-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10">
-                  <div className="flex -space-x-3">
-                    {[1, 2, 3].map((i) => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-secondary bg-gray-200 overflow-hidden">
-                         <Image src={'https://static.wixstatic.com/media/e994c8_2dcb6f97e7ee4815a34d0de41fbc1296~mv2.png?originWidth=1152&originHeight=576'} alt="User" className="w-full h-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex flex-col">
-                    <div className="flex text-yellow-400 text-xs">★★★★★</div>
-                    <span className="text-white text-xs font-medium">Trusted by 10k+ Aussies</span>
-                  </div>
-                </div>
+
               </div>
             </AnimatedElement>
 

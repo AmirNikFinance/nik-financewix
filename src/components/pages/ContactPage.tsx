@@ -44,7 +44,7 @@ export default function ContactPage() {
                       Email
                     </h3>
                     <p className="font-paragraph text-base text-foreground/80">
-                      info@nikfinance.com.au
+                      Hello@nik.finance
                     </p>
                   </div>
                 </div>

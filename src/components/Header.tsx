@@ -57,12 +57,10 @@ export default function Header() {
           </nav>
 
           {/* CTA Button */}
-          <Link
-            to="/apply"
+          <a
+            href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
             className="hidden md:block bg-accent text-white font-paragraph font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 hover:scale-105"
-          >
-            Get Instant Quote
-          </Link>
+          >{"Start Application"}</a>
 
           {/* Mobile Menu Button */}
           <button
@@ -119,13 +117,13 @@ export default function Header() {
             >
               Contact
             </Link>
-            <Link
-              to="/apply"
+            <a
+              href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
               onClick={() => setIsMenuOpen(false)}
               className="bg-accent text-white font-paragraph font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 text-center"
             >
               Get Instant Quote
-            </Link>
+            </a>
           </nav>
         )}
       </div>

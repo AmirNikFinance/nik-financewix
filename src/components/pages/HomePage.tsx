@@ -559,76 +559,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* --- CALENDAR BOOKING SECTION --- */}
-      <section className="relative py-32 bg-light-gray overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent" />
-        
-        <div className="max-w-[100rem] mx-auto px-6 md:px-12 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <AnimatedElement direction="left">
-              <div className="flex flex-col gap-8">
-                <div>
-                  <span className="text-accent font-bold tracking-widest uppercase text-sm mb-4 block">Schedule Your Consultation</span>
-                  <h2 className="font-heading text-5xl md:text-6xl font-bold text-secondary mb-6 leading-tight">
-                    Book a Free <br/>
-                    <span className="text-accent">Loan Consultation</span>
-                  </h2>
-                </div>
-                
-                <p className="font-paragraph text-xl text-gray-600 max-w-lg leading-relaxed">
-                  Connect with one of our loan specialists to discuss your financial goals and find the perfect loan solution tailored to your needs.
-                </p>
-                
-                <div className="flex flex-col gap-4 pt-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
-                      <Clock className="w-4 h-4 text-accent" />
-                    </div>
-                    <div>
-                      <h3 className="font-heading font-bold text-secondary mb-1">30-Minute Session</h3>
-                      <p className="font-paragraph text-gray-600">Personalized consultation with our experts</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle className="w-4 h-4 text-accent" />
-                    </div>
-                    <div>
-                      <h3 className="font-heading font-bold text-secondary mb-1">100% Free</h3>
-                      <p className="font-paragraph text-gray-600">No hidden fees or obligations</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
-                      <User className="w-4 h-4 text-accent" />
-                    </div>
-                    <div>
-                      <h3 className="font-heading font-bold text-secondary mb-1">Expert Guidance</h3>
-                      <p className="font-paragraph text-gray-600">Get matched with the right loan option</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </AnimatedElement>
-            
-            {/* Right Calendar Embed */}
-            <AnimatedElement direction="right" delay={200}>
-              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/50 bg-white">
-                {/* Calendar Embed */}
-                <iframe
-                  src="https://calendar.app.google/mC9ExNLrBSdgV9Qm8"
-                  className="w-full h-[600px] border-0"
-                  title="Book a consultation"
-                  loading="lazy"
-                />
-              </div>
-            </AnimatedElement>
-          </div>
-        </div>
-      </section>
+      {/* --- FINAL CTA --- */}
+
       <Footer />
     </div>
   );

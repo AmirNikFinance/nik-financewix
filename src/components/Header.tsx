@@ -20,37 +20,37 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-8">
             <Link 
               to="/" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Home
             </Link>
             <a 
               href="/#loans" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Loans
             </a>
             <a 
               href="/#how-it-works" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               How It Works
             </a>
             <a 
               href="/#reviews" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Reviews
             </a>
             <a 
               href="/#why-choose-us" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Why Choose Us
             </a>
             <Link 
               to="/contact" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Contact
             </Link>
@@ -78,42 +78,42 @@ export default function Header() {
             <Link 
               to="/" 
               onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Home
             </Link>
             <a 
               href="/#loans" 
               onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Loans
             </a>
             <a 
               href="/#how-it-works" 
               onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               How It Works
             </a>
             <a 
               href="/#reviews" 
               onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Reviews
             </a>
             <a 
               href="/#why-choose-us" 
               onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Why Choose Us
             </a>
             <Link 
               to="/contact" 
               onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300"
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Contact
             </Link>

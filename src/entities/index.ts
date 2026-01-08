@@ -57,7 +57,7 @@ export interface LoanOptions {
   loanName?: string;
   /** @wixFieldType text */
   startingRate?: string;
-  /** @wixFieldType image - Contains image URL, render with <Image> component, NOT as text */
+  /** @wixFieldType image */
   loanIcon?: string;
   /** @wixFieldType text */
   shortDescription?: string;
@@ -78,7 +78,7 @@ export interface WhyChooseUsFeatures {
   _updatedDate?: Date;
   /** @wixFieldType text */
   title?: string;
-  /** @wixFieldType image - Contains image URL, render with <Image> component, NOT as text */
+  /** @wixFieldType image */
   icon?: string;
   /** @wixFieldType text */
   description?: string;

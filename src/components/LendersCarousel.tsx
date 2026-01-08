@@ -198,7 +198,7 @@ export default function LendersCarousel() {
           {/* Previous Button */}
           <button
             onClick={handlePrev}
-            className="flex-shrink-0 p-2 rounded-full hover:bg-white transition-colors"
+            className="flex-shrink-0 p-2 rounded-full hover:bg-white transition-colours"
             aria-label="Previous lenders"
           >
             <ChevronLeft className="w-6 h-6 text-foreground" />
@@ -227,7 +227,7 @@ export default function LendersCarousel() {
           {/* Next Button */}
           <button
             onClick={handleNext}
-            className="flex-shrink-0 p-2 rounded-full hover:bg-white transition-colors"
+            className="flex-shrink-0 p-2 rounded-full hover:bg-white transition-colours"
             aria-label="Next lenders"
           >
             <ChevronRight className="w-6 h-6 text-foreground" />

@@ -222,7 +222,7 @@ export default function HomePage() {
                   { icon: Building2, text: "130+ Lenders" }
                 ].map((badge, idx) => (
                   <div key={idx} className="flex items-center gap-3 text-gray-300 group cursor-default">
-                    <badge.icon className="w-5 h-5 text-accent group-hover:text-white transition-colors" />
+                    <badge.icon className="w-5 h-5 text-accent group-hover:text-white transition-colours" />
                     <span className="font-medium text-sm">{badge.text}</span>
                   </div>
                 ))}
@@ -300,7 +300,7 @@ export default function HomePage() {
                   
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="flex justify-between items-start mb-6">
-                      <div className="p-4 rounded-2xl bg-gray-50 text-secondary group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                      <div className="p-4 rounded-2xl bg-gray-50 text-secondary group-hover:bg-accent group-hover:text-white transition-colours duration-300">
                         {getLoanIcon(loan.loanName)}
                       </div>
                       <div className="text-right">
@@ -309,7 +309,7 @@ export default function HomePage() {
                       </div>
                     </div>
 
-                    <h3 className="text-2xl font-heading font-bold text-secondary mb-3 group-hover:text-accent transition-colors">
+                    <h3 className="text-2xl font-heading font-bold text-secondary mb-3 group-hover:text-accent transition-colours">
                       {loan.loanName}
                     </h3>
                     
@@ -376,7 +376,7 @@ export default function HomePage() {
                   <div className="relative pl-0 md:pl-24 group">
                     {/* Number Badge */}
                     <div className="hidden md:flex absolute left-0 top-0 w-16 h-16 rounded-2xl bg-white border border-gray-100 items-center justify-center shadow-lg group-hover:scale-110 group-hover:border-accent transition-all duration-300 z-10">
-                      <span className="font-heading text-2xl font-bold text-secondary group-hover:text-accent transition-colors">
+                      <span className="font-heading text-2xl font-bold text-secondary group-hover:text-accent transition-colours">
                         0{step.stepNumber}
                       </span>
                     </div>
@@ -425,7 +425,7 @@ export default function HomePage() {
             {whyChooseUsFeatures[0] && (
               <AnimatedElement className="md:col-span-2 row-span-1" delay={0}>
                 <div className="h-full bg-secondary rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-accent/20 transition-colors duration-700" />
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-accent/20 transition-colours duration-700" />
                   
                   <div className="relative z-10 flex flex-col h-full justify-between">
                     <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 text-accent">
@@ -447,7 +447,7 @@ export default function HomePage() {
             {/* Feature 2 - Tall */}
             {whyChooseUsFeatures[1] && (
               <AnimatedElement className="md:col-span-1 row-span-2" delay={200}>
-                <div className="h-full bg-light-gray rounded-[2.5rem] p-10 relative overflow-hidden group hover:bg-gray-100 transition-colors duration-300">
+                <div className="h-full bg-light-gray rounded-[2.5rem] p-10 relative overflow-hidden group hover:bg-gray-100 transition-colours duration-300">
                   <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white to-transparent opacity-50" />
                   
                   <div className="relative z-10 flex flex-col h-full">
@@ -534,7 +534,7 @@ export default function HomePage() {
             {reviews.map((review, index) => (
               <div key={review._id} className="min-w-[350px] md:min-w-[450px] snap-center">
                 <AnimatedElement delay={index * 100} direction="left">
-                  <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-[2rem] p-10 h-full hover:bg-white/10 transition-colors duration-300">
+                  <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-[2rem] p-10 h-full hover:bg-white/10 transition-colours duration-300">
                     <div className="flex gap-1 mb-6">
                       {[...Array(review.starRating || 5)].map((_, i) => (
                         <Star key={i} className="w-5 h-5 fill-accent text-accent" />

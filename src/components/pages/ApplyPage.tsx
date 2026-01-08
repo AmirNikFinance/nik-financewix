@@ -57,8 +57,8 @@ export default function ApplyPage() {
               What Happens Next?
             </h3>
             <div className="space-y-3 font-paragraph text-base text-foreground/80">
-              <p>✓ Our AI instantly analyzes your application against 130+ lenders</p>
-              <p>✓ You'll receive personalized loan recommendations within minutes</p>
+              <p>✓ Our AI instantly analyses your application against 130+ lenders</p>
+              <p>✓ You'll receive personalised loan recommendations within minutes</p>
               <p>✓ A dedicated loan specialist will contact you to finalize your application</p>
               <p>✓ Most applications are approved within 24 hours</p>
             </div>

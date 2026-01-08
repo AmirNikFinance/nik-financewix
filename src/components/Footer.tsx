@@ -8,9 +8,7 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <h3 className="font-heading text-2xl font-bold mb-2">NIK FINANCE</h3>
-            <p className="font-paragraph text-sm opacity-90">
-              Your Trusted Partner for Financial Success
-            </p>
+            <p className="font-paragraph text-sm opacity-90">{"Your Trusted Partner for Financial Success"}</p>
           </div>
 
           {/* Quick Links */}

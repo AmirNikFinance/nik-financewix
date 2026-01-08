@@ -8,7 +8,6 @@ export default function ApplyPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-
       <div className="max-w-[120rem] mx-auto px-8 py-16">
         <div className="text-center mb-12">
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
@@ -59,13 +58,12 @@ export default function ApplyPage() {
             <div className="space-y-3 font-paragraph text-base text-foreground/80">
               <p>✓ Our AI instantly analyses your application against 130+ lenders</p>
               <p>✓ You'll receive personalised loan recommendations within minutes</p>
-              <p>✓ A dedicated loan specialist will contact you to finalize your application</p>
+              <p>{"✓ A dedicated loan specialist will contact you to finalise your application"}</p>
               <p>✓ Most applications are approved within 24 hours</p>
             </div>
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

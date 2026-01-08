@@ -559,33 +559,74 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* --- FINAL CTA --- */}
+      {/* --- CALENDAR BOOKING SECTION --- */}
       <section className="relative py-32 bg-light-gray overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent" />
         
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <AnimatedElement direction="up">
-            <div className="w-20 h-20 bg-accent rounded-3xl rotate-12 mx-auto mb-12 flex items-center justify-center shadow-2xl shadow-accent/30">
-              <MousePointerClick className="w-10 h-10 text-white -rotate-12" />
-            </div>
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <AnimatedElement direction="left">
+              <div className="flex flex-col gap-8">
+                <div>
+                  <span className="text-accent font-bold tracking-widest uppercase text-sm mb-4 block">Schedule Your Consultation</span>
+                  <h2 className="font-heading text-5xl md:text-6xl font-bold text-secondary mb-6 leading-tight">
+                    Book a Free <br/>
+                    <span className="text-accent">Loan Consultation</span>
+                  </h2>
+                </div>
+                
+                <p className="font-paragraph text-xl text-gray-600 max-w-lg leading-relaxed">
+                  Connect with one of our loan specialists to discuss your financial goals and find the perfect loan solution tailored to your needs.
+                </p>
+                
+                <div className="flex flex-col gap-4 pt-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
+                      <Clock className="w-4 h-4 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading font-bold text-secondary mb-1">30-Minute Session</h3>
+                      <p className="font-paragraph text-gray-600">Personalized consultation with our experts</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
+                      <CheckCircle className="w-4 h-4 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading font-bold text-secondary mb-1">100% Free</h3>
+                      <p className="font-paragraph text-gray-600">No hidden fees or obligations</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start gap-4">
+                    <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-1">
+                      <User className="w-4 h-4 text-accent" />
+                    </div>
+                    <div>
+                      <h3 className="font-heading font-bold text-secondary mb-1">Expert Guidance</h3>
+                      <p className="font-paragraph text-gray-600">Get matched with the right loan option</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </AnimatedElement>
             
-            <h2 className="font-heading text-5xl md:text-7xl font-bold text-secondary mb-8">
-              Ready to Get Started?
-            </h2>
-            <p className="font-paragraph text-xl md:text-2xl text-gray-500 mb-12">
-              It only takes 5 minutes to see what you qualify for. <br/> No impact on your credit score.
-            </p>
-            
-            <Link to="/apply">
-              <Button className="bg-secondary hover:bg-secondary/90 text-white text-xl px-12 py-8 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                Get Your Free Quote Now
-              </Button>
-            </Link>
-            
-            <p className="mt-8 text-sm text-gray-400">
-              By clicking, you agree to our Terms of Service and Privacy Policy.
-            </p>
-          </AnimatedElement>
+            {/* Right Calendar Embed */}
+            <AnimatedElement direction="right" delay={200}>
+              <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/50 bg-white">
+                {/* Calendar Embed */}
+                <iframe
+                  src="https://calendar.app.google/mC9ExNLrBSdgV9Qm8"
+                  className="w-full h-[600px] border-0"
+                  title="Book a consultation"
+                  loading="lazy"
+                />
+              </div>
+            </AnimatedElement>
+          </div>
         </div>
       </section>
       <Footer />

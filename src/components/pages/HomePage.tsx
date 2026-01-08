@@ -619,7 +619,7 @@ export default function HomePage() {
               <div className="relative rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl border border-white/50 bg-white h-[500px] md:h-[600px] lg:h-[650px]">
                 {/* Calendly Embed */}
                 <iframe
-                  src="https://calendly.com/nikfinance/consultation?hide_event_type_details=1&hide_gdpr_banner=1"
+                  src="https://calendly.com/hello-nik/30min?hide_event_type_details=1&hide_gdpr_banner=1"
                   className="w-full h-full border-0"
                   title="Book a consultation"
                   loading="lazy"

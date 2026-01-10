@@ -635,9 +635,7 @@ export default function PrivacyPolicyPage() {
                 14.1 Contact Details
               </h3>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li><strong>Email:</strong> privacy@nik.finance</li>
-                <li><strong>Phone:</strong> 1300 NIK FIN (1300 645 346)</li>
-                <li><strong>Mailing Address:</strong> NIK Finance, Australia</li>
+                <li><strong>Email:</strong> Hello@nik.finance</li>
                 <li><strong>Website:</strong> www.nik.finance</li>
               </ul>
 
@@ -645,7 +643,7 @@ export default function PrivacyPolicyPage() {
                 14.2 Privacy Officer
               </h3>
               <p>
-                We have appointed a Privacy Officer to oversee our privacy practices and handle privacy-related enquiries. You can contact our Privacy Officer at privacy@nik.finance.
+                We have appointed a Privacy Officer to oversee our privacy practices and handle privacy-related enquiries. You can contact our Privacy Officer at Hello@nik.finance.
               </p>
 
               <h3 className="font-heading text-2xl font-semibold text-foreground mb-3 mt-6">

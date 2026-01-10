@@ -15,20 +15,28 @@ type CalculatorType =
 const faqs: Record<CalculatorType, Array<{ question: string; answer: string }>> = {
   repayment: [
     {
-      question: 'What is the difference between P&I and Interest-Only loans?',
-      answer: 'Principal & Interest (P&I) loans require you to pay both the loan amount and interest each month, building equity over time. Interest-Only loans require you to pay only interest for a set period (usually 5 years), after which you must switch to P&I. P&I is generally better for home purchases, while Interest-Only may suit investors.',
+      question: 'How is my monthly repayment calculated?',
+      answer: 'Your monthly repayment is calculated using the loan amount, interest rate, and loan term. The formula divides the total loan cost (principal + interest) across the number of months. For example, a $400,000 loan at 6% over 30 years results in approximately $2,398 per month. The calculator uses standard amortization formulas to provide accurate estimates.',
     },
     {
-      question: 'How accurate is this calculator?',
-      answer: 'This calculator provides estimates based on standard calculations. Actual repayments may vary depending on your lender, loan features (offset accounts, redraw facilities), interest rate changes, and any additional fees. Always confirm exact figures with your lender.',
+      question: 'What is the difference between principal and interest?',
+      answer: 'Principal is the original loan amount you borrowed. Interest is the cost of borrowing that money, calculated as a percentage of the principal. In early repayments, most of your payment goes toward interest, while later payments go more toward principal. Over a 30-year loan, you may pay nearly as much in interest as the original principal amount.',
+    },
+    {
+      question: 'How do extra repayments help reduce my loan?',
+      answer: 'Extra repayments go directly toward reducing your principal balance, which decreases the total interest you pay over the loan term. For example, paying an extra $100 per month on a $400,000 loan at 6% can save you over $50,000 in interest and reduce your loan term by several years. The earlier you make extra payments, the more interest you save.',
     },
     {
       question: 'Can I pay fortnightly or weekly instead of monthly?',
-      answer: 'Yes, many lenders offer flexible payment options. Paying fortnightly or weekly can help you pay off your loan faster and reduce total interest. This calculator shows the equivalent amounts for different payment frequencies.',
+      answer: 'Yes, many lenders offer flexible payment options including fortnightly and weekly payments. Paying more frequently can help you pay off your loan faster because you make 26 fortnightly payments or 52 weekly payments per year (compared to 12 monthly payments). This accelerates principal reduction and saves interest. This calculator shows equivalent amounts for different payment frequencies.',
+    },
+    {
+      question: 'How much total interest will I pay over the loan term?',
+      answer: 'Total interest depends on your loan amount, interest rate, and loan term. For example, a $400,000 loan at 6% over 30 years costs approximately $463,000 in total interest. A shorter loan term (e.g., 20 years) reduces total interest significantly. This calculator displays your total interest payable, helping you understand the true cost of borrowing.',
     },
     {
       question: 'What happens if interest rates rise?',
-      answer: 'If interest rates increase, your monthly repayment will also increase (unless you have a fixed rate). A 1% increase in interest rates can significantly impact your repayments. It\'s important to budget for potential rate rises.',
+      answer: 'If interest rates increase, your monthly repayment will also increase (unless you have a fixed rate loan). A 1% increase in interest rates can add $300-400+ to your monthly repayment on a $400,000 loan. It\'s important to budget for potential rate rises and consider whether you can afford repayments at higher rates. Fixed-rate loans protect you from rate increases for the fixed period.',
     },
   ],
   borrowing: [

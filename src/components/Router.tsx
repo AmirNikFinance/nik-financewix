@@ -6,6 +6,8 @@ import HomePage from '@/components/pages/HomePage';
 import ContactPage from '@/components/pages/ContactPage';
 import ApplyPage from '@/components/pages/ApplyPage';
 import PrivacyPolicyPage from '@/components/pages/PrivacyPolicyPage';
+import BlogPage from '@/components/pages/BlogPage';
+import BlogArticlePage from '@/components/pages/BlogArticlePage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
       {
         path: "privacy-policy",
         element: <PrivacyPolicyPage />,
+      },
+      {
+        path: "blog",
+        element: <BlogPage />,
+      },
+      {
+        path: "blog/:slug",
+        element: <BlogArticlePage />,
       },
       {
         path: "*",

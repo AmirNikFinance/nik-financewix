@@ -49,6 +49,12 @@ export default function Header() {
               Why Choose Us
             </a>
             <Link 
+              to="/blog" 
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              Blog
+            </Link>
+            <Link 
               to="/contact" 
               className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
@@ -110,6 +116,13 @@ export default function Header() {
             >
               Why Choose Us
             </a>
+            <Link 
+              to="/blog" 
+              onClick={() => setIsMenuOpen(false)}
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              Blog
+            </Link>
             <Link 
               to="/contact" 
               onClick={() => setIsMenuOpen(false)}

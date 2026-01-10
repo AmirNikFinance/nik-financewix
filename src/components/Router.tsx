@@ -9,6 +9,7 @@ import PrivacyPolicyPage from '@/components/pages/PrivacyPolicyPage';
 import BlogPage from '@/components/pages/BlogPage';
 import BlogArticlePage from '@/components/pages/BlogArticlePage';
 import CalculatorsPage from '@/components/pages/CalculatorsPage';
+import CarLoanCalculatorPage from '@/components/pages/CarLoanCalculatorPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "calculators",
         element: <CalculatorsPage />,
+      },
+      {
+        path: "car-loan-calculator",
+        element: <CarLoanCalculatorPage />,
       },
       {
         path: "*",

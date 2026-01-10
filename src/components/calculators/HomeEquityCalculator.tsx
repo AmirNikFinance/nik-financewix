@@ -123,7 +123,7 @@ export default function HomeEquityCalculator() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-orange-600 to-orange-400 rounded-2xl p-8 text-white shadow-lg"
+              className="bg-gradient-to-br from-secondary to-secondary/80 rounded-2xl p-8 text-white shadow-lg"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
@@ -134,7 +134,7 @@ export default function HomeEquityCalculator() {
               <div className="text-5xl font-bold mb-2">
                 ${calculation.equity.toLocaleString()}
               </div>
-              <p className="text-orange-100 text-sm">
+              <p className="text-white/70 text-sm">
                 {calculation.equityPercentageActual}% of property value
               </p>
             </motion.div>
@@ -144,7 +144,7 @@ export default function HomeEquityCalculator() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl p-8 text-white shadow-lg"
+              className="bg-gradient-to-br from-accent to-accent/80 rounded-2xl p-8 text-white shadow-lg"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
@@ -155,7 +155,7 @@ export default function HomeEquityCalculator() {
               <div className="text-5xl font-bold mb-2">
                 ${calculation.availableToBorrow.toLocaleString()}
               </div>
-              <p className="text-blue-100 text-sm">
+              <p className="text-white/70 text-sm">
                 At 80% LVR (no LMI)
               </p>
             </motion.div>
@@ -213,7 +213,7 @@ export default function HomeEquityCalculator() {
             className="mt-8"
           >
             <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer">
-              <Button className="w-full bg-orange-600 hover:bg-orange-700 text-white rounded-xl py-6 text-lg font-semibold">
+              <Button className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-xl py-6 text-lg font-semibold">
                 Borrow Against Your Equity
               </Button>
             </a>

@@ -185,7 +185,7 @@ export default function DebtConsolidationCalculator() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-indigo-600 to-indigo-400 rounded-2xl p-8 text-white shadow-lg"
+              className="bg-gradient-to-br from-secondary to-secondary/80 rounded-2xl p-8 text-white shadow-lg"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
@@ -196,7 +196,7 @@ export default function DebtConsolidationCalculator() {
               <div className="text-5xl font-bold mb-2">
                 ${calculation.totalDebt.toLocaleString()}
               </div>
-              <p className="text-indigo-100 text-sm">
+              <p className="text-white/70 text-sm">
                 To be consolidated
               </p>
             </motion.div>
@@ -206,7 +206,7 @@ export default function DebtConsolidationCalculator() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="bg-gradient-to-br from-green-600 to-green-400 rounded-2xl p-8 text-white shadow-lg"
+              className="bg-gradient-to-br from-accent to-accent/80 rounded-2xl p-8 text-white shadow-lg"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
@@ -217,7 +217,7 @@ export default function DebtConsolidationCalculator() {
               <div className="text-5xl font-bold mb-2">
                 ${calculation.monthlySavings.toLocaleString()}
               </div>
-              <p className="text-green-100 text-sm">
+              <p className="text-white/70 text-sm">
                 Estimated savings
               </p>
             </motion.div>
@@ -267,7 +267,7 @@ export default function DebtConsolidationCalculator() {
             className="mt-8"
           >
             <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer">
-              <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl py-6 text-lg font-semibold">
+              <Button className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-xl py-6 text-lg font-semibold">
                 Consolidate Your Debts
               </Button>
             </a>

@@ -24,14 +24,14 @@ type CalculatorType =
   | 'report';
 
 const calculators = [
-  { id: 'repayment', name: 'Repayment Calculator', color: 'from-blue-600 to-blue-400' },
-  { id: 'borrowing', name: 'Borrowing Power Calculator', color: 'from-purple-600 to-purple-400' },
-  { id: 'offset', name: 'Offset Calculator', color: 'from-green-600 to-green-400' },
-  { id: 'equity', name: 'Home Equity Calculator', color: 'from-orange-600 to-orange-400' },
-  { id: 'lmi', name: 'LMI Calculator', color: 'from-pink-600 to-pink-400' },
-  { id: 'debt', name: 'Debt Consolidation Calculator', color: 'from-indigo-600 to-indigo-400' },
-  { id: 'stampduty', name: 'Stamp Duty Calculator', color: 'from-red-600 to-red-400' },
-  { id: 'report', name: 'Free Property Report', color: 'from-emerald-600 to-emerald-400' },
+  { id: 'repayment', name: 'Repayment Calculator' },
+  { id: 'borrowing', name: 'Borrowing Power Calculator' },
+  { id: 'offset', name: 'Offset Calculator' },
+  { id: 'equity', name: 'Home Equity Calculator' },
+  { id: 'lmi', name: 'LMI Calculator' },
+  { id: 'debt', name: 'Debt Consolidation Calculator' },
+  { id: 'stampduty', name: 'Stamp Duty Calculator' },
+  { id: 'report', name: 'Free Property Report' },
 ];
 
 export default function CalculatorsPage() {
@@ -93,8 +93,8 @@ export default function CalculatorsPage() {
                 onClick={() => setActiveCalculator(calc.id as CalculatorType)}
                 className={`px-4 py-3 rounded-lg font-paragraph font-semibold text-sm transition-all duration-300 ${
                   activeCalculator === calc.id
-                    ? `bg-gradient-to-r ${calc.color} text-white shadow-lg`
-                    : 'bg-white text-foreground border border-gray-200 hover:border-accent'
+                    ? 'bg-secondary text-white shadow-lg'
+                    : 'bg-white text-foreground border border-gray-200 hover:border-secondary'
                 }`}
               >
                 {calc.name.split(' ')[0]}

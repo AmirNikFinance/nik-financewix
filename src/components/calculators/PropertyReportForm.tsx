@@ -189,7 +189,7 @@ export default function PropertyReportForm() {
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl py-4 text-lg font-semibold"
+              className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-xl py-4 text-lg font-semibold"
             >
               Get Your Free Report
             </Button>
@@ -217,7 +217,7 @@ export default function PropertyReportForm() {
           transition={{ duration: 0.5 }}
           className="space-y-6"
         >
-          <div className="bg-gradient-to-br from-emerald-600 to-emerald-400 rounded-2xl p-8 text-white shadow-lg">
+          <div className="bg-gradient-to-br from-secondary to-secondary/80 rounded-2xl p-8 text-white shadow-lg">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
                 <FileText className="w-6 h-6" />

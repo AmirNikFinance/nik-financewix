@@ -41,20 +41,28 @@ const faqs: Record<CalculatorType, Array<{ question: string; answer: string }>> 
   ],
   borrowing: [
     {
-      question: 'How is borrowing capacity calculated?',
-      answer: 'Lenders typically use a serviceability ratio (usually 80% of gross income) minus existing debts to determine how much you can borrow. They also consider your credit history, employment stability, and other financial commitments.',
+      question: 'How much can I borrow?',
+      answer: 'The amount you can borrow depends on your income, existing debts, credit score, employment stability, and the property value. Most lenders use a serviceability ratio of 80% of your gross income to determine your maximum borrowing capacity. For example, if you earn $100,000 per year, you may be able to borrow up to $400,000-$500,000 depending on your other financial commitments. This calculator provides an estimate based on standard lending criteria.',
     },
     {
-      question: 'What is LVR (Loan to Value Ratio)?',
-      answer: 'LVR is the percentage of the property value you\'re borrowing. For example, if you\'re borrowing $400,000 for a $500,000 property, your LVR is 80%. Lower LVR (higher deposit) means lower risk for lenders and no LMI required.',
+      question: 'What factors affect my borrowing capacity?',
+      answer: 'Several key factors influence how much you can borrow: 1) Income - higher income increases borrowing capacity, 2) Existing debts - credit cards, car loans, and personal loans reduce capacity, 3) Credit score - a better credit score may allow higher borrowing, 4) Employment stability - permanent employment is viewed more favorably than casual work, 5) Deposit size - a larger deposit increases borrowing capacity, 6) Interest rates - higher rates reduce serviceability, 7) Dependents - more dependents may reduce capacity due to living expenses, 8) Age - lenders consider your age relative to loan term.',
     },
     {
-      question: 'Why do I need a larger deposit?',
-      answer: 'A larger deposit (lower LVR) reduces the lender\'s risk, may eliminate LMI costs, and gives you more equity in the property. It also reduces your monthly repayments and total interest paid over the loan term.',
+      question: 'How do lenders calculate borrowing capacity?',
+      answer: 'Lenders use a serviceability assessment to determine borrowing capacity. They typically calculate: (Gross Annual Income × Serviceability Ratio) - Existing Monthly Debt Commitments = Maximum Borrowing Capacity. The serviceability ratio is usually 80% of gross income, though some lenders use 85% for strong applicants. For example, if you earn $100,000 annually with $500/month in existing debts: ($100,000 × 0.80 ÷ 12) - $500 = approximately $5,167 monthly repayment capacity. This translates to a borrowing capacity of around $400,000-$500,000 depending on interest rates and loan term.',
+    },
+    {
+      question: 'How does my credit score affect borrowing capacity?',
+      answer: 'Your credit score significantly impacts your borrowing capacity. A strong credit score (above 700) demonstrates responsible financial management and may allow you to borrow more, access better interest rates, and qualify for larger loans. A poor credit score (below 600) may result in lower borrowing capacity, higher interest rates, or loan rejection. Late payments, defaults, and high credit utilization damage your score. Improving your credit score by paying bills on time and reducing debt can increase your borrowing capacity.',
+    },
+    {
+      question: 'How do dependents affect my borrowing capacity?',
+      answer: 'Dependents reduce your borrowing capacity because lenders account for living expenses when calculating serviceability. Each dependent increases your estimated living costs, which reduces the amount available for loan repayments. For example, a single person may have lower living expenses than someone with a spouse and two children. Lenders typically use standard expense guidelines that increase with the number of dependents. However, if your partner has income, their income can be added to yours to increase total borrowing capacity.',
     },
     {
       question: 'Can I borrow more than the calculator shows?',
-      answer: 'Possibly, but it depends on your individual circumstances. Some lenders may approve higher amounts based on strong credit history, stable employment, or other factors. Always speak with a mortgage broker for personalized advice.',
+      answer: 'Possibly, but it depends on your individual circumstances. Some lenders may approve higher amounts based on strong credit history, stable employment, additional income sources, or other factors. Conversely, some lenders may approve less if you have adverse credit history or unstable employment. Always speak with a mortgage broker or lender for personalized advice, as borrowing capacity varies between lenders and their specific lending criteria.',
     },
   ],
   offset: [

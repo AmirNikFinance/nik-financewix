@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import Form from '@/components/forms/Form';
 import LendersCarousel from '@/components/LendersCarousel';
 import { CheckCircle, Zap, Building2 } from 'lucide-react';
+import { trackButtonClick } from '@/lib/analytics';
 
 export default function ApplyPage() {
   return (

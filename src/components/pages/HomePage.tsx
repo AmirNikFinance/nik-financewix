@@ -10,10 +10,12 @@ import {
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LendersCarousel from '@/components/LendersCarousel';
+import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { BaseCrudService } from '@/integrations';
 import { LoanOptions, HowItWorksSteps, CustomerReviews, WhyChooseUsFeatures } from '@/entities';
+import { trackButtonClick } from '@/lib/analytics';
 
 // --- Utility Components for Motion & Layout ---
 
@@ -204,7 +206,12 @@ export default function HomePage() {
 
             <AnimatedElement direction="up" delay={400}>
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer">
+                <a 
+                  href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => trackButtonClick('hero-get-funded', 'Get funded')}
+                >
                   <Button size="lg" className="bg-accent hover:bg-accent/90 text-white rounded-full px-10 py-8 text-lg font-semibold shadow-[0_0_30px_-5px_rgba(16,185,129,0.4)] transition-all hover:scale-105">
                     Get funded
                   </Button>
@@ -631,6 +638,9 @@ export default function HomePage() {
       </section>
 
       <Footer />
+      
+      {/* Analytics Dashboard - Remove or hide in production */}
+      <AnalyticsDashboard />
     </div>
   );
 }

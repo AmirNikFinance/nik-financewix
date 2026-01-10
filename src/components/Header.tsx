@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
+import { trackButtonClick } from '@/lib/analytics';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,8 +66,9 @@ export default function Header() {
           {/* CTA Button */}
           <a
             href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
+            onClick={() => trackButtonClick('header-start-application', 'Start Application')}
             className="hidden md:block bg-accent text-white font-paragraph font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 hover:scale-105"
-          >{"Start Application"}</a>
+          >Start Application</a>
 
           {/* Mobile Menu Button */}
           <button
@@ -132,7 +134,10 @@ export default function Header() {
             </Link>
             <a
               href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                trackButtonClick('header-get-instant-quote-mobile', 'Get Instant Quote');
+                setIsMenuOpen(false);
+              }}
               className="bg-accent text-white font-paragraph font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 text-center"
             >
               Get Instant Quote

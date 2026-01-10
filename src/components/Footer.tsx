@@ -47,7 +47,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="border-t border-primary-foreground/20 pt-6 text-center">
           <p className="font-paragraph text-sm opacity-90">
-            © 2025 NIK FINANCE. All rights reserved.
+            © 2026 NIK Finance Pty Ltd ACN 685 393 917 all rights reserved. Australian Credit Representative number 567387 of Australian Credit Licence 384704.
           </p>
         </div>
       </div>

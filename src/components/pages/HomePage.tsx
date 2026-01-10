@@ -335,7 +335,7 @@ export default function HomePage() {
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
         
         <div className="max-w-[100rem] mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 bg-background">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 lg:gap-16 bg-background rounded-2xl md:rounded-3xl p-6 md:p-10 lg:p-14 border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300">
             
             {/* Sticky Left Side */}
             <div className="relative h-fit lg:sticky lg:top-32">

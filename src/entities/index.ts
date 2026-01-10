@@ -118,34 +118,3 @@ export interface WhyChooseUsFeatures {
   /** @wixFieldType boolean */
   isActive?: boolean;
 }
-
-
-/**
- * Collection ID: blogarticles
- * Interface for BlogArticles
- */
-export interface BlogArticles {
-  _id: string;
-  _createdDate?: Date;
-  _updatedDate?: Date;
-  /** @wixFieldType text */
-  title?: string;
-  /** @wixFieldType text */
-  slug?: string;
-  /** @wixFieldType text */
-  content?: string;
-  /** @wixFieldType text */
-  excerpt?: string;
-  /** @wixFieldType image */
-  featuredImage?: string;
-  /** @wixFieldType text */
-  author?: string;
-  /** @wixFieldType datetime */
-  publishDate?: Date | string;
-  /** @wixFieldType text */
-  seoTitle?: string;
-  /** @wixFieldType text */
-  seoDescription?: string;
-  /** @wixFieldType text */
-  category?: string;
-}

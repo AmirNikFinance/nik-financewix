@@ -55,7 +55,7 @@ export default function RepaymentCalculator() {
           Loan Repayment Calculator
         </h2>
         <p className="font-paragraph text-lg text-gray-600 max-w-2xl mx-auto">
-          Calculate your monthly loan repayments with principal & interest or interest-only options.
+          Calculate your monthly loan repayments with principal and interest or interest-only options.
         </p>
       </div>
 

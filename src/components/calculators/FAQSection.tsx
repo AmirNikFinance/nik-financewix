@@ -20,7 +20,7 @@ const faqs: Record<CalculatorType, Array<{ question: string; answer: string }>> 
     },
     {
       question: 'What is the difference between principal and interest?',
-      answer: 'Principal is the original loan amount you borrowed. Interest is the cost of borrowing that money, calculated as a percentage of the principal. In early repayments, most of your payment goes toward interest, while later payments go more toward principal. Over a 30-year loan, you may pay nearly as much in interest as the original principal amount.',
+      answer: 'Principal is the original loan amount you borrowed. Interest is the cost of borrowing that money, calculated as a percentage of the principal. In early repayments, most of your payment goes towards interest, while later payments go more towards principal. Over a 30-year loan, you may pay nearly as much in interest as the original principal amount.',
     },
     {
       question: 'How do extra repayments help reduce my loan?',

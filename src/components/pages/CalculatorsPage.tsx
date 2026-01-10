@@ -84,20 +84,21 @@ export default function CalculatorsPage() {
       </section>
 
       {/* Calculator Navigation */}
-      <section className="bg-light-gray py-12 sticky top-[73px] z-40 border-b border-gray-200">
-        <div className="max-w-[100rem] mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+      <section className="bg-light-gray py-8 md:py-12 sticky top-[73px] z-40 border-b border-gray-200">
+        <div className="max-w-[100rem] mx-auto px-4 md:px-6 lg:px-12">
+          <div className="flex gap-2 md:gap-3 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
             {calculators.map((calc) => (
               <button
                 key={calc.id}
                 onClick={() => setActiveCalculator(calc.id as CalculatorType)}
-                className={`px-4 py-3 rounded-lg font-paragraph font-semibold text-sm transition-all duration-300 ${
+                className={`px-3 md:px-4 py-2 md:py-3 rounded-lg font-paragraph font-semibold text-xs md:text-sm whitespace-nowrap flex-shrink-0 transition-all duration-300 ${
                   activeCalculator === calc.id
                     ? 'bg-secondary text-white shadow-lg'
                     : 'bg-white text-foreground border border-gray-200 hover:border-secondary'
                 }`}
               >
-                {calc.name.split(' ')[0]}
+                <span className="hidden md:inline">{calc.name}</span>
+                <span className="md:hidden">{calc.name.split(' ')[0]}</span>
               </button>
             ))}
           </div>

@@ -68,19 +68,35 @@ const faqs: Record<CalculatorType, Array<{ question: string; answer: string }>> 
   offset: [
     {
       question: 'How does an offset account work?',
-      answer: 'An offset account is a savings account linked to your mortgage. The balance in the offset account reduces the amount of interest you pay. For example, if you have a $500,000 loan and $50,000 in offset, you only pay interest on $450,000.',
+      answer: 'An offset account is a savings account linked to your mortgage that reduces the interest you pay on your loan. The balance in the offset account is "offset" against your mortgage balance for interest calculation purposes. For example, if you have a $500,000 mortgage and $50,000 in your offset account, you only pay interest on $450,000 ($500,000 - $50,000). The interest you save depends on the offset balance and your mortgage interest rate. If your rate is 6% and you have $50,000 in offset, you save approximately $3,000 per year in interest.',
+    },
+    {
+      question: 'How much interest can I save with an offset account?',
+      answer: 'The interest savings depend on two factors: your offset balance and your mortgage interest rate. For example: A $500,000 mortgage at 6% with $50,000 in offset saves approximately $3,000 per year. A $500,000 mortgage at 6% with $100,000 in offset saves approximately $6,000 per year. A $500,000 mortgage at 6% with $200,000 in offset saves approximately $12,000 per year. Over a 30-year loan, these savings compound significantly. Even small balances help—$10,000 in offset at 6% saves $600 per year. The key is to keep your offset balance as high as possible to maximize savings.',
     },
     {
       question: 'Is an offset account worth it?',
-      answer: 'Yes, offset accounts can save significant interest over time, especially if you maintain a healthy balance. The savings depend on your offset balance and interest rate. Even small balances can help reduce interest.',
+      answer: 'Yes, offset accounts are generally worth it if you have a regular income and can maintain a healthy balance. The benefits include: 1) Tax-free savings—interest savings are not taxable income, unlike interest earned in a regular savings account, 2) Flexibility—you can withdraw money anytime without affecting your loan, 3) Compound savings—the longer you maintain a balance, the more interest you save, 4) Psychological benefit—seeing your offset balance grow can motivate you to save more. However, offset accounts may have higher fees than regular savings accounts. Compare the fees against your expected interest savings to determine if it\'s worthwhile for your situation.',
     },
     {
       question: 'Can I withdraw money from my offset account?',
-      answer: 'Yes, offset accounts function like regular savings accounts. You can deposit and withdraw money freely. However, withdrawals reduce your interest savings, so it\'s best to keep the balance as high as possible.',
+      answer: 'Yes, offset accounts function like regular savings accounts. You can deposit and withdraw money freely without any restrictions. However, each withdrawal reduces your offset balance and therefore reduces your interest savings. For example, if you have $50,000 in offset and withdraw $10,000, you now only save interest on $40,000. It\'s best to keep your offset balance as high as possible to maximize interest savings. Some people use their offset account as an emergency fund, which provides both financial security and interest savings.',
     },
     {
       question: 'What\'s the difference between offset and redraw?',
-      answer: 'An offset account is a separate savings account that reduces interest. A redraw facility allows you to access extra payments you\'ve made on your loan. Both can help reduce interest, but offset accounts are generally more flexible.',
+      answer: 'Both offset accounts and redraw facilities can help reduce interest, but they work differently: Offset Account: A separate savings account linked to your mortgage. Money in the offset reduces your loan balance for interest calculation. You can withdraw money anytime without affecting your loan. Interest savings are immediate and tax-free. Redraw Facility: Allows you to access extra payments you\'ve made on your loan. When you pay extra on your mortgage, that amount becomes available to redraw. Redrawing reduces the principal you\'ve paid down. You can only redraw money you\'ve actually paid into the loan. Key differences: Offset is more flexible—you can withdraw without affecting your loan balance. Redraw requires you to have made extra payments first. Offset provides immediate interest savings. Redraw only saves interest if you don\'t redraw the money. Many borrowers use both—maintaining an offset account for regular savings and using redraw for extra loan payments.',
+    },
+    {
+      question: 'Do offset accounts have fees?',
+      answer: 'Yes, many offset accounts have fees, though some lenders offer fee-free offset accounts. Common fees include: Monthly account fee (typically $5-$15), Transaction fees for deposits or withdrawals, Inactivity fees if you don\'t use the account. Before opening an offset account, compare the fees against your expected interest savings. For example, if you save $3,000 per year in interest but pay $120 in annual fees, your net saving is $2,880. For small balances, fees may outweigh the benefits. Always ask your lender about fee-free offset options or negotiate fee waivers.',
+    },
+    {
+      question: 'Can I have multiple offset accounts?',
+      answer: 'This depends on your lender\'s policy. Some lenders allow multiple offset accounts linked to a single mortgage, while others only allow one. Multiple offset accounts can be useful if you want to separate savings for different purposes (e.g., emergency fund, holiday savings, home renovation fund). However, each offset account may have separate fees. Check with your lender about their policy on multiple offset accounts and whether there are additional fees for each account.',
+    },
+    {
+      question: 'What\'s the best way to use an offset account?',
+      answer: 'Here are some strategies to maximize your offset account benefits: 1) Keep your salary deposited in the offset account—this maximizes your offset balance throughout the month, 2) Pay bills from the offset account—this keeps money in offset longer before it leaves your account, 3) Build an emergency fund in offset—this provides both financial security and interest savings, 4) Avoid unnecessary withdrawals—every dollar in offset saves you interest, 5) Use it alongside extra repayments—combine offset savings with extra loan payments for faster debt reduction, 6) Review your balance regularly—monitor your offset balance and adjust your savings strategy as needed. The most effective approach is to treat your offset account as your primary transaction account and keep as much money in it as possible.',
     },
   ],
   equity: [

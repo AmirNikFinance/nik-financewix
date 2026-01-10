@@ -102,19 +102,43 @@ const faqs: Record<CalculatorType, Array<{ question: string; answer: string }>> 
   equity: [
     {
       question: 'What is home equity?',
-      answer: 'Home equity is the difference between your property\'s value and the amount you still owe on your mortgage. For example, if your home is worth $800,000 and you owe $500,000, your equity is $300,000.',
+      answer: 'Home equity is the difference between your property\'s current market value and the amount you still owe on your mortgage. For example, if your home is worth $800,000 and you owe $500,000 on your mortgage, your equity is $300,000 ($800,000 - $500,000). Equity represents the portion of your home that you truly own. As you pay down your mortgage and your property value increases, your equity grows. Home equity is one of the most valuable financial assets most Australians build over time.',
     },
     {
-      question: 'Can I borrow against my home equity?',
-      answer: 'Yes, you can use a home equity loan or line of credit to borrow against your equity. Most lenders allow you to borrow up to 80% of your property\'s value. Borrowing beyond 80% may require LMI.',
+      question: 'How much equity do I have in my home?',
+      answer: 'To calculate your home equity, subtract your outstanding mortgage balance from your property\'s current market value: Home Equity = Property Value - Outstanding Mortgage Balance. For example: If your property is worth $600,000 and you owe $400,000, your equity is $200,000. If your property is worth $1,000,000 and you owe $300,000, your equity is $700,000. You can estimate your property\'s value using online tools, recent comparable sales, or by getting a professional valuation. Your mortgage statement shows your outstanding balance. This calculator helps you determine your equity quickly.',
     },
     {
-      question: 'What can I use a home equity loan for?',
-      answer: 'Home equity loans can be used for various purposes including home renovations, debt consolidation, investment property purchases, or other major expenses. The interest rates are typically lower than personal loans because the loan is secured against your property.',
+      question: 'What is the difference between equity and usable equity?',
+      answer: 'Equity is the total amount of ownership you have in your property (Property Value - Outstanding Mortgage). Usable equity is the portion of your equity that you can actually borrow against. Most lenders allow you to borrow up to 80% of your property\'s value. Example: If your property is worth $500,000 and you owe $200,000: Your total equity = $300,000. Your usable equity = (80% of $500,000) - $200,000 = $400,000 - $200,000 = $200,000. So while you have $300,000 in total equity, you can only borrow $200,000 without paying Lenders Mortgage Insurance (LMI). The difference between total and usable equity is important when planning to borrow against your home.',
+    },
+    {
+      question: 'How much can I borrow against my home equity?',
+      answer: 'The amount you can borrow against your home equity depends on your usable equity and lender policies. Most lenders allow you to borrow up to 80% of your property\'s value (the 80% LVR threshold). Example calculations: Property worth $500,000, owing $200,000: Maximum borrowing = (80% × $500,000) - $200,000 = $200,000. Property worth $800,000, owing $300,000: Maximum borrowing = (80% × $800,000) - $300,000 = $340,000. If you want to borrow more than 80% LVR, you\'ll need to pay Lenders Mortgage Insurance (LMI), which increases your costs. Your actual borrowing capacity also depends on your income, credit score, and ability to service the additional debt.',
+    },
+    {
+      question: 'What is LVR and how does it affect my borrowing?',
+      answer: 'LVR (Loan-to-Value Ratio) is the percentage of your property\'s value that you\'re borrowing. It\'s calculated as: LVR = (Total Loan Amount ÷ Property Value) × 100. Example: If your property is worth $500,000 and you borrow $400,000, your LVR is 80%. LVR is crucial because: 1) Most lenders prefer LVR of 80% or less (no LMI required), 2) Borrowing above 80% LVR requires LMI, which adds cost, 3) Higher LVR means higher risk for lenders and higher costs for you, 4) LVR affects interest rates—higher LVR may mean higher rates. To reduce your LVR, you can: increase your deposit, pay down your existing mortgage, or wait for property appreciation.',
     },
     {
       question: 'How does equity build over time?',
-      answer: 'Equity builds in two ways: 1) As you pay down your mortgage principal, and 2) As your property value increases. Both factors increase your equity and your borrowing capacity.',
+      answer: 'Equity builds in two primary ways: 1) Mortgage Principal Repayment: As you make monthly mortgage payments, a portion goes toward paying down the principal (the amount you borrowed). This directly increases your equity. For example, paying an extra $100/month on a $400,000 loan at 6% can save you over $50,000 in interest and build equity faster. 2) Property Value Appreciation: When your property value increases due to market conditions, renovations, or neighborhood improvements, your equity increases automatically. For example, if your property appreciates from $500,000 to $550,000, you gain $50,000 in equity without making any additional payments. Both factors work together to build wealth. Over a 30-year mortgage, you\'ll build significant equity through repayments, and property appreciation can further accelerate this growth.',
+    },
+    {
+      question: 'What can I use a home equity loan for?',
+      answer: 'Home equity loans and lines of credit can be used for various purposes: 1) Home Renovations: Kitchen, bathroom, or extension renovations that increase property value, 2) Debt Consolidation: Consolidating high-interest credit cards and personal loans into a lower-interest home loan, 3) Investment Property Purchase: Buying an investment property using your home equity as security, 4) Education: Funding university or vocational training, 5) Business Investment: Starting or expanding a business, 6) Major Expenses: Vehicles, medical procedures, or other significant costs, 7) Wealth Building: Investment in shares or managed funds. Home equity loans typically have lower interest rates than personal loans because they\'re secured against your property. However, remember that you\'re putting your home at risk, so borrow responsibly.',
+    },
+    {
+      question: 'Should I borrow against my home equity?',
+      answer: 'Borrowing against your home equity can be beneficial in certain situations, but it\'s important to consider carefully: Benefits: 1) Lower interest rates compared to personal loans or credit cards, 2) Tax deductibility if used for investment purposes, 3) Larger borrowing capacity, 4) Flexible repayment options. Risks: 1) You\'re putting your home at risk if you can\'t repay, 2) Increased total debt may affect your financial security, 3) Interest rate rises could increase repayments significantly. Best practices: 1) Only borrow what you need and can afford to repay, 2) Use borrowed funds for investments or improvements that generate returns, 3) Avoid using home equity for consumption (holidays, cars) unless absolutely necessary, 4) Ensure you have an emergency fund before borrowing, 5) Consider your long-term financial goals. Speak with a financial advisor to determine if borrowing against your equity is right for your situation.',
+    },
+    {
+      question: 'What happens to my equity if property values fall?',
+      answer: 'If property values decline, your equity decreases proportionally. Example: If your property was worth $500,000 with $300,000 equity, and it falls to $450,000, your equity drops to $150,000 (assuming your mortgage balance stays the same). This situation is called "negative equity" if your mortgage exceeds your property value. Negative equity occurs when: Property values fall significantly, You borrowed at a high LVR (e.g., 95%), Market conditions deteriorate. Implications: 1) You can\'t borrow against your equity, 2) You may be unable to sell without a loss, 3) Refinancing becomes difficult. However, property values typically recover over time. If you have a long investment horizon and stable income, short-term value fluctuations are usually not a major concern. Focus on paying down your mortgage to build equity regardless of market conditions.',
+    },
+    {
+      question: 'How does a home equity line of credit (HELOC) work?',
+      answer: 'A Home Equity Line of Credit (HELOC) is a flexible borrowing arrangement secured against your home equity. How it works: 1) You establish a credit limit based on your usable equity (typically up to 80% LVR), 2) You can borrow and repay funds as needed, similar to a credit card, 3) You only pay interest on the amount you\'ve borrowed, not the full credit limit, 4) Interest rates are typically variable and linked to the bank\'s base rate. Example: If you have a $200,000 HELOC and borrow $50,000, you only pay interest on $50,000. You can repay that $50,000 and borrow again without reapplying. Benefits: Flexibility, lower interest rates than credit cards, interest-only payment options. Drawbacks: Variable rates mean payments can increase, temptation to over-borrow, risk to your home. HELOCs are useful for managing cash flow or funding planned expenses.',
     },
   ],
   lmi: [

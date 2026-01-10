@@ -25,30 +25,6 @@ export default function Header() {
             >
               Home
             </Link>
-            <a 
-              href="/#loans" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              Loans
-            </a>
-            <a 
-              href="/#how-it-works" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              How It Works
-            </a>
-            <a 
-              href="/#reviews" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              Reviews
-            </a>
-            <a 
-              href="/#why-choose-us" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              Why Choose Us
-            </a>
             <Link 
               to="/blog" 
               className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
@@ -96,34 +72,6 @@ export default function Header() {
             >
               Home
             </Link>
-            <a 
-              href="/#loans" 
-              onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              Loans
-            </a>
-            <a 
-              href="/#how-it-works" 
-              onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              How It Works
-            </a>
-            <a 
-              href="/#reviews" 
-              onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              Reviews
-            </a>
-            <a 
-              href="/#why-choose-us" 
-              onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              Why Choose Us
-            </a>
             <Link 
               to="/blog" 
               onClick={() => setIsMenuOpen(false)}
@@ -148,12 +96,12 @@ export default function Header() {
             <a
               href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
               onClick={() => {
-                trackButtonClick('header-get-instant-quote-mobile', 'Get Instant Quote');
+                trackButtonClick('header-start-application-mobile', 'Start Application');
                 setIsMenuOpen(false);
               }}
               className="bg-accent text-white font-paragraph font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 text-center"
             >
-              Get Instant Quote
+              Start Application
             </a>
           </nav>
         )}

@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground py-12">
       <div className="max-w-[120rem] mx-auto px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Company Info */}
           <div>
             <h3 className="font-heading text-2xl font-bold mb-2">NIK FINANCE</h3>
@@ -18,17 +18,39 @@ export default function Footer() {
               <Link to="/" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
                 Home
               </Link>
-              <a href="/#loans" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                Loans
-              </a>
-              <a href="/#how-it-works" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                How It Works
-              </a>
+              <Link to="/blog" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Blog
+              </Link>
               <Link to="/contact" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
                 Contact
               </Link>
               <Link to="/privacy-policy" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
                 Privacy Policy
+              </Link>
+            </nav>
+          </div>
+
+          {/* Calculators */}
+          <div>
+            <h4 className="font-heading text-lg font-semibold mb-4">Calculators</h4>
+            <nav className="flex flex-col gap-2">
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Repayment Calculator
+              </Link>
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Borrowing Power
+              </Link>
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Offset Calculator
+              </Link>
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Home Equity
+              </Link>
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                LMI Calculator
+              </Link>
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Stamp Duty
               </Link>
             </nav>
           </div>

@@ -24,6 +24,9 @@ export default function Footer() {
               <Link to="/contact" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
                 Contact
               </Link>
+              <Link to="/partner-portal" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Partner Portal
+              </Link>
               <Link to="/privacy-policy" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
                 Privacy Policy
               </Link>

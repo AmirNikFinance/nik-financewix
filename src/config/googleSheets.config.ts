@@ -1,18 +1,24 @@
 /**
  * Google Sheets Configuration
- * Update this file with your Google Apps Script deployment URL
+ * 
+ * Spreadsheet ID: 13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo
+ * Sheet Name: Referrals
+ * Deployment URL: https://script.google.com/macros/s/AKfycbx04_dcPCtnnAyUo8JDPrjLcLZFzv6BO9rLH0APnBpXb5dNkG2vqjQabdS23NQVhI79Dg/exec
  */
 
 export const GOOGLE_SHEETS_CONFIG = {
-  // Replace with your actual Google Apps Script deployment URL
-  // Format: https://script.google.com/macros/d/YOUR_SCRIPT_ID/usercontent
-  scriptUrl: process.env.REACT_APP_GOOGLE_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbxBSa0811aHauC5IywOBIN48HUUO8dM7qPNyhBa0OUuwmXqatIaccxld_OhYPlULQOv/exec',
+  // Google Apps Script deployment URL
+  // This is the production deployment URL for the referral management script
+  scriptUrl: process.env.REACT_APP_GOOGLE_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbx04_dcPCtnnAyUo8JDPrjLcLZFzv6BO9rLH0APnBpXb5dNkG2vqjQabdS23NQVhI79Dg/exec',
   
   // Sheet name (must match the sheet in your Google Sheets document)
   sheetName: 'Referrals',
   
+  // Spreadsheet ID for reference
+  spreadsheetId: '13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo',
+  
   // Enable/disable Google Sheets integration
-  enabled: !!process.env.REACT_APP_GOOGLE_SHEETS_URL,
+  enabled: !!process.env.REACT_APP_GOOGLE_SHEETS_URL || true,
   
   // Retry configuration
   maxRetries: 3,
@@ -33,6 +39,8 @@ export function initializeGoogleSheetsConfig() {
       'Set REACT_APP_GOOGLE_SHEETS_URL environment variable to enable it.'
     );
   } else {
-    console.log('Google Sheets integration is enabled');
+    console.log('✓ Google Sheets integration is enabled');
+    console.log('  Spreadsheet ID: ' + GOOGLE_SHEETS_CONFIG.spreadsheetId);
+    console.log('  Sheet Name: ' + GOOGLE_SHEETS_CONFIG.sheetName);
   }
 }

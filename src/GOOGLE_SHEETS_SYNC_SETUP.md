@@ -4,6 +4,20 @@
 
 This guide explains how to set up bidirectional real-time synchronization between your Wix partner portal and Google Sheets. The system allows referral data to be pushed to Google Sheets and pulled back to display on the partner dashboard.
 
+## Quick Start
+
+### Already Deployed?
+If you already have the Google Apps Script deployed, you just need to:
+
+1. **Set the environment variable** in your `.env` file:
+   ```env
+   REACT_APP_GOOGLE_SHEETS_URL=https://script.google.com/macros/s/AKfycbx04_dcPCtnnAyUo8JDPrjLcLZFzv6BO9rLH0APnBpXb5dNkG2vqjQabdS23NQVhI79Dg/exec
+   ```
+
+2. **Restart your development server** for the changes to take effect
+
+3. **Test the integration** by submitting a referral and checking the Google Sheet
+
 ## Architecture
 
 ```
@@ -16,341 +30,69 @@ Google Sheets (Data Storage)
 Partner Dashboard (displays stats)
 ```
 
-## Step 1: Create Google Apps Script
+## Configuration Details
+
+### Spreadsheet Information
+- **Spreadsheet ID**: `13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo`
+- **Sheet Name**: `Referrals`
+- **Deployment URL**: `https://script.google.com/macros/s/AKfycbx04_dcPCtnnAyUo8JDPrjLcLZFzv6BO9rLH0APnBpXb5dNkG2vqjQabdS23NQVhI79Dg/exec`
+
+### Sheet Columns
+The "Referrals" sheet contains the following columns:
+
+| Column | Type | Description |
+|--------|------|-------------|
+| Timestamp | DateTime | When the referral was submitted (ISO format) |
+| Company Name | Text | Partner company name |
+| Customer Name | Text | Referred customer name |
+| Email | Text | Customer email address |
+| Phone | Text | Customer phone number |
+| Loan Type | Text | Type of loan (Home, Car, Personal, Business, etc.) |
+| Loan Amount | Number | Loan amount in AUD |
+| Submission Date | Date | Date referral was submitted |
+| Status | Text | PENDING, APPROVED, REJECTED |
+| Commission | Number | Commission amount earned |
+| Commission status | Text | PENDING, PAID |
+
+## Step 1: Deploy the Google Apps Script (If Not Already Done)
+
+### Option A: Copy the Existing Script
 
 1. Go to [script.google.com](https://script.google.com)
 2. Create a new project
-3. Replace the entire content with the code below:
+3. Copy the entire content from `/src/GOOGLE_APPS_SCRIPT_CODE.gs` in this repository
+4. Paste it into the Apps Script editor
+5. Update the `SPREADSHEET_ID` constant with your spreadsheet ID (if different)
+6. Save the project
 
-```javascript
-/**
- * Google Apps Script for Referral Management
- * Handles bidirectional sync with the partner portal
- */
+### Option B: Use the Pre-Deployed Script
 
-// Configuration
-const SHEET_NAME = 'Referrals';
-const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID'; // Replace with your Google Sheet ID
+If the script is already deployed at the URL above, you can skip to Step 2.
 
-/**
- * Initialize the spreadsheet with headers
- * Run this once to set up the sheet
- */
-function initializeSheet() {
-  const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
-  
-  const headers = [
-    'Timestamp',
-    'Company Name',
-    'Customer Name',
-    'Email',
-    'Phone',
-    'Loan Type',
-    'Loan Amount',
-    'Submission Date',
-    'Status',
-    'Commission',
-    'Commission Status'
-  ];
-  
-  sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-  Logger.log('Sheet initialized with headers');
-}
+## Step 2: Deploy as Web App
 
-/**
- * Main doPost handler for all requests
- */
-function doPost(e) {
-  try {
-    const payload = JSON.parse(e.postData.contents);
-    const action = payload.action;
-    
-    Logger.log('Received action: ' + action);
-    Logger.log('Payload: ' + JSON.stringify(payload));
-    
-    let result;
-    
-    switch(action) {
-      case 'addRow':
-        result = addRow(payload.data, payload.sheetName);
-        break;
-      case 'getRowsByCompany':
-        result = getRowsByCompany(payload.companyName, payload.sheetName);
-        break;
-      case 'updateRow':
-        result = updateRow(payload.identifier, payload.data, payload.sheetName);
-        break;
-      case 'getAllRows':
-        result = getAllRows(payload.sheetName);
-        break;
-      default:
-        result = { success: false, error: 'Unknown action: ' + action };
-    }
-    
-    return ContentService.createTextOutput(JSON.stringify(result))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch(error) {
-    Logger.log('Error: ' + error.toString());
-    return ContentService.createTextOutput(JSON.stringify({
-      success: false,
-      error: error.toString()
-    })).setMimeType(ContentService.MimeType.JSON);
-  }
-}
-
-/**
- * Add a new referral row to the sheet
- */
-function addRow(data, sheetName) {
-  try {
-    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(sheetName || SHEET_NAME);
-    
-    const row = [
-      data.timestamp || new Date().toISOString(),
-      data.companyName || '',
-      data.customerName || '',
-      data.email || '',
-      data.phone || '',
-      data.loanType || '',
-      data.loanAmount || '',
-      data.submissionDate || new Date().toLocaleDateString('en-AU'),
-      data.status || 'PENDING',
-      data.commission || '',
-      data.commissionStatus || ''
-    ];
-    
-    sheet.appendRow(row);
-    
-    Logger.log('Row added for company: ' + data.companyName);
-    
-    return {
-      success: true,
-      message: 'Referral added successfully',
-      data: data
-    };
-  } catch(error) {
-    Logger.log('Error adding row: ' + error.toString());
-    return {
-      success: false,
-      error: error.toString()
-    };
-  }
-}
-
-/**
- * Get all referrals for a specific company
- */
-function getRowsByCompany(companyName, sheetName) {
-  try {
-    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(sheetName || SHEET_NAME);
-    const data = sheet.getDataRange().getValues();
-    
-    if (data.length <= 1) {
-      return {
-        success: true,
-        data: [],
-        message: 'No referrals found'
-      };
-    }
-    
-    const headers = data[0];
-    const companyIndex = headers.indexOf('Company Name');
-    
-    if (companyIndex === -1) {
-      return {
-        success: false,
-        error: 'Company Name column not found'
-      };
-    }
-    
-    const referrals = [];
-    
-    for (let i = 1; i < data.length; i++) {
-      if (data[i][companyIndex] === companyName) {
-        const referral = {};
-        headers.forEach((header, index) => {
-          referral[header.replace(/\s+/g, '')] = data[i][index];
-        });
-        referrals.push(referral);
-      }
-    }
-    
-    Logger.log('Found ' + referrals.length + ' referrals for company: ' + companyName);
-    
-    return {
-      success: true,
-      data: referrals,
-      count: referrals.length
-    };
-  } catch(error) {
-    Logger.log('Error getting rows: ' + error.toString());
-    return {
-      success: false,
-      error: error.toString()
-    };
-  }
-}
-
-/**
- * Update a referral row by email
- */
-function updateRow(customerEmail, updateData, sheetName) {
-  try {
-    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(sheetName || SHEET_NAME);
-    const data = sheet.getDataRange().getValues();
-    
-    const headers = data[0];
-    const emailIndex = headers.indexOf('Email');
-    
-    if (emailIndex === -1) {
-      return {
-        success: false,
-        error: 'Email column not found'
-      };
-    }
-    
-    for (let i = 1; i < data.length; i++) {
-      if (data[i][emailIndex] === customerEmail) {
-        // Update the row
-        Object.keys(updateData).forEach(key => {
-          const colIndex = headers.indexOf(key);
-          if (colIndex !== -1) {
-            sheet.getRange(i + 1, colIndex + 1).setValue(updateData[key]);
-          }
-        });
-        
-        Logger.log('Row updated for email: ' + customerEmail);
-        
-        return {
-          success: true,
-          message: 'Referral updated successfully'
-        };
-      }
-    }
-    
-    return {
-      success: false,
-      error: 'Referral not found for email: ' + customerEmail
-    };
-  } catch(error) {
-    Logger.log('Error updating row: ' + error.toString());
-    return {
-      success: false,
-      error: error.toString()
-    };
-  }
-}
-
-/**
- * Get all referrals from the sheet
- */
-function getAllRows(sheetName) {
-  try {
-    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(sheetName || SHEET_NAME);
-    const data = sheet.getDataRange().getValues();
-    
-    if (data.length <= 1) {
-      return {
-        success: true,
-        data: [],
-        message: 'No referrals found'
-      };
-    }
-    
-    const headers = data[0];
-    const referrals = [];
-    
-    for (let i = 1; i < data.length; i++) {
-      const referral = {};
-      headers.forEach((header, index) => {
-        referral[header.replace(/\s+/g, '')] = data[i][index];
-      });
-      referrals.push(referral);
-    }
-    
-    Logger.log('Retrieved ' + referrals.length + ' total referrals');
-    
-    return {
-      success: true,
-      data: referrals,
-      count: referrals.length
-    };
-  } catch(error) {
-    Logger.log('Error getting all rows: ' + error.toString());
-    return {
-      success: false,
-      error: error.toString()
-    };
-  }
-}
-
-/**
- * Test function to verify setup
- */
-function testConnection() {
-  Logger.log('Testing Google Apps Script connection...');
-  
-  try {
-    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    Logger.log('✓ Successfully connected to spreadsheet');
-    
-    const sheetByName = sheet.getSheetByName(SHEET_NAME);
-    Logger.log('✓ Found sheet: ' + SHEET_NAME);
-    
-    const data = sheetByName.getDataRange().getValues();
-    Logger.log('✓ Sheet has ' + data.length + ' rows');
-    
-    return 'Connection test successful!';
-  } catch(error) {
-    Logger.log('✗ Connection test failed: ' + error.toString());
-    return 'Connection test failed: ' + error.toString();
-  }
-}
-```
-
-## Step 2: Deploy the Google Apps Script
-
-1. Click **Deploy** → **New Deployment**
+1. In Google Apps Script editor, click **Deploy** → **New Deployment**
 2. Select **Type**: Web app
 3. Set **Execute as**: Your Google account
 4. Set **Who has access**: Anyone
 5. Click **Deploy**
-6. Copy the deployment URL (it will look like: `https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec`)
-7. Click **Authorize** and grant permissions
+6. Copy the deployment URL (format: `https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec`)
 
-## Step 3: Configure Your Spreadsheet
+## Step 3: Configure Your Application
 
-1. Create a new Google Sheet
-2. Copy the Spreadsheet ID from the URL (the long string between `/d/` and `/edit`)
-3. In the Google Apps Script, replace `SPREADSHEET_ID` with your actual ID
-4. Create a sheet named "Referrals"
-5. Run the `initializeSheet()` function in the Apps Script editor to add headers
+### Update Environment Variables
 
-## Step 4: Update Your Application
-
-### Add Environment Variable
-
-Create or update your `.env` file:
+Create or update your `.env` file with:
 
 ```env
-REACT_APP_GOOGLE_SHEETS_URL=https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec
+REACT_APP_GOOGLE_SHEETS_URL=https://script.google.com/macros/s/AKfycbx04_dcPCtnnAyUo8JDPrjLcLZFzv6BO9rLH0APnBpXb5dNkG2vqjQabdS23NQVhI79Dg/exec
 ```
-
-Replace `YOUR_SCRIPT_ID` with the actual script ID from your deployment URL.
 
 ### Initialize in Your App
 
-In your main app file (e.g., `src/main.tsx` or `src/App.tsx`), add:
+The initialization is already handled in the application. The Google Sheets integration will automatically initialize when the app starts.
 
-```typescript
-import { initializeGoogleSheets } from '@/lib/googleSheets';
-import { GOOGLE_SHEETS_CONFIG } from '@/config/googleSheets.config';
-
-// Initialize Google Sheets on app startup
-initializeGoogleSheets(GOOGLE_SHEETS_CONFIG.scriptUrl, GOOGLE_SHEETS_CONFIG.sheetName);
-```
-
-## Step 5: Test the Integration
+## Step 4: Verify the Setup
 
 ### Test Push (Submit a Referral)
 
@@ -374,35 +116,6 @@ initializeGoogleSheets(GOOGLE_SHEETS_CONFIG.scriptUrl, GOOGLE_SHEETS_CONFIG.shee
    - Pending Referrals: 1
    - The John Smith referral in the table
 4. The "Data synced from Google Sheets" message should appear
-
-## Troubleshooting
-
-### Issue: "Google Sheets not configured" message
-
-**Solution**: Ensure `REACT_APP_GOOGLE_SHEETS_URL` is set in your environment variables and the app has been restarted.
-
-### Issue: Referrals not appearing in Google Sheet
-
-**Solution**:
-1. Check browser console for errors
-2. Verify the Google Apps Script deployment URL is correct
-3. Check Google Apps Script logs for errors
-4. Ensure the spreadsheet ID is correct in the script
-
-### Issue: Dashboard shows $0 and 0 referrals
-
-**Solution**:
-1. Click "Refresh" button on the dashboard
-2. Verify referrals exist in the Google Sheet for your company name
-3. Check that company names match exactly (case-sensitive)
-4. Check browser console for fetch errors
-
-### Issue: CORS errors
-
-**Solution**:
-1. Ensure the Google Apps Script is deployed as "Web app"
-2. Set "Who has access" to "Anyone"
-3. The script uses `mode: 'cors'` which should work with Google Apps Script
 
 ## How It Works
 
@@ -431,48 +144,237 @@ initializeGoogleSheets(GOOGLE_SHEETS_CONFIG.scriptUrl, GOOGLE_SHEETS_CONFIG.shee
 5. Partner can click "Refresh" to manually sync
 ```
 
-## Data Structure
+## API Endpoints
 
-### Google Sheet Columns
+The Google Apps Script supports the following actions:
 
-| Column | Type | Description |
-|--------|------|-------------|
-| Timestamp | DateTime | When the referral was submitted |
-| Company Name | Text | Partner company name |
-| Customer Name | Text | Referred customer name |
-| Email | Text | Customer email |
-| Phone | Text | Customer phone |
-| Loan Type | Text | Type of loan (Home, Car, Personal, etc.) |
-| Loan Amount | Number | Loan amount in AUD |
-| Submission Date | Date | Date referral was submitted |
-| Status | Text | PENDING, APPROVED, REJECTED |
-| Commission | Number | Commission amount earned |
-| Commission Status | Text | PENDING, PAID |
+### 1. Add New Referral
 
-## Security Considerations
+**Action**: `addRow`
 
-1. **Google Apps Script Deployment**: Set to "Anyone" for public access (required for frontend to call it)
-2. **Company Name Filtering**: Data is filtered by company name, not user ID
-3. **No Authentication**: The current setup doesn't require authentication for the Apps Script
-4. **CORS**: Google Apps Script handles CORS automatically
+**Request**:
+```json
+{
+  "action": "addRow",
+  "data": {
+    "timestamp": "2024-01-12T10:30:00Z",
+    "companyName": "Your Company",
+    "customerName": "John Smith",
+    "email": "john@example.com",
+    "phone": "0412 345 678",
+    "loanType": "Home Loan",
+    "loanAmount": "500000",
+    "submissionDate": "12/01/2024",
+    "status": "PENDING",
+    "commission": "",
+    "commissionStatus": ""
+  }
+}
+```
 
-For production, consider:
-- Adding authentication tokens
-- Implementing rate limiting
-- Logging all access
-- Using Google Sheets API with OAuth instead of Apps Script
+**Response**:
+```json
+{
+  "success": true,
+  "message": "Referral added successfully",
+  "data": {
+    "companyName": "Your Company",
+    "customerName": "John Smith",
+    "email": "john@example.com",
+    "status": "PENDING"
+  }
+}
+```
 
-## Advanced: Manual Data Entry
+### 2. Get Referrals by Company
+
+**Action**: `getRowsByCompany`
+
+**Request**:
+```json
+{
+  "action": "getRowsByCompany",
+  "companyName": "Your Company"
+}
+```
+
+**Response**:
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "timestamp": "2024-01-12T10:30:00Z",
+      "companyName": "Your Company",
+      "customerName": "John Smith",
+      "email": "john@example.com",
+      "phone": "0412 345 678",
+      "loanType": "Home Loan",
+      "loanAmount": "500000",
+      "submissionDate": "12/01/2024",
+      "status": "PENDING",
+      "commission": "",
+      "commissionStatus": ""
+    }
+  ],
+  "count": 1,
+  "companyName": "Your Company"
+}
+```
+
+### 3. Update Referral Status
+
+**Action**: `updateRow`
+
+**Request**:
+```json
+{
+  "action": "updateRow",
+  "identifier": "john@example.com",
+  "data": {
+    "status": "APPROVED",
+    "commission": "500",
+    "commissionStatus": "PENDING"
+  }
+}
+```
+
+**Response**:
+```json
+{
+  "success": true,
+  "message": "Referral updated successfully",
+  "email": "john@example.com",
+  "updatedFields": ["status", "commission", "commissionStatus"]
+}
+```
+
+### 4. Get All Referrals
+
+**Action**: `getAllRows`
+
+**Request**:
+```json
+{
+  "action": "getAllRows"
+}
+```
+
+**Response**:
+```json
+{
+  "success": true,
+  "data": [
+    { /* referral object */ },
+    { /* referral object */ }
+  ],
+  "count": 2
+}
+```
+
+### 5. Test Connection
+
+**Action**: `test`
+
+**Request**:
+```json
+{
+  "action": "test"
+}
+```
+
+**Response**:
+```json
+{
+  "success": true,
+  "message": "Connection test successful",
+  "details": {
+    "spreadsheetId": "13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo",
+    "sheetName": "Referrals",
+    "headers": ["Timestamp", "Company Name", ...],
+    "dataRows": 5,
+    "totalRows": 6
+  }
+}
+```
+
+## Troubleshooting
+
+### Issue: "Google Sheets not configured" message
+
+**Solution**: 
+1. Ensure `REACT_APP_GOOGLE_SHEETS_URL` is set in your `.env` file
+2. Restart your development server
+3. Check browser console for any errors
+
+### Issue: Referrals not appearing in Google Sheet
+
+**Solution**:
+1. Check browser console for errors
+2. Verify the Google Apps Script deployment URL is correct
+3. Check Google Apps Script logs for errors (Apps Script Editor → Logs)
+4. Ensure the spreadsheet ID is correct
+5. Verify the sheet name is "Referrals"
+
+### Issue: Dashboard shows $0 and 0 referrals
+
+**Solution**:
+1. Click "Refresh" button on the dashboard
+2. Verify referrals exist in the Google Sheet for your company name
+3. Check that company names match exactly (case-sensitive)
+4. Check browser console for fetch errors
+5. Verify the Google Apps Script is deployed and accessible
+
+### Issue: CORS errors
+
+**Solution**:
+1. Ensure the Google Apps Script is deployed as "Web app"
+2. Set "Who has access" to "Anyone"
+3. The script uses `mode: 'cors'` which should work with Google Apps Script
+
+### Issue: "Sheet 'Referrals' not found"
+
+**Solution**:
+1. Open the Google Sheet with ID `13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo`
+2. Verify there is a sheet named "Referrals"
+3. If not, create a new sheet and name it "Referrals"
+4. Run the `initializeSheet()` function in Google Apps Script to add headers
+
+## Manual Data Entry
 
 You can also manually enter referrals in Google Sheets:
 
-1. Open your Google Sheet
-2. Add a new row with the following format:
+1. Open the Google Sheet: [13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo](https://docs.google.com/spreadsheets/d/13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo/edit)
+2. Go to the "Referrals" sheet
+3. Add a new row with the following format:
    ```
-   Timestamp | Company Name | Customer Name | Email | Phone | Loan Type | Loan Amount | Submission Date | Status | Commission | Commission Status
+   Timestamp | Company Name | Customer Name | Email | Phone | Loan Type | Loan Amount | Submission Date | Status | Commission | Commission status
    2024-01-12T10:30:00Z | Your Company | John Smith | john@example.com | 0412345678 | Home Loan | 500000 | 12/01/2024 | PENDING | | 
    ```
-3. The dashboard will automatically pick it up on the next refresh
+4. The dashboard will automatically pick it up on the next refresh
+
+## Advanced: Testing with Google Apps Script
+
+### Run the Test Function
+
+1. Open the Google Apps Script editor
+2. Select the `testConnection` function from the dropdown
+3. Click **Run**
+4. Check the **Logs** (View → Logs) for the test results
+
+### View All Data
+
+1. Open the Google Apps Script editor
+2. Select the `logAllData` function from the dropdown
+3. Click **Run**
+4. Check the **Logs** to see all sheet data
+
+### Clear All Data (WARNING!)
+
+1. Open the Google Apps Script editor
+2. Select the `clearAllData` function from the dropdown
+3. Click **Run**
+4. This will delete all referral data except headers!
 
 ## Support
 
@@ -481,4 +383,13 @@ If you encounter issues:
 1. Check the Google Apps Script logs (Apps Script Editor → Logs)
 2. Check browser console for JavaScript errors
 3. Verify all configuration values are correct
-4. Test the connection using the `testConnection()` function in Apps Script
+4. Test the connection using the `test` action
+5. Review this guide for common issues
+
+## File References
+
+- **Google Apps Script Code**: `/src/GOOGLE_APPS_SCRIPT_CODE.gs`
+- **Configuration**: `/src/config/googleSheets.config.ts`
+- **Integration Library**: `/src/lib/googleSheets.ts`
+- **Partner Dashboard**: `/src/components/partner/PartnerDashboard.tsx`
+- **Submit Referral Page**: `/src/components/partner/PartnerSubmitReferralPage.tsx`

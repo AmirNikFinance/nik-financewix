@@ -6,7 +6,7 @@
 export const GOOGLE_SHEETS_CONFIG = {
   // Replace with your actual Google Apps Script deployment URL
   // Format: https://script.google.com/macros/d/YOUR_SCRIPT_ID/usercontent
-  scriptUrl: process.env.REACT_APP_GOOGLE_SHEETS_URL || '',
+  scriptUrl: process.env.REACT_APP_GOOGLE_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbxBSa0811aHauC5IywOBIN48HUUO8dM7qPNyhBa0OUuwmXqatIaccxld_OhYPlULQOv/exec',
   
   // Sheet name (must match the sheet in your Google Sheets document)
   sheetName: 'Referrals',

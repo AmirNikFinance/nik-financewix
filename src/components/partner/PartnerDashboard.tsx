@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { DollarSign, TrendingUp, Clock, CheckCircle, ArrowRight, MoreVertical } from 'lucide-react';
+import { DollarSign, TrendingUp, Clock, CheckCircle, ArrowRight, MoreVertical, RefreshCw } from 'lucide-react';
 import { ReferralPartners, ReferralCommissions, Referrals } from '@/entities';
 import { BaseCrudService } from '@/integrations';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
+import { fetchReferralsFromSheet, isGoogleSheetsConfigured, ReferralSheetData, PartnerStats } from '@/lib/googleSheets';
 
 interface PartnerDashboardProps {
   partner: ReferralPartners;
@@ -15,35 +16,87 @@ interface PartnerDashboardProps {
 export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
   const [commissions, setCommissions] = useState<ReferralCommissions[]>([]);
   const [referrals, setReferrals] = useState<Referrals[]>([]);
+  const [googleSheetStats, setGoogleSheetStats] = useState<PartnerStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [useGoogleSheetData, setUseGoogleSheetData] = useState(false);
+
+  // Fetch data from both CMS and Google Sheets
+  const fetchData = async (isRefresh = false) => {
+    if (isRefresh) {
+      setRefreshing(true);
+    } else {
+      setLoading(true);
+    }
+
+    try {
+      // Fetch from CMS
+      const [commissionsData, referralsData] = await Promise.all([
+        BaseCrudService.getAll<ReferralCommissions>('commissions'),
+        BaseCrudService.getAll<Referrals>('referrals'),
+      ]);
+
+      setCommissions(commissionsData.items);
+      setReferrals(referralsData.items);
+
+      // Fetch from Google Sheets if configured
+      if (isGoogleSheetsConfigured() && partner.companyName) {
+        console.log('Fetching data from Google Sheets for company:', partner.companyName);
+        const stats = await fetchReferralsFromSheet(partner.companyName);
+        setGoogleSheetStats(stats);
+        
+        // If we have Google Sheet data, use it as the source of truth
+        if (stats.referrals.length > 0) {
+          setUseGoogleSheetData(true);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [commissionsData, referralsData] = await Promise.all([
-          BaseCrudService.getAll<ReferralCommissions>('commissions'),
-          BaseCrudService.getAll<Referrals>('referrals'),
-        ]);
-
-        setCommissions(commissionsData.items);
-        setReferrals(referralsData.items);
-      } catch (error) {
-        console.error('Error fetching dashboard data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchData();
-  }, []);
+  }, [partner.companyName]);
 
-  // Calculate statistics
-  const totalEarnings = commissions.reduce((sum, c) => sum + (c.amount || 0), 0);
+  // Calculate statistics - use Google Sheet data if available, otherwise use CMS data
+  let totalEarnings = 0;
+  let totalReferrals = 0;
+  let approvedReferrals = 0;
+  let pendingReferrals = 0;
+  let displayReferrals = referrals;
+
+  if (useGoogleSheetData && googleSheetStats) {
+    // Use Google Sheet data as source of truth
+    totalEarnings = googleSheetStats.totalEarnings;
+    totalReferrals = googleSheetStats.totalReferrals;
+    approvedReferrals = googleSheetStats.approvedReferrals;
+    pendingReferrals = googleSheetStats.pendingReferrals;
+    
+    // Convert Google Sheet data to Referrals format for display
+    displayReferrals = googleSheetStats.referrals.map((sheetData, index) => ({
+      _id: `gs-${index}`,
+      customerName: sheetData.customerName,
+      customerEmail: sheetData.email,
+      customerPhone: sheetData.phone,
+      loanType: sheetData.loanType,
+      loanAmount: parseFloat(sheetData.loanAmount) || 0,
+      referralStatus: sheetData.status as any,
+      submissionDate: sheetData.submissionDate,
+    })) as Referrals[];
+  } else {
+    // Use CMS data
+    totalReferrals = referrals.length;
+    approvedReferrals = referrals.filter(r => r.referralStatus === 'APPROVED').length;
+    pendingReferrals = referrals.filter(r => r.referralStatus === 'PENDING').length;
+    displayReferrals = referrals;
+  }
+
   const pendingCommissions = commissions.filter(c => c.status === 'PENDING').reduce((sum, c) => sum + (c.amount || 0), 0);
   const paidCommissions = commissions.filter(c => c.status === 'PAID').reduce((sum, c) => sum + (c.amount || 0), 0);
-  const totalReferrals = referrals.length;
-  const approvedReferrals = referrals.filter(r => r.referralStatus === 'APPROVED').length;
-  const pendingReferrals = referrals.filter(r => r.referralStatus === 'PENDING').length;
 
   const StatCard = ({ icon: Icon, label, value, subtext, color }: any) => (
     <motion.div
@@ -71,14 +124,30 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
+          className="mb-12 flex justify-between items-start"
         >
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-secondary mb-2">
-            Welcome, {partner.companyName}
-          </h1>
-          <p className="font-paragraph text-lg text-gray-600">
-            Manage your referrals and track your earnings
-          </p>
+          <div>
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-secondary mb-2">
+              Welcome, {partner.companyName}
+            </h1>
+            <p className="font-paragraph text-lg text-gray-600">
+              Manage your referrals and track your earnings
+            </p>
+            {useGoogleSheetData && (
+              <p className="font-paragraph text-sm text-accent mt-2">
+                ✓ Data synced from Google Sheets
+              </p>
+            )}
+          </div>
+          <Button
+            onClick={() => fetchData(true)}
+            disabled={refreshing}
+            variant="outline"
+            className="flex items-center gap-2"
+          >
+            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+            {refreshing ? 'Refreshing...' : 'Refresh'}
+          </Button>
         </motion.div>
 
         {/* Stats Grid */}
@@ -115,7 +184,7 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
             icon={CheckCircle}
             label="Approved Referrals"
             value={approvedReferrals}
-            subtext={`${((approvedReferrals / totalReferrals) * 100).toFixed(0)}% approval rate`}
+            subtext={totalReferrals > 0 ? `${((approvedReferrals / totalReferrals) * 100).toFixed(0)}% approval rate` : 'No referrals yet'}
             color="bg-green-100 text-green-600"
           />
           <StatCard
@@ -213,9 +282,33 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
             <div className="text-center py-12">
               <p className="text-gray-500">Loading...</p>
             </div>
-          ) : referrals.length === 0 ? (
+          ) : displayReferrals.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-500">No referrals yet</p>
+              <p className="text-gray-500 mb-4">No referrals yet</p>
+              <p className="text-gray-400 text-sm mb-6">
+                {useGoogleSheetData 
+                  ? 'No referrals found in Google Sheets for your company'
+                  : 'Start submitting referrals to see them here'}
+              </p>
+              {!useGoogleSheetData && (
+                <div className="bg-light-gray rounded-xl p-6 max-w-md mx-auto">
+                  <h3 className="font-heading font-bold text-secondary mb-3">Example Referral</h3>
+                  <div className="space-y-2 text-left">
+                    <div>
+                      <p className="font-paragraph text-xs text-gray-600">Customer Name</p>
+                      <p className="font-heading font-semibold text-secondary">John Smith</p>
+                    </div>
+                    <div>
+                      <p className="font-paragraph text-xs text-gray-600">Loan Type</p>
+                      <p className="font-heading font-semibold text-secondary">Home Loan</p>
+                    </div>
+                    <div>
+                      <p className="font-paragraph text-xs text-gray-600">Loan Amount</p>
+                      <p className="font-heading font-semibold text-secondary">$500,000</p>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -230,7 +323,7 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
                   </tr>
                 </thead>
                 <tbody>
-                  {referrals.slice(0, 5).map((referral) => (
+                  {displayReferrals.slice(0, 5).map((referral) => (
                     <tr key={referral._id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                       <td className="py-4 px-4 font-paragraph text-secondary">{referral.customerName}</td>
                       <td className="py-4 px-4 font-paragraph text-gray-600">{referral.loanType}</td>

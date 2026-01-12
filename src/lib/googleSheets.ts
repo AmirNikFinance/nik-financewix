@@ -1,6 +1,7 @@
 /**
  * Google Sheets Integration Service
  * Handles real-time syncing of referral data with Google Sheets
+ * Supports bidirectional sync with proper CORS handling
  */
 
 export interface ReferralSheetData {
@@ -15,6 +16,14 @@ export interface ReferralSheetData {
   status: string;
   commission: string;
   commissionStatus: string;
+}
+
+export interface PartnerStats {
+  totalReferrals: number;
+  totalEarnings: number;
+  pendingReferrals: number;
+  approvedReferrals: number;
+  referrals: ReferralSheetData[];
 }
 
 export interface GoogleSheetsConfig {
@@ -38,6 +47,7 @@ export function initializeGoogleSheets(scriptUrl: string, sheetName = 'Referrals
   }
   config.scriptUrl = scriptUrl;
   config.sheetName = sheetName;
+  console.log('Google Sheets initialized with URL:', scriptUrl.substring(0, 50) + '...');
 }
 
 /**
@@ -51,32 +61,40 @@ export async function pushReferralToSheet(data: ReferralSheetData): Promise<bool
   }
 
   try {
+    const payload = {
+      action: 'addRow',
+      sheetName: config.sheetName,
+      data: {
+        timestamp: data.timestamp,
+        companyName: data.companyName,
+        customerName: data.customerName,
+        email: data.email,
+        phone: data.phone,
+        loanType: data.loanType,
+        loanAmount: data.loanAmount,
+        submissionDate: data.submissionDate,
+        status: data.status,
+        commission: data.commission,
+        commissionStatus: data.commissionStatus,
+      },
+    };
+
+    console.log('Pushing referral to Google Sheet:', payload);
+
     const response = await fetch(config.scriptUrl, {
       method: 'POST',
-      mode: 'no-cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        action: 'addRow',
-        sheetName: config.sheetName,
-        data: {
-          timestamp: data.timestamp,
-          companyName: data.companyName,
-          customerName: data.customerName,
-          email: data.email,
-          phone: data.phone,
-          loanType: data.loanType,
-          loanAmount: data.loanAmount,
-          submissionDate: data.submissionDate,
-          status: data.status,
-          commission: data.commission,
-          commissionStatus: data.commissionStatus,
-        },
-      }),
+      body: JSON.stringify(payload),
     });
 
-    console.log('Referral pushed to Google Sheet');
+    if (!response.ok) {
+      console.warn(`Google Sheets push returned status ${response.status}`);
+    }
+
+    console.log('✓ Referral pushed to Google Sheet successfully');
     return true;
   } catch (error) {
     console.error('Error pushing referral to Google Sheet:', error);
@@ -85,36 +103,79 @@ export async function pushReferralToSheet(data: ReferralSheetData): Promise<bool
 }
 
 /**
- * Fetch all referrals from Google Sheet
- * Retrieves all rows from the sheet for real-time sync
+ * Fetch all referrals from Google Sheet for a specific company
+ * Retrieves filtered rows from the sheet for real-time sync
  */
-export async function fetchReferralsFromSheet(): Promise<ReferralSheetData[]> {
+export async function fetchReferralsFromSheet(companyName: string): Promise<PartnerStats> {
   if (!config.scriptUrl) {
-    console.warn('Google Sheets not configured. Skipping fetch.');
-    return [];
+    console.warn('Google Sheets not configured. Returning empty stats.');
+    return {
+      totalReferrals: 0,
+      totalEarnings: 0,
+      pendingReferrals: 0,
+      approvedReferrals: 0,
+      referrals: [],
+    };
   }
 
   try {
+    const payload = {
+      action: 'getRowsByCompany',
+      sheetName: config.sheetName,
+      companyName: companyName,
+    };
+
+    console.log('Fetching referrals from Google Sheet for company:', companyName);
+
     const response = await fetch(config.scriptUrl, {
       method: 'POST',
-      mode: 'no-cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        action: 'getAllRows',
-        sheetName: config.sheetName,
-      }),
+      body: JSON.stringify(payload),
     });
 
-    // Note: Due to CORS restrictions with no-cors mode, we can't read the response
-    // This function serves as a placeholder for future implementation
-    // Consider using a backend proxy or Google Sheets API with proper authentication
-    console.log('Fetch request sent to Google Sheet');
-    return [];
+    if (!response.ok) {
+      console.warn(`Google Sheets fetch returned status ${response.status}`);
+      return {
+        totalReferrals: 0,
+        totalEarnings: 0,
+        pendingReferrals: 0,
+        approvedReferrals: 0,
+        referrals: [],
+      };
+    }
+
+    const result = await response.json();
+    console.log('✓ Fetched referrals from Google Sheet:', result);
+
+    // Calculate statistics
+    const referrals = result.data || [];
+    const totalEarnings = referrals.reduce((sum: number, r: ReferralSheetData) => {
+      const commission = parseFloat(r.commission) || 0;
+      return sum + commission;
+    }, 0);
+
+    const pendingReferrals = referrals.filter((r: ReferralSheetData) => r.status === 'PENDING').length;
+    const approvedReferrals = referrals.filter((r: ReferralSheetData) => r.status === 'APPROVED').length;
+
+    return {
+      totalReferrals: referrals.length,
+      totalEarnings,
+      pendingReferrals,
+      approvedReferrals,
+      referrals,
+    };
   } catch (error) {
     console.error('Error fetching referrals from Google Sheet:', error);
-    return [];
+    return {
+      totalReferrals: 0,
+      totalEarnings: 0,
+      pendingReferrals: 0,
+      approvedReferrals: 0,
+      referrals: [],
+    };
   }
 }
 
@@ -134,25 +195,33 @@ export async function updateReferralStatusInSheet(
   }
 
   try {
+    const payload = {
+      action: 'updateRow',
+      sheetName: config.sheetName,
+      identifier: customerEmail,
+      data: {
+        status,
+        commission: commission || '',
+        commissionStatus: commissionStatus || '',
+      },
+    };
+
+    console.log('Updating referral status in Google Sheet:', payload);
+
     const response = await fetch(config.scriptUrl, {
       method: 'POST',
-      mode: 'no-cors',
+      mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        action: 'updateRow',
-        sheetName: config.sheetName,
-        identifier: customerEmail,
-        data: {
-          status,
-          commission: commission || '',
-          commissionStatus: commissionStatus || '',
-        },
-      }),
+      body: JSON.stringify(payload),
     });
 
-    console.log('Referral status updated in Google Sheet');
+    if (!response.ok) {
+      console.warn(`Google Sheets update returned status ${response.status}`);
+    }
+
+    console.log('✓ Referral status updated in Google Sheet');
     return true;
   } catch (error) {
     console.error('Error updating referral in Google Sheet:', error);
@@ -167,7 +236,7 @@ export async function updateReferralStatusInSheet(
 export async function syncReferralData(
   localData: ReferralSheetData,
   companyName: string
-): Promise<void> {
+): Promise<PartnerStats> {
   // Add company name to data
   const dataWithCompany = {
     ...localData,
@@ -177,8 +246,8 @@ export async function syncReferralData(
   // Push to sheet
   await pushReferralToSheet(dataWithCompany);
 
-  // Fetch updates (implementation depends on backend setup)
-  // await fetchReferralsFromSheet();
+  // Fetch updates from sheet
+  return await fetchReferralsFromSheet(companyName);
 }
 
 /**

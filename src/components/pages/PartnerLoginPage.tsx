@@ -87,8 +87,9 @@ export default function PartnerLoginPage() {
             </p>
 
             <SignIn
-              messageToSignIn="Sign in to access your partner portal"
-              redirectTo="/partner-portal"
+              title="Partner Login"
+              message="Sign in to access your partner portal"
+              buttonText="Sign In"
             />
 
             <div className="mt-8 pt-8 border-t border-gray-200">

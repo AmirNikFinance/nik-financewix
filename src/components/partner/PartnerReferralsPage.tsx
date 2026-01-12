@@ -4,7 +4,7 @@ import { Download, TrendingUp } from 'lucide-react';
 import { Referrals } from '@/entities';
 import { BaseCrudService } from '@/integrations';
 import { Button } from '@/components/ui/button';
-import Header from '@/components/Header';
+import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
 
 export default function PartnerReferralsPage() {
@@ -70,10 +70,10 @@ export default function PartnerReferralsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-light-gray">
-      <Header />
+    <div className="min-h-screen bg-light-gray flex flex-col">
+      <PartnerPortalHeader />
 
-      <div className="max-w-[100rem] mx-auto px-6 md:px-12 py-16">
+      <div className="flex-1 max-w-[100rem] mx-auto w-full px-6 md:px-12 py-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

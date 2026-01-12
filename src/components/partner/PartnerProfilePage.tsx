@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import { useMember } from '@/integrations';
 import { motion } from 'framer-motion';
 import { AlertCircle, CheckCircle, Save } from 'lucide-react';
-import { Partners } from '@/entities';
+import { ReferralPartners } from '@/entities';
 import { BaseCrudService } from '@/integrations';
 import { Button } from '@/components/ui/button';
-import Header from '@/components/Header';
+import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
 
 export default function PartnerProfilePage() {
   const { member } = useMember();
-  const [partner, setPartner] = useState<Partners | null>(null);
+  const [partner, setPartner] = useState<ReferralPartners | null>(null);
   const [formData, setFormData] = useState({
     companyName: '',
     abn: '',
@@ -28,9 +28,9 @@ export default function PartnerProfilePage() {
   useEffect(() => {
     const fetchPartner = async () => {
       try {
-        if (member?._id) {
-          const { items } = await BaseCrudService.getAll<Partners>('partners');
-          const userPartner = items.find(p => p._id === member._id);
+        if (member?.loginEmail) {
+          const { items } = await BaseCrudService.getAll<ReferralPartners>('partners');
+          const userPartner = items.find(p => p._id === member.loginEmail);
           if (userPartner) {
             setPartner(userPartner);
             setFormData({
@@ -51,7 +51,7 @@ export default function PartnerProfilePage() {
     };
 
     fetchPartner();
-  }, [member?._id]);
+  }, [member?.loginEmail]);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -86,7 +86,7 @@ export default function PartnerProfilePage() {
     setSaving(true);
     try {
       if (partner?._id) {
-        await BaseCrudService.update<Partners>('partners', {
+        await BaseCrudService.update<ReferralPartners>('partners', {
           _id: partner._id,
           companyName: formData.companyName,
           abn: formData.abn,
@@ -116,10 +116,10 @@ export default function PartnerProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-light-gray">
-      <Header />
+    <div className="min-h-screen bg-light-gray flex flex-col">
+      <PartnerPortalHeader />
 
-      <div className="max-w-4xl mx-auto px-6 md:px-12 py-16">
+      <div className="flex-1 max-w-4xl mx-auto w-full px-6 md:px-12 py-16">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -1,2 +1,2 @@
 // Re-export from main entities file for backward compatibility
-export type { Commissions } from './index';
+export type { ReferralCommissions } from './index';

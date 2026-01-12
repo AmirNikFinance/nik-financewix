@@ -3,25 +3,26 @@ import { useMember } from '@/integrations';
 import { Navigate } from 'react-router-dom';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { BaseCrudService } from '@/integrations';
-import { Partners } from '@/entities';
+import { ReferralPartners } from '@/entities';
 import PartnerDashboard from '@/components/partner/PartnerDashboard';
 import PartnerProfileSetup from '@/components/partner/PartnerProfileSetup';
 
 export default function PartnerPortalPage() {
   const { member, isAuthenticated, isLoading } = useMember();
-  const [partnerProfile, setPartnerProfile] = useState<Partners | null>(null);
+  const [partnerProfile, setPartnerProfile] = useState<ReferralPartners | null>(null);
   const [profileLoading, setProfileLoading] = useState(true);
 
   useEffect(() => {
-    if (!isAuthenticated || !member?._id) {
+    if (!isAuthenticated || !member?.loginEmail) {
       setProfileLoading(false);
       return;
     }
 
     const fetchPartnerProfile = async () => {
       try {
-        const { items } = await BaseCrudService.getAll<Partners>('partners');
-        const userPartner = items.find(p => p._id === member._id);
+        const { items } = await BaseCrudService.getAll<ReferralPartners>('partners');
+        // Match partner by email since Member doesn't have _id
+        const userPartner = items.find(p => p._id === member.loginEmail);
         setPartnerProfile(userPartner || null);
       } catch (error) {
         console.error('Error fetching partner profile:', error);
@@ -31,7 +32,7 @@ export default function PartnerPortalPage() {
     };
 
     fetchPartnerProfile();
-  }, [isAuthenticated, member?._id]);
+  }, [isAuthenticated, member?.loginEmail]);
 
   if (isLoading || profileLoading) {
     return (
@@ -51,7 +52,7 @@ export default function PartnerPortalPage() {
   }
 
   // Otherwise, show profile setup
-  return <PartnerProfileSetup partnerId={member?._id || ''} onProfileComplete={() => {
+  return <PartnerProfileSetup partnerId={member?.loginEmail || ''} onProfileComplete={() => {
     setPartnerProfile(prev => prev ? { ...prev, profileSetupComplete: true } : null);
   }} />;
 }

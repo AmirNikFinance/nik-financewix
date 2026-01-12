@@ -15,6 +15,7 @@ import PartnerPortalPage from '@/components/pages/PartnerPortalPage';
 import PartnerCommissionsPage from '@/components/partner/PartnerCommissionsPage';
 import PartnerReferralsPage from '@/components/partner/PartnerReferralsPage';
 import PartnerProfilePage from '@/components/partner/PartnerProfilePage';
+import PartnerSubmitReferralPage from '@/components/partner/PartnerSubmitReferralPage';
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 
 // Layout component that includes ScrollToTop
@@ -98,6 +99,14 @@ const router = createBrowserRouter([
         element: (
           <MemberProtectedRoute messageToSignIn="Sign in to manage your profile">
             <PartnerProfilePage />
+          </MemberProtectedRoute>
+        ),
+      },
+      {
+        path: "partner-portal/submit-referral",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to submit a referral">
+            <PartnerSubmitReferralPage />
           </MemberProtectedRoute>
         ),
       },

@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { DollarSign, TrendingUp, Clock, CheckCircle, ArrowRight, MoreVertical } from 'lucide-react';
-import { Partners, Commissions, Referrals } from '@/entities';
+import { ReferralPartners, ReferralCommissions, Referrals } from '@/entities';
 import { BaseCrudService } from '@/integrations';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import Header from '@/components/Header';
+import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
 
 interface PartnerDashboardProps {
-  partner: Partners;
+  partner: ReferralPartners;
 }
 
 export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
-  const [commissions, setCommissions] = useState<Commissions[]>([]);
+  const [commissions, setCommissions] = useState<ReferralCommissions[]>([]);
   const [referrals, setReferrals] = useState<Referrals[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,7 +21,7 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
     const fetchData = async () => {
       try {
         const [commissionsData, referralsData] = await Promise.all([
-          BaseCrudService.getAll<Commissions>('commissions'),
+          BaseCrudService.getAll<ReferralCommissions>('commissions'),
           BaseCrudService.getAll<Referrals>('referrals'),
         ]);
 
@@ -63,10 +63,10 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
   );
 
   return (
-    <div className="min-h-screen bg-light-gray">
-      <Header />
+    <div className="min-h-screen bg-light-gray flex flex-col">
+      <PartnerPortalHeader />
 
-      <div className="max-w-[100rem] mx-auto px-6 md:px-12 py-16">
+      <div className="flex-1 max-w-[100rem] mx-auto w-full px-6 md:px-12 py-16">
         {/* Welcome Section */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

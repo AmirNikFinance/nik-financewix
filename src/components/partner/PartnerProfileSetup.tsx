@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, AlertCircle } from 'lucide-react';
 import { BaseCrudService } from '@/integrations';
-import { Partners } from '@/entities';
+import { ReferralPartners } from '@/entities';
 import { Button } from '@/components/ui/button';
-import Header from '@/components/Header';
+import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
 
 interface PartnerProfileSetupProps {
@@ -50,8 +50,8 @@ export default function PartnerProfileSetup({ partnerId, onProfileComplete }: Pa
 
     setLoading(true);
     try {
-      // Create or update partner profile
-      const partnerData: Partners = {
+      // Create or update partner profile with auto-approval
+      const partnerData: ReferralPartners = {
         _id: partnerId,
         companyName: formData.companyName,
         abn: formData.abn,
@@ -59,7 +59,7 @@ export default function PartnerProfileSetup({ partnerId, onProfileComplete }: Pa
         bankAccountName: formData.bankAccountName,
         bankBsb: formData.bankBsb,
         bankAccountNumber: formData.bankAccountNumber,
-        status: 'PENDING',
+        status: 'APPROVED',
         profileSetupComplete: true,
       };
 
@@ -98,7 +98,7 @@ export default function PartnerProfileSetup({ partnerId, onProfileComplete }: Pa
           </div>
           <h1 className="font-heading text-3xl font-bold text-secondary mb-4">Profile Setup Complete!</h1>
           <p className="font-paragraph text-gray-600 mb-8">
-            Your profile has been saved. Your account is pending approval. You'll be notified once it's activated.
+            Your profile has been saved and your account is now active. You can start submitting referrals immediately!
           </p>
           <p className="font-paragraph text-sm text-gray-500">Redirecting to dashboard...</p>
         </motion.div>
@@ -108,7 +108,7 @@ export default function PartnerProfileSetup({ partnerId, onProfileComplete }: Pa
 
   return (
     <div className="min-h-screen bg-light-gray">
-      <Header />
+      <PartnerPortalHeader />
 
       <div className="max-w-4xl mx-auto px-6 md:px-12 py-16">
         <motion.div

@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Download, Filter, DollarSign } from 'lucide-react';
-import { Commissions } from '@/entities';
+import { ReferralCommissions } from '@/entities';
 import { BaseCrudService } from '@/integrations';
 import { Button } from '@/components/ui/button';
-import Header from '@/components/Header';
+import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
 
 export default function PartnerCommissionsPage() {
-  const [commissions, setCommissions] = useState<Commissions[]>([]);
-  const [filteredCommissions, setFilteredCommissions] = useState<Commissions[]>([]);
+  const [commissions, setCommissions] = useState<ReferralCommissions[]>([]);
+  const [filteredCommissions, setFilteredCommissions] = useState<ReferralCommissions[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'PENDING' | 'PAID'>('ALL');
 
   useEffect(() => {
     const fetchCommissions = async () => {
       try {
-        const { items } = await BaseCrudService.getAll<Commissions>('commissions');
+        const { items } = await BaseCrudService.getAll<ReferralCommissions>('commissions');
         setCommissions(items);
         filterCommissions(items, 'ALL');
       } catch (error) {
@@ -29,7 +29,7 @@ export default function PartnerCommissionsPage() {
     fetchCommissions();
   }, []);
 
-  const filterCommissions = (items: Commissions[], status: 'ALL' | 'PENDING' | 'PAID') => {
+  const filterCommissions = (items: ReferralCommissions[], status: 'ALL' | 'PENDING' | 'PAID') => {
     if (status === 'ALL') {
       setFilteredCommissions(items);
     } else {
@@ -66,10 +66,10 @@ export default function PartnerCommissionsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-light-gray">
-      <Header />
+    <div className="min-h-screen bg-light-gray flex flex-col">
+      <PartnerPortalHeader />
 
-      <div className="max-w-[100rem] mx-auto px-6 md:px-12 py-16">
+      <div className="flex-1 max-w-[100rem] mx-auto w-full px-6 md:px-12 py-16">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}

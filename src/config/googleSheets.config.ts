@@ -3,13 +3,13 @@
  * 
  * Spreadsheet ID: 13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo
  * Sheet Name: Referrals
- * Deployment URL: https://script.google.com/macros/s/AKfycbx04_dcPCtnnAyUo8JDPrjLcLZFzv6BO9rLH0APnBpXb5dNkG2vqjQabdS23NQVhI79Dg/exec
+ * Deployment URL: https://script.google.com/macros/s/AKfycbzis07haVEhz7AEtU3jlg1km_T_XhS2ZHp8sQMq9AmX46UEZtmXJt6zA4G5Tu_caXbC6Q/exec
  */
 
 export const GOOGLE_SHEETS_CONFIG = {
   // Google Apps Script deployment URL
   // This is the production deployment URL for the referral management script
-  scriptUrl: process.env.REACT_APP_GOOGLE_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbx04_dcPCtnnAyUo8JDPrjLcLZFzv6BO9rLH0APnBpXb5dNkG2vqjQabdS23NQVhI79Dg/exec',
+  scriptUrl: process.env.REACT_APP_GOOGLE_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbzis07haVEhz7AEtU3jlg1km_T_XhS2ZHp8sQMq9AmX46UEZtmXJt6zA4G5Tu_caXbC6Q/exec',
   
   // Sheet name (must match the sheet in your Google Sheets document)
   sheetName: 'Referrals',

@@ -11,7 +11,7 @@ If you already have the Google Apps Script deployed, you just need to:
 
 1. **Set the environment variable** in your `.env` file:
    ```env
-   REACT_APP_GOOGLE_SHEETS_URL=https://script.google.com/macros/s/AKfycbx04_dcPCtnnAyUo8JDPrjLcLZFzv6BO9rLH0APnBpXb5dNkG2vqjQabdS23NQVhI79Dg/exec
+   REACT_APP_GOOGLE_SHEETS_URL=https://script.google.com/macros/s/AKfycbzis07haVEhz7AEtU3jlg1km_T_XhS2ZHp8sQMq9AmX46UEZtmXJt6zA4G5Tu_caXbC6Q/exec
    ```
 
 2. **Restart your development server** for the changes to take effect
@@ -35,7 +35,7 @@ Partner Dashboard (displays stats)
 ### Spreadsheet Information
 - **Spreadsheet ID**: `13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo`
 - **Sheet Name**: `Referrals`
-- **Deployment URL**: `https://script.google.com/macros/s/AKfycbx04_dcPCtnnAyUo8JDPrjLcLZFzv6BO9rLH0APnBpXb5dNkG2vqjQabdS23NQVhI79Dg/exec`
+- **Deployment URL**: `https://script.google.com/macros/s/AKfycbzis07haVEhz7AEtU3jlg1km_T_XhS2ZHp8sQMq9AmX46UEZtmXJt6zA4G5Tu_caXbC6Q/exec`
 
 ### Sheet Columns
 The "Referrals" sheet contains the following columns:

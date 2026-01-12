@@ -124,6 +124,75 @@ function doPost(e) {
 }
 
 /**
+ * Handle GET requests (for testing and direct access)
+ * Safe check for e.parameter before accessing properties
+ */
+function doGet(e) {
+  try {
+    Logger.log('=== GET REQUEST RECEIVED ===');
+    
+    // Safe check for e.parameter
+    if (!e || !e.parameter) {
+      Logger.log('No parameters provided');
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        error: 'No parameters provided',
+        message: 'Use ?action=test or ?action=getRowsByCompany&companyName=YourCompany'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    const action = e.parameter.action;
+    const companyName = e.parameter.companyName;
+    
+    Logger.log('Action: ' + action);
+    Logger.log('Company Name: ' + companyName);
+    
+    let result;
+    
+    switch(action) {
+      case 'test':
+        result = testConnection();
+        break;
+      case 'getRowsByCompany':
+        if (!companyName) {
+          result = {
+            success: false,
+            error: 'companyName parameter is required for getRowsByCompany action'
+          };
+        } else {
+          result = getRowsByCompany(companyName);
+        }
+        break;
+      case 'getAllRows':
+        result = getAllRows();
+        break;
+      default:
+        result = {
+          success: false,
+          error: 'Unknown action: ' + action,
+          availableActions: ['test', 'getRowsByCompany', 'getAllRows'],
+          message: 'Use POST requests for addRow and updateRow actions'
+        };
+    }
+    
+    Logger.log('Result: ' + JSON.stringify(result));
+    
+    return ContentService.createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(error) {
+    Logger.log('=== GET ERROR ===');
+    Logger.log('Error: ' + error.toString());
+    Logger.log('Stack: ' + error.stack);
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      error: error.toString(),
+      stack: error.stack
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
  * Add a new referral row to the sheet
  * 
  * Expected data structure:

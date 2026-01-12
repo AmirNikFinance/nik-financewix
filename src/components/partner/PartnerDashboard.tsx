@@ -357,8 +357,15 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
+          <Link to="/partner-portal/submit-referral" className="block">
+            <div className="bg-gradient-to-br from-accent to-accent/80 rounded-2xl p-6 border border-accent/20 hover:shadow-lg transition-all text-center cursor-pointer text-white">
+              <h3 className="font-heading font-bold mb-2">Submit New Referral</h3>
+              <p className="font-paragraph text-sm text-white/90">Add a new customer referral</p>
+            </div>
+          </Link>
+
           <Link to="/partner-portal/profile" className="block">
             <div className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-accent hover:shadow-lg transition-all text-center cursor-pointer">
               <h3 className="font-heading font-bold text-secondary mb-2">Update Profile</h3>

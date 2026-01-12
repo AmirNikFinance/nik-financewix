@@ -10,6 +10,12 @@ import BlogPage from '@/components/pages/BlogPage';
 import BlogArticlePage from '@/components/pages/BlogArticlePage';
 import CalculatorsPage from '@/components/pages/CalculatorsPage';
 import CarLoanCalculatorPage from '@/components/pages/CarLoanCalculatorPage';
+import PartnerLoginPage from '@/components/pages/PartnerLoginPage';
+import PartnerPortalPage from '@/components/pages/PartnerPortalPage';
+import PartnerCommissionsPage from '@/components/partner/PartnerCommissionsPage';
+import PartnerReferralsPage from '@/components/partner/PartnerReferralsPage';
+import PartnerProfilePage from '@/components/partner/PartnerProfilePage';
+import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -58,6 +64,42 @@ const router = createBrowserRouter([
       {
         path: "car-loan-calculator",
         element: <CarLoanCalculatorPage />,
+      },
+      {
+        path: "partner-login",
+        element: <PartnerLoginPage />,
+      },
+      {
+        path: "partner-portal",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to access the partner portal">
+            <PartnerPortalPage />
+          </MemberProtectedRoute>
+        ),
+      },
+      {
+        path: "partner-portal/commissions",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to view commissions">
+            <PartnerCommissionsPage />
+          </MemberProtectedRoute>
+        ),
+      },
+      {
+        path: "partner-portal/referrals",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to view referrals">
+            <PartnerReferralsPage />
+          </MemberProtectedRoute>
+        ),
+      },
+      {
+        path: "partner-portal/profile",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to manage your profile">
+            <PartnerProfilePage />
+          </MemberProtectedRoute>
+        ),
       },
       {
         path: "*",

@@ -35,6 +35,29 @@ export interface BlogArticles {
 
 
 /**
+ * Collection ID: commissions
+ * Interface for ReferralCommissions
+ */
+export interface ReferralCommissions {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  commissionReference?: string;
+  /** @wixFieldType number */
+  amount?: number;
+  /** @wixFieldType text */
+  status?: string;
+  /** @wixFieldType date */
+  dateEarned?: Date | string;
+  /** @wixFieldType date */
+  datePaid?: Date | string;
+  /** @wixFieldType text */
+  currency?: string;
+}
+
+
+/**
  * Collection ID: customerreviews
  * Interface for CustomerReviews
  */
@@ -100,6 +123,58 @@ export interface LoanOptions {
 
 
 /**
+ * Collection ID: partners
+ * Interface for ReferralPartners
+ */
+export interface ReferralPartners {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  companyName?: string;
+  /** @wixFieldType text */
+  abn?: string;
+  /** @wixFieldType text */
+  bankName?: string;
+  /** @wixFieldType text */
+  bankAccountName?: string;
+  /** @wixFieldType text */
+  bankBsb?: string;
+  /** @wixFieldType text */
+  bankAccountNumber?: string;
+  /** @wixFieldType text */
+  status?: string;
+  /** @wixFieldType boolean */
+  profileSetupComplete?: boolean;
+}
+
+
+/**
+ * Collection ID: referrals
+ * Interface for Referrals
+ */
+export interface Referrals {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  customerName?: string;
+  /** @wixFieldType text */
+  customerEmail?: string;
+  /** @wixFieldType text */
+  customerPhone?: string;
+  /** @wixFieldType text */
+  loanType?: string;
+  /** @wixFieldType number */
+  loanAmount?: number;
+  /** @wixFieldType text */
+  referralStatus?: string;
+  /** @wixFieldType datetime */
+  submissionDate?: Date | string;
+}
+
+
+/**
  * Collection ID: whychooseusfeatures
  * Interface for WhyChooseUsFeatures
  */
@@ -117,4 +192,79 @@ export interface WhyChooseUsFeatures {
   displayOrder?: number;
   /** @wixFieldType boolean */
   isActive?: boolean;
+}
+
+
+/**
+ * Collection ID: partners
+ * Interface for Partners (Referral Partners)
+ */
+export interface Partners {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  companyName?: string;
+  /** @wixFieldType text */
+  abn?: string;
+  /** @wixFieldType text */
+  bankName?: string;
+  /** @wixFieldType text */
+  bankAccountName?: string;
+  /** @wixFieldType text */
+  bankBsb?: string;
+  /** @wixFieldType text */
+  bankAccountNumber?: string;
+  /** @wixFieldType text */
+  status?: string;
+  /** @wixFieldType boolean */
+  profileSetupComplete?: boolean;
+}
+
+
+/**
+ * Collection ID: commissions
+ * Interface for Commissions (Referral Commissions)
+ */
+export interface Commissions {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  commissionReference?: string;
+  /** @wixFieldType number */
+  amount?: number;
+  /** @wixFieldType text */
+  status?: string;
+  /** @wixFieldType date */
+  dateEarned?: Date | string;
+  /** @wixFieldType date */
+  datePaid?: Date | string;
+  /** @wixFieldType text */
+  currency?: string;
+}
+
+
+/**
+ * Collection ID: referrals
+ * Interface for Referrals
+ */
+export interface Referrals {
+  _id: string;
+  _createdDate?: Date;
+  _updatedDate?: Date;
+  /** @wixFieldType text */
+  customerName?: string;
+  /** @wixFieldType text */
+  customerEmail?: string;
+  /** @wixFieldType text */
+  customerPhone?: string;
+  /** @wixFieldType text */
+  loanType?: string;
+  /** @wixFieldType number */
+  loanAmount?: number;
+  /** @wixFieldType text */
+  referralStatus?: string;
+  /** @wixFieldType datetime */
+  submissionDate?: Date | string;
 }

@@ -70,13 +70,16 @@ function initializeSheet() {
 /**
  * Main doPost handler for all requests
  * Routes requests based on the 'action' parameter
+ * Supports both custom API calls and Wix Form webhooks
  */
 function doPost(e) {
   try {
     const payload = JSON.parse(e.postData.contents);
     const action = payload.action;
+    const source = payload.source || 'api'; // 'api' or 'wix_form'
     
     Logger.log('=== REQUEST RECEIVED ===');
+    Logger.log('Source: ' + source);
     Logger.log('Action: ' + action);
     Logger.log('Payload: ' + JSON.stringify(payload));
     
@@ -84,7 +87,12 @@ function doPost(e) {
     
     switch(action) {
       case 'addRow':
-        result = addRow(payload.data);
+        // Handle both API and Wix Form submissions
+        if (source === 'wix_form') {
+          result = handleWixFormSubmission(payload);
+        } else {
+          result = addRow(payload.data);
+        }
         break;
       case 'getRowsByCompany':
         result = getRowsByCompany(payload.companyName);
@@ -189,6 +197,53 @@ function doGet(e) {
       error: error.toString(),
       stack: error.stack
     })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+/**
+ * Handle Wix Form webhook submissions
+ * Validates and processes Wix Form data
+ */
+function handleWixFormSubmission(payload) {
+  try {
+    Logger.log('=== WIX FORM SUBMISSION ===');
+    Logger.log('Form ID: ' + (payload.formId || 'unknown'));
+    
+    const data = payload.data;
+    
+    // Validate required fields
+    const requiredFields = ['customerName', 'email', 'phone', 'loanType', 'loanAmount', 'companyName'];
+    const missingFields = [];
+    
+    requiredFields.forEach(field => {
+      if (!data[field]) {
+        missingFields.push(field);
+      }
+    });
+    
+    if (missingFields.length > 0) {
+      Logger.log('✗ Missing required fields: ' + missingFields.join(', '));
+      return {
+        success: false,
+        error: 'Missing required fields: ' + missingFields.join(', '),
+        missingFields: missingFields
+      };
+    }
+    
+    // Process the form data
+    Logger.log('✓ Wix Form validation passed');
+    Logger.log('Customer: ' + data.customerName);
+    Logger.log('Email: ' + data.email);
+    Logger.log('Company: ' + data.companyName);
+    
+    // Add row to sheet
+    return addRow(data);
+  } catch(error) {
+    Logger.log('Error handling Wix form submission: ' + error.toString());
+    return {
+      success: false,
+      error: 'Failed to process Wix form submission: ' + error.toString()
+    };
   }
 }
 

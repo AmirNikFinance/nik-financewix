@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useMember } from '@/integrations';
 import { motion } from 'framer-motion';
 import { CheckCircle, AlertCircle, Send } from 'lucide-react';
 import { BaseCrudService } from '@/integrations';
-import { Referrals } from '@/entities';
+import { Referrals, ReferralPartners } from '@/entities';
 import { Button } from '@/components/ui/button';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
+import { pushReferralToSheet, formatReferralForSheet, isGoogleSheetsConfigured } from '@/lib/googleSheets';
 
 export default function PartnerSubmitReferralPage() {
+  const { member } = useMember();
   const [formData, setFormData] = useState({
     customerName: '',
     customerEmail: '',
@@ -19,6 +22,7 @@ export default function PartnerSubmitReferralPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [partner, setPartner] = useState<ReferralPartners | null>(null);
 
   const loanTypes = [
     'Home Loan',
@@ -28,6 +32,25 @@ export default function PartnerSubmitReferralPage() {
     'Debt Consolidation',
     'Other',
   ];
+
+  // Fetch partner information on mount
+  useEffect(() => {
+    const fetchPartner = async () => {
+      try {
+        if (member?.loginEmail) {
+          const { items } = await BaseCrudService.getAll<ReferralPartners>('partners');
+          const userPartner = items.find(p => p._id === member.loginEmail);
+          if (userPartner) {
+            setPartner(userPartner);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching partner:', error);
+      }
+    };
+
+    fetchPartner();
+  }, [member?.loginEmail]);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -77,24 +100,15 @@ export default function PartnerSubmitReferralPage() {
       // Save to CMS
       await BaseCrudService.create('referrals', referralData);
 
-      // Send to Google Sheets via webhook
-      try {
-        await fetch(
-          'https://script.google.com/macros/d/AKfycbxYourScriptIdHere/usercontent',
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              customerName: formData.customerName,
-              customerEmail: formData.customerEmail,
-              customerPhone: formData.customerPhone,
-              loanType: formData.loanType,
-              loanAmount: formData.loanAmount,
-              submissionDate: new Date().toLocaleDateString('en-AU'),
-            }),
-          }
+      // Sync to Google Sheets if configured
+      if (isGoogleSheetsConfigured() && partner) {
+        const sheetData = formatReferralForSheet(
+          referralData,
+          partner.companyName || 'Unknown Company',
+          '',
+          ''
         );
-      } catch (sheetError) {
-        console.warn('Google Sheets sync failed (non-critical):', sheetError);
+        await pushReferralToSheet(sheetData);
       }
 
       setSuccess(true);

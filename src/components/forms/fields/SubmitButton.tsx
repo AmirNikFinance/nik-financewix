@@ -18,12 +18,15 @@ export default function SubmitButton({
   return (
     <Field id={id}>
       <FieldInputWrapper>
-        <FieldInput asChild>
+        <FieldInput>
           <div className="flex gap-3 justify-between">
             {showPreviousButton && (
               <button
                 type="button"
-                onClick={() => onPreviousClick()}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onPreviousClick();
+                }}
                 className="px-6 py-3 bg-secondary text-secondary-foreground font-paragraph font-semibold rounded-lg hover:opacity-90 transition-opacity"
               >
                 {previousText}
@@ -32,7 +35,8 @@ export default function SubmitButton({
             {showNextButton && (
               <button
                 type="button"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   onNextClick();
                 }}
                 className="ml-auto px-6 py-3 bg-primary text-primary-foreground font-paragraph font-semibold rounded-lg hover:opacity-90 transition-opacity"
@@ -42,8 +46,11 @@ export default function SubmitButton({
             )}
             {showSubmitButton && (
               <button
-                type="submit"
-                onClick={() => onSubmitClick()}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onSubmitClick();
+                }}
                 disabled={isSubmitInProgress}
                 className="ml-auto px-6 py-3 bg-primary text-primary-foreground font-paragraph font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
               >

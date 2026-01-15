@@ -2,15 +2,14 @@ import { motion } from 'framer-motion';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
 import FormComponent from '@/components/forms/Form';
-import { getFormServiceConfig } from '@wix/headless-forms/services';
 
 // Partner Referral Form ID from Wix Forms
 const PARTNER_REFERRAL_FORM_ID = 'd5cddf53-3ebf-4a9a-9e1c-ec9722a5f261';
 
 export default function PartnerSubmitReferralPage() {
-  const formServiceConfig = getFormServiceConfig({
+  const formServiceConfig = {
     formId: PARTNER_REFERRAL_FORM_ID,
-  });
+  };
 
   return (
     <div className="min-h-screen bg-light-gray flex flex-col">

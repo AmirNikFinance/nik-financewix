@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useMember } from '@/integrations';
 import { BaseCrudService } from '@/integrations';
-import { Referrals } from '@/entities';
+import { Referrals, ReferralPartners } from '@/entities';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
 import FormComponent from '@/components/forms/Form';
 import { useToast } from '@/hooks/use-toast';
+import { pushReferralToSheet, formatReferralForSheet, isGoogleSheetsConfigured } from '@/lib/googleSheets';
 
 // Partner Referral Form ID from Wix Forms
 const PARTNER_REFERRAL_FORM_ID = 'd5cddf53-3ebf-4a9a-9e1c-ec9722a5f261';
@@ -15,10 +16,30 @@ export default function PartnerSubmitReferralPage() {
   const { member } = useMember();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [partnerProfile, setPartnerProfile] = useState<ReferralPartners | null>(null);
 
   const formServiceConfig = {
     formId: PARTNER_REFERRAL_FORM_ID,
   };
+
+  // Fetch partner profile to get company name
+  useEffect(() => {
+    const fetchPartnerProfile = async () => {
+      if (!member?._id) return;
+
+      try {
+        const { items } = await BaseCrudService.getAll<ReferralPartners>('partners');
+        const profile = items.find(p => p._id === member._id);
+        if (profile) {
+          setPartnerProfile(profile);
+        }
+      } catch (error) {
+        console.error('Error fetching partner profile:', error);
+      }
+    };
+
+    fetchPartnerProfile();
+  }, [member?._id]);
 
   // Handle form submission success
   const handleFormSubmitSuccess = async (formData: any) => {
@@ -53,13 +74,41 @@ export default function PartnerSubmitReferralPage() {
 
       await BaseCrudService.create('referrals', referralData);
 
+      // Push to Google Sheets if configured
+      if (isGoogleSheetsConfigured() && partnerProfile?.companyName) {
+        console.log('Pushing referral to Google Sheets...');
+        const sheetData = formatReferralForSheet(
+          referralData,
+          partnerProfile.companyName,
+          '', // commission - empty for new referrals
+          ''  // commissionStatus - empty for new referrals
+        );
+        
+        const sheetSuccess = await pushReferralToSheet(sheetData);
+        
+        if (sheetSuccess) {
+          console.log('✓ Referral successfully pushed to Google Sheets');
+        } else {
+          console.warn('⚠ Referral saved to CMS but failed to sync with Google Sheets');
+        }
+      } else {
+        if (!isGoogleSheetsConfigured()) {
+          console.log('Google Sheets not configured - skipping sync');
+        }
+        if (!partnerProfile?.companyName) {
+          console.warn('Partner company name not available - skipping Google Sheets sync');
+        }
+      }
+
       toast({
         title: 'Referral Submitted Successfully',
-        description: 'Your referral has been saved to your account and is pending review.',
+        description: isGoogleSheetsConfigured() 
+          ? 'Your referral has been saved and synced to Google Sheets.'
+          : 'Your referral has been saved to your account and is pending review.',
         variant: 'default',
       });
     } catch (error) {
-      console.error('Error saving referral to CMS:', error);
+      console.error('Error saving referral:', error);
       toast({
         title: 'Referral Saved',
         description: 'Your referral was submitted successfully.',

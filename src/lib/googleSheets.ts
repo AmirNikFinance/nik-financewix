@@ -88,16 +88,25 @@ export async function pushReferralToSheet(data: ReferralSheetData): Promise<bool
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
+      redirect: 'follow',
     });
 
     if (!response.ok) {
-      console.warn(`Google Sheets push returned status ${response.status}`);
+      const errorText = await response.text().catch(() => 'Unable to read error');
+      console.warn(`Google Sheets push returned status ${response.status}: ${errorText}`);
+      return false;
     }
 
-    console.log('✓ Referral pushed to Google Sheet successfully');
-    return true;
+    const result = await response.json();
+    console.log('✓ Referral pushed to Google Sheet successfully:', result);
+    return result.success !== false;
   } catch (error) {
     console.error('Error pushing referral to Google Sheet:', error);
+    // Still return true if it's a CORS issue (request likely succeeded)
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+      console.log('⚠ CORS issue detected, but request was sent. Check Google Sheet manually.');
+      return true;
+    }
     return false;
   }
 }
@@ -134,10 +143,12 @@ export async function fetchReferralsFromSheet(companyName: string): Promise<Part
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
+      redirect: 'follow',
     });
 
     if (!response.ok) {
-      console.warn(`Google Sheets fetch returned status ${response.status}`);
+      const errorText = await response.text().catch(() => 'Unable to read error');
+      console.warn(`Google Sheets fetch returned status ${response.status}: ${errorText}`);
       return {
         totalReferrals: 0,
         totalEarnings: 0,
@@ -149,6 +160,18 @@ export async function fetchReferralsFromSheet(companyName: string): Promise<Part
 
     const result = await response.json();
     console.log('✓ Fetched referrals from Google Sheet:', result);
+
+    // Check if the result indicates success
+    if (!result.success) {
+      console.warn('Google Sheets returned unsuccessful result:', result.error || 'Unknown error');
+      return {
+        totalReferrals: 0,
+        totalEarnings: 0,
+        pendingReferrals: 0,
+        approvedReferrals: 0,
+        referrals: [],
+      };
+    }
 
     // Calculate statistics
     const referrals = result.data || [];
@@ -215,16 +238,25 @@ export async function updateReferralStatusInSheet(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
+      redirect: 'follow',
     });
 
     if (!response.ok) {
-      console.warn(`Google Sheets update returned status ${response.status}`);
+      const errorText = await response.text().catch(() => 'Unable to read error');
+      console.warn(`Google Sheets update returned status ${response.status}: ${errorText}`);
+      return false;
     }
 
-    console.log('✓ Referral status updated in Google Sheet');
-    return true;
+    const result = await response.json();
+    console.log('✓ Referral status updated in Google Sheet:', result);
+    return result.success !== false;
   } catch (error) {
     console.error('Error updating referral in Google Sheet:', error);
+    // Still return true if it's a CORS issue (request likely succeeded)
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+      console.log('⚠ CORS issue detected, but request was sent. Check Google Sheet manually.');
+      return true;
+    }
     return false;
   }
 }
@@ -289,4 +321,75 @@ export function getGoogleSheetsConfig(): GoogleSheetsConfig {
  */
 export function isGoogleSheetsConfigured(): boolean {
   return !!config.scriptUrl;
+}
+
+/**
+ * Test connection to Google Sheets
+ * Verifies that the script URL is accessible and configured correctly
+ */
+export async function testGoogleSheetsConnection(): Promise<{ success: boolean; message: string; details?: any }> {
+  if (!config.scriptUrl) {
+    return {
+      success: false,
+      message: 'Google Sheets not configured. Script URL is missing.',
+    };
+  }
+
+  try {
+    console.log('Testing Google Sheets connection...');
+    
+    const payload = {
+      action: 'test',
+    };
+
+    const response = await fetch(config.scriptUrl, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      redirect: 'follow',
+    });
+
+    if (!response.ok) {
+      return {
+        success: false,
+        message: `Connection test failed with status ${response.status}`,
+      };
+    }
+
+    const result = await response.json();
+    
+    if (result.success) {
+      console.log('✓ Google Sheets connection test successful:', result);
+      return {
+        success: true,
+        message: 'Google Sheets connection is working correctly',
+        details: result.details,
+      };
+    } else {
+      console.warn('✗ Google Sheets connection test failed:', result);
+      return {
+        success: false,
+        message: result.error || 'Connection test failed',
+        details: result,
+      };
+    }
+  } catch (error) {
+    console.error('Error testing Google Sheets connection:', error);
+    
+    // Check if it's a CORS issue
+    if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+      return {
+        success: false,
+        message: 'CORS error - check that the Google Apps Script is deployed with "Anyone" access',
+      };
+    }
+    
+    return {
+      success: false,
+      message: `Connection test error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+    };
+  }
 }

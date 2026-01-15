@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { DollarSign, TrendingUp, Clock, CheckCircle, ArrowRight, MoreVertical, RefreshCw } from 'lucide-react';
+import { DollarSign, TrendingUp, Clock, CheckCircle, ArrowRight, MoreVertical, RefreshCw, Wifi, WifiOff } from 'lucide-react';
 import { ReferralPartners, ReferralCommissions, Referrals } from '@/entities';
 import { BaseCrudService } from '@/integrations';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
-import { fetchReferralsFromSheet, isGoogleSheetsConfigured, ReferralSheetData, PartnerStats } from '@/lib/googleSheets';
+import { fetchReferralsFromSheet, isGoogleSheetsConfigured, testGoogleSheetsConnection, ReferralSheetData, PartnerStats } from '@/lib/googleSheets';
+import { useToast } from '@/hooks/use-toast';
 
 interface PartnerDashboardProps {
   partner: ReferralPartners;
@@ -20,6 +21,31 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [useGoogleSheetData, setUseGoogleSheetData] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('testing');
+  const { toast } = useToast();
+
+  // Test Google Sheets connection on mount
+  useEffect(() => {
+    const testConnection = async () => {
+      if (!isGoogleSheetsConfigured()) {
+        setConnectionStatus('disconnected');
+        return;
+      }
+
+      setConnectionStatus('testing');
+      const result = await testGoogleSheetsConnection();
+      
+      if (result.success) {
+        setConnectionStatus('connected');
+        console.log('✓ Google Sheets connection verified');
+      } else {
+        setConnectionStatus('disconnected');
+        console.warn('✗ Google Sheets connection failed:', result.message);
+      }
+    };
+
+    testConnection();
+  }, []);
 
   // Fetch data from both CMS and Google Sheets
   const fetchData = async (isRefresh = false) => {
@@ -39,8 +65,8 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
       setCommissions(commissionsData.items);
       setReferrals(referralsData.items);
 
-      // Fetch from Google Sheets if configured
-      if (isGoogleSheetsConfigured() && partner.companyName) {
+      // Fetch from Google Sheets if configured and connected
+      if (isGoogleSheetsConfigured() && connectionStatus === 'connected' && partner.companyName) {
         console.log('Fetching data from Google Sheets for company:', partner.companyName);
         const stats = await fetchReferralsFromSheet(partner.companyName);
         setGoogleSheetStats(stats);
@@ -48,10 +74,30 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
         // If we have Google Sheet data, use it as the source of truth
         if (stats.referrals.length > 0) {
           setUseGoogleSheetData(true);
+          
+          if (isRefresh) {
+            toast({
+              title: 'Data Refreshed',
+              description: `Synced ${stats.referrals.length} referrals from Google Sheets`,
+              variant: 'default',
+            });
+          }
+        } else {
+          setUseGoogleSheetData(false);
         }
+      } else {
+        setUseGoogleSheetData(false);
       }
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
+      
+      if (isRefresh) {
+        toast({
+          title: 'Refresh Failed',
+          description: 'Unable to fetch latest data. Please try again.',
+          variant: 'destructive',
+        });
+      }
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -59,8 +105,10 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [partner.companyName]);
+    if (connectionStatus !== 'testing') {
+      fetchData();
+    }
+  }, [partner.companyName, connectionStatus]);
 
   // Calculate statistics - use Google Sheet data if available, otherwise use CMS data
   let totalEarnings = 0;
@@ -133,11 +181,26 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
             <p className="font-paragraph text-lg text-gray-600">
               Manage your referrals and track your earnings
             </p>
-            {useGoogleSheetData && (
-              <p className="font-paragraph text-sm text-accent mt-2">
-                ✓ Data synced from Google Sheets
-              </p>
-            )}
+            <div className="flex items-center gap-4 mt-3">
+              {connectionStatus === 'connected' && (
+                <div className="flex items-center gap-2 text-accent">
+                  <Wifi className="w-4 h-4" />
+                  <span className="font-paragraph text-sm">Google Sheets Connected</span>
+                </div>
+              )}
+              {connectionStatus === 'disconnected' && (
+                <div className="flex items-center gap-2 text-gray-500">
+                  <WifiOff className="w-4 h-4" />
+                  <span className="font-paragraph text-sm">Google Sheets Offline</span>
+                </div>
+              )}
+              {useGoogleSheetData && (
+                <div className="flex items-center gap-2 text-accent">
+                  <CheckCircle className="w-4 h-4" />
+                  <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
+                </div>
+              )}
+            </div>
           </div>
           <Button
             onClick={() => fetchData(true)}

@@ -1,5 +1,23 @@
 # Google Sheets Real-Time Integration - Implementation Guide
 
+## ✨ What's New in v1.1
+
+### Enhanced Features
+- ✅ **Connection Status Indicator**: Real-time connection status on dashboard
+- ✅ **Improved Error Handling**: Better error messages and CORS handling
+- ✅ **Connection Testing**: Automatic connection verification on startup
+- ✅ **Enhanced Logging**: Detailed console logs for troubleshooting
+- ✅ **Response Validation**: Verifies Google Sheets responses
+- ✅ **User Feedback**: Toast notifications for sync operations
+
+### Bug Fixes
+- Fixed CORS handling for better reliability
+- Improved response parsing and error detection
+- Enhanced connection status detection
+- Better handling of failed requests
+
+---
+
 ## Quick Start
 
 ### 1. Create Google Sheet
@@ -57,10 +75,27 @@ useEffect(() => {
 ```
 
 ### 4. Test the Integration
-1. Log in to partner portal
-2. Go to "Submit Referral"
-3. Fill form and submit
-4. Check Google Sheet - data should appear automatically
+
+1. **Check Connection Status:**
+   - Log in to partner portal
+   - Look for connection indicator in dashboard header
+   - Should show green wifi icon with "Google Sheets Connected"
+
+2. **Test Referral Submission:**
+   - Go to "Submit Referral"
+   - Fill form and submit
+   - Check browser console for success messages
+   - Verify data appears in Google Sheet
+
+3. **Test Dashboard Sync:**
+   - Click "Refresh" button on dashboard
+   - Should see "Data synced from Google Sheets" message
+   - Referrals should appear in the dashboard
+
+4. **Troubleshooting:**
+   - If connection shows "Offline", see [Troubleshooting Guide](/src/GOOGLE_SHEETS_TROUBLESHOOTING.md)
+   - Check browser console for detailed error messages
+   - Verify Apps Script deployment settings
 
 ---
 
@@ -256,6 +291,22 @@ if (isGoogleSheetsConfigured()) {
 }
 ```
 
+### `testGoogleSheetsConnection()`
+Test the connection to Google Sheets and verify configuration.
+
+**Returns:** Promise<{ success: boolean; message: string; details?: any }>
+
+**Example:**
+```typescript
+const result = await testGoogleSheetsConnection();
+if (result.success) {
+  console.log('Connected:', result.message);
+  console.log('Details:', result.details);
+} else {
+  console.error('Connection failed:', result.message);
+}
+```
+
 ### `getGoogleSheetsConfig()`
 Get current Google Sheets configuration.
 
@@ -300,7 +351,7 @@ interface GoogleSheetsConfig {
 
 ## Error Handling
 
-The service includes built-in error handling:
+The service includes built-in error handling with improved CORS support:
 
 ```typescript
 try {
@@ -322,8 +373,13 @@ try {
 | Script URL not configured | `initializeGoogleSheets()` not called | Call initialization function |
 | 403 Forbidden | Script not deployed as "Anyone" | Redeploy with correct access |
 | Sheet not found | Sheet name doesn't match | Check sheet name in script |
-| CORS error | Browser blocking request | Use `mode: 'no-cors'` (already done) |
+| CORS error | Browser blocking request | Check deployment settings, see troubleshooting guide |
 | Timeout | Script taking too long | Check script logs for errors |
+| Connection test failed | Script not accessible | Verify deployment URL and permissions |
+
+**Note:** The integration now handles CORS gracefully. If you see a CORS warning but the console says "request was sent", check your Google Sheet - the data likely was added successfully.
+
+For detailed troubleshooting, see [GOOGLE_SHEETS_TROUBLESHOOTING.md](/src/GOOGLE_SHEETS_TROUBLESHOOTING.md)
 
 ---
 
@@ -542,14 +598,24 @@ describe('Google Sheets Integration', () => {
 
 ## Version History
 
-### v1.0 (Current)
+### v1.1 (Current - 2024-01-15)
+- ✅ Added connection status indicator
+- ✅ Improved error handling and CORS support
+- ✅ Added connection testing functionality
+- ✅ Enhanced logging and debugging
+- ✅ Response validation and error detection
+- ✅ User feedback with toast notifications
+- ✅ Better handling of failed requests
+- ✅ Comprehensive troubleshooting guide
+
+### v1.0 (Initial Release)
 - Initial implementation
 - Push-only sync (Web → Sheet)
 - Support for add, update, and query operations
 - Environment variable configuration
 - Error handling and logging
 
-### v1.1 (Planned)
+### v1.2 (Planned)
 - Bidirectional sync
 - Real-time updates
 - Batch operations

@@ -17,6 +17,8 @@ import PartnerReferralsPage from '@/components/partner/PartnerReferralsPage';
 import PartnerProfilePage from '@/components/partner/PartnerProfilePage';
 import PartnerSubmitReferralPage from '@/components/partner/PartnerSubmitReferralPage';
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
+import { initializeGoogleSheets } from '@/lib/googleSheets';
+import { GOOGLE_SHEETS_CONFIG } from '@/config/googleSheets.config';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -121,6 +123,11 @@ const router = createBrowserRouter([
 });
 
 export default function AppRouter() {
+  // Initialize Google Sheets integration on app startup
+  if (GOOGLE_SHEETS_CONFIG.enabled && GOOGLE_SHEETS_CONFIG.scriptUrl) {
+    initializeGoogleSheets(GOOGLE_SHEETS_CONFIG.scriptUrl, GOOGLE_SHEETS_CONFIG.sheetName);
+  }
+
   return (
     <MemberProvider>
       <RouterProvider router={router} />

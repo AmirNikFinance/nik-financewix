@@ -66,11 +66,12 @@ export const FIELD_MAP = {
 
 interface FormComponentProps {
   formServiceConfig: FormServiceConfig;
+  onSubmitSuccess?: (data: any) => void | Promise<void>;
 }
 
-export function FormComponent({ formServiceConfig }: FormComponentProps) {
+export function FormComponent({ formServiceConfig, onSubmitSuccess }: FormComponentProps) {
   return (
-    <Form formServiceConfig={formServiceConfig}>
+    <Form formServiceConfig={formServiceConfig} onSubmitSuccess={onSubmitSuccess}>
       <FormFields
         fieldMap={FIELD_MAP}
         rowGapClassname="gap-y-6"

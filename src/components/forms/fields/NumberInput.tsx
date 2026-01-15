@@ -66,7 +66,10 @@ const NumberInput = ({
             aria-describedby={descriptionId}
             aria-invalid={!!(required && !value)}
             aria-required={required}
-            onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => {
+              const numValue = e.target.value === "" ? undefined : Number(e.target.value);
+              onChange(numValue);
+            }}
             onBlur={() => onBlur()}
             onFocus={() => onFocus()}
           />

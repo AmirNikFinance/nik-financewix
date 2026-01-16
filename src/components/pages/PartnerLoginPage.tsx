@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
 import { useMember } from '@/integrations';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 import { SignIn } from '@/components/ui/sign-in';
 import { motion } from 'framer-motion';
-import { Briefcase, TrendingUp, Lock } from 'lucide-react';
+import { Briefcase, TrendingUp, Lock, ArrowLeft } from 'lucide-react';
 
 export default function PartnerLoginPage() {
   const { isAuthenticated } = useMember();
@@ -13,12 +12,21 @@ export default function PartnerLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary via-secondary/95 to-primary flex items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-secondary via-secondary/95 to-primary flex items-center justify-center px-6 py-12 relative">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
       </div>
+
+      {/* Back to Home Link */}
+      <Link 
+        to="/" 
+        className="absolute top-8 left-8 flex items-center gap-2 text-white hover:text-accent transition-colors duration-300 z-20"
+      >
+        <ArrowLeft className="w-5 h-5" />
+        <span className="font-paragraph">Back to Home</span>
+      </Link>
 
       <div className="relative z-10 w-full max-w-4xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -29,6 +37,19 @@ export default function PartnerLoginPage() {
             transition={{ duration: 0.6 }}
             className="text-white"
           >
+            {/* Logo */}
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mb-10"
+            >
+              <div className="font-heading text-3xl font-bold text-white">
+                NIK FINANCE
+              </div>
+              <div className="h-1 w-20 bg-accent mt-2 rounded-full" />
+            </motion.div>
+
             <div className="mb-8">
               <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6 leading-tight">
                 Partner <span className="text-accent">Portal</span>
@@ -46,7 +67,7 @@ export default function PartnerLoginPage() {
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2">Track Referrals</h3>
-                  <p className="text-gray-300">Monitor all your referrals and their status in real-time.</p>
+                  <p className="font-paragraph text-gray-300">Monitor all your referrals and their status in real-time.</p>
                 </div>
               </div>
 
@@ -56,7 +77,7 @@ export default function PartnerLoginPage() {
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2">Manage Commissions</h3>
-                  <p className="text-gray-300">View pending and paid commissions with detailed breakdowns.</p>
+                  <p className="font-paragraph text-gray-300">View pending and paid commissions with detailed breakdowns.</p>
                 </div>
               </div>
 
@@ -66,7 +87,7 @@ export default function PartnerLoginPage() {
                 </div>
                 <div>
                   <h3 className="font-heading font-bold text-lg mb-2">Secure & Private</h3>
-                  <p className="text-gray-300">Your data is encrypted and protected with industry-standard security.</p>
+                  <p className="font-paragraph text-gray-300">Your data is encrypted and protected with industry-standard security.</p>
                 </div>
               </div>
             </div>
@@ -79,10 +100,18 @@ export default function PartnerLoginPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl"
           >
-            <h2 className="font-heading text-3xl font-bold text-secondary mb-2">
+            {/* Logo in Card */}
+            <div className="text-center mb-8">
+              <div className="font-heading text-2xl font-bold text-primary mb-2">
+                NIK FINANCE
+              </div>
+              <div className="h-1 w-16 bg-accent mx-auto rounded-full" />
+            </div>
+
+            <h2 className="font-heading text-3xl font-bold text-secondary mb-2 text-center">
               Partner Login
             </h2>
-            <p className="font-paragraph text-gray-600 mb-8">
+            <p className="font-paragraph text-gray-600 mb-8 text-center">
               Sign in to access your partner dashboard
             </p>
 
@@ -95,8 +124,8 @@ export default function PartnerLoginPage() {
             <div className="mt-8 pt-8 border-t border-gray-200">
               <p className="font-paragraph text-sm text-gray-600 text-center">
                 Don't have a partner account?{' '}
-                <a href="/partner-signup" className="text-accent font-semibold hover:underline">
-                  Register here
+                <a href="/contact" className="text-accent font-semibold hover:underline">
+                  Contact us
                 </a>
               </p>
             </div>

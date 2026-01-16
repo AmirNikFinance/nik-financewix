@@ -1,7 +1,19 @@
 /**
  * Google Sheets Integration Service
- * Handles real-time syncing of referral data with Google Sheets
- * Supports bidirectional sync with proper CORS handling
+ * Connects to Google Apps Script URL: https://script.google.com/macros/s/AKfycbzis07haVEhz7AEtU3jlg1km_T_XhS2ZHp8sQMq9AmX46UEZtmXJt6zA4G5Tu_caXbC6Q/exec
+ * 
+ * Features:
+ * - pushReferralToSheet(data): Send referral data to Google Sheet
+ * - updateReferralStatusInSheet(email, status, commission, commissionStatus): Update existing referrals
+ * - formatReferralForSheet(referral, companyName, commission, commissionStatus): Format data for sheet
+ * 
+ * Google Sheet Structure:
+ * Sheet Name: 'referrals'
+ * Columns: Timestamp, Company Name, Customer Name, Email, Phone, Loan Type, Loan Amount, 
+ *          Submission Date, Status, Commission, Commission Status
+ * 
+ * All data communication uses fetch with POST method and CORS mode
+ * Includes robust error handling for network issues and CORS problems
  */
 
 export interface ReferralSheetData {
@@ -33,26 +45,37 @@ export interface GoogleSheetsConfig {
 
 let config: GoogleSheetsConfig = {
   scriptUrl: '',
-  sheetName: 'Referrals'
+  sheetName: 'referrals' // Default sheet name as specified
 };
 
 /**
  * Initialize Google Sheets configuration
  * Must be called before using any other functions
+ * 
+ * @param scriptUrl - Google Apps Script deployment URL (stored in Wix Secrets Manager as 'GOOGLE_SHEETS_URL')
+ * @param sheetName - Name of the sheet in Google Sheets (default: 'referrals')
  */
-export function initializeGoogleSheets(scriptUrl: string, sheetName = 'Referrals') {
+export function initializeGoogleSheets(scriptUrl: string, sheetName = 'referrals') {
   if (!scriptUrl) {
     console.warn('Google Sheets script URL not configured. Sheet syncing will be disabled.');
     return;
   }
   config.scriptUrl = scriptUrl;
   config.sheetName = sheetName;
-  console.log('Google Sheets initialized with URL:', scriptUrl.substring(0, 50) + '...');
+  console.log('✓ Google Sheets initialized successfully');
+  console.log('  Script URL:', scriptUrl.substring(0, 60) + '...');
+  console.log('  Sheet Name:', sheetName);
 }
 
 /**
  * Push referral data to Google Sheet
  * Adds a new row with the referral information
+ * 
+ * @param data - Referral data to push to the sheet
+ * @returns Promise<boolean> - true if successful, false otherwise
+ * 
+ * Uses POST method with CORS mode for communication
+ * Includes error handling for network issues and CORS problems
  */
 export async function pushReferralToSheet(data: ReferralSheetData): Promise<boolean> {
   if (!config.scriptUrl) {
@@ -79,7 +102,11 @@ export async function pushReferralToSheet(data: ReferralSheetData): Promise<bool
       },
     };
 
-    console.log('Pushing referral to Google Sheet:', payload);
+    console.log('📤 Pushing referral to Google Sheet:', {
+      email: data.email,
+      customerName: data.customerName,
+      loanType: data.loanType,
+    });
 
     const response = await fetch(config.scriptUrl, {
       method: 'POST',
@@ -92,21 +119,30 @@ export async function pushReferralToSheet(data: ReferralSheetData): Promise<bool
     });
 
     if (!response.ok) {
-      const errorText = await response.text().catch(() => 'Unable to read error');
-      console.warn(`Google Sheets push returned status ${response.status}: ${errorText}`);
+      const errorText = await response.text().catch(() => 'Unable to read error response');
+      console.error(`❌ Google Sheets push failed with status ${response.status}: ${errorText}`);
       return false;
     }
 
     const result = await response.json();
-    console.log('✓ Referral pushed to Google Sheet successfully:', result);
+    console.log('✓ Referral pushed to Google Sheet successfully');
     return result.success !== false;
   } catch (error) {
-    console.error('Error pushing referral to Google Sheet:', error);
-    // Still return true if it's a CORS issue (request likely succeeded)
+    console.error('❌ Error pushing referral to Google Sheet:', error);
+    
+    // Handle CORS issues gracefully
     if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-      console.log('⚠ CORS issue detected, but request was sent. Check Google Sheet manually.');
+      console.warn('⚠ CORS issue detected. Request was sent but response blocked by browser.');
+      console.warn('  Check Google Sheet manually to verify data was added.');
+      // Return true as the request likely succeeded despite CORS blocking the response
       return true;
     }
+    
+    // Handle other network errors
+    if (error instanceof Error) {
+      console.error('  Error details:', error.message);
+    }
+    
     return false;
   }
 }
@@ -114,6 +150,12 @@ export async function pushReferralToSheet(data: ReferralSheetData): Promise<bool
 /**
  * Fetch all referrals from Google Sheet for a specific company
  * Retrieves filtered rows from the sheet for real-time sync
+ * 
+ * @param companyName - Partner company name to filter referrals
+ * @returns Promise<PartnerStats> - Statistics and referral data
+ * 
+ * Uses POST method with CORS mode for communication
+ * Includes error handling and returns empty stats on failure
  */
 export async function fetchReferralsFromSheet(companyName: string): Promise<PartnerStats> {
   if (!config.scriptUrl) {
@@ -134,7 +176,7 @@ export async function fetchReferralsFromSheet(companyName: string): Promise<Part
       companyName: companyName,
     };
 
-    console.log('Fetching referrals from Google Sheet for company:', companyName);
+    console.log('📥 Fetching referrals from Google Sheet for company:', companyName);
 
     const response = await fetch(config.scriptUrl, {
       method: 'POST',
@@ -147,8 +189,8 @@ export async function fetchReferralsFromSheet(companyName: string): Promise<Part
     });
 
     if (!response.ok) {
-      const errorText = await response.text().catch(() => 'Unable to read error');
-      console.warn(`Google Sheets fetch returned status ${response.status}: ${errorText}`);
+      const errorText = await response.text().catch(() => 'Unable to read error response');
+      console.error(`❌ Google Sheets fetch failed with status ${response.status}: ${errorText}`);
       return {
         totalReferrals: 0,
         totalEarnings: 0,
@@ -159,11 +201,11 @@ export async function fetchReferralsFromSheet(companyName: string): Promise<Part
     }
 
     const result = await response.json();
-    console.log('✓ Fetched referrals from Google Sheet:', result);
+    console.log('✓ Fetched referrals from Google Sheet');
 
     // Check if the result indicates success
     if (!result.success) {
-      console.warn('Google Sheets returned unsuccessful result:', result.error || 'Unknown error');
+      console.warn('❌ Google Sheets returned unsuccessful result:', result.error || 'Unknown error');
       return {
         totalReferrals: 0,
         totalEarnings: 0,
@@ -191,7 +233,12 @@ export async function fetchReferralsFromSheet(companyName: string): Promise<Part
       referrals,
     };
   } catch (error) {
-    console.error('Error fetching referrals from Google Sheet:', error);
+    console.error('❌ Error fetching referrals from Google Sheet:', error);
+    
+    if (error instanceof Error) {
+      console.error('  Error details:', error.message);
+    }
+    
     return {
       totalReferrals: 0,
       totalEarnings: 0,
@@ -205,6 +252,15 @@ export async function fetchReferralsFromSheet(companyName: string): Promise<Part
 /**
  * Update referral status in Google Sheet
  * Updates an existing row with new status information
+ * 
+ * @param customerEmail - Email address to identify the referral (unique identifier)
+ * @param status - New status value (e.g., 'PENDING', 'APPROVED', 'REJECTED')
+ * @param commission - Commission amount (optional)
+ * @param commissionStatus - Commission status (optional, e.g., 'PENDING', 'PAID')
+ * @returns Promise<boolean> - true if successful, false otherwise
+ * 
+ * Uses POST method with CORS mode for communication
+ * Includes error handling for network issues and CORS problems
  */
 export async function updateReferralStatusInSheet(
   customerEmail: string,
@@ -229,7 +285,12 @@ export async function updateReferralStatusInSheet(
       },
     };
 
-    console.log('Updating referral status in Google Sheet:', payload);
+    console.log('📝 Updating referral status in Google Sheet:', {
+      email: customerEmail,
+      status,
+      commission,
+      commissionStatus,
+    });
 
     const response = await fetch(config.scriptUrl, {
       method: 'POST',
@@ -242,21 +303,30 @@ export async function updateReferralStatusInSheet(
     });
 
     if (!response.ok) {
-      const errorText = await response.text().catch(() => 'Unable to read error');
-      console.warn(`Google Sheets update returned status ${response.status}: ${errorText}`);
+      const errorText = await response.text().catch(() => 'Unable to read error response');
+      console.error(`❌ Google Sheets update failed with status ${response.status}: ${errorText}`);
       return false;
     }
 
     const result = await response.json();
-    console.log('✓ Referral status updated in Google Sheet:', result);
+    console.log('✓ Referral status updated in Google Sheet successfully');
     return result.success !== false;
   } catch (error) {
-    console.error('Error updating referral in Google Sheet:', error);
-    // Still return true if it's a CORS issue (request likely succeeded)
+    console.error('❌ Error updating referral in Google Sheet:', error);
+    
+    // Handle CORS issues gracefully
     if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-      console.log('⚠ CORS issue detected, but request was sent. Check Google Sheet manually.');
+      console.warn('⚠ CORS issue detected. Request was sent but response blocked by browser.');
+      console.warn('  Check Google Sheet manually to verify data was updated.');
+      // Return true as the request likely succeeded despite CORS blocking the response
       return true;
     }
+    
+    // Handle other network errors
+    if (error instanceof Error) {
+      console.error('  Error details:', error.message);
+    }
+    
     return false;
   }
 }
@@ -264,6 +334,10 @@ export async function updateReferralStatusInSheet(
 /**
  * Sync referral data bidirectionally
  * Pushes local data and fetches updates from sheet
+ * 
+ * @param localData - Referral data to push
+ * @param companyName - Partner company name
+ * @returns Promise<PartnerStats> - Updated statistics from sheet
  */
 export async function syncReferralData(
   localData: ReferralSheetData,
@@ -285,6 +359,17 @@ export async function syncReferralData(
 /**
  * Format referral data for Google Sheets
  * Converts internal referral format to sheet format
+ * 
+ * @param referral - Referral object from CMS or form submission
+ * @param companyName - Partner company name
+ * @param commission - Commission amount (default: empty string)
+ * @param commissionStatus - Commission status (default: empty string)
+ * @returns ReferralSheetData - Formatted data ready for Google Sheets
+ * 
+ * Maps referral fields to Google Sheet columns:
+ * - Timestamp, Company Name, Customer Name, Email, Phone
+ * - Loan Type, Loan Amount, Submission Date, Status
+ * - Commission, Commission Status
  */
 export function formatReferralForSheet(
   referral: any,
@@ -311,6 +396,7 @@ export function formatReferralForSheet(
 
 /**
  * Get Google Sheets configuration
+ * Returns a copy of the current configuration
  */
 export function getGoogleSheetsConfig(): GoogleSheetsConfig {
   return { ...config };
@@ -318,6 +404,7 @@ export function getGoogleSheetsConfig(): GoogleSheetsConfig {
 
 /**
  * Check if Google Sheets is configured
+ * Returns true if script URL is set
  */
 export function isGoogleSheetsConfigured(): boolean {
   return !!config.scriptUrl;
@@ -326,6 +413,11 @@ export function isGoogleSheetsConfigured(): boolean {
 /**
  * Test connection to Google Sheets
  * Verifies that the script URL is accessible and configured correctly
+ * 
+ * @returns Promise with success status, message, and optional details
+ * 
+ * Uses POST method with CORS mode for communication
+ * Includes error handling for network issues and CORS problems
  */
 export async function testGoogleSheetsConnection(): Promise<{ success: boolean; message: string; details?: any }> {
   if (!config.scriptUrl) {
@@ -336,7 +428,7 @@ export async function testGoogleSheetsConnection(): Promise<{ success: boolean; 
   }
 
   try {
-    console.log('Testing Google Sheets connection...');
+    console.log('🔍 Testing Google Sheets connection...');
     
     const payload = {
       action: 'test',
@@ -362,7 +454,7 @@ export async function testGoogleSheetsConnection(): Promise<{ success: boolean; 
     const result = await response.json();
     
     if (result.success) {
-      console.log('✓ Google Sheets connection test successful:', result);
+      console.log('✓ Google Sheets connection test successful');
       return {
         success: true,
         message: 'Google Sheets connection is working correctly',
@@ -377,7 +469,7 @@ export async function testGoogleSheetsConnection(): Promise<{ success: boolean; 
       };
     }
   } catch (error) {
-    console.error('Error testing Google Sheets connection:', error);
+    console.error('❌ Error testing Google Sheets connection:', error);
     
     // Check if it's a CORS issue
     if (error instanceof TypeError && error.message.includes('Failed to fetch')) {

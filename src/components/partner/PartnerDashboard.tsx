@@ -132,6 +132,9 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
   let approvedReferrals = 0;
   let pendingReferrals = 0;
   let displayReferrals = referrals;
+  let displayCommissions = commissions;
+  let pendingCommissions = 0;
+  let paidCommissions = 0;
 
   if (useGoogleSheetData && googleSheetStats) {
     // Use Google Sheet data as source of truth
@@ -151,16 +154,34 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
       referralStatus: sheetData.status as any,
       submissionDate: sheetData.submissionDate,
     })) as Referrals[];
+
+    // Convert Google Sheet commission data to ReferralCommissions format
+    displayCommissions = googleSheetStats.referrals
+      .filter(sheetData => sheetData.commission && parseFloat(sheetData.commission) > 0)
+      .map((sheetData, index) => ({
+        _id: `gs-comm-${index}`,
+        commissionReference: `${sheetData.customerName} - ${sheetData.loanType}`,
+        amount: parseFloat(sheetData.commission) || 0,
+        status: sheetData.commissionStatus || 'PENDING',
+        dateEarned: sheetData.submissionDate,
+        currency: 'AUD',
+      })) as ReferralCommissions[];
+
+    // Calculate commission totals from Google Sheet data
+    pendingCommissions = displayCommissions.filter(c => c.status === 'PENDING').reduce((sum, c) => sum + (c.amount || 0), 0);
+    paidCommissions = displayCommissions.filter(c => c.status === 'PAID').reduce((sum, c) => sum + (c.amount || 0), 0);
   } else {
     // Use CMS data
     totalReferrals = referrals.length;
     approvedReferrals = referrals.filter(r => r.referralStatus === 'APPROVED').length;
     pendingReferrals = referrals.filter(r => r.referralStatus === 'PENDING').length;
     displayReferrals = referrals;
+    displayCommissions = commissions;
+    
+    // Calculate commission totals from CMS data
+    pendingCommissions = commissions.filter(c => c.status === 'PENDING').reduce((sum, c) => sum + (c.amount || 0), 0);
+    paidCommissions = commissions.filter(c => c.status === 'PAID').reduce((sum, c) => sum + (c.amount || 0), 0);
   }
-
-  const pendingCommissions = commissions.filter(c => c.status === 'PENDING').reduce((sum, c) => sum + (c.amount || 0), 0);
-  const paidCommissions = commissions.filter(c => c.status === 'PAID').reduce((sum, c) => sum + (c.amount || 0), 0);
 
   const StatCard = ({ icon: Icon, label, value, subtext, color }: any) => (
     <motion.div
@@ -241,15 +262,15 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
           <StatCard
             icon={Clock}
             label="Pending Commissions"
-            value={`$${pendingCommissions.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
-            subtext={`${commissions.filter(c => c.status === 'PENDING').length} pending`}
+            value={`${pendingCommissions.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+            subtext={`${displayCommissions.filter(c => c.status === 'PENDING').length} pending`}
             color="bg-yellow-100 text-yellow-600"
           />
           <StatCard
             icon={CheckCircle}
             label="Paid Commissions"
-            value={`$${paidCommissions.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
-            subtext={`${commissions.filter(c => c.status === 'PAID').length} paid`}
+            value={`${paidCommissions.toLocaleString('en-AU', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+            subtext={`${displayCommissions.filter(c => c.status === 'PAID').length} paid`}
             color="bg-green-100 text-green-600"
           />
           <StatCard
@@ -295,7 +316,7 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
             <div className="text-center py-12">
               <p className="text-gray-500">Loading...</p>
             </div>
-          ) : commissions.length === 0 ? (
+          ) : displayCommissions.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500">No commissions yet</p>
             </div>
@@ -312,7 +333,7 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
                   </tr>
                 </thead>
                 <tbody>
-                  {commissions.slice(0, 5).map((commission) => (
+                  {displayCommissions.slice(0, 5).map((commission) => (
                     <tr key={commission._id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                       <td className="py-4 px-4 font-paragraph text-secondary">{commission.commissionReference}</td>
                       <td className="py-4 px-4 font-paragraph font-semibold text-secondary">

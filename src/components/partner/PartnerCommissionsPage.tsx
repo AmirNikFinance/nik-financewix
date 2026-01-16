@@ -1,33 +1,158 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Filter, DollarSign } from 'lucide-react';
-import { ReferralCommissions } from '@/entities';
-import { BaseCrudService } from '@/integrations';
+import { Download, Filter, DollarSign, RefreshCw, Wifi, WifiOff } from 'lucide-react';
+import { ReferralCommissions, ReferralPartners } from '@/entities';
+import { BaseCrudService, useMember } from '@/integrations';
 import { Button } from '@/components/ui/button';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
+import { fetchReferralsFromSheet, isGoogleSheetsConfigured, testGoogleSheetsConnection, PartnerStats } from '@/lib/googleSheets';
+import { useToast } from '@/hooks/use-toast';
 
 export default function PartnerCommissionsPage() {
+  const { member } = useMember();
+  const { toast } = useToast();
   const [commissions, setCommissions] = useState<ReferralCommissions[]>([]);
   const [filteredCommissions, setFilteredCommissions] = useState<ReferralCommissions[]>([]);
+  const [googleSheetStats, setGoogleSheetStats] = useState<PartnerStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'PENDING' | 'PAID'>('ALL');
+  const [useGoogleSheetData, setUseGoogleSheetData] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('testing');
+  const [partnerProfile, setPartnerProfile] = useState<ReferralPartners | null>(null);
 
+  // Test Google Sheets connection on mount
   useEffect(() => {
-    const fetchCommissions = async () => {
-      try {
-        const { items } = await BaseCrudService.getAll<ReferralCommissions>('commissions');
-        setCommissions(items);
-        filterCommissions(items, 'ALL');
-      } catch (error) {
-        console.error('Error fetching commissions:', error);
-      } finally {
-        setLoading(false);
+    const testConnection = async () => {
+      if (!isGoogleSheetsConfigured()) {
+        setConnectionStatus('disconnected');
+        return;
+      }
+
+      setConnectionStatus('testing');
+      const result = await testGoogleSheetsConnection();
+      
+      if (result.success) {
+        setConnectionStatus('connected');
+        console.log('✓ Google Sheets connection verified');
+      } else {
+        setConnectionStatus('disconnected');
+        console.warn('✗ Google Sheets connection failed:', result.message);
       }
     };
 
-    fetchCommissions();
+    testConnection();
   }, []);
+
+  // Auto-refresh data from Google Sheets every 30 seconds when connected
+  useEffect(() => {
+    if (connectionStatus !== 'connected' || !isGoogleSheetsConfigured() || !partnerProfile) {
+      return;
+    }
+
+    // Set up auto-refresh interval
+    const intervalId = setInterval(() => {
+      console.log('🔄 Auto-refreshing commissions data from Google Sheets...');
+      fetchCommissions(true);
+    }, 30000); // 30 seconds
+
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, [connectionStatus, partnerProfile]);
+
+  // Fetch partner profile
+  useEffect(() => {
+    const fetchPartnerProfile = async () => {
+      if (!member?._id) return;
+
+      try {
+        const { items } = await BaseCrudService.getAll<ReferralPartners>('partners');
+        const profile = items.find(p => p._id === member._id);
+        if (profile) {
+          setPartnerProfile(profile);
+        }
+      } catch (error) {
+        console.error('Error fetching partner profile:', error);
+      }
+    };
+
+    fetchPartnerProfile();
+  }, [member?._id]);
+
+  // Fetch commissions from both CMS and Google Sheets
+  const fetchCommissions = async (isRefresh = false) => {
+    if (isRefresh) {
+      setRefreshing(true);
+    } else {
+      setLoading(true);
+    }
+
+    try {
+      // Fetch from CMS
+      const { items } = await BaseCrudService.getAll<ReferralCommissions>('commissions');
+      setCommissions(items);
+
+      // Fetch from Google Sheets if configured and connected
+      if (isGoogleSheetsConfigured() && connectionStatus === 'connected' && partnerProfile?.companyName) {
+        console.log('Fetching commissions from Google Sheets for company:', partnerProfile.companyName);
+        const stats = await fetchReferralsFromSheet(partnerProfile.companyName);
+        setGoogleSheetStats(stats);
+        
+        // If we have Google Sheet data, use it as the source of truth
+        if (stats.referrals.length > 0) {
+          setUseGoogleSheetData(true);
+          
+          // Convert Google Sheet data to ReferralCommissions format
+          const sheetCommissions = stats.referrals
+            .filter(sheetData => sheetData.commission && parseFloat(sheetData.commission) > 0)
+            .map((sheetData, index) => ({
+              _id: `gs-comm-${index}`,
+              commissionReference: `${sheetData.customerName} - ${sheetData.loanType}`,
+              amount: parseFloat(sheetData.commission) || 0,
+              status: sheetData.commissionStatus || 'PENDING',
+              dateEarned: sheetData.submissionDate,
+              currency: 'AUD',
+            })) as ReferralCommissions[];
+          
+          filterCommissions(sheetCommissions, statusFilter);
+          
+          if (isRefresh) {
+            toast({
+              title: 'Data Refreshed',
+              description: `Synced ${sheetCommissions.length} commissions from Google Sheets`,
+              variant: 'default',
+            });
+          }
+        } else {
+          setUseGoogleSheetData(false);
+          filterCommissions(items, statusFilter);
+        }
+      } else {
+        setUseGoogleSheetData(false);
+        filterCommissions(items, statusFilter);
+      }
+    } catch (error) {
+      console.error('Error fetching commissions:', error);
+      
+      if (isRefresh) {
+        toast({
+          title: 'Refresh Failed',
+          description: 'Unable to fetch latest data. Please try again.',
+          variant: 'destructive',
+        });
+      }
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    if (connectionStatus !== 'testing' && partnerProfile) {
+      fetchCommissions();
+    }
+  }, [connectionStatus, partnerProfile]);
 
   const filterCommissions = (items: ReferralCommissions[], status: 'ALL' | 'PENDING' | 'PAID') => {
     if (status === 'ALL') {
@@ -74,14 +199,44 @@ export default function PartnerCommissionsPage() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
+          className="mb-12 flex justify-between items-start"
         >
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-secondary mb-2">
-            Commission History
-          </h1>
-          <p className="font-paragraph text-lg text-gray-600">
-            Track all your referral commissions and payouts
-          </p>
+          <div>
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-secondary mb-2">
+              Commission History
+            </h1>
+            <p className="font-paragraph text-lg text-gray-600">
+              Track all your referral commissions and payouts
+            </p>
+            <div className="flex items-center gap-4 mt-3">
+              {connectionStatus === 'connected' && (
+                <div className="flex items-center gap-2 text-accent">
+                  <Wifi className="w-4 h-4" />
+                  <span className="font-paragraph text-sm">Google Sheets Connected</span>
+                </div>
+              )}
+              {connectionStatus === 'disconnected' && (
+                <div className="flex items-center gap-2 text-gray-500">
+                  <WifiOff className="w-4 h-4" />
+                  <span className="font-paragraph text-sm">Google Sheets Offline</span>
+                </div>
+              )}
+              {useGoogleSheetData && (
+                <div className="flex items-center gap-2 text-accent">
+                  <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
+                </div>
+              )}
+            </div>
+          </div>
+          <Button
+            onClick={() => fetchCommissions(true)}
+            disabled={refreshing}
+            variant="outline"
+            className="flex items-center gap-2"
+          >
+            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+            {refreshing ? 'Refreshing...' : 'Refresh'}
+          </Button>
         </motion.div>
 
         {/* Summary Cards */}

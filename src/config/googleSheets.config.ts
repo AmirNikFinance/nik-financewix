@@ -9,16 +9,16 @@
 export const GOOGLE_SHEETS_CONFIG = {
   // Google Apps Script deployment URL
   // This is the production deployment URL for the referral management script
-  scriptUrl: import.meta.env.VITE_GOOGLE_SHEETS_URL || 'https://script.google.com/macros/s/AKfycbzis07haVEhz7AEtU3jlg1km_T_XhS2ZHp8sQMq9AmX46UEZtmXJt6zA4G5Tu_caXbC6Q/exec',
+  scriptUrl: import.meta.env.VITE_GOOGLE_SHEETS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbzis07haVEhz7AEtU3jlg1km_T_XhS2ZHp8sQMq9AmX46UEZtmXJt6zA4G5Tu_caXbC6Q/exec',
   
   // Sheet name (must match the sheet in your Google Sheets document)
-  sheetName: 'Referrals',
+  sheetName: import.meta.env.VITE_GOOGLE_SHEETS_SHEET_NAME || 'Referrals',
   
   // Spreadsheet ID for reference
   spreadsheetId: '13Thgmyp6UW7e8gjLPl4ySwE2c6wD0IV3KtOjlrSGLgo',
   
   // Enable/disable Google Sheets integration
-  enabled: !!import.meta.env.VITE_GOOGLE_SHEETS_URL || true,
+  enabled: import.meta.env.VITE_GOOGLE_SHEETS_ENABLED === 'true' || true,
   
   // Retry configuration
   maxRetries: 3,
@@ -36,11 +36,11 @@ export function initializeGoogleSheetsConfig() {
   if (!GOOGLE_SHEETS_CONFIG.enabled) {
     console.warn(
       'Google Sheets integration is disabled. ' +
-      'Set VITE_GOOGLE_SHEETS_URL environment variable to enable it.'
+      'Set VITE_GOOGLE_SHEETS_ENABLED environment variable to enable it.'
     );
   } else {
     console.log('✓ Google Sheets integration is enabled');
-    console.log('  Spreadsheet ID: ' + GOOGLE_SHEETS_CONFIG.spreadsheetId);
+    console.log('  Script URL: ' + GOOGLE_SHEETS_CONFIG.scriptUrl);
     console.log('  Sheet Name: ' + GOOGLE_SHEETS_CONFIG.sheetName);
   }
 }

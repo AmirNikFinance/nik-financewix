@@ -45,6 +45,22 @@ export default function PartnerReferralsPage() {
     testConnection();
   }, []);
 
+  // Auto-refresh data from Google Sheets every 30 seconds when connected
+  useEffect(() => {
+    if (connectionStatus !== 'connected' || !isGoogleSheetsConfigured() || !partnerProfile) {
+      return;
+    }
+
+    // Set up auto-refresh interval
+    const intervalId = setInterval(() => {
+      console.log('🔄 Auto-refreshing referrals data from Google Sheets...');
+      fetchReferrals(true);
+    }, 30000); // 30 seconds
+
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, [connectionStatus, partnerProfile]);
+
   // Fetch partner profile
   useEffect(() => {
     const fetchPartnerProfile = async () => {

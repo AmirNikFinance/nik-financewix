@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useMember } from '@/integrations';
-import { Navigate } from 'react-router-dom';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import { BaseCrudService } from '@/integrations';
 import { ReferralPartners } from '@/entities';
@@ -8,12 +7,12 @@ import PartnerDashboard from '@/components/partner/PartnerDashboard';
 import PartnerProfileSetup from '@/components/partner/PartnerProfileSetup';
 
 export default function PartnerPortalPage() {
-  const { member, isAuthenticated, isLoading } = useMember();
+  const { member } = useMember();
   const [partnerProfile, setPartnerProfile] = useState<ReferralPartners | null>(null);
   const [profileLoading, setProfileLoading] = useState(true);
 
   useEffect(() => {
-    if (!isAuthenticated || !member?.loginEmail) {
+    if (!member?.loginEmail) {
       setProfileLoading(false);
       return;
     }
@@ -32,18 +31,14 @@ export default function PartnerPortalPage() {
     };
 
     fetchPartnerProfile();
-  }, [isAuthenticated, member?.loginEmail]);
+  }, [member?.loginEmail]);
 
-  if (isLoading || profileLoading) {
+  if (profileLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-light-gray">
         <LoadingSpinner />
       </div>
     );
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/partner-login" replace />;
   }
 
   // If partner exists and profile is complete, show dashboard

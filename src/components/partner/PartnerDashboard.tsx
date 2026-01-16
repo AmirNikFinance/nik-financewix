@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { DollarSign, TrendingUp, Clock, CheckCircle, ArrowRight, MoreVertical, RefreshCw, Wifi, WifiOff } from 'lucide-react';
 import { ReferralPartners, ReferralCommissions, Referrals } from '@/entities';
-import { BaseCrudService } from '@/integrations';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
@@ -15,12 +14,9 @@ interface PartnerDashboardProps {
 }
 
 export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
-  const [commissions, setCommissions] = useState<ReferralCommissions[]>([]);
-  const [referrals, setReferrals] = useState<Referrals[]>([]);
   const [googleSheetStats, setGoogleSheetStats] = useState<PartnerStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [useGoogleSheetData, setUseGoogleSheetData] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('testing');
   const { toast } = useToast();
 
@@ -63,7 +59,7 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
     return () => clearInterval(intervalId);
   }, [connectionStatus, partner.companyName]);
 
-  // Fetch data from both CMS and Google Sheets
+  // Fetch data exclusively from Google Sheets
   const fetchData = async (isRefresh = false) => {
     if (isRefresh) {
       setRefreshing(true);
@@ -72,37 +68,28 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
     }
 
     try {
-      // Fetch from CMS
-      const [commissionsData, referralsData] = await Promise.all([
-        BaseCrudService.getAll<ReferralCommissions>('commissions'),
-        BaseCrudService.getAll<Referrals>('referrals'),
-      ]);
-
-      setCommissions(commissionsData.items);
-      setReferrals(referralsData.items);
-
-      // Fetch from Google Sheets if configured and connected
+      // Fetch ONLY from Google Sheets - no CMS data
       if (isGoogleSheetsConfigured() && connectionStatus === 'connected' && partner.companyName) {
         console.log('Fetching data from Google Sheets for company:', partner.companyName);
         const stats = await fetchReferralsFromSheet(partner.companyName);
         setGoogleSheetStats(stats);
         
-        // If we have Google Sheet data, use it as the source of truth
-        if (stats.referrals.length > 0) {
-          setUseGoogleSheetData(true);
-          
-          if (isRefresh) {
-            toast({
-              title: 'Data Refreshed',
-              description: `Synced ${stats.referrals.length} referrals from Google Sheets`,
-              variant: 'default',
-            });
-          }
-        } else {
-          setUseGoogleSheetData(false);
+        if (isRefresh) {
+          toast({
+            title: 'Data Refreshed',
+            description: `Synced ${stats.referrals.length} referrals from Google Sheets`,
+            variant: 'default',
+          });
         }
       } else {
-        setUseGoogleSheetData(false);
+        // No Google Sheets connection - show empty state
+        setGoogleSheetStats({
+          totalReferrals: 0,
+          totalEarnings: 0,
+          pendingReferrals: 0,
+          approvedReferrals: 0,
+          referrals: [],
+        });
       }
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
@@ -126,18 +113,18 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
     }
   }, [partner.companyName, connectionStatus]);
 
-  // Calculate statistics - use Google Sheet data if available, otherwise use CMS data
+  // Calculate statistics - use ONLY Google Sheet data
   let totalEarnings = 0;
   let totalReferrals = 0;
   let approvedReferrals = 0;
   let pendingReferrals = 0;
-  let displayReferrals = referrals;
-  let displayCommissions = commissions;
+  let displayReferrals: Referrals[] = [];
+  let displayCommissions: ReferralCommissions[] = [];
   let pendingCommissions = 0;
   let paidCommissions = 0;
 
-  if (useGoogleSheetData && googleSheetStats) {
-    // Use Google Sheet data as source of truth
+  if (googleSheetStats) {
+    // Use Google Sheet data as the ONLY source of truth
     totalEarnings = googleSheetStats.totalEarnings;
     totalReferrals = googleSheetStats.totalReferrals;
     approvedReferrals = googleSheetStats.approvedReferrals;
@@ -170,17 +157,6 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
     // Calculate commission totals from Google Sheet data
     pendingCommissions = displayCommissions.filter(c => c.status === 'PENDING').reduce((sum, c) => sum + (c.amount || 0), 0);
     paidCommissions = displayCommissions.filter(c => c.status === 'PAID').reduce((sum, c) => sum + (c.amount || 0), 0);
-  } else {
-    // Use CMS data
-    totalReferrals = referrals.length;
-    approvedReferrals = referrals.filter(r => r.referralStatus === 'APPROVED').length;
-    pendingReferrals = referrals.filter(r => r.referralStatus === 'PENDING').length;
-    displayReferrals = referrals;
-    displayCommissions = commissions;
-    
-    // Calculate commission totals from CMS data
-    pendingCommissions = commissions.filter(c => c.status === 'PENDING').reduce((sum, c) => sum + (c.amount || 0), 0);
-    paidCommissions = commissions.filter(c => c.status === 'PAID').reduce((sum, c) => sum + (c.amount || 0), 0);
   }
 
   const StatCard = ({ icon: Icon, label, value, subtext, color }: any) => (
@@ -231,12 +207,10 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
                   <span className="font-paragraph text-sm">Google Sheets Offline</span>
                 </div>
               )}
-              {useGoogleSheetData && (
-                <div className="flex items-center gap-2 text-accent">
-                  <CheckCircle className="w-4 h-4" />
-                  <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
-                </div>
-              )}
+              <div className="flex items-center gap-2 text-accent">
+                <CheckCircle className="w-4 h-4" />
+                <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
+              </div>
             </div>
           </div>
           <Button
@@ -386,29 +360,8 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
             <div className="text-center py-12">
               <p className="text-gray-500 mb-4">No referrals yet</p>
               <p className="text-gray-400 text-sm mb-6">
-                {useGoogleSheetData 
-                  ? 'No referrals found in Google Sheets for your company'
-                  : 'Start submitting referrals to see them here'}
+                No referrals found in Google Sheets for your company
               </p>
-              {!useGoogleSheetData && (
-                <div className="bg-light-gray rounded-xl p-6 max-w-md mx-auto">
-                  <h3 className="font-heading font-bold text-secondary mb-3">Example Referral</h3>
-                  <div className="space-y-2 text-left">
-                    <div>
-                      <p className="font-paragraph text-xs text-gray-600">Customer Name</p>
-                      <p className="font-heading font-semibold text-secondary">John Smith</p>
-                    </div>
-                    <div>
-                      <p className="font-paragraph text-xs text-gray-600">Loan Type</p>
-                      <p className="font-heading font-semibold text-secondary">Home Loan</p>
-                    </div>
-                    <div>
-                      <p className="font-paragraph text-xs text-gray-600">Loan Amount</p>
-                      <p className="font-heading font-semibold text-secondary">$500,000</p>
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           ) : (
             <div className="overflow-x-auto">

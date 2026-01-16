@@ -12,13 +12,11 @@ import { useToast } from '@/hooks/use-toast';
 export default function PartnerCommissionsPage() {
   const { member } = useMember();
   const { toast } = useToast();
-  const [commissions, setCommissions] = useState<ReferralCommissions[]>([]);
   const [filteredCommissions, setFilteredCommissions] = useState<ReferralCommissions[]>([]);
   const [googleSheetStats, setGoogleSheetStats] = useState<PartnerStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'PENDING' | 'PAID'>('ALL');
-  const [useGoogleSheetData, setUseGoogleSheetData] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('testing');
   const [partnerProfile, setPartnerProfile] = useState<ReferralPartners | null>(null);
 
@@ -80,7 +78,7 @@ export default function PartnerCommissionsPage() {
     fetchPartnerProfile();
   }, [member?._id]);
 
-  // Fetch commissions from both CMS and Google Sheets
+  // Fetch commissions exclusively from Google Sheets
   const fetchCommissions = async (isRefresh = false) => {
     if (isRefresh) {
       setRefreshing(true);
@@ -89,48 +87,36 @@ export default function PartnerCommissionsPage() {
     }
 
     try {
-      // Fetch from CMS
-      const { items } = await BaseCrudService.getAll<ReferralCommissions>('commissions');
-      setCommissions(items);
-
-      // Fetch from Google Sheets if configured and connected
+      // Fetch ONLY from Google Sheets - no CMS data
       if (isGoogleSheetsConfigured() && connectionStatus === 'connected' && partnerProfile?.companyName) {
         console.log('Fetching commissions from Google Sheets for company:', partnerProfile.companyName);
         const stats = await fetchReferralsFromSheet(partnerProfile.companyName);
         setGoogleSheetStats(stats);
         
-        // If we have Google Sheet data, use it as the source of truth
-        if (stats.referrals.length > 0) {
-          setUseGoogleSheetData(true);
-          
-          // Convert Google Sheet data to ReferralCommissions format
-          const sheetCommissions = stats.referrals
-            .filter(sheetData => sheetData.commission && parseFloat(sheetData.commission) > 0)
-            .map((sheetData, index) => ({
-              _id: `gs-comm-${index}`,
-              commissionReference: `${sheetData.customerName} - ${sheetData.loanType}`,
-              amount: parseFloat(sheetData.commission) || 0,
-              status: sheetData.commissionStatus || 'PENDING',
-              dateEarned: sheetData.submissionDate,
-              currency: 'AUD',
-            })) as ReferralCommissions[];
-          
-          filterCommissions(sheetCommissions, statusFilter);
-          
-          if (isRefresh) {
-            toast({
-              title: 'Data Refreshed',
-              description: `Synced ${sheetCommissions.length} commissions from Google Sheets`,
-              variant: 'default',
-            });
-          }
-        } else {
-          setUseGoogleSheetData(false);
-          filterCommissions(items, statusFilter);
+        // Convert Google Sheet data to ReferralCommissions format
+        const sheetCommissions = stats.referrals
+          .filter(sheetData => sheetData.commission && parseFloat(sheetData.commission) > 0)
+          .map((sheetData, index) => ({
+            _id: `gs-comm-${index}`,
+            commissionReference: `${sheetData.customerName} - ${sheetData.loanType}`,
+            amount: parseFloat(sheetData.commission) || 0,
+            status: sheetData.commissionStatus || 'PENDING',
+            dateEarned: sheetData.submissionDate,
+            currency: 'AUD',
+          })) as ReferralCommissions[];
+        
+        filterCommissions(sheetCommissions, statusFilter);
+        
+        if (isRefresh) {
+          toast({
+            title: 'Data Refreshed',
+            description: `Synced ${sheetCommissions.length} commissions from Google Sheets`,
+            variant: 'default',
+          });
         }
       } else {
-        setUseGoogleSheetData(false);
-        filterCommissions(items, statusFilter);
+        // No Google Sheets connection - show empty state
+        filterCommissions([], statusFilter);
       }
     } catch (error) {
       console.error('Error fetching commissions:', error);
@@ -164,7 +150,20 @@ export default function PartnerCommissionsPage() {
 
   const handleStatusFilter = (status: 'ALL' | 'PENDING' | 'PAID') => {
     setStatusFilter(status);
-    filterCommissions(commissions, status);
+    // Re-filter from Google Sheet stats
+    if (googleSheetStats) {
+      const sheetCommissions = googleSheetStats.referrals
+        .filter(sheetData => sheetData.commission && parseFloat(sheetData.commission) > 0)
+        .map((sheetData, index) => ({
+          _id: `gs-comm-${index}`,
+          commissionReference: `${sheetData.customerName} - ${sheetData.loanType}`,
+          amount: parseFloat(sheetData.commission) || 0,
+          status: sheetData.commissionStatus || 'PENDING',
+          dateEarned: sheetData.submissionDate,
+          currency: 'AUD',
+        })) as ReferralCommissions[];
+      filterCommissions(sheetCommissions, status);
+    }
   };
 
   const totalAmount = filteredCommissions.reduce((sum, c) => sum + (c.amount || 0), 0);
@@ -221,11 +220,9 @@ export default function PartnerCommissionsPage() {
                   <span className="font-paragraph text-sm">Google Sheets Offline</span>
                 </div>
               )}
-              {useGoogleSheetData && (
-                <div className="flex items-center gap-2 text-accent">
-                  <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
-                </div>
-              )}
+              <div className="flex items-center gap-2 text-accent">
+                <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
+              </div>
             </div>
           </div>
           <Button

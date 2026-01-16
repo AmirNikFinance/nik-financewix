@@ -12,13 +12,11 @@ import { useToast } from '@/hooks/use-toast';
 export default function PartnerReferralsPage() {
   const { member } = useMember();
   const { toast } = useToast();
-  const [referrals, setReferrals] = useState<Referrals[]>([]);
   const [filteredReferrals, setFilteredReferrals] = useState<Referrals[]>([]);
   const [googleSheetStats, setGoogleSheetStats] = useState<PartnerStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'PENDING' | 'APPROVED' | 'REJECTED'>('ALL');
-  const [useGoogleSheetData, setUseGoogleSheetData] = useState(false);
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('testing');
   const [partnerProfile, setPartnerProfile] = useState<ReferralPartners | null>(null);
 
@@ -80,7 +78,7 @@ export default function PartnerReferralsPage() {
     fetchPartnerProfile();
   }, [member?._id]);
 
-  // Fetch referrals from both CMS and Google Sheets
+  // Fetch referrals exclusively from Google Sheets
   const fetchReferrals = async (isRefresh = false) => {
     if (isRefresh) {
       setRefreshing(true);
@@ -89,48 +87,36 @@ export default function PartnerReferralsPage() {
     }
 
     try {
-      // Fetch from CMS
-      const { items } = await BaseCrudService.getAll<Referrals>('referrals');
-      setReferrals(items);
-
-      // Fetch from Google Sheets if configured and connected
+      // Fetch ONLY from Google Sheets - no CMS data
       if (isGoogleSheetsConfigured() && connectionStatus === 'connected' && partnerProfile?.companyName) {
         console.log('Fetching referrals from Google Sheets for company:', partnerProfile.companyName);
         const stats = await fetchReferralsFromSheet(partnerProfile.companyName);
         setGoogleSheetStats(stats);
         
-        // If we have Google Sheet data, use it as the source of truth
-        if (stats.referrals.length > 0) {
-          setUseGoogleSheetData(true);
-          
-          // Convert Google Sheet data to Referrals format
-          const sheetReferrals = stats.referrals.map((sheetData, index) => ({
-            _id: `gs-${index}`,
-            customerName: sheetData.customerName,
-            customerEmail: sheetData.email,
-            customerPhone: sheetData.phone,
-            loanType: sheetData.loanType,
-            loanAmount: parseFloat(sheetData.loanAmount) || 0,
-            referralStatus: sheetData.status as any,
-            submissionDate: sheetData.submissionDate,
-          })) as Referrals[];
-          
-          filterReferrals(sheetReferrals, statusFilter);
-          
-          if (isRefresh) {
-            toast({
-              title: 'Data Refreshed',
-              description: `Synced ${stats.referrals.length} referrals from Google Sheets`,
-              variant: 'default',
-            });
-          }
-        } else {
-          setUseGoogleSheetData(false);
-          filterReferrals(items, statusFilter);
+        // Convert Google Sheet data to Referrals format
+        const sheetReferrals = stats.referrals.map((sheetData, index) => ({
+          _id: `gs-${index}`,
+          customerName: sheetData.customerName,
+          customerEmail: sheetData.email,
+          customerPhone: sheetData.phone,
+          loanType: sheetData.loanType,
+          loanAmount: parseFloat(sheetData.loanAmount) || 0,
+          referralStatus: sheetData.status as any,
+          submissionDate: sheetData.submissionDate,
+        })) as Referrals[];
+        
+        filterReferrals(sheetReferrals, statusFilter);
+        
+        if (isRefresh) {
+          toast({
+            title: 'Data Refreshed',
+            description: `Synced ${stats.referrals.length} referrals from Google Sheets`,
+            variant: 'default',
+          });
         }
       } else {
-        setUseGoogleSheetData(false);
-        filterReferrals(items, statusFilter);
+        // No Google Sheets connection - show empty state
+        filterReferrals([], statusFilter);
       }
     } catch (error) {
       console.error('Error fetching referrals:', error);
@@ -164,7 +150,20 @@ export default function PartnerReferralsPage() {
 
   const handleStatusFilter = (status: 'ALL' | 'PENDING' | 'APPROVED' | 'REJECTED') => {
     setStatusFilter(status);
-    filterReferrals(referrals, status);
+    // Re-filter from Google Sheet stats
+    if (googleSheetStats) {
+      const sheetReferrals = googleSheetStats.referrals.map((sheetData, index) => ({
+        _id: `gs-${index}`,
+        customerName: sheetData.customerName,
+        customerEmail: sheetData.email,
+        customerPhone: sheetData.phone,
+        loanType: sheetData.loanType,
+        loanAmount: parseFloat(sheetData.loanAmount) || 0,
+        referralStatus: sheetData.status as any,
+        submissionDate: sheetData.submissionDate,
+      })) as Referrals[];
+      filterReferrals(sheetReferrals, status);
+    }
   };
 
   const totalReferrals = filteredReferrals.length;
@@ -225,11 +224,9 @@ export default function PartnerReferralsPage() {
                   <span className="font-paragraph text-sm">Google Sheets Offline</span>
                 </div>
               )}
-              {useGoogleSheetData && (
-                <div className="flex items-center gap-2 text-accent">
-                  <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
-                </div>
-              )}
+              <div className="flex items-center gap-2 text-accent">
+                <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
+              </div>
             </div>
           </div>
           <Button

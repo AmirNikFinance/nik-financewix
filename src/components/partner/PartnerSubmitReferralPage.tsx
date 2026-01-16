@@ -43,6 +43,11 @@ export default function PartnerSubmitReferralPage() {
 
   // Handle form submission success
   const handleFormSubmitSuccess = async (formData: any) => {
+    console.log('=== FORM SUBMISSION STARTED ===');
+    console.log('Form data received:', formData);
+    console.log('Member ID:', member?._id);
+    console.log('Partner profile:', partnerProfile);
+    
     if (!member?._id) {
       console.warn('No member ID available for referral submission');
       return;
@@ -57,6 +62,8 @@ export default function PartnerSubmitReferralPage() {
       const customerPhone = formData.customerPhone || formData.phone || formData.phone_number || formData['Phone Number'] || '';
       const loanType = formData.loanType || formData.loan_type || formData['Loan Type'] || '';
       const loanAmount = parseFloat(formData.loanAmount || formData.loan_amount || formData['Loan Amount'] || '0');
+      
+      console.log('Extracted data:', { customerName, customerEmail, customerPhone, loanType, loanAmount });
 
       // Create referral entry in CMS
       const referralData: Referrals = {
@@ -72,17 +79,25 @@ export default function PartnerSubmitReferralPage() {
         _updatedDate: new Date(),
       };
 
+      console.log('Creating referral in CMS:', referralData);
       await BaseCrudService.create('referrals', referralData);
+      console.log('✓ Referral created in CMS successfully');
 
       // Push to Google Sheets if configured
       if (isGoogleSheetsConfigured() && partnerProfile?.companyName) {
+        console.log('=== GOOGLE SHEETS SYNC ===');
+        console.log('Google Sheets configured:', isGoogleSheetsConfigured());
+        console.log('Partner company name:', partnerProfile.companyName);
         console.log('Pushing referral to Google Sheets...');
+        
         const sheetData = formatReferralForSheet(
           referralData,
           partnerProfile.companyName,
           '', // commission - empty for new referrals
           ''  // commissionStatus - empty for new referrals
         );
+        
+        console.log('Sheet data formatted:', sheetData);
         
         const sheetSuccess = await pushReferralToSheet(sheetData);
         
@@ -92,14 +107,17 @@ export default function PartnerSubmitReferralPage() {
           console.warn('⚠ Referral saved to CMS but failed to sync with Google Sheets');
         }
       } else {
+        console.log('=== GOOGLE SHEETS SYNC SKIPPED ===');
         if (!isGoogleSheetsConfigured()) {
-          console.log('Google Sheets not configured - skipping sync');
+          console.log('Reason: Google Sheets not configured');
         }
         if (!partnerProfile?.companyName) {
-          console.warn('Partner company name not available - skipping Google Sheets sync');
+          console.warn('Reason: Partner company name not available');
         }
       }
 
+      console.log('=== FORM SUBMISSION COMPLETED ===');
+      
       toast({
         title: 'Referral Submitted Successfully',
         description: isGoogleSheetsConfigured() 
@@ -108,7 +126,8 @@ export default function PartnerSubmitReferralPage() {
         variant: 'default',
       });
     } catch (error) {
-      console.error('Error saving referral:', error);
+      console.error('=== FORM SUBMISSION ERROR ===');
+      console.error('Error details:', error);
       toast({
         title: 'Referral Saved',
         description: 'Your referral was submitted successfully.',

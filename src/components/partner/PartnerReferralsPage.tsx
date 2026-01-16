@@ -1,33 +1,142 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, TrendingUp } from 'lucide-react';
-import { Referrals } from '@/entities';
-import { BaseCrudService } from '@/integrations';
+import { Download, TrendingUp, RefreshCw, Wifi, WifiOff } from 'lucide-react';
+import { Referrals, ReferralPartners } from '@/entities';
+import { BaseCrudService, useMember } from '@/integrations';
 import { Button } from '@/components/ui/button';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
+import { fetchReferralsFromSheet, isGoogleSheetsConfigured, testGoogleSheetsConnection, PartnerStats } from '@/lib/googleSheets';
+import { useToast } from '@/hooks/use-toast';
 
 export default function PartnerReferralsPage() {
+  const { member } = useMember();
+  const { toast } = useToast();
   const [referrals, setReferrals] = useState<Referrals[]>([]);
   const [filteredReferrals, setFilteredReferrals] = useState<Referrals[]>([]);
+  const [googleSheetStats, setGoogleSheetStats] = useState<PartnerStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'PENDING' | 'APPROVED' | 'REJECTED'>('ALL');
+  const [useGoogleSheetData, setUseGoogleSheetData] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('testing');
+  const [partnerProfile, setPartnerProfile] = useState<ReferralPartners | null>(null);
 
+  // Test Google Sheets connection on mount
   useEffect(() => {
-    const fetchReferrals = async () => {
-      try {
-        const { items } = await BaseCrudService.getAll<Referrals>('referrals');
-        setReferrals(items);
-        filterReferrals(items, 'ALL');
-      } catch (error) {
-        console.error('Error fetching referrals:', error);
-      } finally {
-        setLoading(false);
+    const testConnection = async () => {
+      if (!isGoogleSheetsConfigured()) {
+        setConnectionStatus('disconnected');
+        return;
+      }
+
+      setConnectionStatus('testing');
+      const result = await testGoogleSheetsConnection();
+      
+      if (result.success) {
+        setConnectionStatus('connected');
+        console.log('✓ Google Sheets connection verified');
+      } else {
+        setConnectionStatus('disconnected');
+        console.warn('✗ Google Sheets connection failed:', result.message);
       }
     };
 
-    fetchReferrals();
+    testConnection();
   }, []);
+
+  // Fetch partner profile
+  useEffect(() => {
+    const fetchPartnerProfile = async () => {
+      if (!member?._id) return;
+
+      try {
+        const { items } = await BaseCrudService.getAll<ReferralPartners>('partners');
+        const profile = items.find(p => p._id === member._id);
+        if (profile) {
+          setPartnerProfile(profile);
+        }
+      } catch (error) {
+        console.error('Error fetching partner profile:', error);
+      }
+    };
+
+    fetchPartnerProfile();
+  }, [member?._id]);
+
+  // Fetch referrals from both CMS and Google Sheets
+  const fetchReferrals = async (isRefresh = false) => {
+    if (isRefresh) {
+      setRefreshing(true);
+    } else {
+      setLoading(true);
+    }
+
+    try {
+      // Fetch from CMS
+      const { items } = await BaseCrudService.getAll<Referrals>('referrals');
+      setReferrals(items);
+
+      // Fetch from Google Sheets if configured and connected
+      if (isGoogleSheetsConfigured() && connectionStatus === 'connected' && partnerProfile?.companyName) {
+        console.log('Fetching referrals from Google Sheets for company:', partnerProfile.companyName);
+        const stats = await fetchReferralsFromSheet(partnerProfile.companyName);
+        setGoogleSheetStats(stats);
+        
+        // If we have Google Sheet data, use it as the source of truth
+        if (stats.referrals.length > 0) {
+          setUseGoogleSheetData(true);
+          
+          // Convert Google Sheet data to Referrals format
+          const sheetReferrals = stats.referrals.map((sheetData, index) => ({
+            _id: `gs-${index}`,
+            customerName: sheetData.customerName,
+            customerEmail: sheetData.email,
+            customerPhone: sheetData.phone,
+            loanType: sheetData.loanType,
+            loanAmount: parseFloat(sheetData.loanAmount) || 0,
+            referralStatus: sheetData.status as any,
+            submissionDate: sheetData.submissionDate,
+          })) as Referrals[];
+          
+          filterReferrals(sheetReferrals, statusFilter);
+          
+          if (isRefresh) {
+            toast({
+              title: 'Data Refreshed',
+              description: `Synced ${stats.referrals.length} referrals from Google Sheets`,
+              variant: 'default',
+            });
+          }
+        } else {
+          setUseGoogleSheetData(false);
+          filterReferrals(items, statusFilter);
+        }
+      } else {
+        setUseGoogleSheetData(false);
+        filterReferrals(items, statusFilter);
+      }
+    } catch (error) {
+      console.error('Error fetching referrals:', error);
+      
+      if (isRefresh) {
+        toast({
+          title: 'Refresh Failed',
+          description: 'Unable to fetch latest data. Please try again.',
+          variant: 'destructive',
+        });
+      }
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  };
+
+  useEffect(() => {
+    if (connectionStatus !== 'testing' && partnerProfile) {
+      fetchReferrals();
+    }
+  }, [connectionStatus, partnerProfile]);
 
   const filterReferrals = (items: Referrals[], status: 'ALL' | 'PENDING' | 'APPROVED' | 'REJECTED') => {
     if (status === 'ALL') {
@@ -78,14 +187,44 @@ export default function PartnerReferralsPage() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
+          className="mb-12 flex justify-between items-start"
         >
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-secondary mb-2">
-            Referral History
-          </h1>
-          <p className="font-paragraph text-lg text-gray-600">
-            View all your referrals and their approval status
-          </p>
+          <div>
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-secondary mb-2">
+              Referral History
+            </h1>
+            <p className="font-paragraph text-lg text-gray-600">
+              View all your referrals and their approval status
+            </p>
+            <div className="flex items-center gap-4 mt-3">
+              {connectionStatus === 'connected' && (
+                <div className="flex items-center gap-2 text-accent">
+                  <Wifi className="w-4 h-4" />
+                  <span className="font-paragraph text-sm">Google Sheets Connected</span>
+                </div>
+              )}
+              {connectionStatus === 'disconnected' && (
+                <div className="flex items-center gap-2 text-gray-500">
+                  <WifiOff className="w-4 h-4" />
+                  <span className="font-paragraph text-sm">Google Sheets Offline</span>
+                </div>
+              )}
+              {useGoogleSheetData && (
+                <div className="flex items-center gap-2 text-accent">
+                  <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
+                </div>
+              )}
+            </div>
+          </div>
+          <Button
+            onClick={() => fetchReferrals(true)}
+            disabled={refreshing}
+            variant="outline"
+            className="flex items-center gap-2"
+          >
+            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+            {refreshing ? 'Refreshing...' : 'Refresh'}
+          </Button>
         </motion.div>
 
         {/* Summary Cards */}

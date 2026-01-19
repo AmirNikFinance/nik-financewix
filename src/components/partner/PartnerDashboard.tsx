@@ -179,7 +179,6 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
   return (
     <div className="min-h-screen bg-light-gray flex flex-col">
       <PartnerPortalHeader />
-
       <div className="flex-1 max-w-[100rem] mx-auto w-full px-6 md:px-12 py-16">
         {/* Welcome Section */}
         <motion.div
@@ -194,24 +193,7 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
             <p className="font-paragraph text-lg text-gray-600">
               Manage your referrals and track your earnings
             </p>
-            <div className="flex items-center gap-4 mt-3">
-              {connectionStatus === 'connected' && (
-                <div className="flex items-center gap-2 text-accent">
-                  <Wifi className="w-4 h-4" />
-                  <span className="font-paragraph text-sm">Google Sheets Connected</span>
-                </div>
-              )}
-              {connectionStatus === 'disconnected' && (
-                <div className="flex items-center gap-2 text-gray-500">
-                  <WifiOff className="w-4 h-4" />
-                  <span className="font-paragraph text-sm">Google Sheets Offline</span>
-                </div>
-              )}
-              <div className="flex items-center gap-2 text-accent">
-                <CheckCircle className="w-4 h-4" />
-                <span className="font-paragraph text-sm">Data synced from Google Sheets</span>
-              </div>
-            </div>
+
           </div>
           <Button
             onClick={() => fetchData(true)}
@@ -441,7 +423,6 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
           </Link>
         </motion.div>
       </div>
-
       <Footer />
     </div>
   );

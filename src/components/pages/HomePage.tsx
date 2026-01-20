@@ -269,14 +269,14 @@ export default function HomePage() {
                           <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">ANZ</div>
                           <span className="text-sm font-medium text-gray-700">Home Loan</span>
                         </div>
-                        <span className="font-bold text-secondary">{"4.89%"}</span>
+                        <CheckCircle className="w-5 h-5 text-green-600" />
                      </div>
                      <div className="flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-accent/30">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xs">NIK</div>
                           <span className="text-sm font-medium text-gray-700">{"Asset Finance"}</span>
                         </div>
-                        <span className="font-bold text-accent">{"5.75%"}</span>
+                        <CheckCircle className="w-5 h-5 text-accent" />
                      </div>
                    </div>
                    <Button className="w-full mt-6 bg-secondary text-white rounded-xl py-6">View Details</Button>

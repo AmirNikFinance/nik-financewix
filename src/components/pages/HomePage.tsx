@@ -271,7 +271,7 @@ export default function HomePage() {
                           </div>
                           <div>
                             <span className="text-sm font-bold text-secondary block">Home Loan</span>
-                            <span className="text-xs text-gray-600">From 5.99% p.a.</span>
+
                           </div>
                         </div>
                         <CheckCircle className="w-5 h-5 text-accent" />
@@ -283,7 +283,7 @@ export default function HomePage() {
                           </div>
                           <div>
                             <span className="text-sm font-bold text-secondary block">Investment Loan</span>
-                            <span className="text-xs text-gray-600">From 6.29% p.a.</span>
+
                           </div>
                         </div>
                         <CheckCircle className="w-5 h-5 text-gray-400" />
@@ -642,9 +642,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
       <Footer />
-      
       {/* Analytics Dashboard - Remove or hide in production */}
       <AnalyticsDashboard />
     </div>

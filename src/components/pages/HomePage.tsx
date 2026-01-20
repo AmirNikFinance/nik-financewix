@@ -260,26 +260,36 @@ export default function HomePage() {
 
                 <div className="absolute top-40 right-20 w-96 bg-white rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] z-20">
                    <div className="flex items-center justify-between mb-6">
-                     <h3 className="font-heading font-bold text-secondary text-lg">Loan Match</h3>
-                     <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">98% Match</span>
+                     <h3 className="font-heading font-bold text-secondary text-lg">Your Loan Options</h3>
+                     <span className="bg-accent/10 text-accent px-3 py-1 rounded-full text-xs font-bold">Available Now</span>
                    </div>
                    <div className="space-y-4">
-                     <div className="flex justify-between items-center p-3 bg-gray-50 rounded-xl">
+                     <div className="flex justify-between items-center p-4 bg-gradient-to-r from-accent/5 to-accent/10 rounded-xl border border-accent/20">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">ANZ</div>
-                          <span className="text-sm font-medium text-gray-700">Home Loan</span>
-                        </div>
-                        <CheckCircle className="w-5 h-5 text-green-600" />
-                     </div>
-                     <div className="flex justify-between items-center p-3 bg-gray-50 rounded-xl border border-accent/30">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center text-accent font-bold text-xs">NIK</div>
-                          <span className="text-sm font-medium text-gray-700">{"Asset Finance"}</span>
+                          <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
+                            <Home className="w-5 h-5 text-white" />
+                          </div>
+                          <div>
+                            <span className="text-sm font-bold text-secondary block">Home Loan</span>
+                            <span className="text-xs text-gray-600">From 5.99% p.a.</span>
+                          </div>
                         </div>
                         <CheckCircle className="w-5 h-5 text-accent" />
                      </div>
+                     <div className="flex justify-between items-center p-4 bg-gray-50 rounded-xl">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
+                            <TrendingUp className="w-5 h-5 text-white" />
+                          </div>
+                          <div>
+                            <span className="text-sm font-bold text-secondary block">Investment Loan</span>
+                            <span className="text-xs text-gray-600">From 6.29% p.a.</span>
+                          </div>
+                        </div>
+                        <CheckCircle className="w-5 h-5 text-gray-400" />
+                     </div>
                    </div>
-                   <Button className="w-full mt-6 bg-secondary text-white rounded-xl py-6">View Details</Button>
+                   <Button className="w-full mt-6 bg-secondary text-white rounded-xl py-6 hover:bg-secondary/90 transition-colors">Compare Options</Button>
                 </div>
 
                 <div className="absolute bottom-20 right-0 w-72 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 shadow-2xl transform rotate-[3deg] hover:rotate-0 transition-transform duration-500 z-10">

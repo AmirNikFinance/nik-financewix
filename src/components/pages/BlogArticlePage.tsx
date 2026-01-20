@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, User, ArrowLeft, Share2 } from 'lucide-react';
+import { Calendar, User, ArrowLeft } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { BaseCrudService } from '@/integrations';
 import { BlogArticles } from '@/entities';
+import BlogSEO from '@/components/blog/BlogSEO';
+import ReadingTime from '@/components/blog/ReadingTime';
+import TableOfContents from '@/components/blog/TableOfContents';
+import SocialShare from '@/components/blog/SocialShare';
+import NewsletterSignup from '@/components/blog/NewsletterSignup';
+import Breadcrumbs from '@/components/blog/Breadcrumbs';
+import AuthorProfile from '@/components/blog/AuthorProfile';
 
 export default function BlogArticlePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -99,6 +106,7 @@ export default function BlogArticlePage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <BlogSEO article={article} isArticlePage={true} />
       <Header />
 
       {/* Article Header */}
@@ -109,14 +117,15 @@ export default function BlogArticlePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Back Button */}
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors mb-6"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Blog
-            </Link>
+            {/* Breadcrumbs */}
+            <div className="mb-6">
+              <Breadcrumbs
+                items={[
+                  { label: 'Blog', href: '/blog' },
+                  { label: article.title || 'Article' }
+                ]}
+              />
+            </div>
 
             {/* Category Badge */}
             {article.category && (
@@ -146,6 +155,9 @@ export default function BlogArticlePage() {
                   <span>{formatDate(article.publishDate)}</span>
                 </div>
               )}
+              {article.content && (
+                <ReadingTime content={article.content} className="text-gray-300" />
+              )}
             </div>
           </motion.div>
         </div>
@@ -164,40 +176,50 @@ export default function BlogArticlePage() {
 
       {/* Article Content */}
       <section className="py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 md:px-12">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="prose prose-lg max-w-none font-paragraph text-foreground/80 space-y-6"
-          >
-            {article.content && (
-              <div className="whitespace-pre-wrap leading-relaxed text-lg">
-                {article.content}
-              </div>
-            )}
-          </motion.div>
-
-          {/* Share Section */}
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <div className="flex items-center gap-4">
-              <span className="font-heading font-semibold text-foreground">Share:</span>
-              <button
-                onClick={() => {
-                  if (navigator.share) {
-                    navigator.share({
-                      title: article.title,
-                      text: article.excerpt,
-                      url: window.location.href
-                    });
-                  }
-                }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 text-accent rounded-lg hover:bg-accent hover:text-white transition-all"
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            {/* Main Content */}
+            <div className="lg:col-span-8">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="prose prose-lg max-w-none font-paragraph text-foreground/80 space-y-6"
               >
-                <Share2 className="w-4 h-4" />
-                Share
-              </button>
+                {article.content && (
+                  <div className="whitespace-pre-wrap leading-relaxed text-lg">
+                    {article.content}
+                  </div>
+                )}
+              </motion.div>
+
+              {/* Author Profile */}
+              {article.author && (
+                <div className="mt-12">
+                  <AuthorProfile name={article.author} />
+                </div>
+              )}
+
+              {/* Social Share */}
+              <div className="mt-12 pt-8 border-t border-gray-200">
+                <SocialShare
+                  title={article.title || ''}
+                  excerpt={article.excerpt}
+                />
+              </div>
+
+              {/* Newsletter Signup */}
+              <div className="mt-12">
+                <NewsletterSignup />
+              </div>
             </div>
+
+            {/* Sidebar */}
+            <aside className="lg:col-span-4">
+              {article.content && (
+                <TableOfContents content={article.content} />
+              )}
+            </aside>
           </div>
         </div>
       </section>

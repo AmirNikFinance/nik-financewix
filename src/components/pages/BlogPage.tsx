@@ -8,6 +8,8 @@ import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { BaseCrudService } from '@/integrations';
 import { BlogArticles } from '@/entities';
+import ReadingTime from '@/components/blog/ReadingTime';
+import Breadcrumbs from '@/components/blog/Breadcrumbs';
 
 export default function BlogPage() {
   const [articles, setArticles] = useState<BlogArticles[]>([]);
@@ -15,24 +17,31 @@ export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [categories, setCategories] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const { items } = await BaseCrudService.getAll<BlogArticles>('blogarticles');
-      // Sort by publish date, newest first
-      const sorted = items.sort((a, b) => {
-        const dateA = new Date(a.publishDate || 0).getTime();
-        const dateB = new Date(b.publishDate || 0).getTime();
-        return dateB - dateA;
-      });
-      setArticles(sorted);
+      try {
+        const { items } = await BaseCrudService.getAll<BlogArticles>('blogarticles');
+        // Sort by publish date, newest first
+        const sorted = items.sort((a, b) => {
+          const dateA = new Date(a.publishDate || 0).getTime();
+          const dateB = new Date(b.publishDate || 0).getTime();
+          return dateB - dateA;
+        });
+        setArticles(sorted);
 
-      // Extract unique categories
-      const uniqueCategories = Array.from(
-        new Set(sorted.map(article => article.category).filter(Boolean))
-      ) as string[];
-      setCategories(['All', ...uniqueCategories]);
-      setFilteredArticles(sorted);
+        // Extract unique categories
+        const uniqueCategories = Array.from(
+          new Set(sorted.map(article => article.category).filter(Boolean))
+        ) as string[];
+        setCategories(['All', ...uniqueCategories]);
+        setFilteredArticles(sorted);
+      } catch (error) {
+        console.error('Error fetching articles:', error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchArticles();
@@ -81,11 +90,12 @@ export default function BlogPage() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
+            <Breadcrumbs items={[{ label: 'Blog' }]} />
             <h1 className="font-heading text-5xl md:text-6xl font-bold mb-6">
               Financial Insights & Tips
             </h1>
             <p className="font-paragraph text-xl text-gray-300 max-w-2xl mx-auto">
-              Expert advice on loans, borrowing, and financial planning to help you make informed decisions.
+              Expert advice on home loans, car finance, business loans, and more. Updated daily with the latest tips and insights.
             </p>
           </motion.div>
         </div>
@@ -129,8 +139,8 @@ export default function BlogPage() {
 
       {/* Articles Grid */}
       <section className="py-20 md:py-32">
-        <div className="max-w-[100rem] mx-auto px-6 md:px-12">
-          {filteredArticles.length > 0 ? (
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12 min-h-[600px]">
+          {isLoading ? null : filteredArticles.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredArticles.map((article, index) => (
                 <motion.div
@@ -188,6 +198,13 @@ export default function BlogPage() {
                             </div>
                           )}
                         </div>
+
+                        {/* Reading Time */}
+                        {article.content && (
+                          <div className="mb-4">
+                            <ReadingTime content={article.content} />
+                          </div>
+                        )}
 
                         {/* Read More Button */}
                         <div className="flex items-center text-accent font-semibold group-hover:gap-2 transition-all">

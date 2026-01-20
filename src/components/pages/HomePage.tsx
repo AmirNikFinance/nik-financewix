@@ -306,13 +306,9 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="p-4 rounded-2xl bg-gray-50 text-secondary group-hover:bg-accent group-hover:text-white transition-colours duration-300">
+                    <div className="mb-6">
+                      <div className="p-4 rounded-2xl bg-gray-50 text-secondary group-hover:bg-accent group-hover:text-white transition-colours duration-300 inline-block">
                         {getLoanIcon(loan.loanName)}
-                      </div>
-                      <div className="text-right">
-                        <span className="block text-3xl font-bold text-accent tracking-tight">{loan.startingRate}</span>
-                        <span className="text-xs text-gray-400 uppercase tracking-wider font-medium">Starting Rate</span>
                       </div>
                     </div>
 

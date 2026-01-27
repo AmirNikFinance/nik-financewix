@@ -1,5 +1,4 @@
 import React from "react";
-import { PhoneField as PhoneFieldPrimitive } from "@wix/forms/components";
 
 const cn = (...classes: (string | undefined | null | false)[]): string => {
   return classes.filter(Boolean).join(" ");
@@ -23,7 +22,13 @@ const cn = (...classes: (string | undefined | null | false)[]): string => {
  * </PhoneField>
  * ```
  */
-const PhoneField = PhoneFieldPrimitive.Root;
+const PhoneField = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={cn("", className)} {...props} />
+  )
+);
+
+PhoneField.displayName = "PhoneField";
 
 /**
  * Label component for phone field.
@@ -37,18 +42,17 @@ const PhoneField = PhoneFieldPrimitive.Root;
  * </PhoneField.Label>
  * ```
  */
-const PhoneFieldLabel = React.forwardRef<
-  React.ElementRef<typeof PhoneFieldPrimitive.Label>,
-  React.ComponentPropsWithoutRef<typeof PhoneFieldPrimitive.Label>
->(({ className, ...props }, ref) => {
-  return (
-    <PhoneFieldPrimitive.Label
-      {...props}
-      ref={ref}
-      className={cn("text-foreground font-paragraph", className)}
-    />
-  );
-});
+const PhoneFieldLabel = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttributes<HTMLLabelElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <label
+        {...props}
+        ref={ref}
+        className={cn("text-foreground font-paragraph", className)}
+      />
+    );
+  }
+);
 
 PhoneFieldLabel.displayName = "PhoneFieldLabel";
 
@@ -65,18 +69,17 @@ PhoneFieldLabel.displayName = "PhoneFieldLabel";
  * </PhoneField.CountrySelect>
  * ```
  */
-const PhoneFieldCountrySelect = React.forwardRef<
-  React.ElementRef<typeof PhoneFieldPrimitive.CountrySelect>,
-  React.ComponentPropsWithoutRef<typeof PhoneFieldPrimitive.CountrySelect>
->(({ className, ...props }, ref) => {
-  return (
-    <PhoneFieldPrimitive.CountrySelect
-      {...props}
-      ref={ref}
-      className={cn("", className)}
-    />
-  );
-});
+const PhoneFieldCountrySelect = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        {...props}
+        ref={ref}
+        className={cn("", className)}
+      />
+    );
+  }
+);
 
 PhoneFieldCountrySelect.displayName = "PhoneFieldCountrySelect";
 
@@ -90,18 +93,17 @@ PhoneFieldCountrySelect.displayName = "PhoneFieldCountrySelect";
  * <PhoneField.CountrySelect.Button className="px-4 py-2 bg-background border border-foreground/20 rounded-lg" />
  * ```
  */
-const PhoneFieldCountrySelectButton = React.forwardRef<
-  React.ElementRef<typeof PhoneFieldPrimitive.CountrySelect.Button>,
-  React.ComponentPropsWithoutRef<typeof PhoneFieldPrimitive.CountrySelect.Button>
->(({ className, ...props }, ref) => {
-  return (
-    <PhoneFieldPrimitive.CountrySelect.Button
-      {...props}
-      ref={ref}
-      className={cn("", className)}
-    />
-  );
-});
+const PhoneFieldCountrySelectButton = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <button
+        {...props}
+        ref={ref}
+        className={cn("", className)}
+      />
+    );
+  }
+);
 
 PhoneFieldCountrySelectButton.displayName = "PhoneFieldCountrySelectButton";
 
@@ -115,18 +117,17 @@ PhoneFieldCountrySelectButton.displayName = "PhoneFieldCountrySelectButton";
  * <PhoneField.CountrySelect.SelectedValue className="flex items-center gap-2" />
  * ```
  */
-const PhoneFieldCountrySelectSelectedValue = React.forwardRef<
-  React.ElementRef<typeof PhoneFieldPrimitive.CountrySelect.SelectedValue>,
-  React.ComponentPropsWithoutRef<typeof PhoneFieldPrimitive.CountrySelect.SelectedValue>
->(({ className, ...props }, ref) => {
-  return (
-    <PhoneFieldPrimitive.CountrySelect.SelectedValue
-      {...props}
-      ref={ref}
-      className={cn("", className)}
-    />
-  );
-});
+const PhoneFieldCountrySelectSelectedValue = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <span
+        {...props}
+        ref={ref}
+        className={cn("", className)}
+      />
+    );
+  }
+);
 
 PhoneFieldCountrySelectSelectedValue.displayName = "PhoneFieldCountrySelectSelectedValue";
 
@@ -140,18 +141,17 @@ PhoneFieldCountrySelectSelectedValue.displayName = "PhoneFieldCountrySelectSelec
  * <PhoneField.CountrySelect.Options className="max-h-60 overflow-auto" />
  * ```
  */
-const PhoneFieldCountrySelectOptions = React.forwardRef<
-  React.ElementRef<typeof PhoneFieldPrimitive.CountrySelect.Options>,
-  React.ComponentPropsWithoutRef<typeof PhoneFieldPrimitive.CountrySelect.Options>
->(({ className, ...props }, ref) => {
-  return (
-    <PhoneFieldPrimitive.CountrySelect.Options
-      {...props}
-      ref={ref}
-      className={cn("", className)}
-    />
-  );
-});
+const PhoneFieldCountrySelectOptions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        {...props}
+        ref={ref}
+        className={cn("", className)}
+      />
+    );
+  }
+);
 
 PhoneFieldCountrySelectOptions.displayName = "PhoneFieldCountrySelectOptions";
 
@@ -165,18 +165,17 @@ PhoneFieldCountrySelectOptions.displayName = "PhoneFieldCountrySelectOptions";
  * <PhoneField.CountrySelect.Option className="px-4 py-2 hover:bg-primary" />
  * ```
  */
-const PhoneFieldCountrySelectOption = React.forwardRef<
-  React.ElementRef<typeof PhoneFieldPrimitive.CountrySelect.Option>,
-  React.ComponentPropsWithoutRef<typeof PhoneFieldPrimitive.CountrySelect.Option>
->(({ className, ...props }, ref) => {
-  return (
-    <PhoneFieldPrimitive.CountrySelect.Option
-      {...props}
-      ref={ref}
-      className={cn("", className)}
-    />
-  );
-});
+const PhoneFieldCountrySelectOption = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        {...props}
+        ref={ref}
+        className={cn("", className)}
+      />
+    );
+  }
+);
 
 PhoneFieldCountrySelectOption.displayName = "PhoneFieldCountrySelectOption";
 
@@ -203,18 +202,17 @@ const PhoneFieldCountrySelectWithSubComponents = Object.assign(
  * <PhoneField.Input className="flex-1 px-4 py-2 bg-background border border-foreground/20 rounded-lg" />
  * ```
  */
-const PhoneFieldInput = React.forwardRef<
-  React.ElementRef<typeof PhoneFieldPrimitive.Input>,
-  React.ComponentPropsWithoutRef<typeof PhoneFieldPrimitive.Input>
->(({ className, ...props }, ref) => {
-  return (
-    <PhoneFieldPrimitive.Input
-      {...props}
-      ref={ref}
-      className={cn("", className)}
-    />
-  );
-});
+const PhoneFieldInput = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <input
+        {...props}
+        ref={ref}
+        className={cn("", className)}
+      />
+    );
+  }
+);
 
 PhoneFieldInput.displayName = "PhoneFieldInput";
 
@@ -228,18 +226,17 @@ PhoneFieldInput.displayName = "PhoneFieldInput";
  * <PhoneField.Error className="text-destructive text-sm font-paragraph" />
  * ```
  */
-const PhoneFieldError = React.forwardRef<
-  React.ElementRef<typeof PhoneFieldPrimitive.Error>,
-  React.ComponentPropsWithoutRef<typeof PhoneFieldPrimitive.Error>
->(({ className, ...props }, ref) => {
-  return (
-    <PhoneFieldPrimitive.Error
-      {...props}
-      ref={ref}
-      className={cn("text-destructive text-sm font-paragraph", className)}
-    />
-  );
-});
+const PhoneFieldError = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        {...props}
+        ref={ref}
+        className={cn("text-destructive text-sm font-paragraph", className)}
+      />
+    );
+  }
+);
 
 PhoneFieldError.displayName = "PhoneFieldError";
 
@@ -253,18 +250,17 @@ PhoneFieldError.displayName = "PhoneFieldError";
  * <PhoneField.Description className="text-foreground text-sm font-paragraph" />
  * ```
  */
-const PhoneFieldDescription = React.forwardRef<
-  React.ElementRef<typeof PhoneFieldPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof PhoneFieldPrimitive.Description>
->(({ className, ...props }, ref) => {
-  return (
-    <PhoneFieldPrimitive.Description
-      {...props}
-      ref={ref}
-      className={cn("text-foreground text-sm font-paragraph", className)}
-    />
-  );
-});
+const PhoneFieldDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        {...props}
+        ref={ref}
+        className={cn("text-foreground text-sm font-paragraph", className)}
+      />
+    );
+  }
+);
 
 PhoneFieldDescription.displayName = "PhoneFieldDescription";
 

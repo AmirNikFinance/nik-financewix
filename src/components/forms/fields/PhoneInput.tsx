@@ -1,5 +1,5 @@
 import React from "react";
-import { PhoneField } from "../../ui/forms/Form";
+import { PhoneField } from "../../ui/forms";
 
 const getCountryFlagEmoji = (countryCode: string): string => {
   return countryCode

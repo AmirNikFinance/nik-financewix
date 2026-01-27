@@ -11,11 +11,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LendersCarousel from '@/components/LendersCarousel';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
+import ChatBot from '@/components/ChatBot';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { BaseCrudService } from '@/integrations';
 import { LoanOptions, HowItWorksSteps, CustomerReviews, WhyChooseUsFeatures } from '@/entities';
 import { trackButtonClick } from '@/lib/analytics';
+import { useChatBot } from '@/hooks/useChatBot';
 
 // --- Utility Components for Motion & Layout ---
 
@@ -105,6 +107,9 @@ export default function HomePage() {
   const [howItWorksSteps, setHowItWorksSteps] = useState<HowItWorksSteps[]>([]);
   const [reviews, setReviews] = useState<CustomerReviews[]>([]);
   const [whyChooseUsFeatures, setWhyChooseUsFeatures] = useState<WhyChooseUsFeatures[]>([]);
+  
+  // ChatBot lead capture
+  const { captureLead } = useChatBot();
 
   // Scroll Progress for Global Bar
   const { scrollYProgress } = useScroll();
@@ -645,6 +650,9 @@ export default function HomePage() {
       <Footer />
       {/* Analytics Dashboard - Remove or hide in production */}
       <AnalyticsDashboard />
+      
+      {/* ChatBot Component */}
+      <ChatBot onLeadCapture={captureLead} />
     </div>
   );
 }

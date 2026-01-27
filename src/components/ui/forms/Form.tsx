@@ -1,5 +1,5 @@
 import React from "react";
-import { Form as FormPrimitive, PhoneField } from "@wix/forms/components";
+import { Form as FormPrimitive } from "@wix/forms/components";
 
 const cn = (...classes: (string | undefined | null | false)[]): string => {
   return classes.filter(Boolean).join(" ");
@@ -536,7 +536,6 @@ export {
   FormFieldInputWrapper as FieldInputWrapper,
   FormFieldInput as FieldInput,
   FormFieldError as FieldError,
-  PhoneField,
 };
 
 export default Form;

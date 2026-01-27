@@ -43,6 +43,12 @@ export default function Header() {
             >
               Calculators
             </Link>
+            <Link 
+              to="/lending-assistant" 
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              Lending Assistant
+            </Link>
           </nav>
 
           {/* CTA Button */}
@@ -92,6 +98,13 @@ export default function Header() {
               className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Calculators
+            </Link>
+            <Link 
+              to="/lending-assistant" 
+              onClick={() => setIsMenuOpen(false)}
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              Lending Assistant
             </Link>
             <a
               href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"

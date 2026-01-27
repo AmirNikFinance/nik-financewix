@@ -584,8 +584,7 @@ export default function HomePage() {
               {/* New Technology Logo */}
               <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
                 <Image
-                  src="https://static.wixstatic.com/media/e994c8_629c1bfe13ae43e2be28036ad6c7e1c0~mv2.png?originWidth=128&originHeight=128"
-                  alt="Technology partner logo"
+                  src="https://static.wixstatic.com/media/e994c8_a62f347360aa431f87ca513b9824ff73~mv2.png"
                   className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
                   originWidth={1024}
                   originHeight={1024} />

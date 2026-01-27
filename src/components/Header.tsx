@@ -46,9 +46,7 @@ export default function Header() {
             <Link 
               to="/lending-assistant" 
               className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              Lending Assistant
-            </Link>
+            >Finance.ai</Link>
           </nav>
 
           {/* CTA Button */}

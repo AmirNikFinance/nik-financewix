@@ -528,6 +528,81 @@ export default function HomePage() {
         </div>
       </section>
       {/* --- REVIEWS (Horizontal Scroll) --- */}
+      <section className="py-24 md:py-32 border-t border-gray-100 bg-primary">
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12">
+          {/* Header */}
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <AnimatedElement direction="up">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-secondary-foreground">
+                Technology We Use
+              </h2>
+              <p className="font-paragraph text-base md:text-lg text-background">
+                We use industry-standard software and AI tools to operate efficiently, securely, and at scale.
+              </p>
+            </AnimatedElement>
+          </div>
+
+          {/* Logo Grid */}
+          <AnimatedElement direction="up" delay={100}>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 mb-12 py-12">
+              {/* Google */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_a9094c3f263c443db0adcf3fd09aaa22~mv2.png"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+
+              {/* Anthropic */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_69fdd7a4e7c34d1b9c6062faac035597~mv2.png"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+
+              {/* Claude */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_1a4c65369c484342a3b3777f31e00493~mv2.png"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+
+              {/* Notebook LLM */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_972f5009fec3452ca6a4eb479be1b43e~mv2.png"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+
+              {/* New Technology Logo */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_629c1bfe13ae43e2be28036ad6c7e1c0~mv2.png?originWidth=128&originHeight=128"
+                  alt="Technology partner logo"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+            </div>
+          </AnimatedElement>
+
+          {/* Disclaimer */}
+          <AnimatedElement direction="up" delay={200}>
+            <div className="text-center pt-8 border-t border-gray-100">
+              <p className="font-paragraph text-xs md:text-sm text-gray-500">
+                Logos and trademarks are the property of their respective owners. Use of these tools does not imply endorsement or partnership.
+              </p>
+            </div>
+          </AnimatedElement>
+        </div>
+      </section>
       <section className="py-32 bg-secondary overflow-hidden">
         <div className="max-w-[100rem] mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
           <AnimatedElement direction="right">
@@ -578,72 +653,6 @@ export default function HomePage() {
         </div>
       </section>
       {/* --- TECHNOLOGY WE USE SECTION --- */}
-      <section className="py-24 md:py-32 bg-white border-t border-gray-100">
-        <div className="max-w-[100rem] mx-auto px-6 md:px-12">
-          {/* Header */}
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <AnimatedElement direction="up">
-              <h2 className="font-heading text-3xl md:text-4xl font-bold text-secondary mb-4">
-                Technology We Use
-              </h2>
-              <p className="font-paragraph text-base md:text-lg text-gray-600">
-                We use industry-standard software and AI tools to operate efficiently, securely, and at scale.
-              </p>
-            </AnimatedElement>
-          </div>
-
-          {/* Logo Grid */}
-          <AnimatedElement direction="up" delay={100}>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 mb-12 py-12">
-              {/* Google */}
-              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
-                <Image
-                  src="https://static.wixstatic.com/media/e994c8_395dce893f04477ebd7cd0dbd9435b75~mv2.png?originWidth=128&originHeight=128"
-                  alt="Google"
-                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
-                />
-              </div>
-
-              {/* Anthropic */}
-              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
-                <Image
-                  src="https://static.wixstatic.com/media/e994c8_06a3070d911343a7bccc95e38559559d~mv2.png?originWidth=128&originHeight=128"
-                  alt="Anthropic"
-                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
-                />
-              </div>
-
-              {/* Claude */}
-              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
-                <Image
-                  src="https://static.wixstatic.com/media/e994c8_81459e3f9e504edc88d7ab7c9d239f91~mv2.png?originWidth=128&originHeight=128"
-                  alt="Claude"
-                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
-                />
-              </div>
-
-              {/* Notebook LLM */}
-              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
-                <Image
-                  src="https://static.wixstatic.com/media/e994c8_bd17df1ba46246f1ac5f46796d6054d3~mv2.png?originWidth=128&originHeight=128"
-                  alt="Notebook LLM"
-                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
-                />
-              </div>
-            </div>
-          </AnimatedElement>
-
-          {/* Disclaimer */}
-          <AnimatedElement direction="up" delay={200}>
-            <div className="text-center pt-8 border-t border-gray-100">
-              <p className="font-paragraph text-xs md:text-sm text-gray-500">
-                Logos and trademarks are the property of their respective owners. Use of these tools does not imply endorsement or partnership.
-              </p>
-            </div>
-          </AnimatedElement>
-        </div>
-      </section>
-
       {/* --- CALENDAR BOOKING SECTION --- */}
       <section className="relative py-20 md:py-32 bg-light-gray overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent" />
@@ -717,7 +726,6 @@ export default function HomePage() {
       <Footer />
       {/* Analytics Dashboard - Remove or hide in production */}
       <AnalyticsDashboard />
-      
       {/* ChatBot Component */}
       <ChatBot onLeadCapture={captureLead} />
     </div>

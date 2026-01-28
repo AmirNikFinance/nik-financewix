@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Image } from '@/components/ui/image';
 
 const lenderLogos = [
@@ -156,101 +156,68 @@ const lenderLogos = [
 ];
 
 export default function LendersCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsPerView, setItemsPerView] = useState(6);
+  const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerView(2);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerView(4);
-      } else {
-        setItemsPerView(6);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const handlePrev = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? Math.max(0, lenderLogos.length - itemsPerView) : prev - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prev) =>
-      prev >= lenderLogos.length - itemsPerView ? 0 : prev + 1
-    );
-  };
-
-  const visibleLogos = lenderLogos.slice(currentIndex, currentIndex + itemsPerView);
+  // Duplicate logos for seamless infinite loop
+  const duplicatedLogos = [...lenderLogos, ...lenderLogos];
 
   return (
     <div className="w-full bg-light-gray rounded-3xl p-8 md:p-12">
-      <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground text-center mb-8">{"Some Of Our Trusted Lenders"}</h2>
-      <div className="relative">
-        {/* Carousel Container */}
-        <div className="flex items-center justify-center gap-4 md:gap-6">
-          {/* Previous Button */}
-          <button
-            onClick={handlePrev}
-            className="flex-shrink-0 p-2 rounded-full hover:bg-white transition-colours"
-            aria-label="Previous lenders"
-          >
-            <ChevronLeft className="w-6 h-6 text-foreground" />
-          </button>
+      <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
+        Some Of Our Trusted Lenders
+      </h2>
 
-          {/* Logos Grid */}
-          <div className="flex-1 overflow-hidden">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
-              {visibleLogos.map((logo) => (
-                <div
-                  key={logo.id}
-                  className="flex items-center justify-center bg-white rounded-2xl p-4 h-24 md:h-28 hover:shadow-md transition-shadow"
-                >
-                  <Image
-                    src={logo.url}
-                    alt={logo.name}
-                    width={120}
-                    height={80}
-                    className="max-w-full max-h-full object-contain"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Carousel Container */}
+      <div
+        className="relative w-full overflow-hidden"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {/* Gradient Overlays */}
+        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-r from-light-gray to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-20 bg-gradient-to-l from-light-gray to-transparent z-10 pointer-events-none" />
 
-          {/* Next Button */}
-          <button
-            onClick={handleNext}
-            className="flex-shrink-0 p-2 rounded-full hover:bg-white transition-colours"
-            aria-label="Next lenders"
-          >
-            <ChevronRight className="w-6 h-6 text-foreground" />
-          </button>
-        </div>
-
-        {/* Carousel Indicators */}
-        <div className="flex justify-center gap-2 mt-6">
-          {Array.from({
-            length: Math.ceil(lenderLogos.length / itemsPerView),
-          }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index * itemsPerView)}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                Math.floor(currentIndex / itemsPerView) === index
-                  ? 'bg-primary'
-                  : 'bg-foreground/20'
-              }`}
-              aria-label={`Go to carousel page ${index + 1}`}
-            />
+        {/* Infinite Scrolling Carousel */}
+        <motion.div
+          className="flex gap-4 md:gap-6"
+          animate={{ x: isHovered ? 0 : -100 }}
+          transition={{
+            duration: isHovered ? 0 : 60,
+            ease: isHovered ? 'easeInOut' : 'linear',
+            repeat: isHovered ? 0 : Infinity,
+          }}
+        >
+          {duplicatedLogos.map((logo, index) => (
+            <motion.div
+              key={`${logo.id}-${index}`}
+              className="flex-shrink-0 w-32 md:w-40 h-24 md:h-28 flex items-center justify-center bg-white rounded-2xl p-4 hover:bg-gradient-to-br hover:from-white hover:to-accent/5 transition-all duration-300"
+              whileHover={{ scale: 1.08, y: -4 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Image
+                src={logo.url}
+                alt={logo.name}
+                width={140}
+                height={100}
+                className="max-w-full max-h-full object-contain"
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+      </div>
+
+      {/* Indicator Dots */}
+      <div className="flex justify-center gap-2 mt-8">
+        {Array.from({ length: Math.ceil(lenderLogos.length / 6) }).map((_, index) => (
+          <motion.div
+            key={index}
+            className="w-2 h-2 rounded-full bg-foreground/20"
+            animate={{
+              backgroundColor: index === 0 ? '#0d4d3e' : 'rgba(51, 51, 51, 0.2)',
+            }}
+            transition={{ duration: 0.3 }}
+          />
+        ))}
       </div>
     </div>
   );

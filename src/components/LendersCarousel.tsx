@@ -182,7 +182,7 @@ export default function LendersCarousel() {
           className="flex gap-4 md:gap-6"
           animate={{ x: isHovered ? 0 : -100 }}
           transition={{
-            duration: isHovered ? 0 : 60,
+            duration: isHovered ? 0 : 20,
             ease: isHovered ? 'easeInOut' : 'linear',
             repeat: isHovered ? 0 : Infinity,
           }}

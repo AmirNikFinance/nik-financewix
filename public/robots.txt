@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block common bot crawlers that waste resources
+User-agent: PetalBot
+Disallow: /
+
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: dotbot
+Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://www.nik.finance/sitemap.xml

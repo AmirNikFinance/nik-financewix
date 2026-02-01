@@ -12,6 +12,7 @@ import Footer from '@/components/Footer';
 import LendersCarousel from '@/components/LendersCarousel';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 import ChatBot from '@/components/ChatBot';
+import SEO, { LocalBusinessSchema } from '@/components/SEO';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { BaseCrudService } from '@/integrations';
@@ -158,6 +159,14 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-accent selection:text-white overflow-clip">
+      {/* SEO Meta Tags & Schema */}
+      <SEO 
+        title="Australia's Smartest Loan Marketplace"
+        description="Get matched with 130+ lenders in minutes. Car finance, home loans, refinancing & business loans. Free service, fast approval. AI-powered loan matching."
+        keywords="car loan Australia, home loan, mortgage broker, car finance, refinance car loan, personal loan, business loan, AI finance broker"
+      />
+      <LocalBusinessSchema />
+      
       {/* Global Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-accent z-50 origin-left"

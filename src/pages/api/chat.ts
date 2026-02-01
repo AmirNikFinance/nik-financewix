@@ -5,8 +5,14 @@
 
 import type { APIRoute } from 'astro';
 
-const OPENAI_API_KEY = import.meta.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY;
-const ASSISTANT_ID = import.meta.env.OPENAI_ASSISTANT_ID || process.env.OPENAI_ASSISTANT_ID || 'asst_7A4RIGCJc2s95UYUTe4n8Es8';
+// Try multiple sources for the API key (Astro env, process env, or hardcoded fallback for testing)
+const OPENAI_API_KEY = import.meta.env.OPENAI_API_KEY 
+  || process.env.OPENAI_API_KEY 
+  || import.meta.env.PUBLIC_OPENAI_API_KEY;
+
+const ASSISTANT_ID = import.meta.env.OPENAI_ASSISTANT_ID 
+  || process.env.OPENAI_ASSISTANT_ID 
+  || 'asst_7A4RIGCJc2s95UYUTe4n8Es8';
 
 interface ChatRequest {
   message: string;

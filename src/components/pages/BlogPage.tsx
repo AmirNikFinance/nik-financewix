@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight, Search } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { BaseCrudService } from '@/integrations';
@@ -77,8 +78,50 @@ export default function BlogPage() {
     });
   };
 
+  // Add Blog listing schema
+  useEffect(() => {
+    if (articles.length === 0) return;
+    
+    const blogSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      '@id': 'https://www.nik.finance/blog#blog',
+      name: 'Nik Finance Blog',
+      description: 'Expert advice on home loans, car finance, business loans, and more. Tips and insights for Australian borrowers.',
+      url: 'https://www.nik.finance/blog',
+      publisher: {
+        '@type': 'Organization',
+        name: 'Nik Finance',
+        url: 'https://www.nik.finance'
+      },
+      blogPost: articles.slice(0, 10).map(article => ({
+        '@type': 'BlogPosting',
+        headline: article.title,
+        url: `https://www.nik.finance/blog/${article.slug}`,
+        datePublished: article.publishDate ? new Date(article.publishDate).toISOString() : undefined,
+        author: { '@type': 'Person', name: article.author || 'Nik Finance Team' }
+      }))
+    };
+
+    let scriptTag = document.getElementById('blog-listing-schema');
+    if (!scriptTag) {
+      scriptTag = document.createElement('script');
+      scriptTag.id = 'blog-listing-schema';
+      scriptTag.setAttribute('type', 'application/ld+json');
+      document.head.appendChild(scriptTag);
+    }
+    scriptTag.textContent = JSON.stringify(blogSchema);
+
+    return () => { scriptTag?.remove(); };
+  }, [articles]);
+
   return (
     <div className="min-h-screen bg-white">
+      <SEO 
+        title="Finance Blog | Expert Tips & Guides"
+        description="Expert advice on home loans, car finance, refinancing, and business loans. Get the latest tips, guides, and insights for Australian borrowers. Updated daily."
+        keywords="finance blog, home loan tips, car finance guide, refinancing advice, mortgage tips Australia"
+      />
       <Header />
 
       {/* Hero Section */}

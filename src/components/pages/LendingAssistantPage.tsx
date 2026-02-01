@@ -17,7 +17,7 @@ export default function LendingAssistantPage() {
     {
       id: '1',
       type: 'assistant',
-      content: 'Hello! I\'m your Lending Assistant. I\'m here to help you understand our loan products, answer questions about lending policies, and guide you through the application process. What would you like to know today?',
+      content: 'G\'day! 👋 I\'m Nik Finance\'s AI lending assistant, trained on real lender policies and products. I can help you understand your options for car loans, home loans, personal loans, refinancing, and business finance. What would you like to know?',
       timestamp: new Date(),
     },
   ]);
@@ -175,10 +175,10 @@ export default function LendingAssistantPage() {
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {[
-                    'What loan products do you offer?',
-                    'What are your lending requirements?',
-                    'How long does approval take?',
-                    'What is your interest rate range?',
+                    'What car loan options do you have?',
+                    'How does refinancing work?',
+                    'What do I need to apply for a home loan?',
+                    'Can you help with business finance?',
                   ].map((question, idx) => (
                     <button
                       key={idx}
@@ -202,7 +202,7 @@ export default function LendingAssistantPage() {
                   type="text"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ask about loans, rates, or our process..."
+                  placeholder="Ask about car loans, home loans, refinancing..."
                   disabled={isLoading}
                   className="flex-1 px-4 py-3 rounded-lg bg-light-gray border border-light-gray focus:border-primary focus:outline-none font-paragraph text-sm transition-colors duration-200 disabled:opacity-50"
                 />

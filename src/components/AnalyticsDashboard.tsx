@@ -70,13 +70,6 @@ export default function AnalyticsDashboard() {
   return (
     <div className="fixed bottom-4 right-4 z-40">
       {/* Toggle Button */}
-      <button
-        onClick={() => setIsVisible(!isVisible)}
-        className="bg-accent text-white rounded-full p-3 shadow-lg hover:bg-accent/90 transition-all"
-        title="Toggle Analytics Dashboard"
-      >
-        <RefreshCw className="w-5 h-5" />
-      </button>
 
       {/* Dashboard Panel */}
       {isVisible && (

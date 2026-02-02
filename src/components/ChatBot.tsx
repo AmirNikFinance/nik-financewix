@@ -139,7 +139,21 @@ export default function ChatBot({ onLeadCapture }: ChatBotProps) {
     <>
       {/* Chat Bubble Button */}
       <AnimatePresence>
-
+        {!isOpen && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setIsOpen(true)}
+            className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-primary hover:bg-primary/90 text-white rounded-full shadow-lg flex items-center justify-center transition-colors"
+            aria-label="Open chat"
+          >
+            <MessageCircle className="w-7 h-7" />
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full animate-pulse" />
+          </motion.button>
+        )}
       </AnimatePresence>
       {/* Chat Window */}
       <AnimatePresence>

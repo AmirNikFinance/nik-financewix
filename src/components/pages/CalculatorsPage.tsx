@@ -7,6 +7,7 @@ import RepaymentCalculator from '@/components/calculators/RepaymentCalculator';
 import BorrowingPowerCalculator from '@/components/calculators/BorrowingPowerCalculator';
 import OffsetCalculator from '@/components/calculators/OffsetCalculator';
 import HomeEquityCalculator from '@/components/calculators/HomeEquityCalculator';
+import PropertyEquityCalculator from '@/components/calculators/PropertyEquityCalculator';
 import LMICalculator from '@/components/calculators/LMICalculator';
 import DebtConsolidationCalculator from '@/components/calculators/DebtConsolidationCalculator';
 import StampDutyCalculator from '@/components/calculators/StampDutyCalculator';
@@ -18,6 +19,7 @@ type CalculatorType =
   | 'borrowing' 
   | 'offset' 
   | 'equity' 
+  | 'propertyequity'
   | 'lmi' 
   | 'debt' 
   | 'stampduty' 
@@ -28,6 +30,7 @@ const calculators = [
   { id: 'borrowing', name: 'Borrowing Power Calculator' },
   { id: 'offset', name: 'Offset Calculator' },
   { id: 'equity', name: 'Home Equity Calculator' },
+  { id: 'propertyequity', name: 'Property Equity Calculator' },
   { id: 'lmi', name: 'LMI Calculator' },
   { id: 'debt', name: 'Debt Consolidation Calculator' },
   { id: 'stampduty', name: 'Stamp Duty Calculator' },
@@ -47,6 +50,8 @@ export default function CalculatorsPage() {
         return <OffsetCalculator />;
       case 'equity':
         return <HomeEquityCalculator />;
+      case 'propertyequity':
+        return <PropertyEquityCalculator />;
       case 'lmi':
         return <LMICalculator />;
       case 'debt':

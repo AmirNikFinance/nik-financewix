@@ -53,7 +53,7 @@ export default function Header() {
           <a
             href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
             onClick={() => trackButtonClick('header-start-application', 'Start Application')}
-            className="hidden md:block bg-accent text-white font-paragraph font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 hover:scale-105"
+            className="hidden bg-accent text-white font-paragraph font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 hover:scale-105"
           >Start Application</a>
 
           {/* Mobile Menu Button */}

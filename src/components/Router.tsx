@@ -16,9 +16,7 @@ import PartnerCommissionsPage from '@/components/partner/PartnerCommissionsPage'
 import PartnerReferralsPage from '@/components/partner/PartnerReferralsPage';
 import PartnerProfilePage from '@/components/partner/PartnerProfilePage';
 import PartnerSubmitReferralPage from '@/components/partner/PartnerSubmitReferralPage';
-import LendingAssistantPage from '@/components/pages/LendingAssistantPage';
-import AssetChatPage from '@/components/pages/AssetChatPage';
-import ResidentialChatPage from '@/components/pages/ResidentialChatPage';
+// ... keep existing code (imports) ...
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 import { initializeGoogleSheets } from '@/lib/googleSheets';
 import { GOOGLE_SHEETS_CONFIG } from '@/config/googleSheets.config';
@@ -114,18 +112,6 @@ const router = createBrowserRouter([
             <PartnerSubmitReferralPage />
           </MemberProtectedRoute>
         ),
-      },
-      {
-        path: "lending-assistant",
-        element: <LendingAssistantPage />,
-      },
-      {
-        path: "chat/asset",
-        element: <AssetChatPage />,
-      },
-      {
-        path: "chat/residential",
-        element: <ResidentialChatPage />,
       },
       {
         path: "*",

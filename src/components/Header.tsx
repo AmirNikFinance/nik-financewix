@@ -43,10 +43,7 @@ export default function Header() {
             >
               Calculators
             </Link>
-            <Link 
-              to="/lending-assistant" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >Finance.ai</Link>
+
           </nav>
 
           {/* CTA Button */}

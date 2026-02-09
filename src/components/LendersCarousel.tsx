@@ -166,7 +166,6 @@ export default function LendersCarousel() {
       <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
         Some Of Our Trusted Lenders
       </h2>
-
       {/* Carousel Container */}
       <div
         className="relative w-full overflow-hidden"
@@ -205,20 +204,8 @@ export default function LendersCarousel() {
           ))}
         </motion.div>
       </div>
-
       {/* Indicator Dots */}
-      <div className="flex justify-center gap-2 mt-8">
-        {Array.from({ length: Math.ceil(lenderLogos.length / 6) }).map((_, index) => (
-          <motion.div
-            key={index}
-            className="w-2 h-2 rounded-full bg-foreground/20"
-            animate={{
-              backgroundColor: index === 0 ? '#0d4d3e' : 'rgba(51, 51, 51, 0.2)',
-            }}
-            transition={{ duration: 0.3 }}
-          />
-        ))}
-      </div>
+
     </div>
   );
 }

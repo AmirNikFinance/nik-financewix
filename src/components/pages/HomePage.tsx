@@ -446,80 +446,86 @@ export default function HomePage() {
             {/* Feature 1 - Large */}
             {whyChooseUsFeatures[0] && (
               <AnimatedElement className="md:col-span-2 row-span-1" delay={0}>
-                <div className="h-full bg-secondary rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden group">
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-accent/20 transition-colours duration-700" />
-                  
-                  <div className="relative z-10 flex flex-col h-full justify-between">
-                    <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 text-accent">
-                      {getFeatureIcon(whyChooseUsFeatures[0].title)}
-                    </div>
-                    <div>
-                      <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
-                        {whyChooseUsFeatures[0].title}
-                      </h3>
-                      <p className="font-paragraph text-lg text-gray-300 max-w-xl">
-                        {whyChooseUsFeatures[0].description}
-                      </p>
+                <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer" className="h-full block">
+                  <div className="h-full bg-secondary rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden group hover:shadow-2xl transition-all duration-300 cursor-pointer">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-accent/20 transition-colours duration-700" />
+                    
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                      <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 text-accent">
+                        {getFeatureIcon(whyChooseUsFeatures[0].title)}
+                      </div>
+                      <div>
+                        <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+                          {whyChooseUsFeatures[0].title}
+                        </h3>
+                        <p className="font-paragraph text-lg text-gray-300 max-w-xl">
+                          {whyChooseUsFeatures[0].description}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </a>
               </AnimatedElement>
             )}
 
             {/* Feature 2 - Tall */}
             {whyChooseUsFeatures[1] && (
               <AnimatedElement className="md:col-span-1 row-span-2" delay={200}>
-                <div className="h-full bg-light-gray rounded-[2.5rem] p-10 relative overflow-hidden group hover:bg-gray-100 transition-colours duration-300">
-                  <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white to-transparent opacity-50" />
-                  
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 text-secondary">
-                      {getFeatureIcon(whyChooseUsFeatures[1].title)}
-                    </div>
-                    <h3 className="font-heading text-2xl md:text-3xl font-bold text-secondary mb-4">
-                      {whyChooseUsFeatures[1].title}
-                    </h3>
-                    <p className="font-paragraph text-lg text-gray-600 mb-8">
-                      {whyChooseUsFeatures[1].description}
-                    </p>
-                    <div className="mt-auto w-full aspect-[4/3] rounded-2xl overflow-hidden">
-                       <Image 
-                         src="https://static.wixstatic.com/media/e994c8_86b8d8ad96e6491dafae2ed9b5ab1964~mv2.png?originWidth=576&originHeight=448" 
-                         alt="Expert Support" 
-                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                       />
+                <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer" className="h-full block">
+                  <div className="h-full bg-light-gray rounded-[2.5rem] p-10 relative overflow-hidden group hover:bg-gray-100 transition-colours duration-300 hover:shadow-2xl cursor-pointer">
+                    <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white to-transparent opacity-50" />
+                    
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 text-secondary">
+                        {getFeatureIcon(whyChooseUsFeatures[1].title)}
+                      </div>
+                      <h3 className="font-heading text-2xl md:text-3xl font-bold text-secondary mb-4">
+                        {whyChooseUsFeatures[1].title}
+                      </h3>
+                      <p className="font-paragraph text-lg text-gray-600 mb-8">
+                        {whyChooseUsFeatures[1].description}
+                      </p>
+                      <div className="mt-auto w-full aspect-[4/3] rounded-2xl overflow-hidden">
+                         <Image 
+                           src="https://static.wixstatic.com/media/e994c8_86b8d8ad96e6491dafae2ed9b5ab1964~mv2.png?originWidth=576&originHeight=448" 
+                           alt="Expert Support" 
+                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                         />
+                      </div>
                     </div>
                   </div>
-                </div>
+                </a>
               </AnimatedElement>
             )}
 
             {/* Feature 3 - Standard */}
             {whyChooseUsFeatures[2] && (
               <AnimatedElement className="md:col-span-2 row-span-1" delay={300}>
-                <div className="h-full bg-white border border-gray-100 shadow-xl rounded-[2.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 group">
-                  <div className="flex-1">
-                    <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-8 text-accent">
-                      {getFeatureIcon(whyChooseUsFeatures[2].title)}
+                <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer" className="h-full block">
+                  <div className="h-full bg-white border border-gray-100 shadow-xl rounded-[2.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 group hover:shadow-2xl transition-all duration-300 cursor-pointer">
+                    <div className="flex-1">
+                      <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-8 text-accent">
+                        {getFeatureIcon(whyChooseUsFeatures[2].title)}
+                      </div>
+                      <h3 className="font-heading text-3xl font-bold text-secondary mb-4">
+                        {whyChooseUsFeatures[2].title}
+                      </h3>
+                      <p className="font-paragraph text-lg text-gray-600">
+                        {whyChooseUsFeatures[2].description}
+                      </p>
                     </div>
-                    <h3 className="font-heading text-3xl font-bold text-secondary mb-4">
-                      {whyChooseUsFeatures[2].title}
-                    </h3>
-                    <p className="font-paragraph text-lg text-gray-600">
-                      {whyChooseUsFeatures[2].description}
-                    </p>
+                    <div className="w-full md:w-1/3 aspect-square bg-gray-50 rounded-2xl flex items-center justify-center p-6">
+                       <div className="w-full h-full relative">
+                          <div className="absolute inset-0 bg-white rounded-xl shadow-md flex items-center justify-center transform group-hover:-rotate-6 transition-transform duration-300">
+                             <Smartphone className="w-12 h-12 text-gray-300" />
+                          </div>
+                          <div className="absolute inset-0 bg-accent/5 rounded-xl shadow-sm flex items-center justify-center transform rotate-3 group-hover:rotate-6 transition-transform duration-300 backdrop-blur-sm border border-accent/20">
+                             <CheckCircle className="w-12 h-12 text-accent" />
+                          </div>
+                       </div>
+                    </div>
                   </div>
-                  <div className="w-full md:w-1/3 aspect-square bg-gray-50 rounded-2xl flex items-center justify-center p-6">
-                     <div className="w-full h-full relative">
-                        <div className="absolute inset-0 bg-white rounded-xl shadow-md flex items-center justify-center transform group-hover:-rotate-6 transition-transform duration-300">
-                           <Smartphone className="w-12 h-12 text-gray-300" />
-                        </div>
-                        <div className="absolute inset-0 bg-accent/5 rounded-xl shadow-sm flex items-center justify-center transform rotate-3 group-hover:rotate-6 transition-transform duration-300 backdrop-blur-sm border border-accent/20">
-                           <CheckCircle className="w-12 h-12 text-accent" />
-                        </div>
-                     </div>
-                  </div>
-                </div>
+                </a>
               </AnimatedElement>
             )}
           </div>

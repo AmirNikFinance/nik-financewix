@@ -339,12 +339,12 @@ export default function HomePage() {
                       {loan.shortDescription}
                     </p>
 
-                    <Link to={loan.quoteFormUrl || '/apply'} className="mt-auto">
+                    <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer" className="mt-auto">
                       <Button variant="outline" className="w-full rounded-xl py-6 border-gray-200 text-secondary font-semibold group-hover:bg-secondary group-hover:text-white group-hover:border-secondary transition-all duration-300 flex justify-between items-center px-6">
                         {loan.buttonText || 'Get Quote'}
                         <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
                       </Button>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </AnimatedElement>

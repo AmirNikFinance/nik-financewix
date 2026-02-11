@@ -22,8 +22,8 @@ export const Head = () => {
       <meta name="twitter:card" content="summary_large_image" />
       
       {/* Locale targeting - hreflang for Australia */}
-      <link rel="alternate" hrefLang="en-au" href="https://nikfinance.com.au" />
-      <link rel="alternate" hrefLang="en" href="https://nikfinance.com.au" />
+      <link rel="alternate" hrefLang="en-au" href="https://www.nik.finance" />
+      <link rel="alternate" hrefLang="en" href="https://www.nik.finance" />
       
       {/* Theme & Icons */}
       <meta name="theme-color" content="#0d4d3e" />

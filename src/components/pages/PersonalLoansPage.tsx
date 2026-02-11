@@ -60,7 +60,7 @@ export default function PersonalLoansPage() {
       <SEO 
         title="Personal Loans Australia | Fast Approval | Bad Credit OK | NIK Finance"
         description="Get a personal loan fast with competitive rates. Bad credit options available. Borrow $2,000-$50,000 for any purpose. Apply online today."
-        canonical="https://nikfinance.com.au/personal-loans"
+        canonical="https://www.nik.finance/personal-loans"
       />
       <Header />
       

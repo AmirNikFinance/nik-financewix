@@ -60,7 +60,7 @@ export default function HomeLoansPage() {
       <SEO 
         title="Home Loans Australia | Mortgage Broker | Best Rates | NIK Finance"
         description="Find the best home loan rates in Australia. Expert mortgage brokers helping first-time buyers, investors, and refinancers. Get approved fast."
-        canonical="https://nikfinance.com.au/home-loans"
+        canonical="https://www.nik.finance/home-loans"
       />
       <Header />
       

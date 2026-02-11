@@ -60,7 +60,7 @@ export default function BusinessLoansPage() {
       <SEO 
         title="Business Loans Australia | Fast Approval | SME Financing | NIK Finance"
         description="Get business financing fast. Term loans, equipment finance, working capital. Bad credit options. Borrow up to $500,000+. Apply today."
-        canonical="https://nikfinance.com.au/business-loans"
+        canonical="https://www.nik.finance/business-loans"
       />
       <Header />
       

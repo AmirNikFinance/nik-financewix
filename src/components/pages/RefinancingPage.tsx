@@ -60,7 +60,7 @@ export default function RefinancingPage() {
       <SEO 
         title="Loan Refinancing Australia | Save Money | Better Rates | NIK Finance"
         description="Refinance your home loan, car loan, or personal loan to save money. Lower rates, better terms. Get a free refinancing quote today."
-        canonical="https://nikfinance.com.au/refinancing"
+        canonical="https://www.nik.finance/refinancing"
       />
       <Header />
       

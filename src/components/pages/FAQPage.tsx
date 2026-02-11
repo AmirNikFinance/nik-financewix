@@ -191,7 +191,7 @@ export default function FAQPage() {
       <SEO 
         title="FAQ | Frequently Asked Questions | NIK Finance"
         description="Find answers to common questions about loans, finance, and NIK Finance services. Get expert guidance on home loans, car finance, and more."
-        canonical="https://nikfinance.com.au/faq"
+        canonical="https://www.nik.finance/faq"
       />
       <Header />
       

@@ -60,7 +60,7 @@ export default function BadCreditLoansPage() {
       <SEO 
         title="Bad Credit Loans Australia | Get Approved Fast | NIK Finance"
         description="Get approved for a bad credit loan even with poor credit history. Fast approval, flexible terms. Borrow $2,000-$50,000. Apply today."
-        canonical="https://nikfinance.com.au/bad-credit-loans"
+        canonical="https://www.nik.finance/bad-credit-loans"
       />
       <Header />
       

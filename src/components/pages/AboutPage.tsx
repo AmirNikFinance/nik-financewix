@@ -32,7 +32,7 @@ export default function AboutPage() {
       <SEO 
         title="About NIK Finance | Australian Mortgage & Finance Brokers"
         description="Learn about NIK Finance. We're Australia's trusted finance brokers helping thousands get approved for loans with competitive rates."
-        canonical="https://nikfinance.com.au/about"
+        canonical="https://www.nik.finance/about"
       />
       <Header />
       

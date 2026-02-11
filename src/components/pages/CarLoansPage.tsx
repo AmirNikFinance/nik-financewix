@@ -60,7 +60,7 @@ export default function CarLoansPage() {
       <SEO 
         title="Car Loans Australia | Fast & Flexible Car Finance | NIK Finance"
         description="Get approved for car loans fast. Competitive rates, flexible terms, and bad credit options. Apply online today for car finance in Australia."
-        canonical="https://nikfinance.com.au/car-loans"
+        canonical="https://www.nik.finance/car-loans"
       />
       <Header />
       

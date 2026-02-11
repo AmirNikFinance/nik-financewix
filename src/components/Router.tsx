@@ -34,6 +34,9 @@ import RefinancingPage from '@/components/pages/RefinancingPage';
 import AboutPage from '@/components/pages/AboutPage';
 import FAQPage from '@/components/pages/FAQPage';
 import NotFoundPage from '@/components/pages/NotFoundPage';
+import AssetChatPage from '@/components/pages/AssetChatPage';
+import ResidentialChatPage from '@/components/pages/ResidentialChatPage';
+import LendingAssistantPage from '@/components/pages/LendingAssistantPage';
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 import { initializeGoogleSheets } from '@/lib/googleSheets';
 import { GOOGLE_SHEETS_CONFIG } from '@/config/googleSheets.config';
@@ -149,6 +152,18 @@ const router = createBrowserRouter([
       {
         path: "faq",
         element: <FAQPage />,
+      },
+      {
+        path: "asset-chat",
+        element: <AssetChatPage />,
+      },
+      {
+        path: "residential-chat",
+        element: <ResidentialChatPage />,
+      },
+      {
+        path: "lending-assistant",
+        element: <LendingAssistantPage />,
       },
       {
         path: "partner-login",

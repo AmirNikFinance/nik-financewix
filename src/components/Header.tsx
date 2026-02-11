@@ -25,6 +25,19 @@ export default function Header() {
             >
               Home
             </Link>
+            <div className="relative group">
+              <button className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300">
+                Services
+              </button>
+              <div className="absolute left-0 mt-0 w-48 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <Link to="/car-loans" className="block px-4 py-2 text-sm text-foreground hover:bg-light-gray">Car Loans</Link>
+                <Link to="/home-loans" className="block px-4 py-2 text-sm text-foreground hover:bg-light-gray">Home Loans</Link>
+                <Link to="/personal-loans" className="block px-4 py-2 text-sm text-foreground hover:bg-light-gray">Personal Loans</Link>
+                <Link to="/business-loans" className="block px-4 py-2 text-sm text-foreground hover:bg-light-gray">Business Loans</Link>
+                <Link to="/bad-credit-loans" className="block px-4 py-2 text-sm text-foreground hover:bg-light-gray">Bad Credit Loans</Link>
+                <Link to="/refinancing" className="block px-4 py-2 text-sm text-foreground hover:bg-light-gray">Refinancing</Link>
+              </div>
+            </div>
             <Link 
               to="/blog" 
               className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
@@ -32,16 +45,28 @@ export default function Header() {
               Blog
             </Link>
             <Link 
-              to="/contact" 
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              Contact
-            </Link>
-            <Link 
               to="/calculators" 
               className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Calculators
+            </Link>
+            <Link 
+              to="/about" 
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              About
+            </Link>
+            <Link 
+              to="/faq" 
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              FAQ
+            </Link>
+            <Link 
+              to="/contact" 
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              Contact
             </Link>
 
           </nav>
@@ -73,6 +98,15 @@ export default function Header() {
             >
               Home
             </Link>
+            <div className="space-y-2">
+              <p className="font-paragraph text-base font-semibold text-foreground">Services</p>
+              <Link to="/car-loans" onClick={() => setIsMenuOpen(false)} className="block pl-4 font-paragraph text-sm text-foreground hover:text-primary">Car Loans</Link>
+              <Link to="/home-loans" onClick={() => setIsMenuOpen(false)} className="block pl-4 font-paragraph text-sm text-foreground hover:text-primary">Home Loans</Link>
+              <Link to="/personal-loans" onClick={() => setIsMenuOpen(false)} className="block pl-4 font-paragraph text-sm text-foreground hover:text-primary">Personal Loans</Link>
+              <Link to="/business-loans" onClick={() => setIsMenuOpen(false)} className="block pl-4 font-paragraph text-sm text-foreground hover:text-primary">Business Loans</Link>
+              <Link to="/bad-credit-loans" onClick={() => setIsMenuOpen(false)} className="block pl-4 font-paragraph text-sm text-foreground hover:text-primary">Bad Credit Loans</Link>
+              <Link to="/refinancing" onClick={() => setIsMenuOpen(false)} className="block pl-4 font-paragraph text-sm text-foreground hover:text-primary">Refinancing</Link>
+            </div>
             <Link 
               to="/blog" 
               onClick={() => setIsMenuOpen(false)}
@@ -81,18 +115,32 @@ export default function Header() {
               Blog
             </Link>
             <Link 
-              to="/contact" 
-              onClick={() => setIsMenuOpen(false)}
-              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
-            >
-              Contact
-            </Link>
-            <Link 
               to="/calculators" 
               onClick={() => setIsMenuOpen(false)}
               className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
             >
               Calculators
+            </Link>
+            <Link 
+              to="/about" 
+              onClick={() => setIsMenuOpen(false)}
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              About
+            </Link>
+            <Link 
+              to="/faq" 
+              onClick={() => setIsMenuOpen(false)}
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              FAQ
+            </Link>
+            <Link 
+              to="/contact" 
+              onClick={() => setIsMenuOpen(false)}
+              className="font-paragraph text-base text-foreground hover:text-primary transition-colours duration-300"
+            >
+              Contact
             </Link>
             <Link 
               to="/lending-assistant" 

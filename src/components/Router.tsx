@@ -16,6 +16,14 @@ import PartnerCommissionsPage from '@/components/partner/PartnerCommissionsPage'
 import PartnerReferralsPage from '@/components/partner/PartnerReferralsPage';
 import PartnerProfilePage from '@/components/partner/PartnerProfilePage';
 import PartnerSubmitReferralPage from '@/components/partner/PartnerSubmitReferralPage';
+import CarLoansPage from '@/components/pages/CarLoansPage';
+import HomeLoansPage from '@/components/pages/HomeLoansPage';
+import PersonalLoansPage from '@/components/pages/PersonalLoansPage';
+import BusinessLoansPage from '@/components/pages/BusinessLoansPage';
+import BadCreditLoansPage from '@/components/pages/BadCreditLoansPage';
+import RefinancingPage from '@/components/pages/RefinancingPage';
+import AboutPage from '@/components/pages/AboutPage';
+import FAQPage from '@/components/pages/FAQPage';
 // ... keep existing code (imports) ...
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 import { initializeGoogleSheets } from '@/lib/googleSheets';
@@ -68,6 +76,38 @@ const router = createBrowserRouter([
       {
         path: "car-loan-calculator",
         element: <CarLoanCalculatorPage />,
+      },
+      {
+        path: "car-loans",
+        element: <CarLoansPage />,
+      },
+      {
+        path: "home-loans",
+        element: <HomeLoansPage />,
+      },
+      {
+        path: "personal-loans",
+        element: <PersonalLoansPage />,
+      },
+      {
+        path: "business-loans",
+        element: <BusinessLoansPage />,
+      },
+      {
+        path: "bad-credit-loans",
+        element: <BadCreditLoansPage />,
+      },
+      {
+        path: "refinancing",
+        element: <RefinancingPage />,
+      },
+      {
+        path: "about",
+        element: <AboutPage />,
+      },
+      {
+        path: "faq",
+        element: <FAQPage />,
       },
       {
         path: "partner-login",

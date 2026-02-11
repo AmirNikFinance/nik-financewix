@@ -1,33 +1,37 @@
+import React, { Suspense, lazy } from 'react';
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { ScrollToTop } from '@/lib/scroll-to-top';
+import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
-import HomePage from '@/components/pages/HomePage';
-import ContactPage from '@/components/pages/ContactPage';
-import ApplyPage from '@/components/pages/ApplyPage';
-import PrivacyPolicyPage from '@/components/pages/PrivacyPolicyPage';
-import BlogPage from '@/components/pages/BlogPage';
-import BlogArticlePage from '@/components/pages/BlogArticlePage';
-import CalculatorsPage from '@/components/pages/CalculatorsPage';
-import CarLoanCalculatorPage from '@/components/pages/CarLoanCalculatorPage';
-import RepaymentCalculatorPage from '@/components/pages/RepaymentCalculatorPage';
-import BorrowingPowerCalculatorPage from '@/components/pages/BorrowingPowerCalculatorPage';
-import OffsetCalculatorPage from '@/components/pages/OffsetCalculatorPage';
-import HomeEquityCalculatorPage from '@/components/pages/HomeEquityCalculatorPage';
-import PropertyEquityCalculatorPage from '@/components/pages/PropertyEquityCalculatorPage';
-import LMICalculatorPage from '@/components/pages/LMICalculatorPage';
-import DebtConsolidationCalculatorPage from '@/components/pages/DebtConsolidationCalculatorPage';
-import StampDutyCalculatorPage from '@/components/pages/StampDutyCalculatorPage';
-import CarLoansPage from '@/components/pages/CarLoansPage';
-import HomeLoansPage from '@/components/pages/HomeLoansPage';
-import PersonalLoansPage from '@/components/pages/PersonalLoansPage';
-import BusinessLoansPage from '@/components/pages/BusinessLoansPage';
-import BadCreditLoansPage from '@/components/pages/BadCreditLoansPage';
-import RefinancingPage from '@/components/pages/RefinancingPage';
-import AboutPage from '@/components/pages/AboutPage';
-import FAQPage from '@/components/pages/FAQPage';
-import NotFoundPage from '@/components/pages/NotFoundPage';
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
+
+// Lazy load all page components for code-splitting
+const HomePage = lazy(() => import('@/components/pages/HomePage'));
+const ContactPage = lazy(() => import('@/components/pages/ContactPage'));
+const ApplyPage = lazy(() => import('@/components/pages/ApplyPage'));
+const PrivacyPolicyPage = lazy(() => import('@/components/pages/PrivacyPolicyPage'));
+const BlogPage = lazy(() => import('@/components/pages/BlogPage'));
+const BlogArticlePage = lazy(() => import('@/components/pages/BlogArticlePage'));
+const CalculatorsPage = lazy(() => import('@/components/pages/CalculatorsPage'));
+const CarLoanCalculatorPage = lazy(() => import('@/components/pages/CarLoanCalculatorPage'));
+const RepaymentCalculatorPage = lazy(() => import('@/components/pages/RepaymentCalculatorPage'));
+const BorrowingPowerCalculatorPage = lazy(() => import('@/components/pages/BorrowingPowerCalculatorPage'));
+const OffsetCalculatorPage = lazy(() => import('@/components/pages/OffsetCalculatorPage'));
+const HomeEquityCalculatorPage = lazy(() => import('@/components/pages/HomeEquityCalculatorPage'));
+const PropertyEquityCalculatorPage = lazy(() => import('@/components/pages/PropertyEquityCalculatorPage'));
+const LMICalculatorPage = lazy(() => import('@/components/pages/LMICalculatorPage'));
+const DebtConsolidationCalculatorPage = lazy(() => import('@/components/pages/DebtConsolidationCalculatorPage'));
+const StampDutyCalculatorPage = lazy(() => import('@/components/pages/StampDutyCalculatorPage'));
+const CarLoansPage = lazy(() => import('@/components/pages/CarLoansPage'));
+const HomeLoansPage = lazy(() => import('@/components/pages/HomeLoansPage'));
+const PersonalLoansPage = lazy(() => import('@/components/pages/PersonalLoansPage'));
+const BusinessLoansPage = lazy(() => import('@/components/pages/BusinessLoansPage'));
+const BadCreditLoansPage = lazy(() => import('@/components/pages/BadCreditLoansPage'));
+const RefinancingPage = lazy(() => import('@/components/pages/RefinancingPage'));
+const AboutPage = lazy(() => import('@/components/pages/AboutPage'));
+const FAQPage = lazy(() => import('@/components/pages/FAQPage'));
+const NotFoundPage = lazy(() => import('@/components/pages/NotFoundPage'));
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -47,107 +51,211 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <HomePage />
+          </Suspense>
+        ),
       },
       {
         path: "contact",
-        element: <ContactPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <ContactPage />
+          </Suspense>
+        ),
       },
       {
         path: "apply",
-        element: <ApplyPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <ApplyPage />
+          </Suspense>
+        ),
       },
       {
         path: "privacy-policy",
-        element: <PrivacyPolicyPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PrivacyPolicyPage />
+          </Suspense>
+        ),
       },
       {
         path: "blog",
-        element: <BlogPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <BlogPage />
+          </Suspense>
+        ),
       },
       {
         path: "blog/:slug",
-        element: <BlogArticlePage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <BlogArticlePage />
+          </Suspense>
+        ),
       },
       {
         path: "calculators",
-        element: <CalculatorsPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <CalculatorsPage />
+          </Suspense>
+        ),
       },
       {
         path: "car-loan-calculator",
-        element: <CarLoanCalculatorPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <CarLoanCalculatorPage />
+          </Suspense>
+        ),
       },
       {
         path: "repayment-calculator",
-        element: <RepaymentCalculatorPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <RepaymentCalculatorPage />
+          </Suspense>
+        ),
       },
       {
         path: "borrowing-power-calculator",
-        element: <BorrowingPowerCalculatorPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <BorrowingPowerCalculatorPage />
+          </Suspense>
+        ),
       },
       {
         path: "offset-calculator",
-        element: <OffsetCalculatorPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <OffsetCalculatorPage />
+          </Suspense>
+        ),
       },
       {
         path: "home-equity-calculator",
-        element: <HomeEquityCalculatorPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <HomeEquityCalculatorPage />
+          </Suspense>
+        ),
       },
       {
         path: "property-equity-calculator",
-        element: <PropertyEquityCalculatorPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PropertyEquityCalculatorPage />
+          </Suspense>
+        ),
       },
       {
         path: "lmi-calculator",
-        element: <LMICalculatorPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <LMICalculatorPage />
+          </Suspense>
+        ),
       },
       {
         path: "debt-consolidation-calculator",
-        element: <DebtConsolidationCalculatorPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <DebtConsolidationCalculatorPage />
+          </Suspense>
+        ),
       },
       {
         path: "stamp-duty-calculator",
-        element: <StampDutyCalculatorPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <StampDutyCalculatorPage />
+          </Suspense>
+        ),
       },
       {
         path: "car-loans",
-        element: <CarLoansPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <CarLoansPage />
+          </Suspense>
+        ),
       },
       {
         path: "home-loans",
-        element: <HomeLoansPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <HomeLoansPage />
+          </Suspense>
+        ),
       },
       {
         path: "personal-loans",
-        element: <PersonalLoansPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PersonalLoansPage />
+          </Suspense>
+        ),
       },
       {
         path: "business-loans",
-        element: <BusinessLoansPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <BusinessLoansPage />
+          </Suspense>
+        ),
       },
       {
         path: "bad-credit-loans",
-        element: <BadCreditLoansPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <BadCreditLoansPage />
+          </Suspense>
+        ),
       },
       {
         path: "refinancing",
-        element: <RefinancingPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <RefinancingPage />
+          </Suspense>
+        ),
       },
       {
         path: "about",
-        element: <AboutPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <AboutPage />
+          </Suspense>
+        ),
       },
       {
         path: "faq",
-        element: <FAQPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <FAQPage />
+          </Suspense>
+        ),
       },
       {
         path: "404",
-        element: <NotFoundPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <NotFoundPage />
+          </Suspense>
+        ),
       },
       {
         path: "*",
-        element: <NotFoundPage />,
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <NotFoundPage />
+          </Suspense>
+        ),
       },
     ],
   },

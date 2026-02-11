@@ -1,7 +1,7 @@
 /**
  * Google Sheets Configuration
  * 
- * Google Apps Script URL: https://script.google.com/macros/s/AKfycbzis07haVEhz7AEtU3jlg1km_T_XhS2ZHp8sQMq9AmX46UEZtmXJt6zA4G5Tu_caXbC6Q/exec
+ * Google Apps Script URL: Set via VITE_GOOGLE_SHEETS_SCRIPT_URL env var
  * Sheet Name: referrals
  * 
  * Sheet Columns:
@@ -9,15 +9,15 @@
  * - Loan Type, Loan Amount, Submission Date, Status
  * - Commission, Commission Status
  * 
- * The script URL can be stored in Wix Secrets Manager as 'GOOGLE_SHEETS_URL'
- * and accessed via environment variables for security
+ * The script URL must be stored in Wix Secrets Manager
+ * and accessed via VITE_GOOGLE_SHEETS_SCRIPT_URL environment variable
  */
 
 export const GOOGLE_SHEETS_CONFIG = {
   // Google Apps Script deployment URL
   // This URL connects to the Google Sheet for referral management
-  // Can be overridden with VITE_GOOGLE_SHEETS_SCRIPT_URL environment variable
-  scriptUrl: import.meta.env.VITE_GOOGLE_SHEETS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbzis07haVEhz7AEtU3jlg1km_T_XhS2ZHp8sQMq9AmX46UEZtmXJt6zA4G5Tu_caXbC6Q/exec',
+  // Must be set via VITE_GOOGLE_SHEETS_SCRIPT_URL environment variable
+  scriptUrl: import.meta.env.VITE_GOOGLE_SHEETS_SCRIPT_URL || '',
   
   // Sheet name (must match the sheet tab name in Google Sheets)
   // Default: 'referrals' as specified in requirements
@@ -41,6 +41,14 @@ export const GOOGLE_SHEETS_CONFIG = {
  * Logs configuration status to console for debugging
  */
 export function initializeGoogleSheetsConfig() {
+  if (!GOOGLE_SHEETS_CONFIG.scriptUrl) {
+    console.error(
+      'Google Sheets Script URL not configured. ' +
+      'Set VITE_GOOGLE_SHEETS_SCRIPT_URL environment variable.'
+    );
+    return;
+  }
+
   if (!GOOGLE_SHEETS_CONFIG.enabled) {
     console.warn(
       '⚠ Google Sheets integration is disabled. ' +

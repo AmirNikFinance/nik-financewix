@@ -12,7 +12,7 @@ const OPENAI_API_KEY = import.meta.env.OPENAI_API_KEY
 
 const ASSISTANT_ID = import.meta.env.OPENAI_ASSISTANT_ID 
   || process.env.OPENAI_ASSISTANT_ID 
-  || 'asst_7A4RIGCJc2s95UYUTe4n8Es8';
+  || '';
 
 interface ChatRequest {
   message: string;

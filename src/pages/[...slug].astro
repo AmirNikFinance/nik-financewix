@@ -22,7 +22,7 @@ const seoTagsServiceConfig = await loadSEOTagsServiceConfig({
   </head>
   <body class="w-full h-full">
     <div id="root" class="w-full h-full">
-      <AppRouter client:load />
+      <AppRouter client:only="react" />
     </div>
   </body>
 </html>

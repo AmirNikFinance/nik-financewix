@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { CheckCircle, Award, Users, Target, Heart, Zap } from 'lucide-react';
+import { CheckCircle, Award, Users, Target, Heart, Zap, Shield, Cpu, TrendingUp } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
@@ -33,6 +33,21 @@ export default function AboutPage() {
         title="About NIK Finance | Australian Mortgage & Finance Brokers"
         description="Learn about NIK Finance. We're Australia's trusted finance brokers helping thousands get approved for loans with competitive rates."
         canonical="https://www.nik.finance/about"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          'name': 'NIK Finance',
+          'url': 'https://www.nik.finance',
+          'founder': {
+            '@type': 'Person',
+            'name': 'Amir Nikibin',
+            'jobTitle': 'Founder',
+            'description': 'Founder of NIK Finance with expertise in finance and technology'
+          },
+          'sameAs': [
+            'https://www.nik.finance'
+          ]
+        }}
       />
       <Header />
       
@@ -56,7 +71,236 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Our Story */}
+        {/* Meet Our Founder - E-E-A-T Signal */}
+        <section className="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+          <div className="max-w-[100rem] mx-auto px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-12"
+            >
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Meet Amir Nikibin, Founder
+              </h2>
+              <div className="w-16 h-1 bg-accent rounded-full"></div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="space-y-6 font-paragraph text-gray-700 leading-relaxed">
+                  <p className="text-lg">
+                    Amir Nikibin founded NIK Finance with a vision to revolutionize the Australian lending landscape through technology and expertise. With a deep background in both finance and technology, Amir recognized the gap between borrowers seeking competitive rates and the fragmented lending market.
+                  </p>
+                  <p>
+                    Drawing on years of experience in financial services and fintech innovation, Amir built NIK Finance to leverage AI-powered loan matching technology combined with human expertise. His mission is to make quality financial advice accessible to every Australian, regardless of their credit history or financial background.
+                  </p>
+                  <p>
+                    Under Amir's leadership, NIK Finance has grown to help thousands of customers access over $500 million in loans, while maintaining the highest standards of integrity and customer service.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-white rounded-lg p-8 border-2 border-accent/20"
+              >
+                <h3 className="font-heading text-2xl font-bold text-foreground mb-6">
+                  Professional Credentials
+                </h3>
+                <div className="space-y-5">
+                  <div className="pb-5 border-b border-gray-200">
+                    <p className="font-paragraph text-sm text-gray-600 mb-1">Credit Representative Number</p>
+                    <p className="font-heading text-xl font-bold text-primary">567387</p>
+                  </div>
+                  <div className="pb-5 border-b border-gray-200">
+                    <p className="font-paragraph text-sm text-gray-600 mb-1">Operating Under</p>
+                    <p className="font-heading text-lg font-bold text-primary">Finsure</p>
+                    <p className="font-paragraph text-sm text-gray-600 mt-1">Australia's Largest Finance Aggregator</p>
+                  </div>
+                  <div className="pb-5 border-b border-gray-200">
+                    <p className="font-paragraph text-sm text-gray-600 mb-1">Australian Credit Licence</p>
+                    <p className="font-heading text-xl font-bold text-primary">384704</p>
+                  </div>
+                  <div>
+                    <p className="font-paragraph text-sm text-gray-600 mb-1">ACN</p>
+                    <p className="font-heading text-xl font-bold text-primary">685 393 917</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Technology Section */}
+        <section className="py-16 md:py-24">
+          <div className="max-w-[100rem] mx-auto px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-12"
+            >
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Our Technology
+              </h2>
+              <div className="w-16 h-1 bg-accent rounded-full"></div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="bg-light-gray rounded-lg p-8"
+              >
+                <div className="flex items-start gap-4 mb-6">
+                  <Cpu className="w-10 h-10 text-accent flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-heading text-xl font-bold text-foreground mb-2">
+                      AI-Powered Loan Matching
+                    </h3>
+                    <p className="font-paragraph text-gray-700">
+                      Our proprietary AI algorithm analyzes your financial profile against our extensive lender panel to find the best possible rates and terms for your situation.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 mb-6">
+                  <TrendingUp className="w-10 h-10 text-accent flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-heading text-xl font-bold text-foreground mb-2">
+                      130+ Lender Panel
+                    </h3>
+                    <p className="font-paragraph text-gray-700">
+                      Access to Australia's most comprehensive lender network ensures we can find competitive rates for virtually any financial situation, including those with challenging credit histories.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <Zap className="w-10 h-10 text-accent flex-shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-heading text-xl font-bold text-foreground mb-2">
+                      Instant Comparison
+                    </h3>
+                    <p className="font-paragraph text-gray-700">
+                      Get instant comparisons across multiple lenders to see which offers the best value for your needs, all without impacting your credit score.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="space-y-6 font-paragraph text-gray-700 leading-relaxed">
+                  <p className="text-lg font-semibold text-foreground">
+                    Combining Technology with Human Expertise
+                  </p>
+                  <p>
+                    While our AI technology handles the heavy lifting of loan matching and rate comparison, our experienced brokers provide personalized guidance and support throughout your application journey. This hybrid approach ensures you get both the best rates and the best service.
+                  </p>
+                  <p>
+                    Our technology platform integrates with 130+ lenders, allowing us to process applications faster and more efficiently than traditional brokers. Most customers receive approval decisions within 24-48 hours.
+                  </p>
+                  <p>
+                    We continuously update our AI models with market data to ensure you're always getting the most competitive rates available, saving our customers thousands of dollars annually.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Trust & Compliance Section */}
+        <section className="py-16 md:py-24 bg-light-gray">
+          <div className="max-w-[100rem] mx-auto px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mb-12"
+            >
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Trust & Compliance
+              </h2>
+              <div className="w-16 h-1 bg-accent rounded-full"></div>
+            </motion.div>
+
+            <motion.div
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+                }
+              }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            >
+              {[
+                {
+                  icon: Shield,
+                  title: 'Member of Finsure',
+                  desc: 'Operating under Finsure, Australia\'s largest finance aggregator, giving us access to the broadest range of lenders and ensuring compliance with the highest industry standards.'
+                },
+                {
+                  icon: Award,
+                  title: 'ASIC Regulated',
+                  desc: 'We are fully regulated by the Australian Securities and Investments Commission (ASIC) under Australian Credit Licence 384704, ensuring consumer protection and compliance.'
+                },
+                {
+                  icon: Heart,
+                  title: 'Free Service',
+                  desc: 'Our service is completely free to you. Lenders pay us commission for successful referrals, so you never pay for our expert advice and loan matching.'
+                },
+                {
+                  icon: TrendingUp,
+                  title: '130+ Lender Panel',
+                  desc: 'Our extensive lender network ensures competitive rates and access to products you won\'t find elsewhere, giving you genuine choice and value.'
+                }
+              ].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={idx}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                    }}
+                    className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <Icon className="w-10 h-10 text-accent mb-4" />
+                    <h3 className="font-heading text-xl font-bold text-foreground mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="font-paragraph text-gray-700 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+        </section>
         <section className="py-16 md:py-24">
           <div className="max-w-[100rem] mx-auto px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">

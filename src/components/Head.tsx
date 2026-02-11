@@ -10,6 +10,9 @@ export const Head = () => {
       <meta name="author" content="Nik Finance" />
       <meta name="robots" content="index, follow" />
       
+      {/* Bing Webmaster Tools verification */}
+      <meta name="msvalidate.01" content="22B0D748CFB9600CC18419D898D3B53B" />
+      
       {/* Open Graph defaults */}
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Nik Finance" />

@@ -2,7 +2,6 @@
 
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import { useEffect } from 'react';
 import { ScrollToTop } from '@/lib/scroll-to-top';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
 import HomePage from '@/components/pages/HomePage';
@@ -21,7 +20,6 @@ import PropertyEquityCalculatorPage from '@/components/pages/PropertyEquityCalcu
 import LMICalculatorPage from '@/components/pages/LMICalculatorPage';
 import DebtConsolidationCalculatorPage from '@/components/pages/DebtConsolidationCalculatorPage';
 import StampDutyCalculatorPage from '@/components/pages/StampDutyCalculatorPage';
-// ... keep existing code (other imports) ...
 import CarLoansPage from '@/components/pages/CarLoansPage';
 import HomeLoansPage from '@/components/pages/HomeLoansPage';
 import PersonalLoansPage from '@/components/pages/PersonalLoansPage';
@@ -160,20 +158,6 @@ const router = createBrowserRouter([
 });
 
 export default function AppRouter() {
-  useEffect(() => {
-    // Initialize Google Sheets integration on app startup (client-side only)
-    try {
-      const { initializeGoogleSheets } = require('@/lib/googleSheets');
-      const { GOOGLE_SHEETS_CONFIG } = require('@/config/googleSheets.config');
-      
-      if (GOOGLE_SHEETS_CONFIG.enabled && GOOGLE_SHEETS_CONFIG.scriptUrl) {
-        initializeGoogleSheets(GOOGLE_SHEETS_CONFIG.scriptUrl, GOOGLE_SHEETS_CONFIG.sheetName);
-      }
-    } catch (error) {
-      console.warn('Failed to initialize Google Sheets:', error);
-    }
-  }, []);
-
   return (
     <MemberProvider>
       <RouterProvider router={router} />

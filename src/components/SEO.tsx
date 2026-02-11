@@ -192,9 +192,10 @@ export function LocalBusinessSchema() {
         name: 'Amir Nikibin',
       },
       sameAs: [
-        'https://www.facebook.com/nikfinance',
-        'https://www.linkedin.com/company/nikfinance',
-        'https://twitter.com/nikfinance',
+        'https://www.tiktok.com/@nik.finance',
+        'https://www.facebook.com/nikfinance.amir',
+        'https://www.instagram.com/nik._.finance/',
+        'https://www.linkedin.com/in/amir-nikibin/',
       ],
     };
 

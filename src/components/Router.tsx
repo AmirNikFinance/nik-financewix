@@ -10,6 +10,14 @@ import BlogPage from '@/components/pages/BlogPage';
 import BlogArticlePage from '@/components/pages/BlogArticlePage';
 import CalculatorsPage from '@/components/pages/CalculatorsPage';
 import CarLoanCalculatorPage from '@/components/pages/CarLoanCalculatorPage';
+import RepaymentCalculatorPage from '@/components/pages/RepaymentCalculatorPage';
+import BorrowingPowerCalculatorPage from '@/components/pages/BorrowingPowerCalculatorPage';
+import OffsetCalculatorPage from '@/components/pages/OffsetCalculatorPage';
+import HomeEquityCalculatorPage from '@/components/pages/HomeEquityCalculatorPage';
+import PropertyEquityCalculatorPage from '@/components/pages/PropertyEquityCalculatorPage';
+import LMICalculatorPage from '@/components/pages/LMICalculatorPage';
+import DebtConsolidationCalculatorPage from '@/components/pages/DebtConsolidationCalculatorPage';
+import StampDutyCalculatorPage from '@/components/pages/StampDutyCalculatorPage';
 import PartnerLoginPage from '@/components/pages/PartnerLoginPage';
 import PartnerPortalPage from '@/components/pages/PartnerPortalPage';
 import PartnerCommissionsPage from '@/components/partner/PartnerCommissionsPage';
@@ -77,6 +85,38 @@ const router = createBrowserRouter([
       {
         path: "car-loan-calculator",
         element: <CarLoanCalculatorPage />,
+      },
+      {
+        path: "repayment-calculator",
+        element: <RepaymentCalculatorPage />,
+      },
+      {
+        path: "borrowing-power-calculator",
+        element: <BorrowingPowerCalculatorPage />,
+      },
+      {
+        path: "offset-calculator",
+        element: <OffsetCalculatorPage />,
+      },
+      {
+        path: "home-equity-calculator",
+        element: <HomeEquityCalculatorPage />,
+      },
+      {
+        path: "property-equity-calculator",
+        element: <PropertyEquityCalculatorPage />,
+      },
+      {
+        path: "lmi-calculator",
+        element: <LMICalculatorPage />,
+      },
+      {
+        path: "debt-consolidation-calculator",
+        element: <DebtConsolidationCalculatorPage />,
+      },
+      {
+        path: "stamp-duty-calculator",
+        element: <StampDutyCalculatorPage />,
       },
       {
         path: "car-loans",

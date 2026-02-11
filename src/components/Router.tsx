@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense } from 'react';
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { ScrollToTop } from '@/lib/scroll-to-top';
@@ -7,31 +7,37 @@ import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 
 // Lazy load all page components for code-splitting
-const HomePage = lazy(() => import('@/components/pages/HomePage'));
-const ContactPage = lazy(() => import('@/components/pages/ContactPage'));
-const ApplyPage = lazy(() => import('@/components/pages/ApplyPage'));
-const PrivacyPolicyPage = lazy(() => import('@/components/pages/PrivacyPolicyPage'));
-const BlogPage = lazy(() => import('@/components/pages/BlogPage'));
-const BlogArticlePage = lazy(() => import('@/components/pages/BlogArticlePage'));
-const CalculatorsPage = lazy(() => import('@/components/pages/CalculatorsPage'));
-const CarLoanCalculatorPage = lazy(() => import('@/components/pages/CarLoanCalculatorPage'));
-const RepaymentCalculatorPage = lazy(() => import('@/components/pages/RepaymentCalculatorPage'));
-const BorrowingPowerCalculatorPage = lazy(() => import('@/components/pages/BorrowingPowerCalculatorPage'));
-const OffsetCalculatorPage = lazy(() => import('@/components/pages/OffsetCalculatorPage'));
-const HomeEquityCalculatorPage = lazy(() => import('@/components/pages/HomeEquityCalculatorPage'));
-const PropertyEquityCalculatorPage = lazy(() => import('@/components/pages/PropertyEquityCalculatorPage'));
-const LMICalculatorPage = lazy(() => import('@/components/pages/LMICalculatorPage'));
-const DebtConsolidationCalculatorPage = lazy(() => import('@/components/pages/DebtConsolidationCalculatorPage'));
-const StampDutyCalculatorPage = lazy(() => import('@/components/pages/StampDutyCalculatorPage'));
-const CarLoansPage = lazy(() => import('@/components/pages/CarLoansPage'));
-const HomeLoansPage = lazy(() => import('@/components/pages/HomeLoansPage'));
-const PersonalLoansPage = lazy(() => import('@/components/pages/PersonalLoansPage'));
-const BusinessLoansPage = lazy(() => import('@/components/pages/BusinessLoansPage'));
-const BadCreditLoansPage = lazy(() => import('@/components/pages/BadCreditLoansPage'));
-const RefinancingPage = lazy(() => import('@/components/pages/RefinancingPage'));
-const AboutPage = lazy(() => import('@/components/pages/AboutPage'));
-const FAQPage = lazy(() => import('@/components/pages/FAQPage'));
-const NotFoundPage = lazy(() => import('@/components/pages/NotFoundPage'));
+const HomePage = React.lazy(() => import('@/components/pages/HomePage'));
+const ContactPage = React.lazy(() => import('@/components/pages/ContactPage'));
+const ApplyPage = React.lazy(() => import('@/components/pages/ApplyPage'));
+const PrivacyPolicyPage = React.lazy(() => import('@/components/pages/PrivacyPolicyPage'));
+const BlogPage = React.lazy(() => import('@/components/pages/BlogPage'));
+const BlogArticlePage = React.lazy(() => import('@/components/pages/BlogArticlePage'));
+const CalculatorsPage = React.lazy(() => import('@/components/pages/CalculatorsPage'));
+const CarLoanCalculatorPage = React.lazy(() => import('@/components/pages/CarLoanCalculatorPage'));
+const RepaymentCalculatorPage = React.lazy(() => import('@/components/pages/RepaymentCalculatorPage'));
+const BorrowingPowerCalculatorPage = React.lazy(() => import('@/components/pages/BorrowingPowerCalculatorPage'));
+const OffsetCalculatorPage = React.lazy(() => import('@/components/pages/OffsetCalculatorPage'));
+const HomeEquityCalculatorPage = React.lazy(() => import('@/components/pages/HomeEquityCalculatorPage'));
+const PropertyEquityCalculatorPage = React.lazy(() => import('@/components/pages/PropertyEquityCalculatorPage'));
+const LMICalculatorPage = React.lazy(() => import('@/components/pages/LMICalculatorPage'));
+const DebtConsolidationCalculatorPage = React.lazy(() => import('@/components/pages/DebtConsolidationCalculatorPage'));
+const StampDutyCalculatorPage = React.lazy(() => import('@/components/pages/StampDutyCalculatorPage'));
+const PartnerLoginPage = React.lazy(() => import('@/components/pages/PartnerLoginPage'));
+const PartnerPortalPage = React.lazy(() => import('@/components/pages/PartnerPortalPage'));
+const CarLoansPage = React.lazy(() => import('@/components/pages/CarLoansPage'));
+const HomeLoansPage = React.lazy(() => import('@/components/pages/HomeLoansPage'));
+const PersonalLoansPage = React.lazy(() => import('@/components/pages/PersonalLoansPage'));
+const BusinessLoansPage = React.lazy(() => import('@/components/pages/BusinessLoansPage'));
+const BadCreditLoansPage = React.lazy(() => import('@/components/pages/BadCreditLoansPage'));
+const RefinancingPage = React.lazy(() => import('@/components/pages/RefinancingPage'));
+const AboutPage = React.lazy(() => import('@/components/pages/AboutPage'));
+const FAQPage = React.lazy(() => import('@/components/pages/FAQPage'));
+const NotFoundPage = React.lazy(() => import('@/components/pages/NotFoundPage'));
+const PartnerCommissionsPage = React.lazy(() => import('@/components/partner/PartnerCommissionsPage'));
+const PartnerReferralsPage = React.lazy(() => import('@/components/partner/PartnerReferralsPage'));
+const PartnerProfilePage = React.lazy(() => import('@/components/partner/PartnerProfilePage'));
+const PartnerSubmitReferralPage = React.lazy(() => import('@/components/partner/PartnerSubmitReferralPage'));
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -238,6 +244,54 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <FAQPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "partner-login",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PartnerLoginPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "partner-portal",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PartnerPortalPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "partner-commissions",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PartnerCommissionsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "partner-referrals",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PartnerReferralsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "partner-profile",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PartnerProfilePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "partner-submit-referral",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PartnerSubmitReferralPage />
           </Suspense>
         ),
       },

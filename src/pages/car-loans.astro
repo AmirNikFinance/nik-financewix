@@ -1,0 +1,54 @@
+---
+  import { Head } from "@/components/Head";
+import CarLoansPage from "@/components/pages/CarLoansPage";
+import "@wix/wix-vibe-plugins/plugins-vars.css";
+import "@wix/wix-vibe-plugins/plugins-theme.css";
+import "@/styles/global.css";
+
+const title = "Car Loans Australia | Compare 130+ Lenders | Nik Finance";
+const description = "Compare car loan rates from 130+ lenders. New and used car finance, refinancing, and bad credit options. Free service, fast approval. Get matched in minutes.";
+const canonical = "https://www.nik.finance/car-loans";
+const schema = {
+    "@context": "https://schema.org",
+    "@type": "FinancialProduct",
+    "name": "Car Loans Australia",
+    "description": description,
+    "provider": {
+    "@type": "FinancialService",
+          "name": "Nik Finance",
+          "url": "https://www.nik.finance"
+      },
+  "url": canonical
+};
+---
+
+  <html lang="en" class="w-full h-full">
+    <head>
+      <Head />
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta name="keywords" content="car loan, car finance, auto loan, vehicle finance, car loan rates, used car loan, new car loan, Australia" />
+      <link rel="canonical" href={canonical} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:type" content="website" />
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    </head>
+    <body class="w-full h-full">
+      <!-- Server-rendered content for SEO crawlers -->
+      <div id="seo-fallback">
+        <h1>Car Loans Australia — Compare Rates From 130+ Lenders</h1>
+        <p>Nik Finance helps Australians find the best car loan by comparing rates from over 130 lenders. Whether you are buying a new car, used car, or refinancing an existing car loan, our AI-powered platform matches you with the right lender in minutes.</p>
+        <h2>Why Choose Nik Finance for Your Car Loan?</h2>
+        <p>Free service with no hidden fees. Compare new and used car loans, novated leases, and refinancing options. Get pre-approved in minutes with rates from major banks, credit unions, and specialist lenders across Australia.</p>
+        <h2>Car Loan Options</h2>
+      <p>New car loans, used car loans, car refinancing, bad credit car loans, novated leases, and commercial vehicle finance. Loan amounts from $5,000 to $150,000 with flexible terms from 1 to 7 years.</p>
+        <a href="/apply">Apply Now</a> | <a href="/home-loans">Home Loans</a> | <a href="/personal-loans">Personal Loans</a> | <a href="/business-loans">Business Loans</a>
+      </div>
+      <div id="root" class="w-full h-full">
+        <CarLoansPage client:only="react" />
+      </div>
+      <script>document.getElementById('seo-fallback')?.remove();</script>
+    </body>
+  </html>

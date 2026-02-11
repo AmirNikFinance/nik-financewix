@@ -1,5 +1,3 @@
-'use client';
-
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { ScrollToTop } from '@/lib/scroll-to-top';

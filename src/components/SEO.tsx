@@ -164,16 +164,38 @@ export function LocalBusinessSchema() {
   useEffect(() => {
     const schema = {
       '@context': 'https://schema.org',
-      '@type': 'LocalBusiness',
-      name: defaults.siteName,
-      url: defaults.siteUrl,
+      '@type': 'FinancialService',
+      name: 'Nik Finance',
+      url: 'https://www.nik.finance',
       description: defaults.description,
       image: defaults.ogImage,
+      telephone: '1300 NIK FIN',
+      email: 'hello@nik.finance',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'AU',
+        addressRegion: 'Australia',
+      },
+      areaServed: {
+        '@type': 'Country',
+        name: 'Australia',
+      },
+      priceRange: 'Free Service',
+      openingHoursSpecification: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '17:00',
+      },
+      founder: {
+        '@type': 'Person',
+        name: 'Amir Nikibin',
+      },
       sameAs: [
         'https://www.facebook.com/nikfinance',
         'https://www.linkedin.com/company/nikfinance',
-        'https://twitter.com/nikfinance'
-      ]
+        'https://twitter.com/nikfinance',
+      ],
     };
 
     let scriptTag = document.getElementById('local-business-schema');

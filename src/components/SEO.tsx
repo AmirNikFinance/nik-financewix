@@ -94,57 +94,6 @@ export default function SEO({
 }
 
 // Schema markup components
-export function LocalBusinessSchema() {
-  useEffect(() => {
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'FinancialService',
-      name: 'Nik Finance',
-      description: 'AI-powered loan marketplace connecting Australians with 130+ lenders for car loans, home loans, and business finance.',
-      url: 'https://www.nik.finance',
-      logo: 'https://static.wixstatic.com/media/e994c8_fe9aab1d39d448fb8e78e1ae53648c58~mv2.png',
-      telephone: '1300-NIK-FIN',
-      email: 'hello@nik.finance',
-      address: {
-        '@type': 'PostalAddress',
-        addressCountry: 'AU',
-        addressLocality: 'Sydney',
-        addressRegion: 'NSW'
-      },
-      areaServed: {
-        '@type': 'Country',
-        name: 'Australia'
-      },
-      priceRange: 'Free service',
-      openingHours: 'Mo-Fr 09:00-17:00',
-      sameAs: [
-        'https://www.linkedin.com/company/nikfinance',
-        'https://www.instagram.com/nikfinance'
-      ],
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.9',
-        reviewCount: '127'
-      }
-    };
-
-    let scriptTag = document.getElementById('local-business-schema');
-    if (!scriptTag) {
-      scriptTag = document.createElement('script');
-      scriptTag.id = 'local-business-schema';
-      scriptTag.setAttribute('type', 'application/ld+json');
-      document.head.appendChild(scriptTag);
-    }
-    scriptTag.textContent = JSON.stringify(schema);
-
-    return () => {
-      scriptTag?.remove();
-    };
-  }, []);
-
-  return null;
-}
-
 export function FAQSchema({ faqs }: { faqs: { question: string; answer: string }[] }) {
   useEffect(() => {
     if (!faqs || faqs.length === 0) return;

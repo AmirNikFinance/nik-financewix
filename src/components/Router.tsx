@@ -21,12 +21,7 @@ import PropertyEquityCalculatorPage from '@/components/pages/PropertyEquityCalcu
 import LMICalculatorPage from '@/components/pages/LMICalculatorPage';
 import DebtConsolidationCalculatorPage from '@/components/pages/DebtConsolidationCalculatorPage';
 import StampDutyCalculatorPage from '@/components/pages/StampDutyCalculatorPage';
-import PartnerLoginPage from '@/components/pages/PartnerLoginPage';
-import PartnerPortalPage from '@/components/pages/PartnerPortalPage';
-import PartnerCommissionsPage from '@/components/partner/PartnerCommissionsPage';
-import PartnerReferralsPage from '@/components/partner/PartnerReferralsPage';
-import PartnerProfilePage from '@/components/partner/PartnerProfilePage';
-import PartnerSubmitReferralPage from '@/components/partner/PartnerSubmitReferralPage';
+// ... keep existing code (other imports) ...
 import CarLoansPage from '@/components/pages/CarLoansPage';
 import HomeLoansPage from '@/components/pages/HomeLoansPage';
 import PersonalLoansPage from '@/components/pages/PersonalLoansPage';
@@ -149,51 +144,6 @@ const router = createBrowserRouter([
       {
         path: "faq",
         element: <FAQPage />,
-      },
-
-      {
-        path: "partner-login",
-        element: <PartnerLoginPage />,
-      },
-      {
-        path: "partner-portal",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to access the partner portal">
-            <PartnerPortalPage />
-          </MemberProtectedRoute>
-        ),
-      },
-      {
-        path: "partner-portal/commissions",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to view commissions">
-            <PartnerCommissionsPage />
-          </MemberProtectedRoute>
-        ),
-      },
-      {
-        path: "partner-portal/referrals",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to view referrals">
-            <PartnerReferralsPage />
-          </MemberProtectedRoute>
-        ),
-      },
-      {
-        path: "partner-portal/profile",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to manage your profile">
-            <PartnerProfilePage />
-          </MemberProtectedRoute>
-        ),
-      },
-      {
-        path: "partner-portal/submit-referral",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to submit a referral">
-            <PartnerSubmitReferralPage />
-          </MemberProtectedRoute>
-        ),
       },
       {
         path: "404",

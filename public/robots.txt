@@ -1,10 +1,30 @@
 User-agent: *
 Allow: /
 
-# Block common bot crawlers that waste resources
+# Allow AI crawlers explicitly for GEO (Generative Engine Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Block resource-wasting bots
 User-agent: PetalBot
 Disallow: /
 
+# Rate limit aggressive crawlers
 User-agent: AhrefsBot
 Crawl-delay: 10
 

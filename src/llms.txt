@@ -1,0 +1,25 @@
+# Nik Finance — AI-Powered Loan Marketplace
+> Australia's smartest loan marketplace connecting borrowers with 130+ lenders
+Nik Finance is an Australian finance brokerage founded by Amir Nikibin
+that uses AI technology to match borrowers with the right lender.
+Operating under Finsure (Australia's largest finance aggregator),
+Credit Representative #000567388, ACL 384704.
+## Services
+- Car Loans & Car Finance (14-minute approvals)
+- Home Loans & Mortgage Broking
+- Personal Loans & Debt Consolidation
+- Business Loans & Equipment Finance
+- Loan Refinancing
+- Bad Credit Finance Solutions
+## Key Facts
+- 130+ lender panel
+- AI-powered loan matching technology
+- Free service (lenders pay commission)
+- Australia-wide service
+- Phone: 1300 NIK FIN
+- Website: https://www.nik.finance
+## Links
+- Blog: https://www.nik.finance/blog
+- Calculators: https://www.nik.finance/calculators
+- Contact: https://www.nik.finance/contact
+- Apply: https://www.nik.finance/apply

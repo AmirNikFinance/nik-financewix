@@ -190,7 +190,7 @@ export default function RefinancingPage() {
               </h2>
               <div className="space-y-6 font-paragraph text-gray-700 leading-relaxed">
                 <p>
-                  Refinancing can be one of the smartest financial decisions you make. By switching to a better interest rate or more favorable terms, you can save thousands of dollars over the life of your loan.
+                  Refinancing can be one of the smartest financial decisions you make. By switching to a better interest rate or more favourable terms, you can save thousands of dollars over the life of your loan.
                 </p>
                 <p>
                   At NIK Finance, we help customers across Australia refinance their loans to better rates and terms. Our brokers compare options from multiple lenders to ensure you get the best deal.

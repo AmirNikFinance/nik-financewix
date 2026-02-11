@@ -113,7 +113,7 @@ export default function FAQPage() {
         },
         {
           question: 'Can I refinance my existing loan?',
-          answer: 'Yes! Refinancing allows you to switch to a better interest rate or more favorable terms. Many customers save thousands by refinancing. We compare options from multiple lenders to find the best refinancing deal.'
+          answer: 'Yes! Refinancing allows you to switch to a better interest rate or more favourable terms. Many customers save thousands by refinancing. We compare options from multiple lenders to find the best refinancing deal.'
         },
         {
           question: 'What\'s the difference between secured and unsecured loans?',

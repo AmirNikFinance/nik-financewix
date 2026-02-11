@@ -106,7 +106,7 @@ export default function DebtConsolidationCalculatorPage() {
                 <div>
                   <h4 className="font-heading font-bold text-foreground mb-2">Better Credit Score</h4>
                   <p className="font-paragraph text-gray-700">
-                    Consolidation can improve your credit score by reducing credit utilization and demonstrating responsible debt management.
+                    Consolidation can improve your credit score by reducing credit utilisation and demonstrating responsible debt management.
                   </p>
                 </div>
               </div>

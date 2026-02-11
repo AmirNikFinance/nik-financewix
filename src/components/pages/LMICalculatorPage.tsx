@@ -129,7 +129,7 @@ export default function LMICalculatorPage() {
             Get a First Home Buyer Loan Quote
           </h2>
           <p className="font-paragraph text-xl text-gray-300 max-w-2xl mx-auto mb-8">
-            Our lending specialists can help you find the best loan options with competitive LMI rates and favorable terms for first-time buyers.
+            Our lending specialists can help you find the best loan options with competitive LMI rates and favourable terms for first-time buyers.
           </p>
           <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer" className="inline-block bg-accent hover:bg-accent/90 text-white px-8 py-4 rounded-xl font-heading font-bold text-lg transition-colors">
             Get Your First Home Loan Quote

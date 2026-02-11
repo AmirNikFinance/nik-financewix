@@ -186,7 +186,7 @@ export default function HomeLoansPage() {
               </h2>
               <div className="space-y-6 font-paragraph text-gray-700 leading-relaxed">
                 <p>
-                  At NIK Finance, we're committed to helping Australians achieve their property dreams. Our experienced mortgage brokers have helped thousands of customers secure home loans with competitive rates and favorable terms.
+                  At NIK Finance, we're committed to helping Australians achieve their property dreams. Our experienced mortgage brokers have helped thousands of customers secure home loans with competitive rates and favourable terms.
                 </p>
                 <p>
                   We work with Australia's leading banks and specialist lenders to access rates and products you won't find on your own. Whether you're a first-time buyer, property investor, or looking to refinance, we have solutions tailored to your needs.

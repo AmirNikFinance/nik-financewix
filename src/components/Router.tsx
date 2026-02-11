@@ -1,5 +1,6 @@
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
 import { ScrollToTop } from '@/lib/scroll-to-top';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
 import HomePage from '@/components/pages/HomePage';
@@ -34,8 +35,6 @@ import AboutPage from '@/components/pages/AboutPage';
 import FAQPage from '@/components/pages/FAQPage';
 import NotFoundPage from '@/components/pages/NotFoundPage';
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
-import { initializeGoogleSheets } from '@/lib/googleSheets';
-import { GOOGLE_SHEETS_CONFIG } from '@/config/googleSheets.config';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -208,10 +207,23 @@ const router = createBrowserRouter([
 });
 
 export default function AppRouter() {
-  // Initialize Google Sheets integration on app startup
-  if (GOOGLE_SHEETS_CONFIG.enabled && GOOGLE_SHEETS_CONFIG.scriptUrl) {
-    initializeGoogleSheets(GOOGLE_SHEETS_CONFIG.scriptUrl, GOOGLE_SHEETS_CONFIG.sheetName);
-  }
+  useEffect(() => {
+    // Initialize Google Sheets integration on app startup (client-side only)
+    const initGoogleSheets = async () => {
+      try {
+        const { initializeGoogleSheets } = await import('@/lib/googleSheets');
+        const { GOOGLE_SHEETS_CONFIG } = await import('@/config/googleSheets.config');
+        
+        if (GOOGLE_SHEETS_CONFIG.enabled && GOOGLE_SHEETS_CONFIG.scriptUrl) {
+          initializeGoogleSheets(GOOGLE_SHEETS_CONFIG.scriptUrl, GOOGLE_SHEETS_CONFIG.sheetName);
+        }
+      } catch (error) {
+        console.warn('Failed to initialize Google Sheets:', error);
+      }
+    };
+    
+    initGoogleSheets();
+  }, []);
 
   return (
     <MemberProvider>

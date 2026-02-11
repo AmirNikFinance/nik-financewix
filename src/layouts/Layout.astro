@@ -7,9 +7,10 @@ import '@/styles/fonts.css';
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string;
 }
 
-const { title = 'NIK Finance', description = 'Your Trusted Partner for Financial Success' } = Astro.props;
+const { title = 'NIK Finance', description = 'Your Trusted Partner for Financial Success', canonical } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -21,6 +22,7 @@ const { title = 'NIK Finance', description = 'Your Trusted Partner for Financial
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
   </head>
   <body>
     <Header />

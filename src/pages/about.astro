@@ -1,0 +1,56 @@
+---
+import { Head } from "@/components/Head";
+import AboutPage from "@/components/pages/AboutPage";
+import "@wix/wix-vibe-plugins/plugins-vars.css";
+import "@wix/wix-vibe-plugins/plugins-theme.css";
+import "@/styles/global.css";
+
+const title = "About Nik Finance | Amir Nikibin | AI-Powered Finance Broker";
+const description = "Nik Finance is an AI-powered finance brokerage founded by Amir Nikibin. Authorised under Finsure Group, helping Australians compare loans from 130+ lenders.";
+const canonical = "https://www.nik.finance/about";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": title,
+  "description": description,
+  "url": canonical,
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Amir Nikibin",
+    "jobTitle": "Finance Broker & Founder",
+    "worksFor": { "@type": "Organization", "name": "Nik Finance" },
+    "url": "https://www.nik.finance/about"
+  }
+};
+---
+
+<html lang="en" class="w-full h-full">
+  <head>
+    <Head />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Amir Nikibin, Nik Finance, finance broker, about us, Finsure, AI finance, Australian broker" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body class="w-full h-full">
+    <div id="seo-fallback">
+      <h1>About Nik Finance</h1>
+      <p>Nik Finance is an AI-powered finance brokerage founded by Amir Nikibin. We help Australians find the best loan deals by comparing rates from over 130 lenders, including major banks, credit unions, and specialist lenders.</p>
+      <h2>About Amir Nikibin</h2>
+      <p>Amir Nikibin is the founder of Nik Finance. With a passion for technology and finance, Amir built Nik Finance to make the loan comparison process faster, smarter, and completely free for borrowers. Nik Finance is authorised under Finsure Group, one of Australia's largest finance aggregators.</p>
+      <h2>Our Mission</h2>
+      <p>To democratise finance by giving every Australian access to the same lending options and rates, powered by AI technology. No commissions influencing our recommendations — just the best deal for you.</p>
+      <a href="/apply">Apply Now</a> | <a href="/car-loans">Car Loans</a> | <a href="/home-loans">Home Loans</a> | <a href="/contact">Contact Us</a>
+    </div>
+    <div id="root" class="w-full h-full">
+      <AboutPage client:only="react" />
+    </div>
+    <script>document.getElementById('seo-fallback')?.remove();</script>
+  </body>
+</html>

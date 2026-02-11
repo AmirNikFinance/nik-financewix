@@ -1,0 +1,50 @@
+---
+import { Head } from "@/components/Head";
+import BadCreditLoansPage from "@/components/pages/BadCreditLoansPage";
+import "@wix/wix-vibe-plugins/plugins-vars.css";
+import "@wix/wix-vibe-plugins/plugins-theme.css";
+import "@/styles/global.css";
+
+const title = "Bad Credit Loans Australia | Get Approved With Low Credit Score | Nik Finance";
+const description = "Bad credit? We can help. Compare loan options from specialist lenders who work with low credit scores. Car loans, personal loans, and debt consolidation for bad credit.";
+const canonical = "https://www.nik.finance/bad-credit-loans";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "Bad Credit Loans Australia",
+  "description": description,
+  "provider": { "@type": "FinancialService", "name": "Nik Finance", "url": "https://www.nik.finance" },
+  "url": canonical
+};
+---
+
+<html lang="en" class="w-full h-full">
+  <head>
+    <Head />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="bad credit loan, low credit score, bad credit car loan, bad credit personal loan, credit repair, second chance loan, Australia" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body class="w-full h-full">
+    <div id="seo-fallback">
+      <h1>Bad Credit Loans Australia — Get Approved With a Low Credit Score</h1>
+      <p>Having bad credit does not mean you cannot get a loan. Nik Finance works with specialist lenders who consider applicants with defaults, bankruptcies, and low credit scores. We help you find the best deal despite your credit history.</p>
+      <h2>Bad Credit Loan Options</h2>
+      <p>Bad credit car loans. Bad credit personal loans. Debt consolidation to improve your credit. Secured loans using your vehicle or other assets as collateral. Short-term and long-term options available.</p>
+      <h2>How to Improve Your Chances</h2>
+      <p>Provide a larger deposit. Offer security or collateral. Show stable income and employment history. Consider a co-signer. Start with a smaller loan amount. Our team guides you through the best approach for your situation.</p>
+      <a href="/apply">Apply Now</a> | <a href="/car-loans">Car Loans</a> | <a href="/personal-loans">Personal Loans</a> | <a href="/refinancing">Refinancing</a>
+    </div>
+    <div id="root" class="w-full h-full">
+      <BadCreditLoansPage client:only="react" />
+    </div>
+    <script>document.getElementById('seo-fallback')?.remove();</script>
+  </body>
+</html>

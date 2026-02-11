@@ -1,0 +1,50 @@
+---
+import { Head } from "@/components/Head";
+import HomeLoansPage from "@/components/pages/HomeLoansPage";
+import "@wix/wix-vibe-plugins/plugins-vars.css";
+import "@wix/wix-vibe-plugins/plugins-theme.css";
+import "@/styles/global.css";
+
+const title = "Home Loans Australia | Compare Mortgage Rates | Nik Finance";
+const description = "Compare home loan rates from 130+ lenders. First home buyer, refinancing, investment property, and construction loans. Free mortgage broker service with fast approval.";
+const canonical = "https://www.nik.finance/home-loans";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "Home Loans Australia",
+  "description": description,
+  "provider": { "@type": "FinancialService", "name": "Nik Finance", "url": "https://www.nik.finance" },
+  "url": canonical
+};
+---
+
+<html lang="en" class="w-full h-full">
+  <head>
+    <Head />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="home loan, mortgage, mortgage broker, home loan rates, first home buyer, refinance mortgage, investment loan, Australia" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body class="w-full h-full">
+    <div id="seo-fallback">
+      <h1>Home Loans Australia — Compare Mortgage Rates From 130+ Lenders</h1>
+      <p>Nik Finance compares home loan rates from over 130 lenders to help you find the best mortgage deal. Whether you are a first home buyer, refinancing your existing mortgage, or purchasing an investment property, we match you with the right lender in minutes.</p>
+      <h2>Home Loan Options</h2>
+      <p>First home buyer loans with government grant eligibility. Refinancing to lower your interest rate. Investment property loans. Construction loans. Fixed and variable rate options. Offset accounts and redraw facilities. Loans from major banks, credit unions, and non-bank lenders.</p>
+      <h2>Why Use a Mortgage Broker?</h2>
+      <p>Access to 130+ lenders in one application. Free service — lenders pay us, not you. Expert guidance through the entire process. Save time comparing rates yourself. Get pre-approved before you start house hunting.</p>
+      <a href="/apply">Apply Now</a> | <a href="/car-loans">Car Loans</a> | <a href="/personal-loans">Personal Loans</a> | <a href="/refinancing">Refinancing</a>
+    </div>
+    <div id="root" class="w-full h-full">
+      <HomeLoansPage client:only="react" />
+    </div>
+    <script>document.getElementById('seo-fallback')?.remove();</script>
+  </body>
+</html>

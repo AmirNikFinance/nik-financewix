@@ -1,0 +1,38 @@
+---
+import { Head } from "@/components/Head";
+import ApplyPage from "@/components/pages/ApplyPage";
+import "@wix/wix-vibe-plugins/plugins-vars.css";
+import "@wix/wix-vibe-plugins/plugins-theme.css";
+import "@/styles/global.css";
+
+const title = "Apply for a Loan | Free Application | Nik Finance";
+const description = "Apply for a car loan, home loan, personal loan, or business loan. Free application, no obligation. Get matched with the best lender from 130+ options in minutes.";
+const canonical = "https://www.nik.finance/apply";
+---
+
+<html lang="en" class="w-full h-full">
+  <head>
+    <Head />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="apply for loan, loan application, free application, car loan apply, home loan apply, personal loan apply, Australia" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="w-full h-full">
+    <div id="seo-fallback">
+      <h1>Apply for a Loan — Free, No Obligation</h1>
+      <p>Start your free loan application with Nik Finance. Our AI-powered platform compares rates from over 130 lenders to find the best deal for you. No obligation, no hidden fees.</p>
+      <h2>What You Can Apply For</h2>
+      <p>Car loans, home loans, personal loans, business loans, equipment finance, refinancing, and bad credit loans. Tell us what you need and we will match you with the right lender.</p>
+      <a href="/car-loans">Car Loans</a> | <a href="/home-loans">Home Loans</a> | <a href="/personal-loans">Personal Loans</a> | <a href="/business-loans">Business Loans</a>
+    </div>
+    <div id="root" class="w-full h-full">
+      <ApplyPage client:only="react" />
+    </div>
+    <script>document.getElementById('seo-fallback')?.remove();</script>
+  </body>
+</html>

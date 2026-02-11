@@ -1,0 +1,50 @@
+---
+import { Head } from "@/components/Head";
+import PersonalLoansPage from "@/components/pages/PersonalLoansPage";
+import "@wix/wix-vibe-plugins/plugins-vars.css";
+import "@wix/wix-vibe-plugins/plugins-theme.css";
+import "@/styles/global.css";
+
+const title = "Personal Loans Australia | Compare Rates From 130+ Lenders | Nik Finance";
+const description = "Compare personal loan rates from 130+ lenders. Debt consolidation, home improvements, travel, and more. Secured and unsecured options with fast approval.";
+const canonical = "https://www.nik.finance/personal-loans";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FinancialProduct",
+  "name": "Personal Loans Australia",
+  "description": description,
+  "provider": { "@type": "FinancialService", "name": "Nik Finance", "url": "https://www.nik.finance" },
+  "url": canonical
+};
+---
+
+<html lang="en" class="w-full h-full">
+  <head>
+    <Head />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="personal loan, debt consolidation loan, unsecured loan, secured loan, personal finance, loan rates, Australia" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body class="w-full h-full">
+    <div id="seo-fallback">
+      <h1>Personal Loans Australia — Compare Rates From 130+ Lenders</h1>
+      <p>Nik Finance helps you find the best personal loan by comparing rates from over 130 lenders. Whether you need funds for debt consolidation, home improvements, travel, medical expenses, or a major purchase, we match you with the right lender.</p>
+      <h2>Personal Loan Options</h2>
+      <p>Secured and unsecured personal loans. Debt consolidation loans to simplify your repayments. Home improvement finance. Wedding and travel loans. Medical and dental finance. Loan amounts from $2,000 to $100,000 with flexible terms.</p>
+      <h2>Secured vs Unsecured Personal Loans</h2>
+      <p>Secured loans use an asset as collateral and typically offer lower interest rates. Unsecured loans require no collateral but may have higher rates. Our AI matches you with the best option based on your circumstances.</p>
+      <a href="/apply">Apply Now</a> | <a href="/car-loans">Car Loans</a> | <a href="/home-loans">Home Loans</a> | <a href="/business-loans">Business Loans</a>
+    </div>
+    <div id="root" class="w-full h-full">
+      <PersonalLoansPage client:only="react" />
+    </div>
+    <script>document.getElementById('seo-fallback')?.remove();</script>
+  </body>
+</html>

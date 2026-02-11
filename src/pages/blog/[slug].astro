@@ -1,0 +1,25 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import BlogArticlePageClient from '@/components/pages/BlogArticlePageClient';
+import { BaseCrudService } from '@/integrations';
+import type { BlogArticles } from '@/entities';
+
+export async function getStaticPaths() {
+  const result = await BaseCrudService.getAll<BlogArticles>('blogarticles');
+  
+  return result.items.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: BlogArticles;
+}
+
+const { article } = Astro.props;
+---
+
+<Layout title={article.seoTitle || article.title} description={article.seoDescription || article.excerpt}>
+  <BlogArticlePageClient client:load article={article} />
+</Layout>

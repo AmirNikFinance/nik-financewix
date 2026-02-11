@@ -53,6 +53,7 @@ export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   originHeight?: number
   focalPointX?: number
   focalPointY?: number
+  alt: string // REQUIRED: alt text for accessibility and SEO
 }
 
 type WixImageProps = Omit<ImageProps, 'src'> & { data: ImageData }

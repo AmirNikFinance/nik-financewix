@@ -21,6 +21,10 @@ export const Head = () => {
       {/* Twitter defaults */}
       <meta name="twitter:card" content="summary_large_image" />
       
+      {/* Locale targeting - hreflang for Australia */}
+      <link rel="alternate" hrefLang="en-au" href="https://nikfinance.com.au" />
+      <link rel="alternate" hrefLang="en" href="https://nikfinance.com.au" />
+      
       {/* Theme & Icons */}
       <meta name="theme-color" content="#0d4d3e" />
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />

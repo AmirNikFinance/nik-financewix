@@ -24,6 +24,7 @@ import BadCreditLoansPage from '@/components/pages/BadCreditLoansPage';
 import RefinancingPage from '@/components/pages/RefinancingPage';
 import AboutPage from '@/components/pages/AboutPage';
 import FAQPage from '@/components/pages/FAQPage';
+import NotFoundPage from '@/components/pages/NotFoundPage';
 // ... keep existing code (imports) ...
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 import { initializeGoogleSheets } from '@/lib/googleSheets';
@@ -154,8 +155,12 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "404",
+        element: <NotFoundPage />,
+      },
+      {
         path: "*",
-        element: <Navigate to="/" replace />,
+        element: <NotFoundPage />,
       },
     ],
   },

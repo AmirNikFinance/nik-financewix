@@ -59,7 +59,7 @@ const Signature = ({
           />
           {value && (
             <div className="mt-3 p-3 bg-background border border-foreground/10 rounded-lg">
-              <Image src={value.url} alt="" className="max-w-full h-auto rounded" />
+              <Image src={value.url} alt="Signature preview" className="max-w-full h-auto rounded" />
             </div>
           )}
         </FieldInput>

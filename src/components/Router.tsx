@@ -1,5 +1,5 @@
 import { MemberProvider } from '@/integrations';
-import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { ScrollToTop } from '@/lib/scroll-to-top';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
 import HomePage from '@/components/pages/HomePage';
@@ -18,12 +18,6 @@ import PropertyEquityCalculatorPage from '@/components/pages/PropertyEquityCalcu
 import LMICalculatorPage from '@/components/pages/LMICalculatorPage';
 import DebtConsolidationCalculatorPage from '@/components/pages/DebtConsolidationCalculatorPage';
 import StampDutyCalculatorPage from '@/components/pages/StampDutyCalculatorPage';
-import PartnerLoginPage from '@/components/pages/PartnerLoginPage';
-import PartnerPortalPage from '@/components/pages/PartnerPortalPage';
-import PartnerCommissionsPage from '@/components/partner/PartnerCommissionsPage';
-import PartnerReferralsPage from '@/components/partner/PartnerReferralsPage';
-import PartnerProfilePage from '@/components/partner/PartnerProfilePage';
-import PartnerSubmitReferralPage from '@/components/partner/PartnerSubmitReferralPage';
 import CarLoansPage from '@/components/pages/CarLoansPage';
 import HomeLoansPage from '@/components/pages/HomeLoansPage';
 import PersonalLoansPage from '@/components/pages/PersonalLoansPage';
@@ -34,8 +28,6 @@ import AboutPage from '@/components/pages/AboutPage';
 import FAQPage from '@/components/pages/FAQPage';
 import NotFoundPage from '@/components/pages/NotFoundPage';
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
-import { initializeGoogleSheets } from '@/lib/googleSheets';
-import { GOOGLE_SHEETS_CONFIG } from '@/config/googleSheets.config';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -150,50 +142,6 @@ const router = createBrowserRouter([
         element: <FAQPage />,
       },
       {
-        path: "partner-login",
-        element: <PartnerLoginPage />,
-      },
-      {
-        path: "partner-portal",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to access the partner portal">
-            <PartnerPortalPage />
-          </MemberProtectedRoute>
-        ),
-      },
-      {
-        path: "partner-portal/commissions",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to view commissions">
-            <PartnerCommissionsPage />
-          </MemberProtectedRoute>
-        ),
-      },
-      {
-        path: "partner-portal/referrals",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to view referrals">
-            <PartnerReferralsPage />
-          </MemberProtectedRoute>
-        ),
-      },
-      {
-        path: "partner-portal/profile",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to manage your profile">
-            <PartnerProfilePage />
-          </MemberProtectedRoute>
-        ),
-      },
-      {
-        path: "partner-portal/submit-referral",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to submit a referral">
-            <PartnerSubmitReferralPage />
-          </MemberProtectedRoute>
-        ),
-      },
-      {
         path: "404",
         element: <NotFoundPage />,
       },
@@ -208,11 +156,6 @@ const router = createBrowserRouter([
 });
 
 export default function AppRouter() {
-  // Initialize Google Sheets integration on app startup
-  if (GOOGLE_SHEETS_CONFIG.enabled && GOOGLE_SHEETS_CONFIG.scriptUrl) {
-    initializeGoogleSheets(GOOGLE_SHEETS_CONFIG.scriptUrl, GOOGLE_SHEETS_CONFIG.sheetName);
-  }
-
   return (
     <MemberProvider>
       <RouterProvider router={router} />

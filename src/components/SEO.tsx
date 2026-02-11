@@ -159,3 +159,36 @@ export function BreadcrumbSchema({ items }: { items: { name: string; url: string
 
   return null;
 }
+
+export function LocalBusinessSchema() {
+  useEffect(() => {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: defaults.siteName,
+      url: defaults.siteUrl,
+      description: defaults.description,
+      image: defaults.ogImage,
+      sameAs: [
+        'https://www.facebook.com/nikfinance',
+        'https://www.linkedin.com/company/nikfinance',
+        'https://twitter.com/nikfinance'
+      ]
+    };
+
+    let scriptTag = document.getElementById('local-business-schema');
+    if (!scriptTag) {
+      scriptTag = document.createElement('script');
+      scriptTag.id = 'local-business-schema';
+      scriptTag.setAttribute('type', 'application/ld+json');
+      document.head.appendChild(scriptTag);
+    }
+    scriptTag.textContent = JSON.stringify(schema);
+
+    return () => {
+      scriptTag?.remove();
+    };
+  }, []);
+
+  return null;
+}

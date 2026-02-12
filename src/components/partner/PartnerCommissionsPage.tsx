@@ -1,72 +1,32 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Filter, DollarSign, RefreshCw, Wifi, WifiOff } from 'lucide-react';
+import { Download, DollarSign, RefreshCw, Wifi, WifiOff } from 'lucide-react';
 import { ReferralCommissions, ReferralPartners } from '@/entities';
 import { BaseCrudService, useMember } from '@/integrations';
 import { Button } from '@/components/ui/button';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
-import { fetchReferralsFromSheet, isGoogleSheetsConfigured, testGoogleSheetsConnection, PartnerStats } from '@/lib/googleSheets';
 import { useToast } from '@/hooks/use-toast';
 
 export default function PartnerCommissionsPage() {
   const { member } = useMember();
   const { toast } = useToast();
   const [filteredCommissions, setFilteredCommissions] = useState<ReferralCommissions[]>([]);
-  const [googleSheetStats, setGoogleSheetStats] = useState<PartnerStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'PENDING' | 'PAID'>('ALL');
-  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('testing');
   const [partnerProfile, setPartnerProfile] = useState<ReferralPartners | null>(null);
-
-  // Test Google Sheets connection on mount
-  useEffect(() => {
-    const testConnection = async () => {
-      if (!isGoogleSheetsConfigured()) {
-        setConnectionStatus('disconnected');
-        return;
-      }
-
-      setConnectionStatus('testing');
-      const result = await testGoogleSheetsConnection();
-      
-      if (result.success) {
-        setConnectionStatus('connected');
-        console.log('✓ Google Sheets connection verified');
-      } else {
-        setConnectionStatus('disconnected');
-        console.warn('✗ Google Sheets connection failed:', result.message);
-      }
-    };
-
-    testConnection();
-  }, []);
-
-  // Auto-refresh data from Google Sheets every 30 seconds when connected
-  useEffect(() => {
-    if (connectionStatus !== 'connected' || !isGoogleSheetsConfigured() || !partnerProfile) {
-      return;
-    }
-
-    // Set up auto-refresh interval
-    const intervalId = setInterval(() => {
-      console.log('🔄 Auto-refreshing commissions data from Google Sheets...');
-      fetchCommissions(true);
-    }, 30000); // 30 seconds
-
-    // Cleanup interval on unmount
-    return () => clearInterval(intervalId);
-  }, [connectionStatus, partnerProfile]);
+  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('disconnected');
+  const [googleSheetStats, setGoogleSheetStats] = useState<any>(null);
 
   // Fetch partner profile
   useEffect(() => {
     const fetchPartnerProfile = async () => {
-      if (!member?._id) return;
+      if (!member?.loginEmail) return;
 
       try {
         const { items } = await BaseCrudService.getAll<ReferralPartners>('partners');
-        const profile = items.find(p => p._id === member._id);
+        const profile = items.find(p => p._id === member.loginEmail);
         if (profile) {
           setPartnerProfile(profile);
         }
@@ -76,7 +36,7 @@ export default function PartnerCommissionsPage() {
     };
 
     fetchPartnerProfile();
-  }, [member?._id]);
+  }, [member?.loginEmail]);
 
   // Fetch commissions exclusively from Google Sheets
   const fetchCommissions = async (isRefresh = false) => {
@@ -133,6 +93,21 @@ export default function PartnerCommissionsPage() {
       setRefreshing(false);
     }
   };
+
+  useEffect(() => {
+    fetchCommissions();
+  }, []);
+
+  // Set up auto-refresh interval
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      console.log('🔄 Auto-refreshing commissions data from Google Sheets...');
+      fetchCommissions(true);
+    }, 30000); // 30 seconds
+
+    // Cleanup interval on unmount
+    return () => clearInterval(intervalId);
+  }, [connectionStatus, partnerProfile]);
 
   useEffect(() => {
     if (connectionStatus !== 'testing' && partnerProfile) {

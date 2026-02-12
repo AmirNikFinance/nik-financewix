@@ -1,72 +1,30 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, TrendingUp, RefreshCw, Wifi, WifiOff } from 'lucide-react';
+import { Download, TrendingUp, RefreshCw } from 'lucide-react';
 import { Referrals, ReferralPartners } from '@/entities';
 import { BaseCrudService, useMember } from '@/integrations';
 import { Button } from '@/components/ui/button';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
-import { fetchReferralsFromSheet, isGoogleSheetsConfigured, testGoogleSheetsConnection, PartnerStats } from '@/lib/googleSheets';
 import { useToast } from '@/hooks/use-toast';
 
 export default function PartnerReferralsPage() {
   const { member } = useMember();
   const { toast } = useToast();
   const [filteredReferrals, setFilteredReferrals] = useState<Referrals[]>([]);
-  const [googleSheetStats, setGoogleSheetStats] = useState<PartnerStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'PENDING' | 'APPROVED' | 'REJECTED'>('ALL');
-  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('testing');
   const [partnerProfile, setPartnerProfile] = useState<ReferralPartners | null>(null);
-
-  // Test Google Sheets connection on mount
-  useEffect(() => {
-    const testConnection = async () => {
-      if (!isGoogleSheetsConfigured()) {
-        setConnectionStatus('disconnected');
-        return;
-      }
-
-      setConnectionStatus('testing');
-      const result = await testGoogleSheetsConnection();
-      
-      if (result.success) {
-        setConnectionStatus('connected');
-        console.log('✓ Google Sheets connection verified');
-      } else {
-        setConnectionStatus('disconnected');
-        console.warn('✗ Google Sheets connection failed:', result.message);
-      }
-    };
-
-    testConnection();
-  }, []);
-
-  // Auto-refresh data from Google Sheets every 30 seconds when connected
-  useEffect(() => {
-    if (connectionStatus !== 'connected' || !isGoogleSheetsConfigured() || !partnerProfile) {
-      return;
-    }
-
-    // Set up auto-refresh interval
-    const intervalId = setInterval(() => {
-      console.log('🔄 Auto-refreshing referrals data from Google Sheets...');
-      fetchReferrals(true);
-    }, 30000); // 30 seconds
-
-    // Cleanup interval on unmount
-    return () => clearInterval(intervalId);
-  }, [connectionStatus, partnerProfile]);
 
   // Fetch partner profile
   useEffect(() => {
     const fetchPartnerProfile = async () => {
-      if (!member?._id) return;
+      if (!member?.loginEmail) return;
 
       try {
         const { items } = await BaseCrudService.getAll<ReferralPartners>('partners');
-        const profile = items.find(p => p._id === member._id);
+        const profile = items.find(p => p._id === member.loginEmail);
         if (profile) {
           setPartnerProfile(profile);
         }
@@ -76,9 +34,9 @@ export default function PartnerReferralsPage() {
     };
 
     fetchPartnerProfile();
-  }, [member?._id]);
+  }, [member?.loginEmail]);
 
-  // Fetch referrals exclusively from Google Sheets
+  // Fetch referrals from CMS
   const fetchReferrals = async (isRefresh = false) => {
     if (isRefresh) {
       setRefreshing(true);
@@ -87,36 +45,15 @@ export default function PartnerReferralsPage() {
     }
 
     try {
-      // Fetch ONLY from Google Sheets - no CMS data
-      if (isGoogleSheetsConfigured() && connectionStatus === 'connected' && partnerProfile?.companyName) {
-        console.log('Fetching referrals from Google Sheets for company:', partnerProfile.companyName);
-        const stats = await fetchReferralsFromSheet(partnerProfile.companyName);
-        setGoogleSheetStats(stats);
-        
-        // Convert Google Sheet data to Referrals format
-        const sheetReferrals = stats.referrals.map((sheetData, index) => ({
-          _id: `gs-${index}`,
-          customerName: sheetData.customerName,
-          customerEmail: sheetData.email,
-          customerPhone: sheetData.phone,
-          loanType: sheetData.loanType,
-          loanAmount: parseFloat(sheetData.loanAmount) || 0,
-          referralStatus: sheetData.status as any,
-          submissionDate: sheetData.submissionDate,
-        })) as Referrals[];
-        
-        filterReferrals(sheetReferrals, statusFilter);
-        
-        if (isRefresh) {
-          toast({
-            title: 'Data Refreshed',
-            description: `Synced ${stats.referrals.length} referrals from Google Sheets`,
-            variant: 'default',
-          });
-        }
-      } else {
-        // No Google Sheets connection - show empty state
-        filterReferrals([], statusFilter);
+      const { items } = await BaseCrudService.getAll<Referrals>('referrals');
+      filterReferrals(items, statusFilter);
+      
+      if (isRefresh) {
+        toast({
+          title: 'Data Refreshed',
+          description: `Loaded ${items.length} referrals`,
+          variant: 'default',
+        });
       }
     } catch (error) {
       console.error('Error fetching referrals:', error);
@@ -135,10 +72,8 @@ export default function PartnerReferralsPage() {
   };
 
   useEffect(() => {
-    if (connectionStatus !== 'testing' && partnerProfile) {
-      fetchReferrals();
-    }
-  }, [connectionStatus, partnerProfile]);
+    fetchReferrals();
+  }, []);
 
   const filterReferrals = (items: Referrals[], status: 'ALL' | 'PENDING' | 'APPROVED' | 'REJECTED') => {
     if (status === 'ALL') {
@@ -150,20 +85,9 @@ export default function PartnerReferralsPage() {
 
   const handleStatusFilter = (status: 'ALL' | 'PENDING' | 'APPROVED' | 'REJECTED') => {
     setStatusFilter(status);
-    // Re-filter from Google Sheet stats
-    if (googleSheetStats) {
-      const sheetReferrals = googleSheetStats.referrals.map((sheetData, index) => ({
-        _id: `gs-${index}`,
-        customerName: sheetData.customerName,
-        customerEmail: sheetData.email,
-        customerPhone: sheetData.phone,
-        loanType: sheetData.loanType,
-        loanAmount: parseFloat(sheetData.loanAmount) || 0,
-        referralStatus: sheetData.status as any,
-        submissionDate: sheetData.submissionDate,
-      })) as Referrals[];
-      filterReferrals(sheetReferrals, status);
-    }
+    // Re-filter from current referrals
+    const allReferrals = filteredReferrals;
+    filterReferrals(allReferrals, status);
   };
 
   const totalReferrals = filteredReferrals.length;

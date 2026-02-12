@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Send, MessageCircle, Loader } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { useChatBot } from '@/hooks/useChatBot';
 
 interface Message {
   id: string;
@@ -24,7 +23,6 @@ export default function LendingAssistantPage() {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { sendMessage } = useChatBot();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -51,8 +49,8 @@ export default function LendingAssistantPage() {
     setIsLoading(true);
 
     try {
-      // Send to chatbot service
-      const response = await sendMessage(inputValue);
+      // Placeholder for chatbot service - to be implemented later
+      const response = 'This feature is temporarily unavailable. Please contact our team for assistance.';
 
       // Add assistant response
       const assistantMessage: Message = {

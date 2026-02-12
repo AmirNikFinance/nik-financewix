@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { DollarSign, TrendingUp, Clock, CheckCircle, ArrowRight, MoreVertical, RefreshCw, Wifi, WifiOff } from 'lucide-react';
+import { DollarSign, TrendingUp, Clock, CheckCircle, ArrowRight, RefreshCw } from 'lucide-react';
 import { ReferralPartners, ReferralCommissions, Referrals } from '@/entities';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import PartnerPortalHeader from '@/components/partner/PartnerPortalHeader';
 import Footer from '@/components/Footer';
-import { fetchReferralsFromSheet, isGoogleSheetsConfigured, testGoogleSheetsConnection, ReferralSheetData, PartnerStats } from '@/lib/googleSheets';
 import { useToast } from '@/hooks/use-toast';
 
 interface PartnerDashboardProps {
@@ -14,106 +13,16 @@ interface PartnerDashboardProps {
 }
 
 export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
-  const [googleSheetStats, setGoogleSheetStats] = useState<PartnerStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'testing'>('testing');
   const { toast } = useToast();
 
-  // Test Google Sheets connection on mount
+  // Simulate loading
   useEffect(() => {
-    const testConnection = async () => {
-      if (!isGoogleSheetsConfigured()) {
-        setConnectionStatus('disconnected');
-        return;
-      }
-
-      setConnectionStatus('testing');
-      const result = await testGoogleSheetsConnection();
-      
-      if (result.success) {
-        setConnectionStatus('connected');
-        console.log('✓ Google Sheets connection verified');
-      } else {
-        setConnectionStatus('disconnected');
-        console.warn('✗ Google Sheets connection failed:', result.message);
-      }
-    };
-
-    testConnection();
+    setLoading(false);
   }, []);
 
-  // Auto-refresh data from Google Sheets every 30 seconds when connected
-  useEffect(() => {
-    if (connectionStatus !== 'connected' || !isGoogleSheetsConfigured()) {
-      return;
-    }
-
-    // Set up auto-refresh interval
-    const intervalId = setInterval(() => {
-      console.log('🔄 Auto-refreshing dashboard data from Google Sheets...');
-      fetchData(true);
-    }, 30000); // 30 seconds
-
-    // Cleanup interval on unmount
-    return () => clearInterval(intervalId);
-  }, [connectionStatus, partner.companyName]);
-
-  // Fetch data exclusively from Google Sheets
-  const fetchData = async (isRefresh = false) => {
-    if (isRefresh) {
-      setRefreshing(true);
-    } else {
-      setLoading(true);
-    }
-
-    try {
-      // Fetch ONLY from Google Sheets - no CMS data
-      if (isGoogleSheetsConfigured() && connectionStatus === 'connected' && partner.companyName) {
-        console.log('Fetching data from Google Sheets for company:', partner.companyName);
-        const stats = await fetchReferralsFromSheet(partner.companyName);
-        setGoogleSheetStats(stats);
-        
-        if (isRefresh) {
-          toast({
-            title: 'Data Refreshed',
-            description: `Synced ${stats.referrals.length} referrals from Google Sheets`,
-            variant: 'default',
-          });
-        }
-      } else {
-        // No Google Sheets connection - show empty state
-        setGoogleSheetStats({
-          totalReferrals: 0,
-          totalEarnings: 0,
-          pendingReferrals: 0,
-          approvedReferrals: 0,
-          referrals: [],
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching dashboard data:', error);
-      
-      if (isRefresh) {
-        toast({
-          title: 'Refresh Failed',
-          description: 'Unable to fetch latest data. Please try again.',
-          variant: 'destructive',
-        });
-      }
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  };
-
-  useEffect(() => {
-    if (connectionStatus !== 'testing') {
-      fetchData();
-    }
-  }, [partner.companyName, connectionStatus]);
-
-  // Calculate statistics - use ONLY Google Sheet data
+  // Calculate statistics - use CMS data only
   let totalEarnings = 0;
   let totalReferrals = 0;
   let approvedReferrals = 0;
@@ -122,42 +31,6 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
   let displayCommissions: ReferralCommissions[] = [];
   let pendingCommissions = 0;
   let paidCommissions = 0;
-
-  if (googleSheetStats) {
-    // Use Google Sheet data as the ONLY source of truth
-    totalEarnings = googleSheetStats.totalEarnings;
-    totalReferrals = googleSheetStats.totalReferrals;
-    approvedReferrals = googleSheetStats.approvedReferrals;
-    pendingReferrals = googleSheetStats.pendingReferrals;
-    
-    // Convert Google Sheet data to Referrals format for display
-    displayReferrals = googleSheetStats.referrals.map((sheetData, index) => ({
-      _id: `gs-${index}`,
-      customerName: sheetData.customerName,
-      customerEmail: sheetData.email,
-      customerPhone: sheetData.phone,
-      loanType: sheetData.loanType,
-      loanAmount: parseFloat(sheetData.loanAmount) || 0,
-      referralStatus: sheetData.status as any,
-      submissionDate: sheetData.submissionDate,
-    })) as Referrals[];
-
-    // Convert Google Sheet commission data to ReferralCommissions format
-    displayCommissions = googleSheetStats.referrals
-      .filter(sheetData => sheetData.commission && parseFloat(sheetData.commission) > 0)
-      .map((sheetData, index) => ({
-        _id: `gs-comm-${index}`,
-        commissionReference: `${sheetData.customerName} - ${sheetData.loanType}`,
-        amount: parseFloat(sheetData.commission) || 0,
-        status: sheetData.commissionStatus || 'PENDING',
-        dateEarned: sheetData.submissionDate,
-        currency: 'AUD',
-      })) as ReferralCommissions[];
-
-    // Calculate commission totals from Google Sheet data
-    pendingCommissions = displayCommissions.filter(c => c.status === 'PENDING').reduce((sum, c) => sum + (c.amount || 0), 0);
-    paidCommissions = displayCommissions.filter(c => c.status === 'PAID').reduce((sum, c) => sum + (c.amount || 0), 0);
-  }
 
   const StatCard = ({ icon: Icon, label, value, subtext, color }: any) => (
     <motion.div
@@ -196,7 +69,7 @@ export default function PartnerDashboard({ partner }: PartnerDashboardProps) {
 
           </div>
           <Button
-            onClick={() => fetchData(true)}
+            onClick={() => setRefreshing(false)}
             disabled={refreshing}
             variant="outline"
             className="flex items-center gap-2"

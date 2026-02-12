@@ -95,7 +95,7 @@ What would you like to know?`,
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: data.response || 'Sorry, I encountered an error. Please try again.',
+        content: data.response || 'This feature is temporarily unavailable. Please contact our team for assistance.',
         timestamp: new Date()
       };
 
@@ -123,7 +123,7 @@ What would you like to know?`,
     
     // Track lead
     if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'chatbot_lead_capture', {
+      (window as any).gtag('event', 'form_submission', {
         page: 'residential_chat',
         email: leadEmail,
         has_phone: !!leadPhone

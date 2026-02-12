@@ -20,7 +20,9 @@ export default {
             },
             fontFamily: {
                 heading: ["Montserrat", "sans-serif"],
-                paragraph: ["lato-light", "sans-serif"]
+                paragraph: ["lato-light", "sans-serif"],
+                montserrat: ["Montserrat", "sans-serif"],
+                lato: ["Lato", "sans-serif"]
             },
             colors: {
                 accent: '#10b981',

@@ -105,9 +105,13 @@ export default function HomePage() {
   const [howItWorksSteps, setHowItWorksSteps] = useState<HowItWorksSteps[]>([]);
   const [reviews, setReviews] = useState<CustomerReviews[]>([]);
   const [whyChooseUsFeatures, setWhyChooseUsFeatures] = useState<WhyChooseUsFeatures[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Scroll Progress for Global Bar
-  const { scrollYProgress } = useScroll();
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
@@ -152,7 +156,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-accent selection:text-white overflow-clip">
+    <div ref={containerRef} className="min-h-screen bg-background font-sans selection:bg-accent selection:text-white overflow-clip">
       {/* SEO Meta Tags & Schema */}
       <SEO 
         title="Australia's Smartest Loan Marketplace"

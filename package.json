@@ -58,7 +58,7 @@
     "@wix/astro": "2.23.0",
     "@wix/astro-pages": "^2.0.1",
     "@wix/postcss-pseudo-to-data": "^1.0.0",
-    "@wix/babel-plugin-jsx-dynamic-data": "1.0.13",
+    "@wix/babel-plugin-jsx-dynamic-data": "1.0.17",
     "@wix/babel-plugin-jsx-source-attrs": "^1.1.0",
     "@wix/wix-data-items-sdk": "^1.0.469",
     "@wix/benefit-programs": "^1.0.121",
@@ -158,6 +158,15 @@
   "overrides": {
     "@wix/services-definitions": "^1.0.1",
     "@wix/services-manager": "^1.0.2",
-    "@wix/services-manager-react": "^1.0.3"
+    "@wix/services-manager-react": "^1.0.3",
+    "@wix/headless-forms": {
+      "@wix/locale-dataset-javascript": "npm:empty-npm-package@1.0.0"
+    },
+    "@wix/video": {
+      "@wix/editor-elements-definitions": "npm:empty-npm-package@1.0.0"
+    },
+    "@wix/workspace": {
+      "@wix/credits-types": "npm:empty-npm-package@1.0.0"
+    }
   }
 }

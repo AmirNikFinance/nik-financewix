@@ -70,16 +70,20 @@ export default function HomePageIsland() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const [loansData, stepsData, reviewsData, featuresData] = await Promise.all([
-        BaseCrudService.getAll<LoanOptions>('loanoptions'),
-        BaseCrudService.getAll<HowItWorksSteps>('howitworkssteps'),
-        BaseCrudService.getAll<CustomerReviews>('customerreviews'),
-        BaseCrudService.getAll<WhyChooseUsFeatures>('whychooseusfeatures'),
-      ]);
-      setLoanOptions(loansData.items);
-      setHowItWorksSteps(stepsData.items.sort((a, b) => (a.stepNumber || 0) - (b.stepNumber || 0)));
-      setReviews(reviewsData.items);
-      setWhyChooseUsFeatures(featuresData.items.filter(f => f.isActive).sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)));
+      try {
+        const [loansData, stepsData, reviewsData, featuresData] = await Promise.all([
+          BaseCrudService.getAll<LoanOptions>('loanoptions'),
+          BaseCrudService.getAll<HowItWorksSteps>('howitworkssteps'),
+          BaseCrudService.getAll<CustomerReviews>('customerreviews'),
+          BaseCrudService.getAll<WhyChooseUsFeatures>('whychooseusfeatures'),
+        ]);
+        setLoanOptions(loansData.items);
+        setHowItWorksSteps(stepsData.items.sort((a, b) => (a.stepNumber || 0) - (b.stepNumber || 0)));
+        setReviews(reviewsData.items);
+        setWhyChooseUsFeatures(featuresData.items.filter(f => f.isActive).sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)));
+      } catch (err) {
+        console.error('Failed to fetch CMS data:', err);
+      }
     };
     fetchData();
   }, []);
@@ -216,13 +220,13 @@ export default function HomePageIsland() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {loanOptions.map((loan, idx) => (
                 <AnimatedElement key={loan._id || idx} direction="up" delay={idx * 100}>
-                  <a href={`/${(loan.title || '').toLowerCase().replace(/\s+/g, '-')}`} className="block group">
+                  <a href={`/${(loan.loanName || '').toLowerCase().replace(/\s+/g, '-')}`} className="block group">
                     <div className="bg-white border border-gray-100 rounded-2xl p-8 hover:shadow-xl hover:border-accent/30 transition-all duration-300 h-full">
                       <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-all">
-                        {getLoanIcon(loan.title)}
+                        {getLoanIcon(loan.loanName)}
                       </div>
-                      <h3 className="font-heading text-xl font-bold text-foreground mb-3">{loan.title}</h3>
-                      <p className="font-paragraph text-foreground/70 text-sm leading-relaxed">{loan.description}</p>
+                      <h3 className="font-heading text-xl font-bold text-foreground mb-3">{loan.loanName}</h3>
+                      <p className="font-paragraph text-foreground/70 text-sm leading-relaxed">{loan.shortDescription}</p>
                       <div className="flex items-center gap-2 mt-4 text-accent font-semibold text-sm">
                         Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -248,8 +252,8 @@ export default function HomePageIsland() {
                 <AnimatedElement key={step._id || idx} direction="up" delay={idx * 150}>
                   <div className="text-center">
                     <div className="w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6">{step.stepNumber || idx + 1}</div>
-                    <h3 className="font-heading text-xl font-bold text-foreground mb-3">{step.title}</h3>
-                    <p className="font-paragraph text-foreground/70 text-sm leading-relaxed">{step.description}</p>
+                    <h3 className="font-heading text-xl font-bold text-foreground mb-3">{step.stepTitle}</h3>
+                    <p className="font-paragraph text-foreground/70 text-sm leading-relaxed">{step.stepDescription}</p>
                   </div>
                 </AnimatedElement>
               ))}
@@ -307,18 +311,18 @@ export default function HomePageIsland() {
                 <AnimatedElement key={review._id || idx} direction="up" delay={idx * 100}>
                   <div className="bg-light-gray rounded-2xl p-8 h-full flex flex-col">
                     <div className="flex gap-1 mb-4">
-                      {Array.from({ length: review.rating || 5 }).map((_, i) => (
+                      {Array.from({ length: review.starRating || 5 }).map((_, i) => (
                         <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                       ))}
                     </div>
-                    <p className="font-paragraph text-foreground/80 text-sm leading-relaxed flex-1 mb-4">"{review.comment}"</p>
+                    <p className="font-paragraph text-foreground/80 text-sm leading-relaxed flex-1 mb-4">"{review.reviewText}"</p>
                     <div className="flex items-center gap-3 pt-4 border-t border-gray-200">
                       <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
                         <span className="text-accent font-bold text-sm">{(review.customerName || 'A')[0]}</span>
                       </div>
                       <div>
                         <p className="font-heading font-semibold text-foreground text-sm">{review.customerName}</p>
-                        {review.loanType && <p className="font-paragraph text-foreground/50 text-xs">{review.loanType}</p>}
+                        {review.customerLocation && <p className="font-paragraph text-foreground/50 text-xs">{review.customerLocation}</p>}
                       </div>
                     </div>
                   </div>

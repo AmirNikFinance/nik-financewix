@@ -1,0 +1,391 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import BreadcrumbSchema from '@/components/schemas/BreadcrumbSchema.astro';
+import ServiceSchema from '@/components/schemas/ServiceSchema.astro';
+import FAQSchema from '@/components/schemas/FAQSchema.astro';
+
+const faqs = [
+  {
+    question: 'What interest rates can I get on a car loan?',
+    answer: 'Car loan interest rates through NIK Finance start from 4.5% p.a. for well-qualified borrowers. Your actual rate depends on factors including your credit score, loan amount, vehicle age, and whether the loan is secured or unsecured. Our AI matching technology compares rates from over 130 lenders to find the most competitive option for your situation.',
+  },
+  {
+    question: 'Can I get a car loan with bad credit?',
+    answer: 'Yes. NIK Finance works with specialist lenders who offer car finance for applicants with impaired credit histories, defaults, or past bankruptcies. While rates may be higher than standard products, our panel includes lenders focused on second-chance lending. We assess each application individually and match you with lenders most likely to approve your profile.',
+  },
+  {
+    question: 'How quickly can my car loan be approved?',
+    answer: 'Many car loans are approved within 14 minutes when all documentation is provided upfront. Our AI-powered system matches your profile against lender criteria instantly, allowing your dedicated finance specialist to submit to the best-fit lender without delay. Settlement can occur within 24 to 48 hours for straightforward applications.',
+  },
+  {
+    question: 'What documents do I need to apply for a car loan?',
+    answer: 'Typically you will need proof of identity (driver licence or passport), proof of income (two recent payslips or tax returns for self-employed applicants), bank statements covering the last 90 days, and details of the vehicle you wish to purchase. If you are trading in a vehicle, you will also need its registration details and payout figure if financed.',
+  },
+  {
+    question: 'Can I refinance my existing car loan?',
+    answer: 'Absolutely. If your current car loan has a high interest rate or unfavourable terms, refinancing through NIK Finance could reduce your repayments significantly. We compare your existing loan against offers from 130+ lenders and handle the entire switch for you at no cost. Visit our refinancing page to learn more.',
+  },
+  {
+    question: 'What is the maximum amount I can borrow for a car loan?',
+    answer: 'Car loan amounts through our lender panel range from $5,000 to $500,000 depending on the lender and your borrowing capacity. Loan terms are available from 1 to 7 years. Higher loan amounts typically require a stronger credit profile and may need additional supporting documentation such as asset and liability statements.',
+  },
+];
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.nik.finance/' },
+  { name: 'Car Loans', url: 'https://www.nik.finance/car-loans' },
+];
+
+const ctaUrl = 'https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Car Loans Australia | Fast & Flexible Car Finance"
+      description="Get approved for car loans fast. Competitive rates from 4.5%, flexible terms 1-7 years, new and used vehicles. Apply online in 5 minutes."
+      keywords="car loan Australia, car finance, used car loan, new car loan, car finance rates, bad credit car loan"
+      canonical="https://www.nik.finance/car-loans"
+    />
+  </Fragment>
+  <Fragment slot="schema">
+    <BreadcrumbSchema items={breadcrumbs} />
+    <ServiceSchema
+      serviceName="Car Loans Australia"
+      serviceDescription="Fast and flexible car finance solutions for new and used vehicles with competitive rates from 130+ lenders"
+      serviceUrl="https://www.nik.finance/car-loans"
+    />
+    <FAQSchema faqs={faqs} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary via-primary to-secondary py-20 md:py-28 overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-72 h-72 bg-accent rounded-full blur-3xl -translate-x-1/2 translate-y-1/2"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 text-center">
+      <nav aria-label="Breadcrumb" class="mb-6">
+        <ol class="flex items-center justify-center gap-2 text-sm text-primary-foreground/70">
+          <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+          <li aria-hidden="true">/</li>
+          <li class="text-white font-medium">Car Loans</li>
+        </ol>
+      </nav>
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+        Car Loans Australia
+      </h1>
+      <p class="font-paragraph text-lg md:text-xl text-primary-foreground/90 max-w-3xl mx-auto mb-10 leading-relaxed">
+        Whether you are buying your first car, upgrading to something newer, or financing a used vehicle, NIK Finance
+        connects you with competitive car loan rates from over 130 lenders. Our AI-powered matching finds the right
+        loan for your situation in minutes, not days.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={ctaUrl}
+          class="inline-flex items-center justify-center px-8 py-4 bg-accent hover:bg-accent/90 text-white font-heading font-bold rounded-lg text-lg transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+        >
+          Apply Now
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-heading font-semibold rounded-lg text-lg transition-all duration-200 border border-white/30"
+        >
+          Get Free Quote
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Benefits Section -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">
+          Why Choose NIK Finance for Your Car Loan
+        </h2>
+        <p class="font-paragraph text-lg text-foreground/70 max-w-2xl mx-auto">
+          We make car finance simple, fast, and affordable with access to Australia's widest lender panel.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Benefit 1 -->
+        <div class="bg-light-gray rounded-xl p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-primary mb-3">Competitive Rates from 4.5%</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            Access car loan rates starting from 4.5% p.a. by comparing offers across our panel of more than
+            130 Australian lenders, including major banks, credit unions, and specialist auto finance providers.
+          </p>
+        </div>
+        <!-- Benefit 2 -->
+        <div class="bg-light-gray rounded-xl p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-primary mb-3">Fast Approval in 14 Minutes</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            Our streamlined digital application and AI lender matching mean many car loans receive
+            conditional approval within 14 minutes. Get behind the wheel sooner without weeks of waiting.
+          </p>
+        </div>
+        <!-- Benefit 3 -->
+        <div class="bg-light-gray rounded-xl p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-primary mb-3">New & Used Vehicles</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            Finance brand-new vehicles from dealerships or quality used cars from private sellers and dealers.
+            We arrange loans for passenger vehicles, SUVs, utes, vans, and light commercial vehicles.
+          </p>
+        </div>
+        <!-- Benefit 4 -->
+        <div class="bg-light-gray rounded-xl p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-primary mb-3">Bad Credit Options</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            Past credit issues do not have to stop you. Our lender panel includes specialist financiers
+            experienced in non-conforming lending, offering pathways for applicants with defaults, judgments,
+            or prior bankruptcies.
+          </p>
+        </div>
+        <!-- Benefit 5 -->
+        <div class="bg-light-gray rounded-xl p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-primary mb-3">Flexible Terms 1-7 Years</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            Choose a repayment schedule that fits your budget. Loan terms range from 1 to 7 years, allowing you
+            to balance between lower monthly repayments over a longer period or paying less interest with a
+            shorter term.
+          </p>
+        </div>
+        <!-- Benefit 6 -->
+        <div class="bg-light-gray rounded-xl p-8 hover:shadow-lg transition-shadow duration-300">
+          <div class="w-14 h-14 bg-accent/10 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-primary mb-3">No Early Exit Fees</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            Many of our lender products come with no early repayment penalties, giving you the freedom to pay
+            off your car loan ahead of schedule and save on interest without being charged additional fees.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="py-16 md:py-24 bg-light-gray">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">
+          How Our Car Loan Process Works
+        </h2>
+        <p class="font-paragraph text-lg text-foreground/70 max-w-2xl mx-auto">
+          From enquiry to approval in four straightforward steps. No paperwork headaches, no branch visits required.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Step 1 -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-5">
+            <span class="text-white font-heading font-bold text-2xl">1</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-primary mb-3">Submit Your Enquiry</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            Complete our simple online application in under 5 minutes. Tell us about the vehicle you want,
+            your financial situation, and your preferred loan structure.
+          </p>
+        </div>
+        <!-- Step 2 -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-5">
+            <span class="text-white font-heading font-bold text-2xl">2</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-primary mb-3">AI Matches Your Profile</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            Our proprietary AI engine analyses your application against credit policies from 130+ lenders,
+            identifying the products with the highest chance of approval at the best rates.
+          </p>
+        </div>
+        <!-- Step 3 -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-5">
+            <span class="text-white font-heading font-bold text-2xl">3</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-primary mb-3">Expert Reviews Options</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            A dedicated finance specialist reviews the AI recommendations, provides personalised advice,
+            and ensures the loan structure aligns with your goals before submitting your application.
+          </p>
+        </div>
+        <!-- Step 4 -->
+        <div class="text-center">
+          <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-5">
+            <span class="text-white font-heading font-bold text-2xl">4</span>
+          </div>
+          <h3 class="font-heading text-lg font-bold text-primary mb-3">Fast Approval & Settlement</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed">
+            Receive your approval decision quickly, often within 14 minutes for car loans. Once approved,
+            settlement is coordinated so you can collect your vehicle without delay.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Car Loan Types Section -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">
+          Car Finance Options We Arrange
+        </h2>
+        <p class="font-paragraph text-lg text-foreground/70 max-w-2xl mx-auto">
+          Every driver's needs are different. We match you to the right car loan structure for your circumstances.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="border border-gray-200 rounded-xl p-8">
+          <h3 class="font-heading text-xl font-bold text-secondary mb-3">Secured Car Loans</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed mb-4">
+            The vehicle acts as security for the loan, typically resulting in lower interest rates. Ideal for
+            borrowers who want the most competitive rate possible on a vehicle they plan to keep for the loan term.
+          </p>
+          <ul class="space-y-2 font-paragraph text-foreground/70">
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> Lower interest rates than unsecured options</li>
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> Terms from 1 to 7 years available</li>
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> New and used vehicles eligible</li>
+          </ul>
+        </div>
+        <div class="border border-gray-200 rounded-xl p-8">
+          <h3 class="font-heading text-xl font-bold text-secondary mb-3">Unsecured Car Loans</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed mb-4">
+            No asset security required. Rates are slightly higher, but you have full ownership flexibility from
+            day one. Suitable for private purchases or when you want the freedom to sell the car at any time.
+          </p>
+          <ul class="space-y-2 font-paragraph text-foreground/70">
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> No vehicle security registered on PPSR</li>
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> Sell or trade anytime without lender consent</li>
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> Faster settlement process</li>
+          </ul>
+        </div>
+        <div class="border border-gray-200 rounded-xl p-8">
+          <h3 class="font-heading text-xl font-bold text-secondary mb-3">Novated Lease</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed mb-4">
+            Package your car finance and running costs into pre-tax salary deductions through your employer.
+            A novated lease can offer significant tax savings for eligible PAYG employees.
+          </p>
+          <ul class="space-y-2 font-paragraph text-foreground/70">
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> Reduce taxable income with pre-tax deductions</li>
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> Bundle running costs including fuel and insurance</li>
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> Available for new and used vehicles</li>
+          </ul>
+        </div>
+        <div class="border border-gray-200 rounded-xl p-8">
+          <h3 class="font-heading text-xl font-bold text-secondary mb-3">Chattel Mortgage</h3>
+          <p class="font-paragraph text-foreground/70 leading-relaxed mb-4">
+            A popular option for ABN holders and businesses purchasing a vehicle for work use. Claim GST on
+            the purchase price and interest as a business expense, with a balloon payment option to reduce
+            monthly repayments.
+          </p>
+          <ul class="space-y-2 font-paragraph text-foreground/70">
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> GST claimable on the vehicle purchase</li>
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> Interest deductible as a business expense</li>
+            <li class="flex items-start gap-2"><span class="text-accent font-bold mt-0.5">&#10003;</span> Optional balloon payment for lower repayments</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 md:py-24 bg-light-gray">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-primary mb-4">
+          Frequently Asked Questions About Car Loans
+        </h2>
+        <p class="font-paragraph text-lg text-foreground/70 max-w-2xl mx-auto">
+          Answers to the most common questions we receive about car finance in Australia.
+        </p>
+      </div>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-white rounded-xl p-6 group cursor-pointer">
+            <summary class="font-heading font-bold text-lg text-primary flex items-center justify-between list-none">
+              {faq.question}
+              <svg class="w-5 h-5 text-accent flex-shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <p class="font-paragraph text-foreground/70 mt-4 leading-relaxed">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Internal Links Section -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-primary mb-8 text-center">
+        Explore Related Services
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="/refinancing" class="block border border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-md transition-all duration-200 group">
+          <h3 class="font-heading font-bold text-primary group-hover:text-accent transition-colors">Refinancing</h3>
+          <p class="font-paragraph text-sm text-foreground/60 mt-2">Lower your existing car loan rate by switching to a better deal.</p>
+        </a>
+        <a href="/personal-loans" class="block border border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-md transition-all duration-200 group">
+          <h3 class="font-heading font-bold text-primary group-hover:text-accent transition-colors">Personal Loans</h3>
+          <p class="font-paragraph text-sm text-foreground/60 mt-2">Flexible finance for debt consolidation, travel, and more.</p>
+        </a>
+        <a href="/home-loans" class="block border border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-md transition-all duration-200 group">
+          <h3 class="font-heading font-bold text-primary group-hover:text-accent transition-colors">Home Loans</h3>
+          <p class="font-paragraph text-sm text-foreground/60 mt-2">Compare home loan rates from 130+ lenders.</p>
+        </a>
+        <a href="/contact" class="block border border-gray-200 rounded-xl p-6 hover:border-accent hover:shadow-md transition-all duration-200 group">
+          <h3 class="font-heading font-bold text-primary group-hover:text-accent transition-colors">Contact Us</h3>
+          <p class="font-paragraph text-sm text-foreground/60 mt-2">Speak with a car finance specialist today.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 md:py-24 bg-gradient-to-br from-primary to-secondary">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-6">
+        Ready to Drive Away With a Great Deal?
+      </h2>
+      <p class="font-paragraph text-lg text-primary-foreground/90 mb-10 max-w-2xl mx-auto leading-relaxed">
+        Apply online in under 5 minutes and let our AI-powered platform find the best car loan for your needs.
+        Our service is 100% free for borrowers -- lenders pay us, not you.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={ctaUrl}
+          class="inline-flex items-center justify-center px-8 py-4 bg-accent hover:bg-accent/90 text-white font-heading font-bold rounded-lg text-lg transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+        >
+          Apply Now
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-heading font-semibold rounded-lg text-lg transition-all duration-200 border border-white/30"
+        >
+          Talk to a Specialist
+        </a>
+      </div>
+      <p class="font-paragraph text-sm text-primary-foreground/60 mt-8">
+        NIK Finance Pty Ltd | ACN 685 393 917 | Credit Representative No. 567387 of Finsure Finance and Insurance Pty Ltd (Australian Credit Licence 384704)
+      </p>
+    </div>
+  </section>
+</BaseLayout>

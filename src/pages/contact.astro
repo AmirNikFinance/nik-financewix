@@ -1,0 +1,148 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import LocalBusinessSchema from '@/components/schemas/LocalBusinessSchema.astro';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Contact Us | NIK Finance"
+      description="Get in touch with NIK Finance. Call 1300 NIK FIN, email hello@nik.finance, or submit an enquiry online. Free loan broking service available Australia-wide."
+      keywords="contact NIK Finance, finance broker contact, loan enquiry Australia, mortgage broker phone, NIK Finance email"
+      canonical="https://www.nik.finance/contact"
+    />
+  </Fragment>
+  <Fragment slot="schema">
+    <LocalBusinessSchema />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-[#0d4d3e] to-[#1e3a5f] py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+        Contact Us
+      </h1>
+      <p class="font-paragraph text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
+        Have a question about your loan options? Our team is here to help. Reach out by phone, email, or send us a message below.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Information & Form -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+
+        <!-- Left Column: Contact Details -->
+        <div>
+          <h2 class="font-heading text-3xl font-bold text-[#333333] mb-8">Get in Touch</h2>
+
+          <!-- Email -->
+          <div class="flex items-start gap-4 mb-8">
+            <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-semibold text-[#333333] mb-1">Email</h3>
+              <a href="mailto:hello@nik.finance" class="font-paragraph text-[#10b981] hover:text-[#0d9668] transition-colors text-lg">hello@nik.finance</a>
+              <p class="font-paragraph text-[#333333]/60 text-sm mt-1">We typically respond within a few hours during business hours.</p>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="flex items-start gap-4 mb-8">
+            <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-semibold text-[#333333] mb-1">Phone</h3>
+              <a href="tel:1300645346" class="font-paragraph text-[#10b981] hover:text-[#0d9668] transition-colors text-lg">1300 NIK FIN</a>
+              <p class="font-paragraph text-[#333333]/60 text-sm mt-1">Speak directly with a finance specialist.</p>
+            </div>
+          </div>
+
+          <!-- Service Area -->
+          <div class="flex items-start gap-4 mb-8">
+            <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+            <div>
+              <h3 class="font-heading text-lg font-semibold text-[#333333] mb-1">Service Area</h3>
+              <p class="font-paragraph text-[#333333]/80 text-lg">Australia Wide</p>
+              <p class="font-paragraph text-[#333333]/60 text-sm mt-1">We serve customers in every state and territory across Australia.</p>
+            </div>
+          </div>
+
+          <!-- Business Hours -->
+          <div class="bg-[#f8fafb] rounded-3xl p-6 border border-[#333333]/5">
+            <h3 class="font-heading text-lg font-semibold text-[#333333] mb-4">Business Hours</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between font-paragraph text-[#333333]/80">
+                <span>Monday -- Friday</span>
+                <span class="font-semibold">9:00 AM -- 6:00 PM</span>
+              </div>
+              <div class="flex justify-between font-paragraph text-[#333333]/80">
+                <span>Saturday</span>
+                <span class="font-semibold">10:00 AM -- 4:00 PM</span>
+              </div>
+              <div class="flex justify-between font-paragraph text-[#333333]/80">
+                <span>Sunday</span>
+                <span class="font-semibold text-[#333333]/50">Closed</span>
+              </div>
+            </div>
+            <p class="font-paragraph text-sm text-[#333333]/50 mt-4">
+              Online applications are available 24/7. Submit your enquiry anytime and we will be in touch during business hours.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Column: Contact Form Placeholder -->
+        <div>
+          <div id="contact-form" class="bg-white border border-foreground/10 rounded-3xl p-8">
+            <h2 class="font-heading text-2xl font-semibold text-foreground mb-6">Send us a Message</h2>
+            <p class="font-paragraph text-foreground/60">Contact form loading...</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links Section -->
+  <section class="py-16 md:py-20 bg-[#f8fafb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="font-heading text-3xl font-bold text-[#333333] mb-4">Looking for something specific?</h2>
+        <p class="font-paragraph text-lg text-[#333333]/70">Explore our services or start your application today.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="/home-loans" class="block bg-white rounded-2xl p-6 text-center border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2">Home Loans</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">Purchase, refinance & investment</p>
+        </a>
+        <a href="/car-loans" class="block bg-white rounded-2xl p-6 text-center border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2">Car Loans</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">New & used vehicle finance</p>
+        </a>
+        <a href="/personal-loans" class="block bg-white rounded-2xl p-6 text-center border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2">Personal Loans</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">Debt consolidation & more</p>
+        </a>
+        <a href="/apply" class="block bg-[#10b981] rounded-2xl p-6 text-center hover:bg-[#0d9668] transition-colors duration-200">
+          <h3 class="font-heading text-lg font-semibold text-white mb-2">Apply Now</h3>
+          <p class="font-paragraph text-sm text-white/80">Free, no obligation</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="py-8 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="font-paragraph text-sm text-[#333333]/50">
+        NIK Finance Pty Ltd (ACN 685 393 917) is a Credit Representative (No. 567387) of Finsure Finance & Insurance Pty Ltd (Australian Credit Licence 384704).
+      </p>
+    </div>
+  </section>
+</BaseLayout>

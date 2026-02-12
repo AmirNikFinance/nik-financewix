@@ -1,0 +1,71 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+  author?: string;
+  section?: string;
+  keywords?: string;
+}
+
+const {
+  title,
+  description,
+  url,
+  image = 'https://static.wixstatic.com/media/e994c8_fe9aab1d39d448fb8e78e1ae53648c58~mv2.png',
+  datePublished,
+  dateModified,
+  author = 'NIK Finance Team',
+  section,
+  keywords,
+} = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: title,
+  description,
+  image: {
+    '@type': 'ImageObject',
+    url: image,
+    width: 1200,
+    height: 630,
+  },
+  ...(datePublished && { datePublished }),
+  ...(dateModified && { dateModified }),
+  author: {
+    '@type': 'Person',
+    name: author,
+    url: 'https://www.nik.finance/about',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'NIK Finance',
+    url: 'https://www.nik.finance',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://static.wixstatic.com/media/e994c8_fe9aab1d39d448fb8e78e1ae53648c58~mv2.png',
+      width: 200,
+      height: 60,
+    },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': url,
+  },
+  inLanguage: 'en-AU',
+  isAccessibleForFree: true,
+  ...(section && { articleSection: section }),
+  ...(keywords && { keywords }),
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: ['h1', '.article-summary'],
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

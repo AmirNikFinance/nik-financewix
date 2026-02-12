@@ -1,0 +1,44 @@
+---
+interface Props {
+  serviceName: string;
+  serviceDescription: string;
+  serviceUrl: string;
+  serviceType?: string;
+  areaServed?: string;
+}
+
+const {
+  serviceName,
+  serviceDescription,
+  serviceUrl,
+  serviceType = 'FinancialProduct',
+  areaServed = 'Australia',
+} = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType,
+  name: serviceName,
+  description: serviceDescription,
+  url: serviceUrl,
+  provider: {
+    '@type': 'Organization',
+    '@id': 'https://www.nik.finance/#organization',
+    name: 'NIK Finance',
+  },
+  areaServed: {
+    '@type': areaServed === 'Australia' ? 'Country' : 'City',
+    name: areaServed,
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'AUD',
+    description: 'Free broking service for borrowers. Commission paid by lenders.',
+  },
+  termsOfService: 'https://www.nik.finance/privacy-policy',
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

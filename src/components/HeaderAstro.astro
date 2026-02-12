@@ -1,0 +1,167 @@
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '' } = Astro.props;
+const path = currentPath || Astro.url.pathname;
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/calculators', label: 'Calculators' },
+];
+
+const serviceLinks = [
+  { href: '/home-loans', label: 'Home Loans' },
+  { href: '/car-loans', label: 'Car Loans' },
+  { href: '/personal-loans', label: 'Personal Loans' },
+  { href: '/business-loans', label: 'Business Loans' },
+  { href: '/refinancing', label: 'Refinancing' },
+];
+---
+
+<header class="bg-white sticky top-0 z-50 shadow-sm">
+  <div class="max-w-[120rem] mx-auto px-8 py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
+        <span class="font-heading text-2xl font-bold text-primary">
+          NIK FINANCE
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-6">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`font-paragraph text-base transition-colors duration-300 ${
+              path === link.href
+                ? 'text-primary font-semibold'
+                : 'text-foreground hover:text-primary'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+
+        <!-- Services Dropdown -->
+        <div class="relative group">
+          <button
+            class="font-paragraph text-base text-foreground hover:text-primary transition-colors duration-300 flex items-center gap-1"
+            aria-haspopup="true"
+          >
+            Services
+            <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+            <div class="py-2">
+              {serviceLinks.map(link => (
+                <a
+                  href={link.href}
+                  class={`block px-4 py-2.5 font-paragraph text-sm transition-colors ${
+                    path === link.href
+                      ? 'text-primary bg-primary/5 font-semibold'
+                      : 'text-foreground hover:text-primary hover:bg-primary/5'
+                  }`}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- CTA Button (Desktop) -->
+      <a
+        href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
+        class="hidden lg:block bg-accent text-white font-paragraph font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 hover:scale-105"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Start Application
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden text-foreground p-2"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+      >
+        <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav id="mobile-menu" class="lg:hidden hidden mt-4 pb-4 border-t border-gray-100 pt-4">
+      <div class="flex flex-col gap-3">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`font-paragraph text-base py-1 transition-colors ${
+              path === link.href
+                ? 'text-primary font-semibold'
+                : 'text-foreground hover:text-primary'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+
+        <div class="border-t border-gray-100 pt-3 mt-1">
+          <p class="font-heading text-sm font-semibold text-foreground/60 mb-2 uppercase tracking-wider">Services</p>
+          {serviceLinks.map(link => (
+            <a
+              href={link.href}
+              class={`block font-paragraph text-base py-1 transition-colors ${
+                path === link.href
+                  ? 'text-primary font-semibold'
+                  : 'text-foreground hover:text-primary'
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <a
+          href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
+          class="mt-3 bg-accent text-white font-paragraph font-semibold px-6 py-3 rounded-full hover:bg-primary transition-all duration-300 text-center"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Start Application
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  if (btn && menu && iconOpen && iconClose) {
+    btn.addEventListener('click', () => {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  }
+</script>

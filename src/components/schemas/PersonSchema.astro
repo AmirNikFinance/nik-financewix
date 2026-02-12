@@ -1,0 +1,30 @@
+---
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://www.nik.finance/about#founder',
+  name: 'Amir Nikibin',
+  jobTitle: 'Founder & Director',
+  description: 'Founder of NIK Finance with expertise in finance and technology, passionate about using AI to make lending faster, smarter, and more transparent for Australians.',
+  url: 'https://www.nik.finance/about',
+  worksFor: {
+    '@type': 'Organization',
+    '@id': 'https://www.nik.finance/#organization',
+    name: 'NIK Finance',
+  },
+  knowsAbout: [
+    'Mortgage Broking',
+    'Car Finance',
+    'Personal Loans',
+    'Business Finance',
+    'AI in Finance',
+    'Lending Technology',
+    'Australian Financial Services',
+  ],
+  sameAs: [
+    'https://www.linkedin.com/in/amirnikibin',
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

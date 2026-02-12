@@ -1,0 +1,78 @@
+---
+import HeaderAstro from '@/components/HeaderAstro.astro';
+import FooterAstro from '@/components/FooterAstro.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  canonical?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  section?: string;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  canonical,
+  ogImage,
+  type = 'website',
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+  author,
+  section,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en-AU" class="w-full h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0d4d3e" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://static.parastorage.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- SEO Meta Tags (server-rendered) -->
+    <slot name="seo" />
+
+    <!-- Schema Markup (server-rendered) -->
+    <slot name="schema" />
+
+    <!-- Google Analytics placeholder -->
+    <!-- Uncomment and replace G-XXXXXXXXXX with your GA4 Measurement ID -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+
+    <!-- Google Search Console verification placeholder -->
+    <!-- <meta name="google-site-verification" content="[YOUR_VERIFICATION_CODE]" /> -->
+  </head>
+  <body class="w-full h-full bg-white text-foreground">
+    <HeaderAstro currentPath={Astro.url.pathname} />
+
+    <main>
+      <slot />
+    </main>
+
+    <FooterAstro />
+  </body>
+</html>

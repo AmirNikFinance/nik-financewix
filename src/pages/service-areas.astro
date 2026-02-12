@@ -1,0 +1,153 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import BreadcrumbSchema from '@/components/schemas/BreadcrumbSchema.astro';
+import OrganizationSchema from '@/components/schemas/OrganizationSchema.astro';
+
+const breadcrumbs = [
+  { name: 'Home', url: 'https://www.nik.finance/' },
+  { name: 'Service Areas', url: 'https://www.nik.finance/service-areas' },
+];
+
+const cities = [
+  { name: 'Sydney', state: 'NSW', slug: 'sydney', description: 'Australia\'s largest city with a dynamic property and automotive market.' },
+  { name: 'Melbourne', state: 'VIC', slug: 'melbourne', description: 'Victoria\'s capital with diverse lending opportunities across every suburb.' },
+  { name: 'Brisbane', state: 'QLD', slug: 'brisbane', description: 'Queensland\'s fast-growing capital, boosted by 2032 Olympics infrastructure.' },
+  { name: 'Perth', state: 'WA', slug: 'perth', description: 'Western Australia\'s capital with unique FIFO and mining industry lending needs.' },
+  { name: 'Adelaide', state: 'SA', slug: 'adelaide', description: 'South Australia\'s capital offering strong value and growing defence industry.' },
+  { name: 'Canberra', state: 'ACT', slug: 'canberra', description: 'Australia\'s capital territory with stable public sector employment.' },
+  { name: 'Gold Coast', state: 'QLD', slug: 'gold-coast', description: 'Queensland\'s second city with thriving tourism and lifestyle markets.' },
+];
+
+const loanTypes = [
+  { name: 'Home Loans', slug: 'home-loans', icon: '🏠', description: 'Purchase, refinance, investment property, first home buyer, construction, and equity release.' },
+  { name: 'Car Loans', slug: 'car-loans', icon: '🚗', description: 'New and used vehicle finance, commercial vehicles, green vehicle loans, and refinancing.' },
+  { name: 'Personal Loans', slug: 'personal-loans', icon: '💰', description: 'Secured and unsecured loans for debt consolidation, renovations, travel, and more.' },
+  { name: 'Business Loans', slug: 'business-loans', icon: '🏢', description: 'Working capital, equipment finance, commercial property, and invoice finance.' },
+];
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Service Areas | Mortgage Broker & Finance Broker Australia Wide"
+      description="NIK Finance serves all major Australian cities. Find a mortgage broker or finance broker in Sydney, Melbourne, Brisbane, Perth, Adelaide, Canberra, and Gold Coast."
+      keywords="mortgage broker Sydney, finance broker Melbourne, home loan Brisbane, car loan Perth, personal loan Adelaide, business loan Canberra, Gold Coast finance"
+      canonical="https://www.nik.finance/service-areas"
+    />
+  </Fragment>
+  <Fragment slot="schema">
+    <BreadcrumbSchema items={breadcrumbs} />
+    <OrganizationSchema />
+  </Fragment>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-primary to-secondary py-16 md:py-24">
+    <div class="max-w-[100rem] mx-auto px-8">
+      <nav class="mb-6">
+        <ol class="flex items-center gap-2 font-paragraph text-sm text-white/60">
+          <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
+          <li>/</li>
+          <li class="text-white">Service Areas</li>
+        </ol>
+      </nav>
+      <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
+        Finance Broker Service Areas
+      </h1>
+      <p class="font-paragraph text-lg text-white/90 max-w-3xl">
+        NIK Finance serves customers across Australia. Whether you're in Sydney, Melbourne, Brisbane, or anywhere in between, our AI-powered lending platform connects you with 130+ lenders for the best loan match.
+      </p>
+    </div>
+  </section>
+
+  <!-- Service Areas by City -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-[100rem] mx-auto px-8">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 text-center">Browse by City</h2>
+      <p class="font-paragraph text-lg text-foreground/70 text-center mb-12 max-w-2xl mx-auto">
+        Find finance solutions tailored to your local market. Click on a city to explore available services.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {cities.map(city => (
+          <div class="bg-light-gray rounded-2xl p-8 hover:shadow-lg transition-all duration-300">
+            <h3 class="font-heading text-2xl font-bold text-foreground mb-2">{city.name}, {city.state}</h3>
+            <p class="font-paragraph text-foreground/70 text-sm mb-6">{city.description}</p>
+            <div class="flex flex-col gap-2">
+              {loanTypes.map(loan => (
+                <a
+                  href={`/${loan.slug}-${city.slug}`}
+                  class="flex items-center gap-3 px-4 py-2.5 bg-white rounded-xl hover:bg-accent/5 hover:text-accent transition-all text-foreground font-paragraph text-sm group"
+                >
+                  <span class="text-lg">{loan.icon}</span>
+                  <span class="group-hover:translate-x-1 transition-transform">{loan.name} {city.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas by Loan Type -->
+  <section class="py-16 md:py-24 bg-light-gray">
+    <div class="max-w-[100rem] mx-auto px-8">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 text-center">Browse by Loan Type</h2>
+      <p class="font-paragraph text-lg text-foreground/70 text-center mb-12 max-w-2xl mx-auto">
+        Find the right loan product across all our service areas.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {loanTypes.map(loan => (
+          <div class="bg-white rounded-2xl p-8 hover:shadow-lg transition-all duration-300">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-3xl">{loan.icon}</span>
+              <h3 class="font-heading text-2xl font-bold text-foreground">{loan.name}</h3>
+            </div>
+            <p class="font-paragraph text-foreground/70 text-sm mb-6">{loan.description}</p>
+            <div class="flex flex-wrap gap-2">
+              <a href={`/${loan.slug}`} class="px-4 py-2 bg-primary text-white rounded-full font-paragraph text-sm hover:bg-accent transition-colors">All Australia</a>
+              {cities.map(city => (
+                <a
+                  href={`/${loan.slug}-${city.slug}`}
+                  class="px-4 py-2 bg-light-gray text-foreground rounded-full font-paragraph text-sm hover:bg-accent hover:text-white transition-colors"
+                >
+                  {city.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 bg-gradient-to-r from-primary to-secondary">
+    <div class="max-w-[100rem] mx-auto px-8 text-center">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-6">
+        Can't Find Your Area?
+      </h2>
+      <p class="font-paragraph text-lg text-white/80 max-w-2xl mx-auto mb-8">
+        NIK Finance serves customers Australia-wide. Even if your city isn't listed above, we can help you find the right loan from 130+ lenders. Get in touch today.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
+          class="bg-accent text-white font-paragraph font-semibold px-8 py-4 rounded-full hover:bg-accent/90 transition-all text-center"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Apply Now
+        </a>
+        <a
+          href="/contact"
+          class="bg-white/10 text-white border border-white/30 font-paragraph font-semibold px-8 py-4 rounded-full hover:bg-white/20 transition-all text-center"
+        >
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

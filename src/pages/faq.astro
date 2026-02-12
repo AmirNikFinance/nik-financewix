@@ -1,0 +1,373 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import FAQSchema from '@/components/schemas/FAQSchema.astro';
+
+const allFaqs = [
+  // General
+  { question: 'Is NIK Finance really free?', answer: 'Yes, our service is 100% free for borrowers. NIK Finance is paid a commission by the lender when your loan settles. There are no application fees, no broker fees, and no hidden charges. You never pay us anything.' },
+  { question: 'How many lenders does NIK Finance have access to?', answer: 'We have access to a panel of over 130 lenders across Australia, including major banks, credit unions, non-bank lenders, and specialist finance providers. This gives you a wide range of options for home loans, car loans, personal loans, and business finance.' },
+  { question: 'How does AI matching work?', answer: 'Our AI-powered platform analyses your financial profile -- including income, expenses, credit history, and loan requirements -- against the credit policies of 130+ lenders. It instantly identifies which lenders are most likely to approve your application and offer competitive rates, saving you time and increasing your chances of approval.' },
+  { question: 'How fast can I get approved?', answer: 'Approval times vary by loan type. Car loans can be approved in as little as 14 minutes. Personal loans typically take 1-3 business days. Home loans usually take 3-10 business days depending on the lender and complexity of the application. Our team works to expedite every application.' },
+  { question: 'Is NIK Finance a bank?', answer: 'No, NIK Finance is not a bank. We are an Australian finance broker (Credit Representative No. 567387) authorised under Finsure Finance & Insurance Pty Ltd (Australian Credit Licence 384704). We act as an intermediary between you and lenders to find the best loan for your situation.' },
+  // Home Loans
+  { question: 'What types of home loans can NIK Finance help with?', answer: 'We can help with a wide range of home loans including owner-occupier purchases, investment property loans, first home buyer loans, refinancing, construction loans, bridging finance, and low-doc home loans. Our panel of 130+ lenders means we can cater to most situations.' },
+  { question: 'Can NIK Finance help first home buyers?', answer: 'Absolutely. We specialise in helping first home buyers navigate the process. Our team can guide you through government grants and schemes like the First Home Owner Grant (FHOG), First Home Guarantee, and stamp duty concessions. We will find lenders that offer competitive rates and low deposit options for first-time buyers.' },
+  { question: 'Can I refinance my home loan through NIK Finance?', answer: 'Yes, refinancing is one of our most popular services. We compare your current home loan against offers from 130+ lenders to see if you could get a better rate, lower repayments, or access equity. Our service is free, and there is no obligation to proceed if the savings are not worthwhile.' },
+  { question: 'How much can I borrow for a home loan?', answer: 'Your borrowing capacity depends on factors like your income, expenses, existing debts, deposit size, and the property you are purchasing. Use our free borrowing power calculator on our calculators page for an estimate, or submit an enquiry and our team will provide a detailed assessment based on current lender criteria.' },
+  // Car Loans
+  { question: 'Can I get a car loan for a used vehicle?', answer: 'Yes, we can arrange finance for both new and used vehicles. Our lender panel includes providers who specialise in used car finance, so whether you are buying from a dealer or privately, we can help you find a competitive rate.' },
+  { question: 'How quickly can a car loan be approved?', answer: 'Car loans are among the fastest to approve. With our AI matching and streamlined application process, some car loans can be approved in as little as 14 minutes. The exact timeframe depends on the lender, your circumstances, and how quickly you can provide any required documentation.' },
+  { question: 'Do I need a deposit for a car loan?', answer: 'A deposit is not always required for a car loan, though having one can help you secure a better interest rate and lower repayments. Some lenders offer 100% finance for eligible borrowers. Our team will advise you on the best approach based on your situation.' },
+  { question: 'Can I finance a motorcycle, boat, or caravan?', answer: 'Yes, our lender panel includes providers that finance motorcycles, boats, caravans, campervans, and other recreational vehicles. The process is similar to a car loan. Submit an enquiry through our platform and we will match you with suitable lenders.' },
+  // Personal Loans
+  { question: 'What can I use a personal loan for?', answer: 'Personal loans can be used for a wide range of purposes including debt consolidation, home renovations, travel, medical expenses, weddings, education, and unexpected bills. When you apply, simply let us know the purpose and we will match you with lenders who cater to your needs.' },
+  { question: 'Can I consolidate my debts with a personal loan?', answer: 'Yes, debt consolidation is one of the most common uses for personal loans. By combining multiple debts into a single loan, you can simplify your repayments and potentially reduce the total interest you pay. Our team will assess whether debt consolidation makes financial sense for your situation.' },
+  { question: 'What is the difference between a secured and unsecured personal loan?', answer: 'A secured personal loan is backed by an asset (such as a car or property), which typically results in a lower interest rate. An unsecured personal loan does not require an asset as security, but may have a higher interest rate. Our AI will match you with the best option based on your profile and preferences.' },
+  { question: 'How much can I borrow with a personal loan?', answer: 'Personal loan amounts typically range from $2,000 to $75,000, depending on the lender and your financial circumstances. Factors such as your income, expenses, credit history, and the purpose of the loan will determine how much you can borrow. Submit an enquiry for a personalised assessment.' },
+  // Application Process
+  { question: 'What information do I need to apply?', answer: 'To get started, you only need basic details such as your name, contact information, employment status, approximate income, and the type of loan you are looking for. No documents are required at the initial enquiry stage. If you proceed with a lender, you may need to provide identification, payslips, and bank statements.' },
+  { question: 'Will my credit score be affected by applying?', answer: 'No. Submitting an enquiry through NIK Finance does not affect your credit score. A formal credit check is only conducted when you choose to proceed with a specific lender and provide your explicit consent. We always inform you before any credit enquiry is made.' },
+  { question: 'Can I apply if I have bad credit?', answer: 'Yes, we work with a number of specialist lenders who cater to borrowers with adverse credit history. While options may be more limited and rates may be higher, our AI will identify lenders whose policies align with your circumstances. Visit our bad credit loans page for more information.' },
+  { question: 'How do I track my application progress?', answer: 'Once you submit your enquiry, a dedicated finance specialist is assigned to your case. They will keep you updated at every stage via your preferred communication method -- phone, email, or SMS. You can also contact us at any time on 1300 NIK FIN or hello@nik.finance for an update.' },
+];
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Frequently Asked Questions | NIK Finance"
+      description="Find answers to common questions about car loans, home loans, personal loans, and our AI-powered broking service. Learn how NIK Finance works, what it costs, and how to apply."
+      keywords="NIK Finance FAQ, car loan questions, home loan FAQ, personal loan questions, finance broker FAQ, loan application questions, AI loan matching"
+      canonical="https://www.nik.finance/faq"
+    />
+  </Fragment>
+  <Fragment slot="schema">
+    <FAQSchema faqs={allFaqs} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-[#0d4d3e] to-[#1e3a5f] py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+        Frequently Asked Questions
+      </h1>
+      <p class="font-paragraph text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
+        Everything you need to know about NIK Finance, our loan services, and the application process. Can't find what you are looking for? <a href="/contact" class="text-[#10b981] hover:text-[#10b981]/80 underline">Contact us</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Navigation -->
+  <section class="py-8 bg-white border-b border-[#333333]/5">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="flex flex-wrap gap-3 justify-center">
+        <a href="#general" class="font-paragraph text-sm font-semibold px-4 py-2 rounded-full bg-[#10b981]/10 text-[#0d4d3e] hover:bg-[#10b981]/20 transition-colors">General</a>
+        <a href="#home-loans" class="font-paragraph text-sm font-semibold px-4 py-2 rounded-full bg-[#10b981]/10 text-[#0d4d3e] hover:bg-[#10b981]/20 transition-colors">Home Loans</a>
+        <a href="#car-loans" class="font-paragraph text-sm font-semibold px-4 py-2 rounded-full bg-[#10b981]/10 text-[#0d4d3e] hover:bg-[#10b981]/20 transition-colors">Car Loans</a>
+        <a href="#personal-loans" class="font-paragraph text-sm font-semibold px-4 py-2 rounded-full bg-[#10b981]/10 text-[#0d4d3e] hover:bg-[#10b981]/20 transition-colors">Personal Loans</a>
+        <a href="#application-process" class="font-paragraph text-sm font-semibold px-4 py-2 rounded-full bg-[#10b981]/10 text-[#0d4d3e] hover:bg-[#10b981]/20 transition-colors">Application Process</a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- General FAQs -->
+  <section id="general" class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="font-paragraph text-sm font-semibold uppercase tracking-wider text-[#10b981] mb-2">General</p>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#333333]">General Questions</h2>
+      </div>
+      <div class="space-y-4">
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Is NIK Finance really free?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Yes, our service is 100% free for borrowers. NIK Finance is paid a commission by the lender when your loan settles. There are no application fees, no broker fees, and no hidden charges. You never pay us anything.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>How many lenders does NIK Finance have access to?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">We have access to a panel of over 130 lenders across Australia, including major banks, credit unions, non-bank lenders, and specialist finance providers. This gives you a wide range of options for home loans, car loans, personal loans, and business finance.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>How does AI matching work?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Our AI-powered platform analyses your financial profile -- including income, expenses, credit history, and loan requirements -- against the credit policies of 130+ lenders. It instantly identifies which lenders are most likely to approve your application and offer competitive rates, saving you time and increasing your chances of approval.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>How fast can I get approved?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Approval times vary by loan type. Car loans can be approved in as little as 14 minutes. Personal loans typically take 1-3 business days. Home loans usually take 3-10 business days depending on the lender and complexity of the application. Our team works to expedite every application.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Is NIK Finance a bank?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">No, NIK Finance is not a bank. We are an Australian finance broker (Credit Representative No. 567387) authorised under Finsure Finance & Insurance Pty Ltd (Australian Credit Licence 384704). We act as an intermediary between you and lenders to find the best loan for your situation.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Home Loans FAQs -->
+  <section id="home-loans" class="py-16 md:py-20 bg-[#f8fafb]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="font-paragraph text-sm font-semibold uppercase tracking-wider text-[#10b981] mb-2">Home Loans</p>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#333333]">Home Loan Questions</h2>
+      </div>
+      <div class="space-y-4">
+        <details class="group bg-white rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>What types of home loans can NIK Finance help with?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">We can help with a wide range of home loans including owner-occupier purchases, investment property loans, first home buyer loans, refinancing, construction loans, bridging finance, and low-doc home loans. Our panel of 130+ lenders means we can cater to most situations.</p>
+          </div>
+        </details>
+
+        <details class="group bg-white rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Can NIK Finance help first home buyers?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Absolutely. We specialise in helping first home buyers navigate the process. Our team can guide you through government grants and schemes like the First Home Owner Grant (FHOG), First Home Guarantee, and stamp duty concessions. We will find lenders that offer competitive rates and low deposit options for first-time buyers.</p>
+          </div>
+        </details>
+
+        <details class="group bg-white rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Can I refinance my home loan through NIK Finance?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Yes, refinancing is one of our most popular services. We compare your current home loan against offers from 130+ lenders to see if you could get a better rate, lower repayments, or access equity. Our service is free, and there is no obligation to proceed if the savings are not worthwhile.</p>
+          </div>
+        </details>
+
+        <details class="group bg-white rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>How much can I borrow for a home loan?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Your borrowing capacity depends on factors like your income, expenses, existing debts, deposit size, and the property you are purchasing. Use our free <a href="/calculators" class="text-[#10b981] hover:text-[#0d9668] underline">borrowing power calculator</a> for an estimate, or submit an enquiry and our team will provide a detailed assessment based on current lender criteria.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Car Loans FAQs -->
+  <section id="car-loans" class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="font-paragraph text-sm font-semibold uppercase tracking-wider text-[#10b981] mb-2">Car Loans</p>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#333333]">Car Loan Questions</h2>
+      </div>
+      <div class="space-y-4">
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Can I get a car loan for a used vehicle?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Yes, we can arrange finance for both new and used vehicles. Our lender panel includes providers who specialise in used car finance, so whether you are buying from a dealer or privately, we can help you find a competitive rate.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>How quickly can a car loan be approved?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Car loans are among the fastest to approve. With our AI matching and streamlined application process, some car loans can be approved in as little as 14 minutes. The exact timeframe depends on the lender, your circumstances, and how quickly you can provide any required documentation.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Do I need a deposit for a car loan?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">A deposit is not always required for a car loan, though having one can help you secure a better interest rate and lower repayments. Some lenders offer 100% finance for eligible borrowers. Our team will advise you on the best approach based on your situation.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Can I finance a motorcycle, boat, or caravan?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Yes, our lender panel includes providers that finance motorcycles, boats, caravans, campervans, and other recreational vehicles. The process is similar to a car loan. Submit an enquiry through our platform and we will match you with suitable lenders.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Personal Loans FAQs -->
+  <section id="personal-loans" class="py-16 md:py-20 bg-[#f8fafb]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="font-paragraph text-sm font-semibold uppercase tracking-wider text-[#10b981] mb-2">Personal Loans</p>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#333333]">Personal Loan Questions</h2>
+      </div>
+      <div class="space-y-4">
+        <details class="group bg-white rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>What can I use a personal loan for?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Personal loans can be used for a wide range of purposes including debt consolidation, home renovations, travel, medical expenses, weddings, education, and unexpected bills. When you apply, simply let us know the purpose and we will match you with lenders who cater to your needs.</p>
+          </div>
+        </details>
+
+        <details class="group bg-white rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Can I consolidate my debts with a personal loan?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Yes, debt consolidation is one of the most common uses for personal loans. By combining multiple debts into a single loan, you can simplify your repayments and potentially reduce the total interest you pay. Our team will assess whether debt consolidation makes financial sense for your situation.</p>
+          </div>
+        </details>
+
+        <details class="group bg-white rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>What is the difference between a secured and unsecured personal loan?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">A secured personal loan is backed by an asset (such as a car or property), which typically results in a lower interest rate. An unsecured personal loan does not require an asset as security, but may have a higher interest rate. Our AI will match you with the best option based on your profile and preferences.</p>
+          </div>
+        </details>
+
+        <details class="group bg-white rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>How much can I borrow with a personal loan?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Personal loan amounts typically range from $2,000 to $75,000, depending on the lender and your financial circumstances. Factors such as your income, expenses, credit history, and the purpose of the loan will determine how much you can borrow. Submit an enquiry for a personalised assessment.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Process FAQs -->
+  <section id="application-process" class="py-16 md:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="font-paragraph text-sm font-semibold uppercase tracking-wider text-[#10b981] mb-2">Application Process</p>
+        <h2 class="font-heading text-2xl md:text-3xl font-bold text-[#333333]">Application Process Questions</h2>
+      </div>
+      <div class="space-y-4">
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>What information do I need to apply?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">To get started, you only need basic details such as your name, contact information, employment status, approximate income, and the type of loan you are looking for. No documents are required at the initial enquiry stage. If you proceed with a lender, you may need to provide identification, payslips, and bank statements.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Will my credit score be affected by applying?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">No. Submitting an enquiry through NIK Finance does not affect your credit score. A formal credit check is only conducted when you choose to proceed with a specific lender and provide your explicit consent. We always inform you before any credit enquiry is made.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>Can I apply if I have bad credit?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Yes, we work with a number of specialist lenders who cater to borrowers with adverse credit history. While options may be more limited and rates may be higher, our AI will identify lenders whose policies align with your circumstances. Visit our <a href="/bad-credit-loans" class="text-[#10b981] hover:text-[#0d9668] underline">bad credit loans page</a> for more information.</p>
+          </div>
+        </details>
+
+        <details class="group bg-[#f8fafb] rounded-2xl border border-[#333333]/5 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-heading text-lg font-semibold text-[#333333] hover:text-[#0d4d3e] transition-colors">
+            <span>How do I track my application progress?</span>
+            <svg class="w-5 h-5 text-[#10b981] transform group-open:rotate-180 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-paragraph text-[#333333]/70">Once you submit your enquiry, a dedicated finance specialist is assigned to your case. They will keep you updated at every stage via your preferred communication method -- phone, email, or SMS. You can also contact us at any time on <a href="tel:1300645346" class="text-[#10b981] hover:text-[#0d9668] underline">1300 NIK FIN</a> or <a href="mailto:hello@nik.finance" class="text-[#10b981] hover:text-[#0d9668] underline">hello@nik.finance</a> for an update.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 md:py-20 bg-gradient-to-br from-[#0d4d3e] to-[#1e3a5f]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-white mb-6">
+        Still have questions?
+      </h2>
+      <p class="font-paragraph text-lg text-white/80 max-w-2xl mx-auto mb-8">
+        Our team is ready to help. Get in touch and we will answer any questions you have about our services or the loan process.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-8 py-4 bg-white text-[#0d4d3e] font-heading font-semibold rounded-2xl hover:bg-white/90 transition-colors duration-200 text-lg"
+        >
+          Contact Us
+        </a>
+        <a
+          href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
+          class="inline-flex items-center justify-center px-8 py-4 bg-[#10b981] text-white font-heading font-semibold rounded-2xl hover:bg-[#0d9668] transition-colors duration-200 text-lg"
+        >
+          Apply Now -- It's Free
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="py-8 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="font-paragraph text-sm text-[#333333]/50">
+        NIK Finance Pty Ltd (ACN 685 393 917) is a Credit Representative (No. 567387) of Finsure Finance & Insurance Pty Ltd (Australian Credit Licence 384704). Information provided is general in nature and does not constitute financial advice.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

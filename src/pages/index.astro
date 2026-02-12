@@ -1,0 +1,55 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import OrganizationSchema from '@/components/schemas/OrganizationSchema.astro';
+import LocalBusinessSchema from '@/components/schemas/LocalBusinessSchema.astro';
+import WebSiteSchema from '@/components/schemas/WebSiteSchema.astro';
+import HomePageContent from '@/components/pages/HomePageIsland';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Australia's Smartest Loan Marketplace | AI-Powered Finance Broker"
+      description="Get matched with 130+ lenders in minutes. Car finance, home loans, refinancing & business loans. Free service, fast approval. AI-powered loan matching."
+      keywords="car loan Australia, home loan, mortgage broker, car finance, refinance car loan, personal loan, business loan, AI finance broker, NIK Finance"
+      canonical="https://www.nik.finance/"
+    />
+  </Fragment>
+  <Fragment slot="schema">
+    <OrganizationSchema />
+    <LocalBusinessSchema />
+    <WebSiteSchema />
+  </Fragment>
+
+  <!-- Server-rendered hero content for SEO (visible to crawlers) -->
+  <div class="sr-only" aria-hidden="true">
+    <h1>Australia's Smartest Loan Marketplace - NIK Finance</h1>
+    <p>AI-powered loan matching with 130+ lenders. Get approved for car loans, home loans, personal loans, and business finance in minutes. 100% free service for borrowers. NIK Finance is a credit representative (No. 567387) of Finsure Finance and Insurance Pty Ltd (Australian Credit Licence 384704).</p>
+    <h2>Our Loan Services</h2>
+    <ul>
+      <li><a href="/home-loans">Home Loans</a> - Purchase, refinance, investment property, first home buyer loans</li>
+      <li><a href="/car-loans">Car Loans</a> - New and used vehicle finance, fast approvals</li>
+      <li><a href="/personal-loans">Personal Loans</a> - Debt consolidation, renovations, travel</li>
+      <li><a href="/business-loans">Business Loans</a> - Working capital, equipment finance, commercial property</li>
+    </ul>
+    <h2>How It Works</h2>
+    <ol>
+      <li>Submit your loan enquiry online - takes just a few minutes</li>
+      <li>Our AI matches your profile against 130+ lender credit policies</li>
+      <li>A dedicated finance specialist reviews and provides personalised advice</li>
+      <li>Fast approval and settlement - some loans approved same day</li>
+    </ol>
+    <h2>Why Choose NIK Finance</h2>
+    <ul>
+      <li>100% Free Service - We're paid by lenders, not by you</li>
+      <li>130+ Lenders - Access to Australia's largest lender panel</li>
+      <li>AI-Powered Matching - Instant lender matching for maximum approval likelihood</li>
+      <li>Fast Approvals - Car loans approved in as little as 14 minutes</li>
+      <li>Expert Guidance - Dedicated human finance specialist for every client</li>
+    </ul>
+  </div>
+
+  <!-- Interactive React island for animations and CMS data -->
+  <HomePageContent client:load />
+</BaseLayout>

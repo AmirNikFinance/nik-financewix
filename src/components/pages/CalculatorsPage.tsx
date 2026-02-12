@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import RepaymentCalculator from '@/components/calculators/RepaymentCalculator';
 import BorrowingPowerCalculator from '@/components/calculators/BorrowingPowerCalculator';
 import OffsetCalculator from '@/components/calculators/OffsetCalculator';
@@ -66,9 +64,7 @@ export default function CalculatorsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-
+    <div className="bg-white">
       {/* Hero Section */}
       <section className="bg-secondary text-white py-16 md:py-24">
         <div className="max-w-[100rem] mx-auto px-6 md:px-12">
@@ -131,7 +127,6 @@ export default function CalculatorsPage() {
         </div>
       </section>
 
-      <Footer />
     </div>
   );
 }

@@ -1,0 +1,61 @@
+---
+interface Props {
+  city?: string;
+  state?: string;
+  streetAddress?: string;
+  postalCode?: string;
+}
+
+const {
+  city = '[YOUR_SUBURB]',
+  state = '[YOUR_STATE]',
+  streetAddress = '[YOUR_STREET_ADDRESS]',
+  postalCode = '[YOUR_POSTCODE]',
+} = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FinancialService',
+  '@id': `https://www.nik.finance/#localbusiness${city !== '[YOUR_SUBURB]' ? `-${city.toLowerCase().replace(/\s+/g, '-')}` : ''}`,
+  name: 'NIK Finance',
+  description: `AI-powered loan marketplace helping ${city !== '[YOUR_SUBURB]' ? city : 'Australian'} customers access 130+ lenders for car loans, home loans, and business finance.`,
+  url: 'https://www.nik.finance',
+  logo: 'https://static.wixstatic.com/media/e994c8_fe9aab1d39d448fb8e78e1ae53648c58~mv2.png',
+  telephone: '1300 NIK FIN',
+  email: 'hello@nik.finance',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress,
+    addressLocality: city,
+    addressRegion: state,
+    postalCode,
+    addressCountry: 'AU',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: city !== '[YOUR_SUBURB]' ? city : 'Australia',
+  },
+  priceRange: 'Free service for borrowers',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '10:00',
+      closes: '16:00',
+    },
+  ],
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'Finsure Finance & Insurance Pty Ltd',
+    description: 'Australian Credit Licence 384704',
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

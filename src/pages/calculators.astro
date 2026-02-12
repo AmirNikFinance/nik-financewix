@@ -1,0 +1,178 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import OrganizationSchema from '@/components/schemas/OrganizationSchema.astro';
+import CalculatorsPage from '@/components/pages/CalculatorsPage';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Loan Calculators | Repayment, Borrowing Power & More"
+      description="Free loan calculators to help you plan your finances. Calculate loan repayments, borrowing power, stamp duty, LMI, offset savings, and more. Powered by NIK Finance."
+      keywords="loan calculator, repayment calculator, borrowing power calculator, stamp duty calculator, LMI calculator, offset calculator, home equity calculator, car loan calculator, mortgage calculator Australia"
+      canonical="https://www.nik.finance/calculators"
+    />
+  </Fragment>
+  <Fragment slot="schema">
+    <OrganizationSchema />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-[#0d4d3e] to-[#1e3a5f] py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+        Loan Calculators
+      </h1>
+      <p class="font-paragraph text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
+        Use our free calculators to estimate your loan repayments, borrowing capacity, stamp duty, and more. Get a clearer picture of your finances before you apply.
+      </p>
+    </div>
+  </section>
+
+  <!-- SEO Content for Crawlers -->
+  <div class="sr-only" aria-hidden="true">
+    <h2>Available Loan Calculators</h2>
+    <ul>
+      <li><a href="/calculators/repayment">Repayment Calculator</a> - Calculate your monthly loan repayments based on loan amount, interest rate, and term. Works for home loans, car loans, and personal loans.</li>
+      <li><a href="/calculators/borrowing-power">Borrowing Power Calculator</a> - Find out how much you could borrow based on your income, expenses, and existing debts.</li>
+      <li><a href="/calculators/stamp-duty">Stamp Duty Calculator</a> - Estimate stamp duty costs for your property purchase in any Australian state or territory.</li>
+      <li><a href="/calculators/lmi">LMI Calculator</a> - Calculate Lenders Mortgage Insurance costs for home loans with a deposit under 20%.</li>
+      <li><a href="/calculators/offset">Offset Calculator</a> - See how an offset account could save you interest and help you pay off your home loan sooner.</li>
+      <li><a href="/calculators/home-equity">Home Equity Calculator</a> - Estimate the equity in your property and how much you could access.</li>
+      <li><a href="/calculators/car-loan">Car Loan Calculator</a> - Calculate repayments for new and used car loans with balloon payment options.</li>
+      <li><a href="/calculators/debt-consolidation">Debt Consolidation Calculator</a> - Compare your current debts against a single consolidated loan to see potential savings.</li>
+    </ul>
+    <h2>Why Use Our Calculators</h2>
+    <p>Our loan calculators help you plan ahead and understand your financial position before applying for a loan. All calculators are free to use and provide instant results. For a personalised assessment, contact NIK Finance or apply online for free.</p>
+  </div>
+
+  <!-- Calculator Cards (Server-rendered for SEO) -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <p class="font-paragraph text-sm font-semibold uppercase tracking-wider text-[#10b981] mb-3">Free Tools</p>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-[#333333]">Choose a Calculator</h2>
+        <p class="font-paragraph text-lg text-[#333333]/70 max-w-2xl mx-auto mt-4">
+          Select a calculator below to get started. All tools are free, instant, and require no sign-up.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Repayment Calculator -->
+        <a href="/calculators/repayment" class="group block bg-[#f8fafb] rounded-3xl p-6 border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#10b981]/20 transition-colors">
+            <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2 group-hover:text-[#0d4d3e] transition-colors">Repayment Calculator</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">Calculate your monthly loan repayments for any loan type.</p>
+        </a>
+
+        <!-- Borrowing Power Calculator -->
+        <a href="/calculators/borrowing-power" class="group block bg-[#f8fafb] rounded-3xl p-6 border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#10b981]/20 transition-colors">
+            <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2 group-hover:text-[#0d4d3e] transition-colors">Borrowing Power</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">Find out how much you could borrow based on your income.</p>
+        </a>
+
+        <!-- Stamp Duty Calculator -->
+        <a href="/calculators/stamp-duty" class="group block bg-[#f8fafb] rounded-3xl p-6 border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#10b981]/20 transition-colors">
+            <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2 group-hover:text-[#0d4d3e] transition-colors">Stamp Duty</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">Estimate stamp duty costs for any Australian state.</p>
+        </a>
+
+        <!-- LMI Calculator -->
+        <a href="/calculators/lmi" class="group block bg-[#f8fafb] rounded-3xl p-6 border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#10b981]/20 transition-colors">
+            <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2 group-hover:text-[#0d4d3e] transition-colors">LMI Calculator</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">Calculate Lenders Mortgage Insurance for low-deposit loans.</p>
+        </a>
+
+        <!-- Offset Calculator -->
+        <a href="/calculators/offset" class="group block bg-[#f8fafb] rounded-3xl p-6 border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#10b981]/20 transition-colors">
+            <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2 group-hover:text-[#0d4d3e] transition-colors">Offset Calculator</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">See how an offset account can save you interest.</p>
+        </a>
+
+        <!-- Home Equity Calculator -->
+        <a href="/calculators/home-equity" class="group block bg-[#f8fafb] rounded-3xl p-6 border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#10b981]/20 transition-colors">
+            <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2 group-hover:text-[#0d4d3e] transition-colors">Home Equity</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">Estimate the equity in your property.</p>
+        </a>
+
+        <!-- Car Loan Calculator -->
+        <a href="/calculators/car-loan" class="group block bg-[#f8fafb] rounded-3xl p-6 border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#10b981]/20 transition-colors">
+            <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2 group-hover:text-[#0d4d3e] transition-colors">Car Loan Calculator</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">Calculate repayments for new and used car loans.</p>
+        </a>
+
+        <!-- Debt Consolidation Calculator -->
+        <a href="/calculators/debt-consolidation" class="group block bg-[#f8fafb] rounded-3xl p-6 border border-[#333333]/5 hover:shadow-lg hover:border-[#10b981]/30 transition-all duration-200">
+          <div class="w-12 h-12 bg-[#10b981]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#10b981]/20 transition-colors">
+            <svg class="w-6 h-6 text-[#10b981]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+          </div>
+          <h3 class="font-heading text-lg font-semibold text-[#333333] mb-2 group-hover:text-[#0d4d3e] transition-colors">Debt Consolidation</h3>
+          <p class="font-paragraph text-sm text-[#333333]/60">Compare consolidating your debts into one loan.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Calculator Island -->
+  <section class="py-8 bg-[#f8fafb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <CalculatorsPage client:visible />
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-heading text-3xl md:text-4xl font-bold text-[#333333] mb-6">
+        Ready for a personalised assessment?
+      </h2>
+      <p class="font-paragraph text-lg text-[#333333]/80 max-w-2xl mx-auto mb-8">
+        Calculators provide estimates only. For an accurate assessment based on real lender criteria, apply through NIK Finance. It is free, fast, and our AI will match you with the best lenders for your situation.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3"
+          class="inline-flex items-center justify-center px-8 py-4 bg-[#10b981] text-white font-heading font-semibold rounded-2xl hover:bg-[#0d9668] transition-colors duration-200 text-lg"
+        >
+          Apply Now -- It's Free
+        </a>
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-8 py-4 bg-white text-[#0d4d3e] font-heading font-semibold rounded-2xl border-2 border-[#0d4d3e] hover:bg-[#0d4d3e] hover:text-white transition-colors duration-200 text-lg"
+        >
+          Talk to a Specialist
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="py-8 bg-[#f8fafb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="font-paragraph text-sm text-[#333333]/50">
+        Calculator results are estimates only and should not be taken as financial advice. Actual rates, fees, and repayments will vary depending on the lender and your individual circumstances. NIK Finance Pty Ltd (ACN 685 393 917) is a Credit Representative (No. 567387) of Finsure Finance & Insurance Pty Ltd (Australian Credit Licence 384704).
+      </p>
+    </div>
+  </section>
+</BaseLayout>

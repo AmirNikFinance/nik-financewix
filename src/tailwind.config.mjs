@@ -19,8 +19,8 @@ export default {
                 '9xl': ['8rem', { lineHeight: '1', letterSpacing: '-0.025em', fontWeight: '900' }]
             },
             fontFamily: {
-                heading: "montserrat",
-                paragraph: "lato-light"
+                heading: ["Montserrat", "sans-serif"],
+                paragraph: ["lato-light", "sans-serif"]
             },
             colors: {
                 accent: '#10b981',

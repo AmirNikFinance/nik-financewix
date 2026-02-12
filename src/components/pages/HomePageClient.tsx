@@ -6,7 +6,6 @@ import {
   Smartphone, TrendingUp
 } from 'lucide-react';
 import LendersCarousel from '@/components/LendersCarousel';
-import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 import SEO, { LocalBusinessSchema } from '@/components/SEO';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
@@ -630,7 +629,6 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      <AnalyticsDashboard />
     </div>
   );
 }

@@ -10,7 +10,6 @@ import {
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LendersCarousel from '@/components/LendersCarousel';
-import AnalyticsDashboard from '@/components/AnalyticsDashboard';
 import SEO, { LocalBusinessSchema } from '@/components/SEO';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
@@ -659,8 +658,6 @@ export default function HomePage() {
         </div>
       </section>
       <Footer />
-      {/* Analytics Dashboard - Remove or hide in production */}
-      <AnalyticsDashboard />
     </div>
   );
 }

@@ -23,8 +23,6 @@ const PropertyEquityCalculatorPage = React.lazy(() => import('@/components/pages
 const LMICalculatorPage = React.lazy(() => import('@/components/pages/LMICalculatorPage'));
 const DebtConsolidationCalculatorPage = React.lazy(() => import('@/components/pages/DebtConsolidationCalculatorPage'));
 const StampDutyCalculatorPage = React.lazy(() => import('@/components/pages/StampDutyCalculatorPage'));
-const PartnerLoginPage = React.lazy(() => import('@/components/pages/PartnerLoginPage'));
-const PartnerPortalPage = React.lazy(() => import('@/components/pages/PartnerPortalPage'));
 const CarLoansPage = React.lazy(() => import('@/components/pages/CarLoansPage'));
 const HomeLoansPage = React.lazy(() => import('@/components/pages/HomeLoansPage'));
 const PersonalLoansPage = React.lazy(() => import('@/components/pages/PersonalLoansPage'));
@@ -34,10 +32,6 @@ const RefinancingPage = React.lazy(() => import('@/components/pages/RefinancingP
 const AboutPage = React.lazy(() => import('@/components/pages/AboutPage'));
 const FAQPage = React.lazy(() => import('@/components/pages/FAQPage'));
 const NotFoundPage = React.lazy(() => import('@/components/pages/NotFoundPage'));
-const PartnerCommissionsPage = React.lazy(() => import('@/components/partner/PartnerCommissionsPage'));
-const PartnerReferralsPage = React.lazy(() => import('@/components/partner/PartnerReferralsPage'));
-const PartnerProfilePage = React.lazy(() => import('@/components/partner/PartnerProfilePage'));
-const PartnerSubmitReferralPage = React.lazy(() => import('@/components/partner/PartnerSubmitReferralPage'));
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -246,54 +240,6 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<LoadingSpinner />}>
             <FAQPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "partner-login",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <PartnerLoginPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "partner-portal",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <PartnerPortalPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "partner-commissions",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <PartnerCommissionsPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "partner-referrals",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <PartnerReferralsPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "partner-profile",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <PartnerProfilePage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "partner-submit-referral",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <PartnerSubmitReferralPage />
           </Suspense>
         ),
       },

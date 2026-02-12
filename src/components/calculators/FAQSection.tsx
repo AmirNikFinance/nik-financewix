@@ -46,7 +46,7 @@ const faqs: Record<CalculatorType, Array<{ question: string; answer: string }>> 
     },
     {
       question: 'What factors affect my borrowing capacity?',
-      answer: 'Several key factors influence how much you can borrow: 1) Income - higher income increases borrowing capacity, 2) Existing debts - credit cards, car loans, and personal loans reduce capacity, 3) Credit score - a better credit score may allow higher borrowing, 4) Employment stability - permanent employment is viewed more favourably than casual work, 5) Deposit size - a larger deposit increases borrowing capacity, 6) Interest rates - higher rates reduce serviceability, 7) Dependents - more dependents may reduce capacity due to living expenses, 8) Age - lenders consider your age relative to loan term.',
+      answer: 'Several key factors influence how much you can borrow: 1) Income - higher income increases borrowing capacity, 2) Existing debts - credit cards, car loans, and personal loans reduce capacity, 3) Credit score - a better credit score may allow higher borrowing, 4) Employment stability - permanent employment is viewed more favorably than casual work, 5) Deposit size - a larger deposit increases borrowing capacity, 6) Interest rates - higher rates reduce serviceability, 7) Dependents - more dependents may reduce capacity due to living expenses, 8) Age - lenders consider your age relative to loan term.',
     },
     {
       question: 'How do lenders calculate borrowing capacity?',
@@ -54,7 +54,7 @@ const faqs: Record<CalculatorType, Array<{ question: string; answer: string }>> 
     },
     {
       question: 'How does my credit score affect borrowing capacity?',
-      answer: 'Your credit score significantly impacts your borrowing capacity. A strong credit score (above 700) demonstrates responsible financial management and may allow you to borrow more, access better interest rates, and qualify for larger loans. A poor credit score (below 600) may result in lower borrowing capacity, higher interest rates, or loan rejection. Late payments, defaults, and high credit utilisation damage your score. Improving your credit score by paying bills on time and reducing debt can increase your borrowing capacity.',
+      answer: 'Your credit score significantly impacts your borrowing capacity. A strong credit score (above 700) demonstrates responsible financial management and may allow you to borrow more, access better interest rates, and qualify for larger loans. A poor credit score (below 600) may result in lower borrowing capacity, higher interest rates, or loan rejection. Late payments, defaults, and high credit utilization damage your score. Improving your credit score by paying bills on time and reducing debt can increase your borrowing capacity.',
     },
     {
       question: 'How do dependents affect my borrowing capacity?',

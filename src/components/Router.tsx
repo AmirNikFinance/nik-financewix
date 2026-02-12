@@ -1,46 +1,32 @@
-import React, { Suspense } from 'react';
 import { MemberProvider } from '@/integrations';
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import { ScrollToTop } from '@/lib/scroll-to-top';
-import { LoadingSpinner } from '@/components/ui/loading-spinner';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
+import HomePage from '@/components/pages/HomePage';
+import ContactPage from '@/components/pages/ContactPage';
+import ApplyPage from '@/components/pages/ApplyPage';
+import PrivacyPolicyPage from '@/components/pages/PrivacyPolicyPage';
+import BlogPage from '@/components/pages/BlogPage';
+import BlogArticlePage from '@/components/pages/BlogArticlePage';
+import CalculatorsPage from '@/components/pages/CalculatorsPage';
+import CarLoanCalculatorPage from '@/components/pages/CarLoanCalculatorPage';
+import PartnerLoginPage from '@/components/pages/PartnerLoginPage';
+import PartnerPortalPage from '@/components/pages/PartnerPortalPage';
+import PartnerCommissionsPage from '@/components/partner/PartnerCommissionsPage';
+import PartnerReferralsPage from '@/components/partner/PartnerReferralsPage';
+import PartnerProfilePage from '@/components/partner/PartnerProfilePage';
+import PartnerSubmitReferralPage from '@/components/partner/PartnerSubmitReferralPage';
+// ... keep existing code (imports) ...
 import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
-
-// Lazy load all page components for code-splitting
-const HomePage = React.lazy(() => import('@/components/pages/HomePage'));
-const ContactPage = React.lazy(() => import('@/components/pages/ContactPage'));
-const ApplyPage = React.lazy(() => import('@/components/pages/ApplyPage'));
-const PrivacyPolicyPage = React.lazy(() => import('@/components/pages/PrivacyPolicyPage'));
-const BlogPage = React.lazy(() => import('@/components/pages/BlogPage'));
-const BlogArticlePage = React.lazy(() => import('@/components/pages/BlogArticlePage'));
-const CalculatorsPage = React.lazy(() => import('@/components/pages/CalculatorsPage'));
-const CarLoanCalculatorPage = React.lazy(() => import('@/components/pages/CarLoanCalculatorPage'));
-const RepaymentCalculatorPage = React.lazy(() => import('@/components/pages/RepaymentCalculatorPage'));
-const BorrowingPowerCalculatorPage = React.lazy(() => import('@/components/pages/BorrowingPowerCalculatorPage'));
-const OffsetCalculatorPage = React.lazy(() => import('@/components/pages/OffsetCalculatorPage'));
-const HomeEquityCalculatorPage = React.lazy(() => import('@/components/pages/HomeEquityCalculatorPage'));
-const PropertyEquityCalculatorPage = React.lazy(() => import('@/components/pages/PropertyEquityCalculatorPage'));
-const LMICalculatorPage = React.lazy(() => import('@/components/pages/LMICalculatorPage'));
-const DebtConsolidationCalculatorPage = React.lazy(() => import('@/components/pages/DebtConsolidationCalculatorPage'));
-const StampDutyCalculatorPage = React.lazy(() => import('@/components/pages/StampDutyCalculatorPage'));
-const CarLoansPage = React.lazy(() => import('@/components/pages/CarLoansPage'));
-const HomeLoansPage = React.lazy(() => import('@/components/pages/HomeLoansPage'));
-const PersonalLoansPage = React.lazy(() => import('@/components/pages/PersonalLoansPage'));
-const BusinessLoansPage = React.lazy(() => import('@/components/pages/BusinessLoansPage'));
-const BadCreditLoansPage = React.lazy(() => import('@/components/pages/BadCreditLoansPage'));
-const RefinancingPage = React.lazy(() => import('@/components/pages/RefinancingPage'));
-const AboutPage = React.lazy(() => import('@/components/pages/AboutPage'));
-const FAQPage = React.lazy(() => import('@/components/pages/FAQPage'));
-const NotFoundPage = React.lazy(() => import('@/components/pages/NotFoundPage'));
+import { initializeGoogleSheets } from '@/lib/googleSheets';
+import { GOOGLE_SHEETS_CONFIG } from '@/config/googleSheets.config';
 
 // Layout component that includes ScrollToTop
 function Layout() {
   return (
     <>
       <ScrollToTop />
-      <Suspense fallback={<div className="flex items-center justify-center min-h-screen"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
-        <Outlet />
-      </Suspense>
+      <Outlet />
     </>
   );
 }
@@ -53,211 +39,83 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <HomePage />
-          </Suspense>
-        ),
+        element: <HomePage />,
       },
       {
         path: "contact",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <ContactPage />
-          </Suspense>
-        ),
+        element: <ContactPage />,
       },
       {
         path: "apply",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <ApplyPage />
-          </Suspense>
-        ),
+        element: <ApplyPage />,
       },
       {
         path: "privacy-policy",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <PrivacyPolicyPage />
-          </Suspense>
-        ),
+        element: <PrivacyPolicyPage />,
       },
       {
         path: "blog",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <BlogPage />
-          </Suspense>
-        ),
+        element: <BlogPage />,
       },
       {
         path: "blog/:slug",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <BlogArticlePage />
-          </Suspense>
-        ),
+        element: <BlogArticlePage />,
       },
       {
         path: "calculators",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <CalculatorsPage />
-          </Suspense>
-        ),
+        element: <CalculatorsPage />,
       },
       {
         path: "car-loan-calculator",
+        element: <CarLoanCalculatorPage />,
+      },
+      {
+        path: "partner-login",
+        element: <PartnerLoginPage />,
+      },
+      {
+        path: "partner-portal",
         element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <CarLoanCalculatorPage />
-          </Suspense>
+          <MemberProtectedRoute messageToSignIn="Sign in to access the partner portal">
+            <PartnerPortalPage />
+          </MemberProtectedRoute>
         ),
       },
       {
-        path: "repayment-calculator",
+        path: "partner-portal/commissions",
         element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <RepaymentCalculatorPage />
-          </Suspense>
+          <MemberProtectedRoute messageToSignIn="Sign in to view commissions">
+            <PartnerCommissionsPage />
+          </MemberProtectedRoute>
         ),
       },
       {
-        path: "borrowing-power-calculator",
+        path: "partner-portal/referrals",
         element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <BorrowingPowerCalculatorPage />
-          </Suspense>
+          <MemberProtectedRoute messageToSignIn="Sign in to view referrals">
+            <PartnerReferralsPage />
+          </MemberProtectedRoute>
         ),
       },
       {
-        path: "offset-calculator",
+        path: "partner-portal/profile",
         element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <OffsetCalculatorPage />
-          </Suspense>
+          <MemberProtectedRoute messageToSignIn="Sign in to manage your profile">
+            <PartnerProfilePage />
+          </MemberProtectedRoute>
         ),
       },
       {
-        path: "home-equity-calculator",
+        path: "partner-portal/submit-referral",
         element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <HomeEquityCalculatorPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "property-equity-calculator",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <PropertyEquityCalculatorPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "lmi-calculator",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <LMICalculatorPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "debt-consolidation-calculator",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <DebtConsolidationCalculatorPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "stamp-duty-calculator",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <StampDutyCalculatorPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "car-loans",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <CarLoansPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "home-loans",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <HomeLoansPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "personal-loans",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <PersonalLoansPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "business-loans",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <BusinessLoansPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "bad-credit-loans",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <BadCreditLoansPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "refinancing",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <RefinancingPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "about",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <AboutPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "faq",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <FAQPage />
-          </Suspense>
-        ),
-      },
-      {
-        path: "404",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <NotFoundPage />
-          </Suspense>
+          <MemberProtectedRoute messageToSignIn="Sign in to submit a referral">
+            <PartnerSubmitReferralPage />
+          </MemberProtectedRoute>
         ),
       },
       {
         path: "*",
-        element: (
-          <Suspense fallback={<LoadingSpinner />}>
-            <NotFoundPage />
-          </Suspense>
-        ),
+        element: <Navigate to="/" replace />,
       },
     ],
   },
@@ -266,6 +124,11 @@ const router = createBrowserRouter([
 });
 
 export default function AppRouter() {
+  // Initialize Google Sheets integration on app startup
+  if (GOOGLE_SHEETS_CONFIG.enabled && GOOGLE_SHEETS_CONFIG.scriptUrl) {
+    initializeGoogleSheets(GOOGLE_SHEETS_CONFIG.scriptUrl, GOOGLE_SHEETS_CONFIG.sheetName);
+  }
+
   return (
     <MemberProvider>
       <RouterProvider router={router} />

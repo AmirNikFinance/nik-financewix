@@ -18,17 +18,14 @@ export default function Footer() {
               <Link to="/" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
                 Home
               </Link>
-              <Link to="/about" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                About
-              </Link>
               <Link to="/blog" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
                 Blog
               </Link>
               <Link to="/contact" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
                 Contact
               </Link>
-              <Link to="/faq" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                FAQ
+              <Link to="/partner-portal" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Partner Portal
               </Link>
               <Link to="/privacy-policy" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
                 Privacy Policy
@@ -38,25 +35,25 @@ export default function Footer() {
 
           {/* Calculators */}
           <div>
-            <h4 className="font-heading text-lg font-semibold mb-4">Services</h4>
+            <h4 className="font-heading text-lg font-semibold mb-4">Calculators</h4>
             <nav className="flex flex-col gap-2">
-              <Link to="/car-loans" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                Car Loans
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Repayment Calculator
               </Link>
-              <Link to="/home-loans" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                Home Loans
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Borrowing Power
               </Link>
-              <Link to="/personal-loans" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                Personal Loans
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Offset Calculator
               </Link>
-              <Link to="/business-loans" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                Business Loans
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Home Equity
               </Link>
-              <Link to="/bad-credit-loans" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                Bad Credit Loans
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                LMI Calculator
               </Link>
-              <Link to="/refinancing" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
-                Refinancing
+              <Link to="/calculators" className="font-paragraph text-sm opacity-90 hover:opacity-100 transition-opacity">
+                Stamp Duty
               </Link>
             </nav>
           </div>

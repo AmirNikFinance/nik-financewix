@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import LMICalculatorPageContent from '@/components/pages/LMICalculatorPage';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="LMI Calculator | Lenders Mortgage Insurance | NIK Finance"
+      description="Calculate Lenders Mortgage Insurance costs for home loans with deposits under 20%. Free calculator, instant results."
+      canonical="https://www.nik.finance/calculators/lmi-calculator"
+    />
+  </Fragment>
+
+  <LMICalculatorPageContent client:load />
+</BaseLayout>

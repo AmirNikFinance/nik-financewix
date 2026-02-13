@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import OffsetCalculatorPageContent from '@/components/pages/OffsetCalculatorPage';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Offset Account Calculator | NIK Finance"
+      description="See how an offset account could save you interest on your home loan. Free calculator, instant results."
+      canonical="https://www.nik.finance/calculators/offset-calculator"
+    />
+  </Fragment>
+
+  <OffsetCalculatorPageContent client:load />
+</BaseLayout>

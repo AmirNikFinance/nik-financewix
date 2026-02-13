@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import PropertyEquityCalculatorPageContent from '@/components/pages/PropertyEquityCalculatorPage';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Property Equity Calculator | NIK Finance"
+      description="Calculate the equity in your property. Free calculator, instant results."
+      canonical="https://www.nik.finance/calculators/property-equity-calculator"
+    />
+  </Fragment>
+
+  <PropertyEquityCalculatorPageContent client:load />
+</BaseLayout>

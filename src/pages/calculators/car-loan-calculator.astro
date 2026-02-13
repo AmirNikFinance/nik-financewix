@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import CarLoanCalculatorPageContent from '@/components/pages/CarLoanCalculatorPage';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Car Loan Calculator | NIK Finance"
+      description="Calculate repayments for new and used car loans. Free calculator, instant results."
+      canonical="https://www.nik.finance/calculators/car-loan-calculator"
+    />
+  </Fragment>
+
+  <CarLoanCalculatorPageContent client:load />
+</BaseLayout>

@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import BadCreditLoansPageContent from '@/components/pages/BadCreditLoansPage';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Bad Credit Loans Australia | Low Credit Score | NIK Finance"
+      description="Get loans with bad credit. Access 130+ lenders including specialist bad credit providers. Fast approval, free service. Apply online today."
+      keywords="bad credit loans Australia, low credit score loans, adverse credit loans, poor credit finance"
+      canonical="https://www.nik.finance/bad-credit-loans"
+    />
+  </Fragment>
+
+  <BadCreditLoansPageContent client:load />
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import RepaymentCalculatorPageContent from '@/components/pages/RepaymentCalculatorPage';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Loan Repayment Calculator | NIK Finance"
+      description="Calculate your monthly loan repayments. Works for home loans, car loans, and personal loans. Free calculator, instant results."
+      canonical="https://www.nik.finance/calculators/repayment-calculator"
+    />
+  </Fragment>
+
+  <RepaymentCalculatorPageContent client:load />
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import DebtConsolidationCalculatorPageContent from '@/components/pages/DebtConsolidationCalculatorPage';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Debt Consolidation Calculator | NIK Finance"
+      description="Compare consolidating your debts into one loan. See potential savings. Free calculator, instant results."
+      canonical="https://www.nik.finance/calculators/debt-consolidation-calculator"
+    />
+  </Fragment>
+
+  <DebtConsolidationCalculatorPageContent client:load />
+</BaseLayout>

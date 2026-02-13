@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SEOHead from '@/components/SEOHead.astro';
+import StampDutyCalculatorPageContent from '@/components/pages/StampDutyCalculatorPage';
+---
+
+<BaseLayout>
+  <Fragment slot="seo">
+    <SEOHead
+      title="Stamp Duty Calculator | NIK Finance"
+      description="Calculate stamp duty costs for property purchases in any Australian state. Free calculator, instant results."
+      canonical="https://www.nik.finance/calculators/stamp-duty-calculator"
+    />
+  </Fragment>
+
+  <StampDutyCalculatorPageContent client:load />
+</BaseLayout>

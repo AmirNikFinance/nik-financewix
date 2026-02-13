@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle, Award, Users, Target, Heart, Zap, Shield, Cpu, TrendingUp } from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import SEO from '@/components/SEO';
 import { trackButtonClick } from '@/lib/analytics';
 
 export default function AboutPage() {
@@ -29,27 +25,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <SEO 
-        title="About NIK Finance | Australian Mortgage & Finance Brokers"
-        description="Learn about NIK Finance. We're Australia's trusted finance brokers helping thousands get approved for loans with competitive rates."
-        canonical="https://www.nik.finance/about"
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'Organization',
-          'name': 'NIK Finance',
-          'url': 'https://www.nik.finance',
-          'founder': {
-            '@type': 'Person',
-            'name': 'Amir Nikibin',
-            'jobTitle': 'Founder',
-            'description': 'Founder of NIK Finance with expertise in finance and technology'
-          },
-          'sameAs': [
-            'https://www.nik.finance'
-          ]
-        }}
-      />
-      <Header />
       
       <main className="min-h-screen bg-white">
         {/* Hero Section */}
@@ -301,6 +276,7 @@ export default function AboutPage() {
             </motion.div>
           </div>
         </section>
+
         <section className="py-16 md:py-24">
           <div className="max-w-[100rem] mx-auto px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -538,12 +514,12 @@ export default function AboutPage() {
                   <p className="font-paragraph text-gray-600 mb-4">
                     {service.desc}
                   </p>
-                  <Link
-                    to={`/${service.title.toLowerCase().replace(/\s+/g, '-')}`}
+                  <a
+                    href={`/${service.title.toLowerCase().replace(/\\s+/g, '-')}`}
                     className="text-accent font-paragraph font-semibold hover:text-primary transition-colors"
                   >
                     Learn More →
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
             </motion.div>
@@ -567,18 +543,16 @@ export default function AboutPage() {
               >
                 Apply Now
               </a>
-              <Link
-                to="/contact"
+              <a
+                href="/contact"
                 className="bg-white text-primary font-paragraph font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition-all duration-300"
               >
                 Contact Us
-              </Link>
+              </a>
             </div>
           </div>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }

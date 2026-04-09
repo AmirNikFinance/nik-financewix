@@ -60,7 +60,7 @@ const AnimatedElement: React.FC<{
   );
 };
 
-export default function HomePageIsland() {
+function HomePageIsland() {
   const [loanOptions, setLoanOptions] = useState<LoanOptions[]>([]);
   const [howItWorksSteps, setHowItWorksSteps] = useState<HowItWorksSteps[]>([]);
   const [reviews, setReviews] = useState<CustomerReviews[]>([]);
@@ -359,3 +359,5 @@ export default function HomePageIsland() {
     </div>
   );
 }
+
+export default HomePageIsland;

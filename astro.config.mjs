@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import sitemap from "@astrojs/sitemap";
 import cloudProviderFetchAdapter from "@wix/cloud-provider-fetch-adapter";
 import wix from "@wix/astro";
 import monitoring from "@wix/monitoring-astro";
@@ -15,7 +14,6 @@ const isBuild = process.env.NODE_ENV == "production";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://www.nik.finance",
   output: "server",
   integrations: [
     {
@@ -33,42 +31,15 @@ export default defineConfig({
       },
     },
     tailwind(),
-    sitemap({
-      filter: (page) =>
-        !page.includes('/partner') &&
-        !page.includes('/api/') &&
-        !page.includes('/privacy-policy'),
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-    }),
     wix({
       htmlEmbeds: isBuild,
       auth: true,
     }),
     ...(isBuild ? [monitoring()] : []),
-    react(isBuild ? {} : {
-      babel: { plugins: [sourceAttrsPlugin, dynamicDataPlugin] },
-    }),
+    react({ babel: { plugins: [sourceAttrsPlugin, dynamicDataPlugin] } }),
   ],
   vite: {
     plugins: [customErrorOverlayPlugin()],
-    cacheDir: 'node_modules/.cache/.vite',
-    optimizeDeps: {
-      include: [
-        'react',
-        'react-dom',
-        'zustand',
-        'framer-motion',
-        'date-fns',
-        'clsx',
-        'class-variance-authority',
-        'tailwind-merge',
-        '@radix-ui/*',
-        '@wix/*',
-        'zod',
-      ],
-    },
     css: !isBuild ? {
       postcss: {
         plugins: [

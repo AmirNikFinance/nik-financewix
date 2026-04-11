@@ -11,12 +11,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LendersCarousel from '@/components/LendersCarousel';
 import AnalyticsDashboard from '@/components/AnalyticsDashboard';
-import SEO, { LocalBusinessSchema } from '@/components/SEO';
+import ChatBot from '@/components/ChatBot';
 import { Image } from '@/components/ui/image';
 import { Button } from '@/components/ui/button';
 import { BaseCrudService } from '@/integrations';
 import { LoanOptions, HowItWorksSteps, CustomerReviews, WhyChooseUsFeatures } from '@/entities';
 import { trackButtonClick } from '@/lib/analytics';
+import { useChatBot } from '@/hooks/useChatBot';
 
 // --- Utility Components for Motion & Layout ---
 
@@ -106,6 +107,9 @@ export default function HomePage() {
   const [howItWorksSteps, setHowItWorksSteps] = useState<HowItWorksSteps[]>([]);
   const [reviews, setReviews] = useState<CustomerReviews[]>([]);
   const [whyChooseUsFeatures, setWhyChooseUsFeatures] = useState<WhyChooseUsFeatures[]>([]);
+  
+  // ChatBot lead capture
+  const { captureLead } = useChatBot();
 
   // Scroll Progress for Global Bar
   const { scrollYProgress } = useScroll();
@@ -154,14 +158,6 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-accent selection:text-white overflow-clip">
-      {/* SEO Meta Tags & Schema */}
-      <SEO 
-        title="Australia's Smartest Loan Marketplace"
-        description="Get matched with 130+ lenders in minutes. Car finance, home loans, refinancing & business loans. Free service, fast approval. AI-powered loan matching."
-        keywords="car loan Australia, home loan, mortgage broker, car finance, refinance car loan, personal loan, business loan, AI finance broker"
-      />
-      <LocalBusinessSchema />
-      
       {/* Global Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-accent z-50 origin-left"
@@ -339,12 +335,12 @@ export default function HomePage() {
                       {loan.shortDescription}
                     </p>
 
-                    <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer" className="mt-auto">
+                    <Link to={loan.quoteFormUrl || '/apply'} className="mt-auto">
                       <Button variant="outline" className="w-full rounded-xl py-6 border-gray-200 text-secondary font-semibold group-hover:bg-secondary group-hover:text-white group-hover:border-secondary transition-all duration-300 flex justify-between items-center px-6">
                         {loan.buttonText || 'Get Quote'}
                         <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
                       </Button>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </AnimatedElement>
@@ -446,86 +442,80 @@ export default function HomePage() {
             {/* Feature 1 - Large */}
             {whyChooseUsFeatures[0] && (
               <AnimatedElement className="md:col-span-2 row-span-1" delay={0}>
-                <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer" className="h-full block">
-                  <div className="h-full bg-secondary rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden group hover:shadow-2xl transition-all duration-300 cursor-pointer">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-accent/20 transition-colours duration-700" />
-                    
-                    <div className="relative z-10 flex flex-col h-full justify-between">
-                      <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 text-accent">
-                        {getFeatureIcon(whyChooseUsFeatures[0].title)}
-                      </div>
-                      <div>
-                        <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
-                          {whyChooseUsFeatures[0].title}
-                        </h3>
-                        <p className="font-paragraph text-lg text-gray-300 max-w-xl">
-                          {whyChooseUsFeatures[0].description}
-                        </p>
-                      </div>
+                <div className="h-full bg-secondary rounded-[2.5rem] p-10 md:p-14 relative overflow-hidden group">
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-accent/20 transition-colours duration-700" />
+                  
+                  <div className="relative z-10 flex flex-col h-full justify-between">
+                    <div className="w-16 h-16 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mb-8 text-accent">
+                      {getFeatureIcon(whyChooseUsFeatures[0].title)}
+                    </div>
+                    <div>
+                      <h3 className="font-heading text-3xl md:text-4xl font-bold text-white mb-4">
+                        {whyChooseUsFeatures[0].title}
+                      </h3>
+                      <p className="font-paragraph text-lg text-gray-300 max-w-xl">
+                        {whyChooseUsFeatures[0].description}
+                      </p>
                     </div>
                   </div>
-                </a>
+                </div>
               </AnimatedElement>
             )}
 
             {/* Feature 2 - Tall */}
             {whyChooseUsFeatures[1] && (
               <AnimatedElement className="md:col-span-1 row-span-2" delay={200}>
-                <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer" className="h-full block">
-                  <div className="h-full bg-light-gray rounded-[2.5rem] p-10 relative overflow-hidden group hover:bg-gray-100 transition-colours duration-300 hover:shadow-2xl cursor-pointer">
-                    <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white to-transparent opacity-50" />
-                    
-                    <div className="relative z-10 flex flex-col h-full">
-                      <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 text-secondary">
-                        {getFeatureIcon(whyChooseUsFeatures[1].title)}
-                      </div>
-                      <h3 className="font-heading text-2xl md:text-3xl font-bold text-secondary mb-4">
-                        {whyChooseUsFeatures[1].title}
-                      </h3>
-                      <p className="font-paragraph text-lg text-gray-600 mb-8">
-                        {whyChooseUsFeatures[1].description}
-                      </p>
-                      <div className="mt-auto w-full aspect-[4/3] rounded-2xl overflow-hidden">
-                         <Image 
-                           src="https://static.wixstatic.com/media/e994c8_86b8d8ad96e6491dafae2ed9b5ab1964~mv2.png?originWidth=576&originHeight=448" 
-                           alt="Expert Support" 
-                           className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                         />
-                      </div>
+                <div className="h-full bg-light-gray rounded-[2.5rem] p-10 relative overflow-hidden group hover:bg-gray-100 transition-colours duration-300">
+                  <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-white to-transparent opacity-50" />
+                  
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-8 text-secondary">
+                      {getFeatureIcon(whyChooseUsFeatures[1].title)}
+                    </div>
+                    <h3 className="font-heading text-2xl md:text-3xl font-bold text-secondary mb-4">
+                      {whyChooseUsFeatures[1].title}
+                    </h3>
+                    <p className="font-paragraph text-lg text-gray-600 mb-8">
+                      {whyChooseUsFeatures[1].description}
+                    </p>
+                    <div className="mt-auto w-full aspect-[4/3] rounded-2xl overflow-hidden">
+                       <Image 
+                         src="https://static.wixstatic.com/media/e994c8_86b8d8ad96e6491dafae2ed9b5ab1964~mv2.png?originWidth=576&originHeight=448" 
+                         alt="Expert Support" 
+                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                       />
                     </div>
                   </div>
-                </a>
+                </div>
               </AnimatedElement>
             )}
 
             {/* Feature 3 - Standard */}
             {whyChooseUsFeatures[2] && (
               <AnimatedElement className="md:col-span-2 row-span-1" delay={300}>
-                <a href="https://app.middle.finance/ref/7d27aec6-deb1-4e44-8bd8-85f8f8aecff3" target="_blank" rel="noopener noreferrer" className="h-full block">
-                  <div className="h-full bg-white border border-gray-100 shadow-xl rounded-[2.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 group hover:shadow-2xl transition-all duration-300 cursor-pointer">
-                    <div className="flex-1">
-                      <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-8 text-accent">
-                        {getFeatureIcon(whyChooseUsFeatures[2].title)}
-                      </div>
-                      <h3 className="font-heading text-3xl font-bold text-secondary mb-4">
-                        {whyChooseUsFeatures[2].title}
-                      </h3>
-                      <p className="font-paragraph text-lg text-gray-600">
-                        {whyChooseUsFeatures[2].description}
-                      </p>
+                <div className="h-full bg-white border border-gray-100 shadow-xl rounded-[2.5rem] p-10 md:p-14 flex flex-col md:flex-row items-center gap-10 group">
+                  <div className="flex-1">
+                    <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-8 text-accent">
+                      {getFeatureIcon(whyChooseUsFeatures[2].title)}
                     </div>
-                    <div className="w-full md:w-1/3 aspect-square bg-gray-50 rounded-2xl flex items-center justify-center p-6">
-                       <div className="w-full h-full relative">
-                          <div className="absolute inset-0 bg-white rounded-xl shadow-md flex items-center justify-center transform group-hover:-rotate-6 transition-transform duration-300">
-                             <Smartphone className="w-12 h-12 text-gray-300" />
-                          </div>
-                          <div className="absolute inset-0 bg-accent/5 rounded-xl shadow-sm flex items-center justify-center transform rotate-3 group-hover:rotate-6 transition-transform duration-300 backdrop-blur-sm border border-accent/20">
-                             <CheckCircle className="w-12 h-12 text-accent" />
-                          </div>
-                       </div>
-                    </div>
+                    <h3 className="font-heading text-3xl font-bold text-secondary mb-4">
+                      {whyChooseUsFeatures[2].title}
+                    </h3>
+                    <p className="font-paragraph text-lg text-gray-600">
+                      {whyChooseUsFeatures[2].description}
+                    </p>
                   </div>
-                </a>
+                  <div className="w-full md:w-1/3 aspect-square bg-gray-50 rounded-2xl flex items-center justify-center p-6">
+                     <div className="w-full h-full relative">
+                        <div className="absolute inset-0 bg-white rounded-xl shadow-md flex items-center justify-center transform group-hover:-rotate-6 transition-transform duration-300">
+                           <Smartphone className="w-12 h-12 text-gray-300" />
+                        </div>
+                        <div className="absolute inset-0 bg-accent/5 rounded-xl shadow-sm flex items-center justify-center transform rotate-3 group-hover:rotate-6 transition-transform duration-300 backdrop-blur-sm border border-accent/20">
+                           <CheckCircle className="w-12 h-12 text-accent" />
+                        </div>
+                     </div>
+                  </div>
+                </div>
               </AnimatedElement>
             )}
           </div>
@@ -538,6 +528,80 @@ export default function HomePage() {
         </div>
       </section>
       {/* --- REVIEWS (Horizontal Scroll) --- */}
+      <section className="py-24 md:py-32 border-t border-gray-100 bg-primary">
+        <div className="max-w-[100rem] mx-auto px-6 md:px-12">
+          {/* Header */}
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <AnimatedElement direction="up">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold mb-4 text-secondary-foreground">
+                Technology We Use
+              </h2>
+              <p className="font-paragraph text-base md:text-lg text-background">
+                We use industry-standard software and AI tools to operate efficiently, securely, and at scale.
+              </p>
+            </AnimatedElement>
+          </div>
+
+          {/* Logo Grid */}
+          <AnimatedElement direction="up" delay={100}>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 mb-12 py-12">
+              {/* Google */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_a9094c3f263c443db0adcf3fd09aaa22~mv2.png"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+
+              {/* Anthropic */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_69fdd7a4e7c34d1b9c6062faac035597~mv2.png"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+
+              {/* Claude */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_1a4c65369c484342a3b3777f31e00493~mv2.png"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+
+              {/* Notebook LLM */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_972f5009fec3452ca6a4eb479be1b43e~mv2.png"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+
+              {/* New Technology Logo */}
+              <div className="flex items-center justify-center h-16 md:h-20 px-4 md:px-6">
+                <Image
+                  src="https://static.wixstatic.com/media/e994c8_a62f347360aa431f87ca513b9824ff73~mv2.png"
+                  className="h-full w-auto object-contain opacity-60 hover:opacity-80 transition-opacity duration-300"
+                  originWidth={1024}
+                  originHeight={1024} />
+              </div>
+            </div>
+          </AnimatedElement>
+
+          {/* Disclaimer */}
+          <AnimatedElement direction="up" delay={200}>
+            <div className="text-center pt-8 border-t border-gray-100">
+              <p className="font-paragraph text-xs md:text-sm text-gray-500">
+                Logos and trademarks are the property of their respective owners. Use of these tools does not imply endorsement or partnership.
+              </p>
+            </div>
+          </AnimatedElement>
+        </div>
+      </section>
       <section className="py-32 bg-secondary overflow-hidden">
         <div className="max-w-[100rem] mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
           <AnimatedElement direction="right">
@@ -661,6 +725,8 @@ export default function HomePage() {
       <Footer />
       {/* Analytics Dashboard - Remove or hide in production */}
       <AnalyticsDashboard />
+      {/* ChatBot Component */}
+      <ChatBot onLeadCapture={captureLead} />
     </div>
   );
 }

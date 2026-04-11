@@ -121,17 +121,26 @@ export default function HomePage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const [loansData, stepsData, reviewsData, featuresData] = await Promise.all([
-        BaseCrudService.getAll<LoanOptions>('loanoptions'),
-        BaseCrudService.getAll<HowItWorksSteps>('howitworkssteps'),
-        BaseCrudService.getAll<CustomerReviews>('customerreviews'),
-        BaseCrudService.getAll<WhyChooseUsFeatures>('whychooseusfeatures'),
-      ]);
+      try {
+        const [loansData, stepsData, reviewsData, featuresData] = await Promise.all([
+          BaseCrudService.getAll<LoanOptions>('loanoptions').catch(() => ({ items: [] })),
+          BaseCrudService.getAll<HowItWorksSteps>('howitworkssteps').catch(() => ({ items: [] })),
+          BaseCrudService.getAll<CustomerReviews>('customerreviews').catch(() => ({ items: [] })),
+          BaseCrudService.getAll<WhyChooseUsFeatures>('whychooseusfeatures').catch(() => ({ items: [] })),
+        ]);
 
-      setLoanOptions(loansData.items);
-      setHowItWorksSteps(stepsData.items.sort((a, b) => (a.stepNumber || 0) - (b.stepNumber || 0)));
-      setReviews(reviewsData.items);
-      setWhyChooseUsFeatures(featuresData.items.filter(f => f.isActive).sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)));
+        setLoanOptions(loansData.items || []);
+        setHowItWorksSteps((stepsData.items || []).sort((a, b) => (a.stepNumber || 0) - (b.stepNumber || 0)));
+        setReviews(reviewsData.items || []);
+        setWhyChooseUsFeatures((featuresData.items || []).filter(f => f.isActive).sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0)));
+      } catch (error) {
+        console.error('Error fetching homepage data:', error);
+        // Set empty arrays as fallback
+        setLoanOptions([]);
+        setHowItWorksSteps([]);
+        setReviews([]);
+        setWhyChooseUsFeatures([]);
+      }
     };
 
     fetchData();
